@@ -1,5 +1,7 @@
 # AppFolio MCP Server
 
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/NightSquawk/appfolio-mcp-server/badge)](https://scorecard.dev/viewer/?uri=github.com/NightSquawk/appfolio-mcp-server)
+
 MCP server for AppFolio property management data, covering **two** AppFolio APIs, each through **3 consolidated catalog-backed tools** rather than one tool per endpoint:
 
 - **Reporting API v2**: all **137** read-only reports (`list_reports` / `describe_report` / `run_report`). See [Reporting API Overview](https://help.appfolio.com/s/article/Reporting-API-Overview).
