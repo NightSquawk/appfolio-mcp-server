@@ -1,0 +1,106 @@
+{
+  "operationId": "get_recurring_charges",
+  "resource": "recurring_charges",
+  "name": "List All Recurring Charges",
+  "method": "GET",
+  "path": "/recurring_charges",
+  "description": "Returns all recurring charges that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[OccupancyId]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by occupancy ID. All GET requests must include a filter for [OccupancyId] or [LastUpdatedAtFrom]."
+    },
+    {
+      "name": "filters[LastUpdatedAtFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter recurring charges updated at or after this date-time. All GET requests must include a filter for [OccupancyId] or [LastUpdatedAtFrom]."
+    },
+    {
+      "name": "page[number]",
+      "type": "integer",
+      "required": false,
+      "description": "Page number for pagination. Default: 1."
+    },
+    {
+      "name": "page[size]",
+      "type": "integer",
+      "required": false,
+      "description": "Page size for pagination. Default: 1000."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of recurring charge objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the recurring charge"
+    },
+    {
+      "name": "data[].Amount",
+      "type": "number <float>",
+      "required": false,
+      "description": "The amount of the recurring charge"
+    },
+    {
+      "name": "data[].Description",
+      "type": "string",
+      "required": false,
+      "description": "A brief summary or description of the recurring charge"
+    },
+    {
+      "name": "data[].Frequency",
+      "type": "string",
+      "required": false,
+      "description": "The frequency that the recurring charge occurs. Enum: \"Monthly\" \"Every 3 Months\" \"Every 6 Months\" \"Once a Year\""
+    },
+    {
+      "name": "data[].EndDate",
+      "type": "string <date>",
+      "required": false,
+      "description": "The end date of the recurring charge"
+    },
+    {
+      "name": "data[].StartDate",
+      "type": "string <date>",
+      "required": false,
+      "description": "The start date of the recurring charge"
+    },
+    {
+      "name": "data[].OccupancyId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the occupancy associated with the recurring charge"
+    },
+    {
+      "name": "data[].GlAccountId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the general ledger account associated with the recurring charge"
+    },
+    {
+      "name": "data[].LastUpdatedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The date the recurring charge was last updated"
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/recurring_charges?filters[LastUpdatedAtFrom]=2020-12-15T16:30:46Z' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

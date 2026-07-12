@@ -1,0 +1,147 @@
+{
+  "slug": "lease_history",
+  "endpoint": "lease_history.json",
+  "name": "Lease History",
+  "description": "Returns Lease History report data.",
+  "requiredFilters": [
+    "lease_history_filter_by",
+    "start_on_from",
+    "start_on_to"
+  ],
+  "parameters": [
+    {
+      "name": "properties",
+      "type": "object",
+      "required": false,
+      "description": "The property filter. Expand to view all attributes associated with this filter. If required, you must submit an id for at least one of the below filters.",
+      "attributes": [
+        {
+          "name": "properties_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "property_groups_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "portfolios_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "owners_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "unit_visibility",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "enum": [
+        "active",
+        "hidden",
+        "all"
+      ],
+      "description": ""
+    },
+    {
+      "name": "tenant_visibility",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "enum": [
+        "active",
+        "hidden",
+        "all"
+      ],
+      "description": ""
+    },
+    {
+      "name": "lease_history_filter_by",
+      "type": "string",
+      "required": true,
+      "enum": [
+        "Lease Start Date",
+        "Lease Countersigned Date"
+      ],
+      "description": "Filter leases by to filter by."
+    },
+    {
+      "name": "start_on_from",
+      "type": "string",
+      "required": true,
+      "format": "YYYY-MM",
+      "description": "The 'Date From' month to filter by."
+    },
+    {
+      "name": "start_on_to",
+      "type": "string",
+      "required": true,
+      "format": "YYYY-MM",
+      "description": "The 'Date To' month to filter by."
+    },
+    {
+      "name": "statuses",
+      "type": "array",
+      "required": false,
+      "default": "[\"Completed\",\"Did Not Renew\",\"Month To Month\",\"Pending\",\"Status Cannot Be Determined\"]",
+      "enum": [
+        "all",
+        "Completed",
+        "Did Not Renew",
+        "Month To Month",
+        "Pending",
+        "Status Cannot Be Determined"
+      ],
+      "description": "Statuses to filter by."
+    },
+    {
+      "name": "non_revenue_units",
+      "type": "string",
+      "required": false,
+      "default": "0",
+      "enum": [
+        "0",
+        "1"
+      ],
+      "description": "Include Non-Revenue Units"
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "properties": {
+      "properties_ids": [],
+      "property_groups_ids": [],
+      "portfolios_ids": [],
+      "owners_ids": []
+    },
+    "unit_visibility": "active",
+    "tenant_visibility": "active",
+    "lease_history_filter_by": "Lease Start Date",
+    "start_on_from": "2023-06",
+    "start_on_to": "2023-06",
+    "statuses": [
+      "all"
+    ],
+    "non_revenue_units": "1",
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

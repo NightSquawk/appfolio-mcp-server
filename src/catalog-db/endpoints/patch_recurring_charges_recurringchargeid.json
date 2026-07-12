@@ -1,0 +1,89 @@
+{
+  "operationId": "patch_recurring_charges_recurringchargeid",
+  "resource": "recurring_charges",
+  "name": "Update Recurring Charges",
+  "method": "PATCH",
+  "path": "/recurring_charges/{recurringChargeId}",
+  "description": "Update a recurring charge",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "recurringChargeId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the recurring charge to update"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Recurring Charge object",
+    "attributes": [
+      {
+        "name": "Id",
+        "type": "string <uuid>",
+        "required": false,
+        "description": "Unique identifier of the recurring charge"
+      },
+      {
+        "name": "Amount",
+        "type": "number <float>",
+        "required": false,
+        "description": "The amount of the recurring charge"
+      },
+      {
+        "name": "Description",
+        "type": "string",
+        "required": false,
+        "description": "A brief summary or description of the recurring charge"
+      },
+      {
+        "name": "Frequency",
+        "type": "string",
+        "required": false,
+        "description": "The frequency that the recurring charge occurs",
+        "enum": ["Monthly", "Every 3 Months", "Every 6 Months", "Once a Year"]
+      },
+      {
+        "name": "EndDate",
+        "type": "string <date>",
+        "required": false,
+        "description": "The end date of the recurring charge"
+      },
+      {
+        "name": "StartDate",
+        "type": "string <date>",
+        "required": false,
+        "description": "The start date of the recurring charge"
+      },
+      {
+        "name": "ProrateFirstMonth",
+        "type": "boolean",
+        "required": false,
+        "description": "Determines if the first month's recurring charge should be prorated. When true, the charge amount will be adjusted based on the start date within the month. Proration requires all of the following conditions: The start date cannot be the first day of a month, must be after the first day of the current month, the charge frequency must be Monthly, the charge cannot be an insurance charge, the charge cannot start and end in the same month, and the first charge has not posted."
+      },
+      {
+        "name": "ProrateLastMonth",
+        "type": "boolean",
+        "required": false,
+        "description": "Determines if the final month's recurring charge should be prorated. When true, the charge amount will be adjusted based on the end date within the month. Proration requires all of the following conditions: The end date must exist and not fall on the last day of a month, must be a future date, the charge frequency must be Monthly, the charge cannot be an insurance charge, the charge cannot start and end in the same month, and final charge has not posted."
+      },
+      {
+        "name": "GlAccountId",
+        "type": "string <uuid>",
+        "required": false,
+        "description": "Unique identifier of the general ledger account associated with the recurring charge"
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the updated recurring charge"
+    }
+  ],
+  "requestSample": "{\n  \"Amount\": \"222.55\",\n  \"Description\": \"Sample description of the recurring charge\",\n  \"Frequency\": \"Monthly\",\n  \"StartDate\": \"2022-12-25\",\n  \"EndDate\": \"2023-12-25\",\n  \"ProrateFirstMonth\": false,\n  \"ProrateLastMonth\": false,\n  \"GlAccountId\": \"d9009724-9f32-11ec-bc31-d46a96ab9b08\"\n}"
+}

@@ -1,0 +1,70 @@
+{
+  "operationId": "get_inventory_locations",
+  "resource": "inventory_locations",
+  "name": "List All Inventory Locations",
+  "method": "GET",
+  "path": "/inventory_locations",
+  "description": "Returns all inventory locations that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[Id]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by unique identifier of the inventory location"
+    },
+    {
+      "name": "filters[LastUpdatedAtFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter inventory locations last updated at or after this date-time"
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of inventory location objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the inventory location"
+    },
+    {
+      "name": "data[].Name",
+      "type": "string",
+      "required": false,
+      "description": "The name of the inventory location"
+    },
+    {
+      "name": "data[].Description",
+      "type": "string",
+      "required": false,
+      "description": "A brief summary or description of the inventory location"
+    },
+    {
+      "name": "data[].LastUpdatedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The date and time the inventory location was last updated"
+    },
+    {
+      "name": "data[].PropertyId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the property associated with the inventory location"
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/inventory_locations?filters[Id]=1abcde23-c543-456e-abc9-123456789cba&filters[LastUpdatedAtFrom]=2020-12-15T16:30:46Z' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

@@ -1,0 +1,251 @@
+{
+  "operationId": "post_work_orders",
+  "resource": "work_orders",
+  "name": "Create Work Orders",
+  "method": "POST",
+  "path": "/work_orders",
+  "description": "Create a work order which belongs to a property, unit, occupancy, or inspection",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "requestBody": {
+    "required": true,
+    "description": "Created work order object. One of PropertyId, UnitId, OccupancyId, InspectionId, or ServiceRequestId must be provided.",
+    "attributes": [
+      {
+        "name": "JobDescription",
+        "type": "string",
+        "required": true,
+        "description": "A brief description of the work order to be performed"
+      },
+      {
+        "name": "PropertyId",
+        "type": "string <uuid>",
+        "required": false,
+        "description": "Unique identifier of the property associated with the work order"
+      },
+      {
+        "name": "AssignedUsers",
+        "type": "Array of arrays",
+        "required": false,
+        "description": "Array of AssignedUsers to create the work order with"
+      },
+      {
+        "name": "BillableItems",
+        "type": "array",
+        "required": false,
+        "description": "Array of billable line item attributes present on a work order",
+        "attributes": [
+          {
+            "name": "Description",
+            "type": "string",
+            "required": false,
+            "description": "A brief informative message about the billable line item"
+          },
+          {
+            "name": "GlAccountId",
+            "type": "string",
+            "required": false,
+            "description": "Unique identifier of the General Ledger account associated with the billable line item"
+          },
+          {
+            "name": "Quantity",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "The number of services or goods utilized. Quantity must be a positive number."
+          },
+          {
+            "name": "Rate",
+            "type": "string",
+            "required": false,
+            "description": "The rate (cost) of the goods or services provided. Valid format is \"DD.CC\", e.g. \"23.33\""
+          }
+        ]
+      },
+      {
+        "name": "CanceledOn",
+        "type": "string <date>",
+        "required": false,
+        "description": "The date the work order status changed to \"canceled\""
+      },
+      {
+        "name": "CompletedOn",
+        "type": "string <date>",
+        "required": false,
+        "description": "The date the work order status changed to \"completed\""
+      },
+      {
+        "name": "Description",
+        "type": "string",
+        "required": false,
+        "description": "The top-level description for a grouping of work orders in AppFolio"
+      },
+      {
+        "name": "Estimates",
+        "type": "array",
+        "required": false,
+        "description": "Use estimates to track anticipated costs for Work Orders. Estimates created via API are not automatically sent to Vendors or Owners, but are visible to assigned Vendors in the Vendor Portal.",
+        "attributes": [
+          {
+            "name": "VendorId",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "The unique identifier of the vendor who submitted this estimate. If provided, ManagementCompanyAsVendor must be false or omitted."
+          },
+          {
+            "name": "ManagementCompanyAsVendor",
+            "type": "boolean",
+            "required": false,
+            "description": "Indicates whether or not the management company is acting as the vendor for the estimate. If true, VendorId must be null or omitted."
+          },
+          {
+            "name": "Amount",
+            "type": "number <decimal>",
+            "required": false,
+            "description": "The total estimated cost in dollars for completing the work order as quoted by the vendor."
+          },
+          {
+            "name": "Status",
+            "type": "string",
+            "required": false,
+            "description": "The current approval status of the estimate. Only one estimate can have Approved status at a time per work order. Enum: \"Pending\" \"Approved\" \"Not Approved\"",
+            "enum": ["Pending", "Approved", "Not Approved"]
+          },
+          {
+            "name": "InternalNotes",
+            "type": "string",
+            "required": false,
+            "description": "Internal notes or comments attached to the estimate. These notes are for internal use only and not visible to vendors or owners."
+          },
+          {
+            "name": "EstimateRequestedDate",
+            "type": "string <date>",
+            "required": false,
+            "description": "The date the estimate was requested from the Vendor."
+          },
+          {
+            "name": "EstimateReceivedDate",
+            "type": "string <date>",
+            "required": false,
+            "description": "The date the estimate was received from the Vendor. If Amount is provided but EstimateReceivedDate is not specified, it will automatically default to today's date."
+          }
+        ]
+      },
+      {
+        "name": "LaborItems",
+        "type": "array",
+        "required": false,
+        "description": "Array of labor line item attributes present on a work order",
+        "attributes": [
+          {
+            "name": "Date",
+            "type": "string <date>",
+            "required": false,
+            "description": "The date the labor was completed. Valid format is \"YYYY-MM-DD\" e.g. \"2020-12-01\"."
+          },
+          {
+            "name": "Description",
+            "type": "string",
+            "required": false,
+            "description": "A brief informative message about the labor performed"
+          },
+          {
+            "name": "HoursWorked",
+            "type": "string <decimal>",
+            "required": false,
+            "description": "The number of hours worked by the maintenance tech"
+          },
+          {
+            "name": "HoursBillable",
+            "type": "string <decimal>",
+            "required": false,
+            "description": "The number of hours worked by the maintenance tech that are billable, used to create the work order bill"
+          },
+          {
+            "name": "UserId",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "Unique identifier of the maintenance tech assigned to the work order"
+          }
+        ]
+      },
+      {
+        "name": "ManagementCompanyAsVendor",
+        "type": "boolean",
+        "required": false,
+        "description": "Indicates whether or not the management company is the vendor for the work order. If true, VendorId must be null or omitted."
+      },
+      {
+        "name": "PermissionToEnter",
+        "type": "boolean or string",
+        "required": false,
+        "description": "Indicates whether or not the occupancy has given permission to enter the unit"
+      },
+      {
+        "name": "Priority",
+        "type": "string",
+        "required": false,
+        "description": "The priority of the work order. Enum: \"Urgent\" \"Normal\" \"Low\"",
+        "enum": ["Urgent", "Normal", "Low"]
+      },
+      {
+        "name": "ScheduledEnd",
+        "type": "string <date-time>",
+        "required": false,
+        "description": "When the work order is scheduled to be completed. The value must adhere to the ISO 8601 format YYYY-MM-DDThh:mm:ssZ and the default time zone is Coordinated Universal Time (UTC)."
+      },
+      {
+        "name": "ScheduledStart",
+        "type": "string <date-time>",
+        "required": false,
+        "description": "When the work order is scheduled to start. The value must adhere to the ISO 8601 format: YYYY-MM-DDThh:mm:ssZ."
+      },
+      {
+        "name": "Status",
+        "type": "string",
+        "required": false,
+        "description": "The status of the work order. Enum: \"Assigned\" \"Canceled\" \"Completed\" \"New\" \"Scheduled\" \"Waiting\" \"Work Completed\"",
+        "enum": ["Assigned", "Canceled", "Completed", "New", "Scheduled", "Waiting", "Work Completed"]
+      },
+      {
+        "name": "VendorId",
+        "type": "string <uuid>",
+        "required": false,
+        "description": "Unique identifier of the vendor associated with the work order. If the management company is the vendor, this should be null or omitted."
+      },
+      {
+        "name": "VendorTrade",
+        "type": "string",
+        "required": false,
+        "description": "The type of service offered by the vendor"
+      },
+      {
+        "name": "WorkCompletedOn",
+        "type": "string <date>",
+        "required": false,
+        "description": "The date the work order was completed"
+      },
+      {
+        "name": "UnitTurnCategory",
+        "type": "string",
+        "required": false,
+        "description": "The category of the unit turn work order. This field requires a valid UnitId or OccupancyId if provided."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the created work order"
+    },
+    {
+      "name": "Link",
+      "type": "string <uri>",
+      "required": false,
+      "description": "A link to the work order page in the AppFolio Property Manager."
+    }
+  ],
+  "requestSample": "{\n  \"AssignedUsers\": [\n    \"1091593d-613b-43d0-b8f1-1cd0eac704e4\",\n    \"4897dd96-7479-44ec-83a0-99b19936d607\"\n  ],\n  \"BillableItems\": [\n    {},\n    {}\n  ],\n  \"Description\": \"Something to fix.\",\n  \"Estimates\": [\n    {},\n    {}\n  ],\n  \"LaborItems\": [\n    {},\n    {}\n  ],\n  \"JobDescription\": \"Fix leaky sink.\",\n  \"ManagementCompanyAsVendor\": false,\n  \"PermissionToEnter\": true,\n  \"Priority\": \"Normal\",\n  \"PropertyId\": \"8eb28538-c8f5-41e7-ac82-3f9609cceec9\",\n  \"ScheduledEnd\": \"2021-01-15T20:30:46Z\",\n  \"ScheduledStart\": \"2021-01-15T16:30:46Z\",\n  \"Status\": \"Scheduled\",\n  \"VendorId\": \"8eb28538-c8f5-41e7-ac82-3f9609ccee10\",\n  \"VendorTrade\": \"Appliances\",\n  \"UnitTurnCategory\": \"Paint\"\n}"
+}

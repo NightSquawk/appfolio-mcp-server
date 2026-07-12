@@ -1,0 +1,88 @@
+{
+  "operationId": "get_users",
+  "resource": "users",
+  "name": "List All Users",
+  "method": "GET",
+  "path": "/users",
+  "description": "Returns all users that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[LastUpdatedAtFrom]",
+      "type": "string <date-time>",
+      "required": true,
+      "description": "All GET requests must include a filter for [LastUpdatedAtFrom]. Filters users by the date their details were last updated, returning only users updated at or after this date-time."
+    },
+    {
+      "name": "filters[PropertyId]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filters users by the unique identifier of a property."
+    },
+    {
+      "name": "page[number]",
+      "type": "integer",
+      "required": false,
+      "description": "Page number for pagination. Default is 1."
+    },
+    {
+      "name": "page[size]",
+      "type": "integer",
+      "required": false,
+      "description": "Number of results per page. Default is 1000."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of user objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of an AppFolio Property Manager user"
+    },
+    {
+      "name": "data[].Email",
+      "type": "string",
+      "required": false,
+      "description": "The user's email address"
+    },
+    {
+      "name": "data[].FirstName",
+      "type": "string",
+      "required": false,
+      "description": "The user's first name"
+    },
+    {
+      "name": "data[].LastName",
+      "type": "string",
+      "required": false,
+      "description": "The user's last name"
+    },
+    {
+      "name": "data[].UserRole",
+      "type": "string",
+      "required": false,
+      "description": "The system role assigned to the user that dictates most permissions"
+    },
+    {
+      "name": "data[].LastUpdatedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The date the user's details were last updated"
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/users?filters[PropertyId]=bfcb95e8-d5fb-448c-b811-88d9f832e79c&filters[LastUpdatedAtFrom]=2020-12-15T16:30:46Z' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

@@ -1,0 +1,71 @@
+{
+  "operationId": "get_owners_notes",
+  "resource": "owners",
+  "name": "List All Owners Notes",
+  "method": "GET",
+  "path": "/owners/notes",
+  "description": "Returns all owner's notes that meet the filter criteria.",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[OwnerId]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by owner ID. All GET requests must include a filter for [OwnerId] or [LastUpdatedAtFrom]."
+    },
+    {
+      "name": "filters[LastUpdatedAtFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter notes last updated at or after this date/time. All GET requests must include a filter for [OwnerId] or [LastUpdatedAtFrom]."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of owner note objects."
+    },
+    {
+      "name": "data[].Body",
+      "type": "string",
+      "required": false,
+      "description": "A brief informative message about the owner note. A owner note cannot exceed 63,535 characters."
+    },
+    {
+      "name": "data[].EntityId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "The owner to which the note will be attached."
+    },
+    {
+      "name": "data[].LastUpdatedAt",
+      "type": "string",
+      "required": false,
+      "description": "The date the owner note's details were last updated."
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the note associated with the owner."
+    },
+    {
+      "name": "data[].NoteId",
+      "type": "string <uuid>",
+      "required": false,
+      "deprecated": true,
+      "description": "Unique identifier of the note associated with the owner. Deprecated in favor of Id."
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses."
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/owners/notes?filters[OwnerId]=1abcde23-c543-456e-abc9-123456789cba&filters[LastUpdatedAtFrom]=2020-12-15T16:30:46Z' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

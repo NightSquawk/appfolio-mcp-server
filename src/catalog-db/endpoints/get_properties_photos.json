@@ -1,0 +1,76 @@
+{
+  "operationId": "get_properties_photos",
+  "resource": "properties",
+  "name": "List All Properties Photos",
+  "method": "GET",
+  "path": "/properties/photos",
+  "description": "Returns all properties' photos that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[PropertyId]",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Filters for property photos. All GET requests must include a filter for [PropertyId]."
+    },
+    {
+      "name": "page[number]",
+      "type": "integer",
+      "required": false,
+      "description": "Page number for pagination. Default: 1."
+    },
+    {
+      "name": "page[size]",
+      "type": "integer",
+      "required": false,
+      "description": "Page size for pagination. Default: 1000."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of photo objects (Properties.Photo)"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the photo"
+    },
+    {
+      "name": "data[].PropertyId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the property associated with the photo"
+    },
+    {
+      "name": "data[].Position",
+      "type": "integer",
+      "required": false,
+      "description": "The position of the photo in the property photo gallery. If multiple photos are associated with a property, the order of the remaining photos (positions 1 and above) will not change automatically if some photos are deleted."
+    },
+    {
+      "name": "data[].Url",
+      "type": "string <uri>",
+      "required": false,
+      "description": "The public link to the photo"
+    },
+    {
+      "name": "data[].ContentType",
+      "type": "string",
+      "required": false,
+      "description": "The content type of the photo"
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/properties/photos?filters[PropertyId]=1abcde23-c543-456e-abc9-123456789cba' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

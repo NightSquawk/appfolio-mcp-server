@@ -1,0 +1,119 @@
+{
+  "operationId": "get_ca_violations",
+  "resource": "ca",
+  "name": "List All Community Association Violations",
+  "method": "GET",
+  "path": "/ca/violations",
+  "description": "Returns Community Association (CA) violations that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[LastUpdatedAtFrom]",
+      "type": "string <date-time>",
+      "required": true,
+      "description": "Filter for CA violations updated at or after this date. All GET requests must include a filter for [LastUpdatedAtFrom]."
+    },
+    {
+      "name": "filters[AssociationId]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by unique identifier of the association related to the violation(s)"
+    },
+    {
+      "name": "page[number]",
+      "type": "integer",
+      "required": false,
+      "description": "Page number for pagination. Default: 1"
+    },
+    {
+      "name": "page[size]",
+      "type": "integer",
+      "required": false,
+      "description": "Page size for pagination. Default: 1000"
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "Array of objects (CAViolation)",
+      "required": false,
+      "description": "Array of CA violation objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the CA violation"
+    },
+    {
+      "name": "data[].AssociationId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the association related to the violation(s)"
+    },
+    {
+      "name": "data[].CreatedAt",
+      "type": "string",
+      "required": false,
+      "description": "The date the CA violation was created"
+    },
+    {
+      "name": "data[].Description",
+      "type": "string",
+      "required": false,
+      "description": "A brief summary or description of the CA violation"
+    },
+    {
+      "name": "data[].InspectionDate",
+      "type": "string",
+      "required": false,
+      "description": "The date of the CA unit's inspection"
+    },
+    {
+      "name": "data[].LastUpdatedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The last time a CA violation's details were updated by an AppFolio Property Manager user"
+    },
+    {
+      "name": "data[].MarkedForEscalation",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether or not the CA violation was marked for escalation"
+    },
+    {
+      "name": "data[].OccupancyId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the occupancy associated with the CA violation"
+    },
+    {
+      "name": "data[].Status",
+      "type": "string",
+      "required": false,
+      "description": "Indicates the current status of the CA violation",
+      "enum": ["In Progress", "In Dispute", "Corrected", "On Hold"]
+    },
+    {
+      "name": "data[].UnitId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the unit associated with the CA violation"
+    },
+    {
+      "name": "data[].ViolatedRuleId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the CA rule that was violated"
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/ca/violations?filters[AssociationId]=1abcde23-c543-456e-abc9-123456789cee&filters[LastUpdatedAtFrom]=2020-12-15T16:30:46Z' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

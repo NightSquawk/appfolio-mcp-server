@@ -1,0 +1,72 @@
+{
+  "slug": "tenant_ledger",
+  "endpoint": "tenant_ledger.json",
+  "name": "Tenant Ledger",
+  "description": "Returns Tenant Ledger report data.",
+  "requiredFilters": [
+    "parties_ids",
+    "occurred_on_from",
+    "occurred_on_to"
+  ],
+  "parameters": [
+    {
+      "name": "parties_ids",
+      "type": "object",
+      "required": true,
+      "description": "The occupancy ids to filter by. Expand to view all attributes associated with this filter. If required, you must submit an id for at least one of the below filters.",
+      "attributes": [
+        {
+          "name": "occupancies_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "occurred_on_from",
+      "type": "string",
+      "format": "YYYY-MM-DD",
+      "required": true,
+      "description": "The 'Date From' date to filter by."
+    },
+    {
+      "name": "occurred_on_to",
+      "type": "string",
+      "format": "YYYY-MM-DD",
+      "required": true,
+      "description": "The 'Date To' date to filter by."
+    },
+    {
+      "name": "transactions_shown",
+      "type": "string",
+      "required": false,
+      "default": "all",
+      "enum": [
+        "'tenant' denotes 'Tenant Only'",
+        "'subsidy' denotes 'Subsidized Only'",
+        "'all' denotes 'Combined'"
+      ],
+      "description": "Transactions shown to filter by."
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "parties_ids": {
+      "occupancies_ids": []
+    },
+    "occurred_on_from": "2023-06-01",
+    "occurred_on_to": "2023-06-30",
+    "transactions_shown": "tenant",
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

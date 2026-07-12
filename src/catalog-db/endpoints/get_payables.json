@@ -1,0 +1,138 @@
+{
+  "operationId": "get_payables",
+  "resource": "payables",
+  "name": "List All Payables",
+  "method": "GET",
+  "path": "/payables",
+  "description": "Returns all payable bills that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[CreatedAt]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter payables by creation date"
+    },
+    {
+      "name": "filters",
+      "type": "object",
+      "required": true,
+      "description": "Filters for payables"
+    },
+    {
+      "name": "page[number]",
+      "type": "integer",
+      "required": false,
+      "description": "Page number for pagination. Default is 1."
+    },
+    {
+      "name": "page[size]",
+      "type": "integer",
+      "required": false,
+      "description": "Page size for pagination. Default is 1000."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of payable objects"
+    },
+    {
+      "name": "data[].TotalAmount",
+      "type": "string <decimal>",
+      "required": false,
+      "description": "The total amount of the payable. Ensure that the total amount is equal to the total of all line items summed."
+    },
+    {
+      "name": "data[].BankAccountId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the bank account associated with the payable"
+    },
+    {
+      "name": "data[].CheckNumber",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "The check number of the payable"
+    },
+    {
+      "name": "data[].CreatedAt",
+      "type": "string",
+      "required": false,
+      "description": "The date the payable was created"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the payable"
+    },
+    {
+      "name": "data[].LineItems",
+      "type": "array",
+      "required": false,
+      "description": "Array of line item attributes present on the payable(s)",
+      "attributes": [
+        {
+          "name": "Amount",
+          "type": "string",
+          "required": false,
+          "description": "The amount due for the line item"
+        },
+        {
+          "name": "BillId",
+          "type": "string",
+          "required": false,
+          "description": "The bill ID relevant to the line item"
+        },
+        {
+          "name": "Description",
+          "type": "string",
+          "required": false,
+          "description": "A brief description of the line item"
+        },
+        {
+          "name": "Id",
+          "type": "string",
+          "required": false,
+          "description": "Unique identifier of line item"
+        },
+        {
+          "name": "PayerAddress",
+          "type": "array",
+          "required": false,
+          "description": "Array of payer address details"
+        },
+        {
+          "name": "PropertyId",
+          "type": "string",
+          "required": false,
+          "description": "The property ID relevant to the line item"
+        },
+        {
+          "name": "PropertyName",
+          "type": "string",
+          "required": false,
+          "description": "The property name relevant to the line item"
+        }
+      ]
+    },
+    {
+      "name": "data[].VendorId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the vendor owed the payable"
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/payables?filters[CreatedAt]=2020-12-15T16:30:46Z' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

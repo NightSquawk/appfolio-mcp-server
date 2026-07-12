@@ -1,0 +1,296 @@
+{
+  "operationId": "patch_units_unitid",
+  "resource": "units",
+  "name": "Update Unit",
+  "method": "PATCH",
+  "path": "/units/{unitId}",
+  "description": "Update a unit",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "unitId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the unit to update"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Update unit object",
+    "attributes": [
+      {
+        "name": "Name",
+        "type": "string",
+        "required": false,
+        "description": "The unit name as displayed in the AppFolio Property Manager"
+      },
+      {
+        "name": "Bathrooms",
+        "type": "string <decimal>",
+        "required": false,
+        "description": "The number of desired bathrooms"
+      },
+      {
+        "name": "Bedrooms",
+        "type": "integer",
+        "required": false,
+        "description": "The number of desired bedrooms"
+      },
+      {
+        "name": "SquareFeet",
+        "type": "string",
+        "required": false,
+        "description": "The size of the unit in square feet"
+      },
+      {
+        "name": "Description",
+        "type": "string",
+        "required": false,
+        "description": "A brief, informative description of the unit"
+      },
+      {
+        "name": "ListedMarketRent",
+        "type": "string <decimal>",
+        "required": false,
+        "description": "The rent per month as listed on the market",
+        "deprecated": true
+      },
+      {
+        "name": "ListedRent",
+        "type": "string <decimal>",
+        "required": false,
+        "description": "The rent per month as listed on the market. This value reflects either the market rent or the advertised rent, depending on whether \"Use Market Rent On Ads\" is enabled in AppFolio Property Manager.",
+        "deprecated": true
+      },
+      {
+        "name": "MarketRent",
+        "type": "string <decimal>",
+        "required": false,
+        "description": "The unit's base market rent, representing its estimated fair market value based on current market conditions and comparable properties. It does not include advertised adjustments or amenity fees. This value directly updates the unit's market rent unless overridden by a configured unit type."
+      },
+      {
+        "name": "AdvertiseUsingListedMarketRent",
+        "type": "boolean",
+        "required": false,
+        "description": "Indicates whether or not to use the listed market rent as the advertised rent. Passing in null will result in no change."
+      },
+      {
+        "name": "CatsAllowed",
+        "type": "string",
+        "required": false,
+        "description": "The unit's cat policy. Enum: \"Yes\" \"No\" or null",
+        "enum": ["Yes", "No"]
+      },
+      {
+        "name": "DogsAllowed",
+        "type": "string",
+        "required": false,
+        "description": "The unit's dog policy. Enum: \"Large & Small\" \"Small Only\" \"No\" or null",
+        "enum": ["Large & Small", "Small Only", "No"]
+      },
+      {
+        "name": "CustomFields",
+        "type": "object",
+        "required": false,
+        "description": "The custom fields for the associated entity. Each key is a CustomFieldId and value is the new value to set. Set to null to clear; use empty array [] or empty string \"\" for array-type fields.",
+        "attributes": [
+          {
+            "name": "CustomFieldId",
+            "type": "object",
+            "required": false,
+            "description": "The value of the CustomField to update. Type must match the type configured for the CustomField at creation."
+          }
+        ]
+      },
+      {
+        "name": "Address1",
+        "type": "string",
+        "required": false,
+        "description": "The primary street address of the unit"
+      },
+      {
+        "name": "Address2",
+        "type": "string",
+        "required": false,
+        "description": "Additional street address information pertaining to the unit"
+      },
+      {
+        "name": "City",
+        "type": "string",
+        "required": false,
+        "description": "The city where the unit is located"
+      },
+      {
+        "name": "State",
+        "type": "string",
+        "required": false,
+        "description": "The state where the unit is located"
+      },
+      {
+        "name": "Zip",
+        "type": "string",
+        "required": false,
+        "description": "The zip code where the unit is located"
+      },
+      {
+        "name": "MaintenanceNotes",
+        "type": "string",
+        "required": false,
+        "description": "A brief informative message about the unit's maintenance"
+      },
+      {
+        "name": "MarketingTitle",
+        "type": "string",
+        "required": false,
+        "description": "The title of the listing for syndication"
+      },
+      {
+        "name": "MarketingDescription",
+        "type": "string",
+        "required": false,
+        "description": "A description of the listing for syndication"
+      },
+      {
+        "name": "NonRevenue",
+        "type": "boolean",
+        "required": false,
+        "description": "Indicates whether or not the unit is rentable and is a model unit, office or other non revenue unit"
+      },
+      {
+        "name": "Deposit",
+        "type": "number",
+        "required": false,
+        "description": "The security deposit amount"
+      },
+      {
+        "name": "ApplicationFee",
+        "type": "number",
+        "required": false,
+        "description": "The application fee amount"
+      },
+      {
+        "name": "RentReady",
+        "type": "boolean",
+        "required": false,
+        "description": "Indicates whether or not the unit is ready to be occupied by a tenant"
+      },
+      {
+        "name": "Tags",
+        "type": "Array of strings",
+        "required": false,
+        "description": "User-defined tag(s) that categorize the unit. Providing an array of valid strings will overwrite all existing tags. Passing in an empty array [] or an array of empty strings will clear all existing tags. Passing in null will result in no change."
+      },
+      {
+        "name": "LastInspectedDate",
+        "type": "string <date>",
+        "required": false,
+        "description": "The date the unit was last inspected"
+      },
+      {
+        "name": "YouTubeURL",
+        "type": "string <uri>",
+        "required": false,
+        "description": "The URL of the YouTube video for the listing(s)"
+      },
+      {
+        "name": "PostedToInternet",
+        "type": "boolean",
+        "required": false,
+        "description": "Sets whether to post the unit to third-party listings pages. Set to true to display and accept applications and false to remove the listing."
+      },
+      {
+        "name": "PostedToWebsite",
+        "type": "boolean",
+        "required": false,
+        "description": "Sets whether to post the unit to the AppFolio listings page. Set to true to display and accept applications and false to remove the listing."
+      },
+      {
+        "name": "AvailableOn",
+        "type": "string <date>",
+        "required": false,
+        "description": "The date upon which the unit can be leased. The date must be within three years of today's date"
+      },
+      {
+        "name": "ReadyForShowingOn",
+        "type": "string <date>",
+        "required": false,
+        "description": "The date upon which the unit is ready for showing"
+      },
+      {
+        "name": "UnitTypeId",
+        "type": "string <uuid>",
+        "required": false,
+        "description": "When present, the unit type can dictate fields like bedrooms, bathrooms, sq. feet, etc. Attempting to update a Unit with values that conflict with the Unit Type will cause an error."
+      },
+      {
+        "name": "HvacFilters",
+        "type": "array",
+        "required": false,
+        "description": "Array containing data about a unit's HVAC filters",
+        "attributes": [
+          {
+            "name": "Length",
+            "type": "number <float>",
+            "required": false,
+            "description": "The length of the HVAC filter"
+          },
+          {
+            "name": "Width",
+            "type": "number <float>",
+            "required": false,
+            "description": "The width of the HVAC filter"
+          },
+          {
+            "name": "Thickness",
+            "type": "number <float>",
+            "required": false,
+            "description": "The thickness of the HVAC filter"
+          },
+          {
+            "name": "Quantity",
+            "type": "integer",
+            "required": false,
+            "description": "The quantity of the HVAC filter"
+          },
+          {
+            "name": "Model",
+            "type": "string",
+            "required": false,
+            "description": "The model of the HVAC filter"
+          },
+          {
+            "name": "Brand",
+            "type": "string",
+            "required": false,
+            "description": "The brand of the HVAC filter"
+          }
+        ]
+      },
+      {
+        "name": "HvacDetail",
+        "type": "object",
+        "required": false,
+        "description": "The HVAC details of the unit",
+        "attributes": [
+          {
+            "name": "ConfirmedNoFiltersNeeded",
+            "type": "boolean",
+            "required": false,
+            "description": "Indicates whether or not the unit does not require HVAC filters"
+          }
+        ]
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the updated unit"
+    }
+  ],
+  "requestSample": "{\n  \"Name\": \"Unit A\",\n  \"ApplicationFee\": 20.23,\n  \"Bathrooms\": 2.5,\n  \"Bedrooms\": 3,\n  \"CatsAllowed\": \"Yes\",\n  \"Deposit\": 300.34,\n  \"Description\": \"Sample Description\",\n  \"DogsAllowed\": \"Large & Small\",\n  \"LastInspectedDate\": \"2021-02-15\",\n  \"MarketRent\": 1569.05,\n  \"MaintenanceNotes\": \"Sample notes\",\n  \"MarketingTitle\": \"Beautiful Unit\",\n  \"MarketingDescription\": \"Sample marketing description\",\n  \"NonRevenue\": false,\n  \"SquareFeet\": 2000,\n  \"ReadyForShowingOn\": \"2021-02-15\",\n  \"RentReady\": true,\n  \"Tags\": [\"TagName\"],\n  \"Address1\": \"123 Highland Avenue\",\n  \"Address2\": \"unit c\",\n  \"City\": \"Santa Barbara\",\n  \"State\": \"CA\",\n  \"Zip\": \"93117\",\n  \"AdvertiseUsingListedMarketRent\": true,\n  \"YouTubeURL\": \"https://www.youtube.com/watch?v=abc\",\n  \"AvailableOn\": \"2021-02-15\",\n  \"UnitTypeId\": \"7f3230dc-8b9a-11ec-9b4b-14482e0fbe8e\",\n  \"HvacDetail\": {\"ConfirmedNoFiltersNeeded\": \"true\"},\n  \"HvacFilters\": [{}],\n  \"PostedToInternet\": true,\n  \"PostedToWebsite\": true,\n  \"CustomFields\": {\n    \"a965e7d8-a17d-11ec-b909-0242ac120002\": \"a new value\",\n    \"454d8635-521e-4864-99fb-0bd6200d3a0f\": true,\n    \"c80d3dd1-9eba-45aa-803c-666280b8ff24\": 87.4,\n    \"3277c366-1783-42a9-b925-0bca2afbe391\": \"0e9a7b18-1778-4a03-bc1c-f913aeaef6bc\"\n  }\n}"
+}

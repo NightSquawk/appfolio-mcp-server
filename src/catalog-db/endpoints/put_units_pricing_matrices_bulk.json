@@ -1,0 +1,58 @@
+{
+  "operationId": "put_units_pricing_matrices_bulk",
+  "resource": "units",
+  "name": "Bulk Put Unit Pricing Matrix",
+  "method": "PUT",
+  "path": "/units/pricing_matrices/bulk",
+  "description": "Manage the rent pricing structure for units",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "requestBody": {
+    "required": true,
+    "description": "Unit Pricing objects",
+    "attributes": [
+      {
+        "name": "data",
+        "type": "array",
+        "required": false,
+        "description": "Array of unit pricing objects",
+        "attributes": [
+          {
+            "name": "PricingMatrix",
+            "type": "array",
+            "required": true,
+            "description": "Array of objects that defines the rent pricing structure and lease terms for a unit"
+          },
+          {
+            "name": "UnitId",
+            "type": "string <uuid>",
+            "required": true,
+            "description": "Unique identifier of the unit associated with the rent pricing matrix entry. A unit should only be included once per call"
+          }
+        ]
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of unit pricing matrix result objects"
+    },
+    {
+      "name": "data[].UnitId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the unit associated with the rent pricing matrix entry"
+    },
+    {
+      "name": "data[].successful",
+      "type": "boolean",
+      "required": false,
+      "description": "Indication of successful creation"
+    }
+  ],
+  "requestSample": "{\n  \"data\": [\n    {},\n    {}\n  ]\n}"
+}

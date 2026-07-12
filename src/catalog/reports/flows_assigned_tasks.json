@@ -1,0 +1,103 @@
+{
+  "slug": "flows_assigned_tasks",
+  "endpoint": "flows_assigned_tasks.json",
+  "name": "Realm-X Flows Assigned Tasks",
+  "description": "Returns Realm-X Flows Assigned Tasks report data.",
+  "requiredFilters": [],
+  "parameters": [
+    {
+      "name": "property_visibility",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "enum": [
+        "active",
+        "hidden",
+        "all"
+      ],
+      "description": "The property visibility to filter by."
+    },
+    {
+      "name": "properties",
+      "type": "object",
+      "required": false,
+      "description": "The property filter. Expand to view all attributes associated with this filter. If required, you must submit an id for at least one of the below filters.",
+      "attributes": [
+        {
+          "name": "properties_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "property_groups_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "portfolios_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "owners_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "status",
+      "type": "array",
+      "required": false,
+      "default": "[\"In Progress\"]",
+      "enum": [
+        "all",
+        "In Progress",
+        "Completed",
+        "Dismissed",
+        "Canceled"
+      ],
+      "description": "Task status to filter by."
+    },
+    {
+      "name": "workflow",
+      "type": "array",
+      "required": false,
+      "default": "[\"all\"]",
+      "enum": [
+        "all"
+      ],
+      "description": "Workflow to filter by."
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "property_visibility": "active",
+    "properties": {
+      "properties_ids": [],
+      "property_groups_ids": [],
+      "portfolios_ids": [],
+      "owners_ids": []
+    },
+    "status": [
+      "all"
+    ],
+    "workflow": [
+      "all"
+    ],
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

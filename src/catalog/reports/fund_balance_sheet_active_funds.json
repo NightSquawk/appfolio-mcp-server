@@ -1,0 +1,113 @@
+{
+  "slug": "fund_balance_sheet_active_funds",
+  "endpoint": "fund_balance_sheet_active_funds.json",
+  "name": "Fund Balance Sheet - Active Funds",
+  "description": "Returns Fund Balance Sheet - Active Funds report data.",
+  "requiredFilters": [
+    "posted_on_to"
+  ],
+  "parameters": [
+    {
+      "name": "property_visibility",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "enum": [
+        "active",
+        "hidden",
+        "all"
+      ],
+      "description": "The property visibility to filter by."
+    },
+    {
+      "name": "properties",
+      "type": "object",
+      "required": false,
+      "description": "The property filter. Expand to view all attributes associated with this filter. If required, you must submit an id for at least one of the below filters.",
+      "attributes": [
+        {
+          "name": "properties_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "property_groups_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "portfolios_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "owners_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "posted_on_to",
+      "type": "string",
+      "required": true,
+      "format": "YYYY-MM-DD",
+      "description": "The 'As of To' date to filter by."
+    },
+    {
+      "name": "accounting_basis",
+      "type": "string",
+      "required": false,
+      "default": "Cash",
+      "enum": [
+        "Cash",
+        "Accrual"
+      ],
+      "description": "The accounting basis to filter by."
+    },
+    {
+      "name": "level_of_detail",
+      "type": "string",
+      "required": false,
+      "default": "detail_view",
+      "enum": [
+        "detail_view",
+        "summary_view"
+      ],
+      "description": "The level of detail to filter by."
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "property_visibility": "active",
+    "properties": {
+      "properties_ids": [],
+      "property_groups_ids": [],
+      "portfolios_ids": [],
+      "owners_ids": []
+    },
+    "posted_on_to": "2023-06-30",
+    "accounting_basis": "Cash",
+    "level_of_detail": "detail_view",
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": [
+    "account_number",
+    "account_name",
+    "operating",
+    "reserve",
+    "total"
+  ]
+}

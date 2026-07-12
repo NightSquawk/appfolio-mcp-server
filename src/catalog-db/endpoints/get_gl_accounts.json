@@ -1,0 +1,115 @@
+{
+  "operationId": "get_gl_accounts",
+  "resource": "gl_accounts",
+  "name": "List All General Ledger Accounts",
+  "method": "GET",
+  "path": "/gl_accounts",
+  "description": "Returns all General Ledger (GL) accounts that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[LastUpdatedAtFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter GL accounts updated at or after this date-time"
+    },
+    {
+      "name": "filters[IsCorporateAccount]",
+      "type": "boolean",
+      "required": false,
+      "description": "Filter by whether the GL account is a corporate or non-corporate (standard) GL account"
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of GL account objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the GL account"
+    },
+    {
+      "name": "data[].IsCorporateAccount",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether the GL account is a corporate or non-corporate (standard) GL account"
+    },
+    {
+      "name": "data[].AccountName",
+      "type": "string",
+      "required": false,
+      "deprecated": true,
+      "description": "User provided name of the GL account"
+    },
+    {
+      "name": "data[].AccountType",
+      "type": "string",
+      "required": false,
+      "deprecated": true,
+      "description": "The account type or category of the GL account"
+    },
+    {
+      "name": "data[].FundAccount",
+      "type": "object",
+      "required": false,
+      "description": "The type of fund account. Options: Reserve (funds set aside for specific future purposes), Operating (funds set aside for regular operating expenses)"
+    },
+    {
+      "name": "data[].LastUpdatedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The date the GL account's details were last updated"
+    },
+    {
+      "name": "data[].Name",
+      "type": "string",
+      "required": false,
+      "description": "User provided name of the GL account"
+    },
+    {
+      "name": "data[].Number",
+      "type": "string",
+      "required": false,
+      "description": "The GL account number"
+    },
+    {
+      "name": "data[].Type",
+      "type": "string",
+      "required": false,
+      "description": "The account type or category of the GL account",
+      "enum": ["asset", "capital", "cash", "expense", "income", "liability", "other_expense", "other_income"]
+    },
+    {
+      "name": "data[].OffsetAccountId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the offset account"
+    },
+    {
+      "name": "data[].ParentGlAccountId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the parent general ledger account. If present, it indicates the parent account to which the sub-account belongs."
+    },
+    {
+      "name": "data[].PropertyIds",
+      "type": "Array of arrays",
+      "required": false,
+      "description": "Unique identifier(s) of the properties associated with the GL account. Note: This endpoint returns hidden properties. To associate hidden properties yielded from this endpoint with those from the Properties endpoint, ensure the IncludeHidden filter is enabled."
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/gl_accounts?filters[LastUpdatedAtFrom]=2020-12-15T16:30:46Z&filters[IsCorporateAccount]=true' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

@@ -1,0 +1,263 @@
+{
+  "operationId": "patch_vendors_vendorid",
+  "resource": "vendors",
+  "name": "Update Vendor",
+  "method": "PATCH",
+  "path": "/vendors/{vendorId}",
+  "description": "Update a vendor.",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "vendorId",
+      "type": "string",
+      "required": true,
+      "description": "Unique identifier of the vendor to update"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Vendor update object",
+    "attributes": [
+      {
+        "name": "TaxpayerName",
+        "type": "string",
+        "required": false,
+        "description": "The taxpayer name of the vendor. If UseCompanyNameAsTaxpayerName is true, then TaxpayerName will be CompanyName. If IsCompany is true, and TaxpayerName is not provided, then TaxpayerName will be set to CompanyName. If IsCompany is false, and TaxpayerName is not provided, then TaxpayerName will be set to the concatenation of FirstName and LastName. If TaxpayerName is provided, and UseCompanyNameAsTaxpayerName is false, then TaxpayerName will be set as provided value."
+      },
+      {
+        "name": "TaxpayerId",
+        "type": "string",
+        "required": false,
+        "description": "The tax identification number of the vendor. This field accepts either a Employer Identification Number (EIN), a Social Security Number (SSN), or an Individual Taxpayer Identification Number (ITIN)."
+      },
+      {
+        "name": "CompanyName",
+        "type": "string",
+        "required": false,
+        "description": "The display name of the vendor's company"
+      },
+      {
+        "name": "Send1099",
+        "type": "boolean",
+        "required": false,
+        "description": "Indicates whether or not the vendor needs a 1099 tax form from the management company"
+      },
+      {
+        "name": "FirstName",
+        "type": "string",
+        "required": false,
+        "description": "The vendor's first name"
+      },
+      {
+        "name": "LastName",
+        "type": "string",
+        "required": false,
+        "description": "The vendor's last name"
+      },
+      {
+        "name": "Address1",
+        "type": "string",
+        "required": false,
+        "description": "The primary street address of the vendor. If provided, City, State, and Zip must also be provided."
+      },
+      {
+        "name": "Address2",
+        "type": "string",
+        "required": false,
+        "description": "Additional street address information pertaining to the vendor. If provided, Address1, City, State, and Zip must also be provided."
+      },
+      {
+        "name": "City",
+        "type": "string",
+        "required": false,
+        "description": "The city where the vendor is located. If provided, Address1, State, and Zip must also be provided."
+      },
+      {
+        "name": "State",
+        "type": "string",
+        "required": false,
+        "description": "The state where the vendor is located (e.g. \"CA\" for California). If provided, Address1, City, and Zip must also be provided. This value must not be an unincorporated US territory (AS, FM, MH, MP, or VI) for primary address when the vendor is using online payables with ACH."
+      },
+      {
+        "name": "Zip",
+        "type": "string",
+        "required": false,
+        "description": "The zip code where the vendor is located. Must be a string in 5-digit ZIP code format (e.g., 93013) or ZIP+4 format (e.g., 93013-0429). If provided, Address1, City, and State must also be provided."
+      },
+      {
+        "name": "CountryCode",
+        "type": "string",
+        "required": false,
+        "description": "The country code of the vendor (e.g. \"JP\" for Japan). If provided, Address1, City, State, and Zip must also be provided. This value must be US for primary address when the vendor is using online payables and ACH."
+      },
+      {
+        "name": "PhoneNumber",
+        "type": "string",
+        "required": false,
+        "description": "The vendor's primary phone number",
+        "deprecated": true
+      },
+      {
+        "name": "PhoneNumbers",
+        "type": "array",
+        "required": false,
+        "description": "The vendor's phone number(s). PhoneNumber and PhoneNumbers cannot be provided together. Passing any number of phone numbers will replace all existing phone numbers for the vendor.",
+        "attributes": [
+          {
+            "name": "Number",
+            "type": "string",
+            "required": true,
+            "description": "The vendor's phone number"
+          },
+          {
+            "name": "AdditionalDetails",
+            "type": "string",
+            "required": false,
+            "description": "Additional detailed information pertaining to the phone number associated with the vendor"
+          },
+          {
+            "name": "IsPrimary",
+            "type": "boolean",
+            "required": false,
+            "description": "Indicates whether the phone number provided is the vendor's main contact number"
+          },
+          {
+            "name": "Label",
+            "type": "string",
+            "required": false,
+            "description": "The label of the phone number, e.g. 'Home'",
+            "enum": ["Fax", "Home", "Mobile", "Office"]
+          }
+        ]
+      },
+      {
+        "name": "Email",
+        "type": "string",
+        "required": false,
+        "description": "The vendor's primary email address",
+        "deprecated": true
+      },
+      {
+        "name": "Emails",
+        "type": "array",
+        "required": false,
+        "description": "The vendor's email address(es). Email and Emails cannot be provided together. Passing any number of emails will replace all existing email addresses for the vendor.",
+        "attributes": [
+          {
+            "name": "EmailAddress",
+            "type": "string",
+            "required": true,
+            "description": "The vendor's email address"
+          },
+          {
+            "name": "IsPrimary",
+            "type": "boolean",
+            "required": false,
+            "description": "Indicates whether the email address provided is the vendor's primary email address"
+          }
+        ]
+      },
+      {
+        "name": "CompanyURL",
+        "type": "string",
+        "required": false,
+        "description": "The internet address of vendor's website"
+      },
+      {
+        "name": "LiabilityInsuranceExpiration",
+        "type": "string <date>",
+        "required": false,
+        "description": "The expiration date of the vendor's liability insurance. ISO 8601 format (YYYY-MM-DD) is required. Legacy MM/DD/YYYY format is supported for backward compatibility but will be deprecated in a future release."
+      },
+      {
+        "name": "AutoInsuranceExpiration",
+        "type": "string <date>",
+        "required": false,
+        "description": "The expiration date of the vendor's automobile insurance. ISO 8601 format (YYYY-MM-DD) is required. Legacy MM/DD/YYYY format is supported for backward compatibility but will be deprecated in a future release."
+      },
+      {
+        "name": "WorkersCompExpiration",
+        "type": "string <date>",
+        "required": false,
+        "description": "The expiration date of the vendor's worker's compensation insurance. ISO 8601 format (YYYY-MM-DD) is required. Legacy MM/DD/YYYY format is supported for backward compatibility but will be deprecated in a future release."
+      },
+      {
+        "name": "ContractExpiration",
+        "type": "string <date>",
+        "required": false,
+        "description": "The expiration date of the contract. ISO 8601 format (YYYY-MM-DD) is required. Legacy MM/DD/YYYY format is supported for backward compatibility but will be deprecated in a future release."
+      },
+      {
+        "name": "UmbrellaInsuranceExpiration",
+        "type": "string <date>",
+        "required": false,
+        "description": "The expiration date of the vendor's umbrella insurance. ISO 8601 format (YYYY-MM-DD) is required. Legacy MM/DD/YYYY format is supported for backward compatibility but will be deprecated in a future release."
+      },
+      {
+        "name": "CompliantStatus",
+        "type": "boolean",
+        "required": false,
+        "description": "Indicates whether or not the vendor meets compliance"
+      },
+      {
+        "name": "NetVendorId",
+        "type": "string",
+        "required": false,
+        "description": "The vendor's NetVendor ID"
+      },
+      {
+        "name": "IsCompany",
+        "type": "boolean",
+        "required": false,
+        "description": "Indicates whether or not the vendor identifies as a company"
+      },
+      {
+        "name": "UseCompanyNameAsTaxpayerName",
+        "type": "boolean",
+        "required": false,
+        "description": "Indicates whether or not to use the company name for tax paying purposes"
+      },
+      {
+        "name": "DefaultAutoAcceptWorkOrders",
+        "type": "boolean",
+        "required": false,
+        "description": "Indicates whether the vendor is ineligible for auto-accept work order assignments. When set to true, this vendor will auto-accept all work orders assigned to them."
+      },
+      {
+        "name": "PaymentTerms",
+        "type": "integer",
+        "required": false,
+        "description": "Represents the number of days the payment is due after the invoice date. A null value indicates that no payment terms were defined. A value of 0 indicates the payment is due on receipt. A value greater than 0, for example, 15, indicates the payment is due 15 days after the invoice date. Required if UsingEomTerms is true."
+      },
+      {
+        "name": "UsingEomTerms",
+        "type": "boolean",
+        "required": false,
+        "description": "Indicates whether or not the payment terms include an end-of-month (EOM) stipulation. For example, if PaymentTerms is 15, and EOM is true, the payment is due within 15 days of the end of the month."
+      },
+      {
+        "name": "Tags",
+        "type": "Array of strings",
+        "required": false,
+        "description": "User-defined tag(s) that categorize the vendor. Providing an array of valid strings will overwrite all existing tags. Passing in an empty array [] or an array of empty strings will clear all existing tags. Passing in null will result in no change."
+      },
+      {
+        "name": "CustomFields",
+        "type": "object",
+        "required": false,
+        "description": "The custom fields for the associated entity. The value of the CustomField to update keyed by CustomFieldId. To clear the value of a CustomField, set CustomFieldId to null. For array-type custom fields (select_multiple), use an empty array [] or empty string instead of null."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the updated vendor"
+    }
+  ],
+  "requestSample": "{\n  \"TaxpayerName\": \"John Doe\",\n  \"TaxpayerId\": \"55-2345678\",\n  \"CompanyName\": \"Fake Company\",\n  \"IsCompany\": true,\n  \"UseCompanyNameAsTaxpayerName\": false,\n  \"Send1099\": true,\n  \"FirstName\": \"John\",\n  \"LastName\": \"Doe\",\n  \"Address1\": \"25 Example Way\",\n  \"Address2\": \"34 Example Way\",\n  \"City\": \"Los Angeles\",\n  \"State\": \"CA\",\n  \"Zip\": \"92114\",\n  \"PhoneNumbers\": [{}],\n  \"Emails\": [{}],\n  \"CompanyURL\": \"https://example.com\",\n  \"LiabilityInsuranceExpiration\": \"01-23-2022\",\n  \"AutoInsuranceExpiration\": \"02-23-2022\",\n  \"WorkersCompExpiration\": \"03-23-2022\",\n  \"ContractExpiration\": \"04-23-2022\",\n  \"UmbrellaInsuranceExpiration\": \"05-23-2022\",\n  \"CompliantStatus\": true,\n  \"NetVendorId\": \"1\",\n  \"DefaultAutoAcceptWorkOrders\": true,\n  \"PaymentTerms\": 30,\n  \"UsingEomTerms\": true,\n  \"Tags\": [\"tag1\", \"tag2\"],\n  \"CustomFields\": {\n    \"a965e7d8-a17d-11ec-b909-0242ac120002\": \"a new value\",\n    \"454d8635-521e-4864-99fb-0bd6200d3a0f\": true,\n    \"c80d3dd1-9eba-45aa-803c-666280b8ff24\": 87.4,\n    \"3277c366-1783-42a9-b925-0bca2afbe391\": \"0e9a7b18-1778-4a03-bc1c-f913aeaef6bc\",\n    \"4f83a1bf-4e49-4463-8113-15c52f79243a\": []\n  }\n}"
+}

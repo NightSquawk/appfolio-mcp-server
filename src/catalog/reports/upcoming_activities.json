@@ -1,0 +1,142 @@
+{
+  "slug": "upcoming_activities",
+  "endpoint": "upcoming_activities.json",
+  "name": "Activities Summary",
+  "description": "Returns Activities Summary report data.",
+  "requiredFilters": [
+    "due_at_from",
+    "due_at_to"
+  ],
+  "parameters": [
+    {
+      "name": "property_visibility",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "enum": [
+        "active",
+        "hidden",
+        "all"
+      ],
+      "description": "The property visibility to filter by."
+    },
+    {
+      "name": "unit_ids",
+      "type": "array",
+      "required": false,
+      "description": "Unique reference number of the unit or units to filter by."
+    },
+    {
+      "name": "property",
+      "type": "object",
+      "required": false,
+      "description": "The property filter. Expand to view all attributes associated with this filter. You can only submit ONE of the below filters.",
+      "attributes": [
+        {
+          "name": "property_id",
+          "type": "string",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "parties_ids",
+      "type": "object",
+      "required": false,
+      "description": "The occupancy, owner, rental_application ids to filter by. Expand to view all attributes associated with this filter. If required, you must submit an id for at least one of the below filters.",
+      "attributes": [
+        {
+          "name": "occupancies_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "owners_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "rental_applications_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "activity_status",
+      "type": "array",
+      "required": false,
+      "default": [
+        "pending",
+        "queued",
+        "in_progress"
+      ],
+      "enum": [
+        "all",
+        "pending",
+        "queued",
+        "'in_progress' denotes 'In Progress'",
+        "completed"
+      ],
+      "description": "Activity status to filter by."
+    },
+    {
+      "name": "assigned_user",
+      "type": "string",
+      "required": false,
+      "default": "All",
+      "description": "Assigned user id to filter by."
+    },
+    {
+      "name": "due_at_from",
+      "type": "string",
+      "required": true,
+      "format": "YYYY-MM-DD",
+      "description": "The 'Due Date From' date to filter by."
+    },
+    {
+      "name": "due_at_to",
+      "type": "string",
+      "required": true,
+      "format": "YYYY-MM-DD",
+      "description": "The 'Due Date To' date to filter by."
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "property_visibility": "active",
+    "unit_ids": [
+      "1",
+      "2",
+      "3"
+    ],
+    "property": {
+      "property_id": "1"
+    },
+    "parties_ids": {
+      "occupancies_ids": [],
+      "owners_ids": [],
+      "rental_applications_ids": []
+    },
+    "activity_status": [
+      "all"
+    ],
+    "assigned_user": "All",
+    "due_at_from": "2023-06-01",
+    "due_at_to": "2023-06-30",
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

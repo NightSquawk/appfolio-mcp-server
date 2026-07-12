@@ -1,0 +1,41 @@
+{
+  "operationId": "post_work_orders_workorderid_attachments",
+  "resource": "work_orders",
+  "name": "Create Work Order Attachment",
+  "method": "POST",
+  "path": "/work_orders/{WorkOrderId}/attachments",
+  "description": "Upload an attachment to a work order",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "WorkOrderId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "The work order to which the file will be attached"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Attachment object (multipart/form-data)",
+    "attributes": [
+      {
+        "name": "File",
+        "type": "string",
+        "required": false,
+        "description": "Filename.file-extension",
+        "format": "multipart/form-data"
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the work order attachment"
+    }
+  ],
+  "requestSample": "{\n  \"File\": \"/path/to/file.pdf\"\n}"
+}

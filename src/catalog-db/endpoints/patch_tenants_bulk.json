@@ -1,0 +1,131 @@
+{
+  "operationId": "patch_tenants_bulk",
+  "resource": "tenants",
+  "name": "Bulk Update Tenants",
+  "method": "PATCH",
+  "path": "/tenants/bulk",
+  "description": "Update Tenants in bulk",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "requestBody": {
+    "required": true,
+    "description": "Tenant objects",
+    "attributes": [
+      {
+        "name": "data",
+        "type": "array",
+        "required": false,
+        "description": "Array of tenant objects to update",
+        "attributes": [
+          {
+            "name": "Id",
+            "type": "string <uuid>",
+            "required": true,
+            "description": "Unique identifier for the tenant"
+          },
+          {
+            "name": "FirstName",
+            "type": "string",
+            "required": false,
+            "description": "The tenant's first name"
+          },
+          {
+            "name": "LastName",
+            "type": "string",
+            "required": false,
+            "description": "The tenant's last name"
+          },
+          {
+            "name": "MiddleName",
+            "type": "string",
+            "required": false,
+            "description": "The tenant's middle name"
+          },
+          {
+            "name": "CompanyName",
+            "type": "string",
+            "required": false,
+            "description": "The display name of the tenant's company. Cannot be blank unless IsCompany is false."
+          },
+          {
+            "name": "IsCompany",
+            "type": "boolean",
+            "required": false,
+            "description": "Whether the tenant is a company (controls if the company name should be used as the name of the tenant). When true, CompanyName must be set. When false, FirstName and LastName must both be set."
+          },
+          {
+            "name": "MoveInOn",
+            "type": "string <date>",
+            "required": false,
+            "description": "The date the tenant physically started or will start occupancy. Dictates whether the \"future\" or \"current\" option is displayed in the status field."
+          },
+          {
+            "name": "MoveOutOn",
+            "type": "string <date>",
+            "required": false,
+            "description": "The date the tenant physically ended or will end occupancy. Dictates whether the \"notice\" or \"past\" option is displayed in the status field."
+          },
+          {
+            "name": "PrimaryTenant",
+            "type": "boolean",
+            "required": false,
+            "description": "Indicates whether or not the tenant is the primary leaseholder for the occupancy. At least one PrimaryTenant is required per UnitId. Note: PrimaryTenant: true automatically sets the TenantType to Financially Responsible."
+          },
+          {
+            "name": "TenantType",
+            "type": "string",
+            "required": false,
+            "description": "The type of tenant. At least one tenant with TenantType Financially Responsible is required per UnitId.",
+            "enum": ["Financially Responsible", "Other Occupant", "Co-signer"]
+          },
+          {
+            "name": "Addresses",
+            "type": "array",
+            "required": false,
+            "description": "The tenant's address(es). Passing any number of addresses will replace all existing addresses for the tenant. Passing an empty array [] will remove all existing addresses for the tenant."
+          },
+          {
+            "name": "PhoneNumbers",
+            "type": "array",
+            "required": false,
+            "description": "The tenant's phone number(s). Passing any number of phone numbers will replace all existing phone numbers for the tenant. Passing an empty array [] will remove all existing phone numbers for the tenant."
+          },
+          {
+            "name": "Pets",
+            "type": "array",
+            "required": false,
+            "description": "Contains details about the tenant's pet(s). This will add new pets to the tenant and not remove any existing pets."
+          },
+          {
+            "name": "Vehicles",
+            "type": "array",
+            "required": false,
+            "description": "Contains details about the tenant's vehicle(s). This will add new vehicles to the tenant and not remove any existing vehicles."
+          },
+          {
+            "name": "Emails",
+            "type": "array",
+            "required": false,
+            "description": "The tenant's email address(es). Passing any number of emails will replace all existing email addresses for the tenant. Passing an empty array [] will remove all existing email addresses for the tenant."
+          },
+          {
+            "name": "Tags",
+            "type": "Array of strings",
+            "required": false,
+            "description": "User-defined tag(s) that categorize the tenant. Providing an array of valid strings will overwrite all existing tags. Passing in an empty array [] or an array of empty strings [\"\"] or [\"\", \"\"] will clear all existing tags. Passing in an array of a valid string and an empty string [\"tag_name\", \"\"] will result in Tags: [\"tag_name\"]. Passing in null will result in no change."
+          }
+        ]
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "JobId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the bulk update job"
+    }
+  ],
+  "requestSample": "{\n  \"data\": [\n    {},\n    {}\n  ]\n}"
+}

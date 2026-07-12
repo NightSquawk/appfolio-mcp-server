@@ -1,0 +1,120 @@
+{
+  "operationId": "get_custom_fields",
+  "resource": "custom_fields",
+  "name": "List All Custom Fields",
+  "method": "GET",
+  "path": "/custom_fields",
+  "description": "Returns all custom fields that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[LastUpdatedAtFrom]",
+      "type": "string <date-time>",
+      "required": true,
+      "description": "Filters for custom fields. All GET requests must include a filter for [LastUpdatedAtFrom]."
+    },
+    {
+      "name": "page[number]",
+      "type": "integer",
+      "required": false,
+      "description": "Page number for pagination. Default: 1."
+    },
+    {
+      "name": "page[size]",
+      "type": "integer",
+      "required": false,
+      "description": "Page size for pagination. Default: 1000."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of custom field objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the custom field"
+    },
+    {
+      "name": "data[].Name",
+      "type": "string",
+      "required": false,
+      "description": "The name of the custom field"
+    },
+    {
+      "name": "data[].EntityType",
+      "type": "string",
+      "required": false,
+      "description": "The type of entity for which the custom field was created. Entity types include properties, units, associations, and others."
+    },
+    {
+      "name": "data[].EntitySubType",
+      "type": "string",
+      "required": false,
+      "description": "The sub-type of the entity for which the custom field was created. For example, a property entity's sub-type could be \"Single Family.\" If EntitySubType is null, the field applies to all possible entity sub-types."
+    },
+    {
+      "name": "data[].Instruction",
+      "type": "string",
+      "required": false,
+      "description": "Any additional instructions or clarification relating to the custom field"
+    },
+    {
+      "name": "data[].DefaultValue",
+      "type": "string",
+      "required": false,
+      "description": "The default value set for the custom attribute. If DefaultValue is null, no default value was set for this custom field."
+    },
+    {
+      "name": "data[].Required",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether or not the custom attribute was marked as required by the AppFolio Property Manager user"
+    },
+    {
+      "name": "data[].Type",
+      "type": "string",
+      "required": false,
+      "description": "The type of custom attribute.",
+      "enum": [
+        "boolean",
+        "currency",
+        "date",
+        "decimal",
+        "select",
+        "select_multiple",
+        "email",
+        "link",
+        "number",
+        "percent",
+        "phone_number",
+        "text_line"
+      ]
+    },
+    {
+      "name": "data[].LastUpdatedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The date the custom field's details were last updated"
+    },
+    {
+      "name": "data[].Options",
+      "type": "array",
+      "required": false,
+      "description": "The option(s) set for the custom attribute. If Type is set to Select or Select Multiple, several values can be present."
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/custom_fields?filters[LastUpdatedAtFrom]=2020-12-15T16:30:46Z' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

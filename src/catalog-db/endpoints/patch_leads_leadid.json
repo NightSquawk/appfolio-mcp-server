@@ -1,0 +1,162 @@
+{
+  "operationId": "patch_leads_leadid",
+  "resource": "leads",
+  "name": "Update Lead",
+  "method": "PATCH",
+  "path": "/leads/{leadId}",
+  "description": "Update a lead",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "leadId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the lead to update"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Lead fields to update. All attributes are optional; only provided fields will be updated.",
+    "attributes": [
+      {
+        "name": "AdditionalOccupants",
+        "type": "integer",
+        "required": false,
+        "description": "The number of other potential occupants of the residency"
+      },
+      {
+        "name": "AssignedUserId",
+        "type": "string <uuid>",
+        "required": false,
+        "description": "The AppFolio Property Manager user assigned to the lead. A null value passed to AssignedUserId will unassign the user previously assigned to the lead. Omitting AssignedUserId from the request body will not update the assigned user. Reference the Users endpoint for any necessary associations."
+      },
+      {
+        "name": "Bathrooms",
+        "type": "string <decimal>",
+        "required": false,
+        "description": "The number of desired bathrooms"
+      },
+      {
+        "name": "Bedrooms",
+        "type": "integer",
+        "required": false,
+        "description": "The number of desired bedrooms"
+      },
+      {
+        "name": "CreatedAt",
+        "type": "string <date-time>",
+        "required": false,
+        "description": "The date the lead was created. The value must adhere to the ISO 8601 format YYYY-MM-DDThh:mm:ssZ and the default time zone is Coordinated Universal Time (UTC)."
+      },
+      {
+        "name": "CreditScore",
+        "type": "string",
+        "required": false,
+        "description": "The self-reported credit score of the interested party"
+      },
+      {
+        "name": "DesiredMoveIn",
+        "type": "string <date>",
+        "required": false,
+        "description": "The date the prospective resident desires to move in"
+      },
+      {
+        "name": "FirstName",
+        "type": "string",
+        "required": false,
+        "description": "The first name of the interested person"
+      },
+      {
+        "name": "Email",
+        "type": "string",
+        "required": false,
+        "description": "The email address of the interested person"
+      },
+      {
+        "name": "HasCats",
+        "type": "boolean",
+        "required": false,
+        "description": "Indicates whether or not the interested person has cat(s)"
+      },
+      {
+        "name": "HasDogs",
+        "type": "boolean",
+        "required": false,
+        "description": "Indicates whether or not the interested person has dog(s)"
+      },
+      {
+        "name": "HasOtherPet",
+        "type": "boolean",
+        "required": false,
+        "description": "Indicates whether or not the interested person has other pet(s)"
+      },
+      {
+        "name": "InactiveReason",
+        "type": "string",
+        "required": false,
+        "description": "The reason why the lead was marked inactive",
+        "enum": ["price", "location", "amenities", "no_response", "decided_not_to_move", "leasing_criteria_not_met", "looking_for_move_in_special", "no_availability", "duplicate", "other"]
+      },
+      {
+        "name": "LastName",
+        "type": "string",
+        "required": false,
+        "description": "The last name of the interested person"
+      },
+      {
+        "name": "MaxRent",
+        "type": "string <decimal>",
+        "required": false,
+        "description": "The max amount the interested person is willing to pay monthly for rent"
+      },
+      {
+        "name": "MiddleInitial",
+        "type": "string",
+        "required": false,
+        "description": "The middle initial of the interested person"
+      },
+      {
+        "name": "MonthlyIncome",
+        "type": "string <decimal>",
+        "required": false,
+        "description": "The self-reported monthly income of interested person"
+      },
+      {
+        "name": "PhoneNumber",
+        "type": "string",
+        "required": false,
+        "description": "The phone number of the interested person"
+      },
+      {
+        "name": "Source",
+        "type": "string",
+        "required": false,
+        "description": "The mechanism through which this lead was submitted"
+      },
+      {
+        "name": "Status",
+        "type": "string",
+        "required": false,
+        "description": "Indicates the current phase of engagement with a prospective resident. If the status is set to inactive, you must specify the reason the lead was marked inactive by setting a value for InactiveReason.",
+        "enum": ["active", "cold", "inactive", "waitlisted"]
+      },
+      {
+        "name": "UnitIds",
+        "type": "Array of strings",
+        "required": false,
+        "description": "Array of UnitIds to update on the lead. To maintain a unit's association with a lead, pass in that unit's Id. Passing an empty array of UnitIds will drop all unit interests from the lead. Passing in null for this array or omitting it from the request will not change the units."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the updated lead"
+    }
+  ],
+  "requestSample": "{\n  \"AdditionalOccupants\": 1,\n  \"AssignedUserId\": \"123cde23-c543-456e-abc9-123456789cba\",\n  \"Bathrooms\": \"2.5\",\n  \"Bedrooms\": 2,\n  \"CreatedAt\": \"2021-12-15T16:30:46Z\",\n  \"CreditScore\": \"650\",\n  \"DesiredMoveIn\": \"2021-12-31\",\n  \"Email\": \"sample@example.com\",\n  \"FirstName\": \"John\",\n  \"HasCats\": true,\n  \"HasDogs\": false,\n  \"HasOtherPet\": false,\n  \"LastName\": \"Doe\",\n  \"MaxRent\": \"2200.00\",\n  \"MiddleInitial\": \"\",\n  \"MonthlyIncome\": \"6600.00\",\n  \"PhoneNumber\": \"(310) 555-0194\",\n  \"Source\": \"Website\",\n  \"Status\": \"active\",\n  \"UnitIds\": [\"1abcde23-c543-456e-abc9-123456789cba\", \"234abcde-c543-456e-abc9-123456789abc\"]\n}"
+}

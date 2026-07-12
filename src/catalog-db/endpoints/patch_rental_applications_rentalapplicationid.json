@@ -1,0 +1,47 @@
+{
+  "operationId": "patch_rental_applications_rentalapplicationid",
+  "resource": "rental_applications",
+  "name": "Update Rental Application",
+  "method": "PATCH",
+  "path": "/rental_applications/{rentalApplicationId}",
+  "description": "Update a rental application",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "rentalApplicationId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the rental application to update"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Rental application update object",
+    "attributes": [
+      {
+        "name": "Status",
+        "type": "string",
+        "required": false,
+        "description": "The rental application's status",
+        "enum": ["approved", "canceled", "decision_pending", "denied", "in_review", "info_needed", "in_screening"]
+      },
+      {
+        "name": "StatusReason",
+        "type": "string",
+        "required": false,
+        "description": "The reason for the denied or canceled rental application. Required when Status is \"denied\", optional when Status is \"canceled\". Not applicable for other statuses; will remain null for approved, decision_pending, etc."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the updated rental application"
+    }
+  ],
+  "requestSample": "{\n  \"Status\": \"canceled\",\n  \"StatusReason\": \"The reason why the rental application is canceled\"\n}"
+}

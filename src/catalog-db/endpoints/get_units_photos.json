@@ -1,0 +1,70 @@
+{
+  "operationId": "get_units_photos",
+  "resource": "units",
+  "name": "List All Units Photos",
+  "method": "GET",
+  "path": "/units/photos",
+  "description": "Returns all Multi-Family Unit photos that meet the filter criteria. For Single-Family property photos see /Properties/Photos. Photos may be attached directly to a unit or inherited from the unit's unit type — when inherited, UnitTypeId will be populated and the photo cannot be created, updated, or deleted via these endpoints.",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[UnitId]",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Filter by unit ID. All GET requests must include a filter for [UnitId]."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of unit photo objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the photo"
+    },
+    {
+      "name": "data[].UnitId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the unit associated with the photo"
+    },
+    {
+      "name": "data[].UnitTypeId",
+      "type": "string or null <uuid>",
+      "required": false,
+      "description": "Unique identifier of the unit type associated with the photo. Populated when the photo is attached to the unit type rather than directly to the unit. Null when the photo is attached directly to the unit. Photos attached to a unit type cannot be created, updated, or deleted via the unit photos endpoints."
+    },
+    {
+      "name": "data[].Position",
+      "type": "integer",
+      "required": false,
+      "description": "The position of the photo in the unit photo gallery. If multiple photos are associated with a unit, the order of the remaining photos (positions 1 and above) will not change automatically if some photos are deleted. For example, if there are photos in positions 1, 2, 3, and 4, and photos 1 and 3 are deleted, the remaining photos will retain their original positions of 2 and 4."
+    },
+    {
+      "name": "data[].Url",
+      "type": "string <uri>",
+      "required": false,
+      "description": "The public link to the photo"
+    },
+    {
+      "name": "data[].ContentType",
+      "type": "string",
+      "required": false,
+      "description": "The content type of the photo"
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/units/photos?filters[UnitId]=1abcde23-c543-456e-abc9-123456789cba' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

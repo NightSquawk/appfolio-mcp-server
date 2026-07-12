@@ -1,0 +1,58 @@
+{
+  "operationId": "put_leases_renewal_pricings_bulk",
+  "resource": "leases",
+  "name": "Bulk Put Lease Renewal Pricings",
+  "method": "PUT",
+  "path": "/leases/renewal_pricings/bulk",
+  "description": "Update approved renewal pricing options for leases in bulk",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "requestBody": {
+    "required": true,
+    "description": "Lease renewal pricing objects",
+    "attributes": [
+      {
+        "name": "data",
+        "type": "array",
+        "required": true,
+        "description": "Array of lease renewal pricing objects to update",
+        "attributes": [
+          {
+            "name": "LeaseId",
+            "type": "string <uuid>",
+            "required": true,
+            "description": "Unique identifier of the lease"
+          },
+          {
+            "name": "StartDate",
+            "type": "string <date>",
+            "required": true,
+            "description": "Start date of the renewal pricing option"
+          },
+          {
+            "name": "Price",
+            "type": "number",
+            "required": true,
+            "description": "Monthly rent amount for the renewal option"
+          },
+          {
+            "name": "LeaseTerm",
+            "type": "integer",
+            "required": true,
+            "description": "Lease term in months for the renewal option"
+          }
+        ]
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "JobId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Identifier of the queued processing job"
+    }
+  ],
+  "requestSample": "{\n  \"data\": [\n    {}\n  ]\n}"
+}

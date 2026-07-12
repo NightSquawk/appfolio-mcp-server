@@ -1,0 +1,154 @@
+{
+  "operationId": "get_gl_details",
+  "resource": "gl_details",
+  "name": "List All General Ledger Details",
+  "method": "GET",
+  "path": "/gl_details",
+  "description": "Returns all General Ledger (GL) Details that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[DateFrom]",
+      "type": "string <date>",
+      "required": true,
+      "description": "Start date for filtering GL details by transaction date. Required unless both LastUpdatedOnFrom and LastUpdatedOnTo are provided with a time range of 2 days or less."
+    },
+    {
+      "name": "filters[DateTo]",
+      "type": "string <date>",
+      "required": true,
+      "description": "End date for filtering GL details by transaction date. Required unless both LastUpdatedOnFrom and LastUpdatedOnTo are provided with a time range of 2 days or less."
+    },
+    {
+      "name": "filters[PropertyId]",
+      "type": "string",
+      "required": false,
+      "description": "Unique identifier(s) of the property to filter by. Required unless both LastUpdatedOnFrom and LastUpdatedOnTo are provided and the time range between them is 2 days or less. Accepts comma-separated values."
+    },
+    {
+      "name": "filters[GlAccountId]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the GL account to filter by."
+    },
+    {
+      "name": "filters[AccountingBasis]",
+      "type": "string",
+      "required": false,
+      "description": "The accounting basis to filter by (e.g. Cash or Accrual)."
+    },
+    {
+      "name": "filters[LastUpdatedOnFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Start of the last-updated range. When provided together with LastUpdatedOnTo with a range of 2 days or less, PropertyId is not required."
+    },
+    {
+      "name": "filters[LastUpdatedOnTo]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "End of the last-updated range. When provided together with LastUpdatedOnFrom with a range of 2 days or less, PropertyId is not required."
+    },
+    {
+      "name": "page[number]",
+      "type": "integer",
+      "required": false,
+      "description": "Page number to retrieve. Default is 1."
+    },
+    {
+      "name": "page[size]",
+      "type": "integer",
+      "required": false,
+      "description": "Number of results per page. Default is 1000."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of GL detail objects"
+    },
+    {
+      "name": "data[].LineItemId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the line item associated to this GL detail"
+    },
+    {
+      "name": "data[].GlAccountId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the GL account"
+    },
+    {
+      "name": "data[].PropertyId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the property associated with the GL transaction"
+    },
+    {
+      "name": "data[].UnitId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the unit associated with the GL transaction"
+    },
+    {
+      "name": "data[].Date",
+      "type": "string <date>",
+      "required": false,
+      "description": "The date of the transaction associated with the GL transaction"
+    },
+    {
+      "name": "data[].Reference",
+      "type": "string",
+      "required": false,
+      "description": "The reference number of the transaction associated with the GL transaction"
+    },
+    {
+      "name": "data[].Remarks",
+      "type": "string",
+      "required": false,
+      "description": "Remarks or notes pertaining to the GL transaction"
+    },
+    {
+      "name": "data[].Description",
+      "type": "string",
+      "required": false,
+      "description": "A brief, informative message pertaining to the GL transaction"
+    },
+    {
+      "name": "data[].Credit",
+      "type": "string",
+      "required": false,
+      "description": "Total amount of credit"
+    },
+    {
+      "name": "data[].Debit",
+      "type": "string",
+      "required": false,
+      "description": "Total amount of debit"
+    },
+    {
+      "name": "data[].TransactionId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the transaction"
+    },
+    {
+      "name": "data[].TransactionType",
+      "type": "string",
+      "required": false,
+      "description": "The AppFolio transaction type"
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/gl_details?filters[DateFrom]=2020-12-15&filters[DateTo]=2020-12-16&filters[GlAccountId]=1abcde23-c543-456e-abc9-123456789cba&filters[PropertyId]=1abcde23-c543-456e-abc9-123456789cee,1abcde23-c543-456e-abc9-123456789cbb&filters[AccountingBasis]=Cash' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

@@ -1,0 +1,359 @@
+{
+  "operationId": "get_units",
+  "resource": "units",
+  "name": "List All Units",
+  "method": "GET",
+  "path": "/units",
+  "description": "Returns all units that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[Id]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by unique identifier of the unit"
+    },
+    {
+      "name": "filters[PropertyId]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by unique identifier of the property associated with the unit"
+    },
+    {
+      "name": "filters[UnitGroupId]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by unique identifier of the unit group the unit is a part of"
+    },
+    {
+      "name": "filters[LeasingType]",
+      "type": "string",
+      "required": false,
+      "description": "Filter results based on a single leasing type value. Enum: \"ConventionalUnit\" \"BedUnit\""
+    },
+    {
+      "name": "filters[LastUpdatedAtFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter units last updated at or after this date-time. All GET requests must include a filter for [Id] (if available) or [LastUpdatedAtFrom]."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of unit objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the unit"
+    },
+    {
+      "name": "data[].Name",
+      "type": "string",
+      "required": false,
+      "description": "The unit name as displayed in the AppFolio Property Manager"
+    },
+    {
+      "name": "data[].Bathrooms",
+      "type": "string <decimal>",
+      "required": false,
+      "description": "The number of desired bathrooms"
+    },
+    {
+      "name": "data[].Bedrooms",
+      "type": "integer",
+      "required": false,
+      "description": "The number of desired bedrooms"
+    },
+    {
+      "name": "data[].CustomFields",
+      "type": "object",
+      "required": false,
+      "description": "The custom fields for the associated entity"
+    },
+    {
+      "name": "data[].SquareFeet",
+      "type": "string",
+      "required": false,
+      "description": "The size of the unit in square feet"
+    },
+    {
+      "name": "data[].ListedMarketRent",
+      "type": "string <decimal>",
+      "required": false,
+      "description": "The rent per month as listed on the market",
+      "deprecated": true
+    },
+    {
+      "name": "data[].ListedRent",
+      "type": "string <decimal>",
+      "required": false,
+      "description": "The rent per month as listed on the market. This value reflects either the market rent plus amenities fees or the advertised rent, depending on whether \"Use Market Rent On Ads\" is enabled in AppFolio Property Manager."
+    },
+    {
+      "name": "data[].MarketRent",
+      "type": "string <decimal>",
+      "required": false,
+      "description": "The unit's base market rent, representing its estimated fair market value based on current market conditions and comparable properties. This value may differ from ListedRent, as it does not include advertised adjustments or amenity fees."
+    },
+    {
+      "name": "data[].Status",
+      "type": "string",
+      "required": false,
+      "description": "The status of the unit. Enum: \"Occupied\" \"Vacant\" \"Vacant Rented\" \"Notice\" \"Notice Rented\""
+    },
+    {
+      "name": "data[].PropertyId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the property associated with the unit"
+    },
+    {
+      "name": "data[].CurrentOccupancyId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the current occupant of the unit"
+    },
+    {
+      "name": "data[].UnitGroupId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the unit group the unit is a part of"
+    },
+    {
+      "name": "data[].LeasingType",
+      "type": "string",
+      "required": false,
+      "description": "The type of lease for the unit. Enum: \"ConventionalUnit\" \"BedUnit\""
+    },
+    {
+      "name": "data[].Description",
+      "type": "string",
+      "required": false,
+      "description": "A brief, informative description of the unit"
+    },
+    {
+      "name": "data[].Address1",
+      "type": "string",
+      "required": false,
+      "description": "The primary street address of the unit"
+    },
+    {
+      "name": "data[].Address2",
+      "type": "string",
+      "required": false,
+      "description": "Additional street address information pertaining to the unit"
+    },
+    {
+      "name": "data[].City",
+      "type": "string",
+      "required": false,
+      "description": "The city where the unit is located"
+    },
+    {
+      "name": "data[].State",
+      "type": "string",
+      "required": false,
+      "description": "The state where the unit is located"
+    },
+    {
+      "name": "data[].Zip",
+      "type": "string",
+      "required": false,
+      "description": "The zip code where the unit is located"
+    },
+    {
+      "name": "data[].MaintenanceNotes",
+      "type": "string",
+      "required": false,
+      "description": "A brief informative message about the unit's maintenance"
+    },
+    {
+      "name": "data[].MarketingTitle",
+      "type": "string",
+      "required": false,
+      "description": "The title of the listing for syndication"
+    },
+    {
+      "name": "data[].MarketingDescription",
+      "type": "string",
+      "required": false,
+      "description": "A description of the listing for syndication"
+    },
+    {
+      "name": "data[].NonRevenue",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether or not the unit is rentable and is a model unit, office or other non revenue unit"
+    },
+    {
+      "name": "data[].ApplicationURL",
+      "type": "string",
+      "required": false,
+      "description": "The URL link(s) to the application page of the unit(s) accepting online applications"
+    },
+    {
+      "name": "data[].AppliancesIncluded",
+      "type": "Array of strings",
+      "required": false,
+      "description": "User-defined appliances that are included with the unit"
+    },
+    {
+      "name": "data[].AcceptingApplications",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether or not the unit is accepting applications"
+    },
+    {
+      "name": "data[].PostedToInternet",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether the unit has been posted to a third-party listings page."
+    },
+    {
+      "name": "data[].PostedToWebsite",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether a vacant unit was posted to the AppFolio listings page."
+    },
+    {
+      "name": "data[].YouTubeURL",
+      "type": "string <uri>",
+      "required": false,
+      "description": "The URL of the YouTube video for the listing(s)"
+    },
+    {
+      "name": "data[].Link",
+      "type": "string <uri>",
+      "required": false,
+      "description": "A link to the unit page in the AppFolio Property Manager"
+    },
+    {
+      "name": "data[].Deposit",
+      "type": "string",
+      "required": false,
+      "description": "The security deposit amount"
+    },
+    {
+      "name": "data[].CatsAllowed",
+      "type": "string",
+      "required": false,
+      "description": "The unit's cat policy. Enum: \"Yes\" \"No\" or null"
+    },
+    {
+      "name": "data[].DogsAllowed",
+      "type": "string",
+      "required": false,
+      "description": "The unit's dog policy. Enum: \"Large & Small\" \"Small Only\" \"No\" or null"
+    },
+    {
+      "name": "data[].Tags",
+      "type": "Array of strings",
+      "required": false,
+      "description": "User-defined tag(s) that categorize the unit"
+    },
+    {
+      "name": "data[].UnitType",
+      "type": "string",
+      "required": false,
+      "description": "The floor plan of the unit"
+    },
+    {
+      "name": "data[].UnitTypeId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the floor plan associated with the unit"
+    },
+    {
+      "name": "data[].UtilitiesIncluded",
+      "type": "Array of strings",
+      "required": false,
+      "description": "User-defined utilities that are included with the unit"
+    },
+    {
+      "name": "data[].CreatedAt",
+      "type": "string",
+      "required": false,
+      "description": "When the unit was created in the AppFolio Property Manager"
+    },
+    {
+      "name": "data[].RentStatus",
+      "type": "null or string",
+      "required": false,
+      "description": "Status / type of rent control. Enum: null \"RentControlled\" \"RentStabilized\" \"Decontrolled\""
+    },
+    {
+      "name": "data[].ApplicationFee",
+      "type": "string",
+      "required": false,
+      "description": "The application fee amount"
+    },
+    {
+      "name": "data[].Amenities",
+      "type": "Array of objects",
+      "required": false,
+      "description": "Array containing a unit's amenities"
+    },
+    {
+      "name": "data[].HvacFilters",
+      "type": "Array of objects",
+      "required": false,
+      "description": "Array containing a unit's HVAC filters"
+    },
+    {
+      "name": "data[].HvacDetail",
+      "type": "object",
+      "required": false,
+      "description": "The HVAC details of the unit"
+    },
+    {
+      "name": "data[].RentReady",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether or not the unit is ready to be occupied by a tenant"
+    },
+    {
+      "name": "data[].AvailableOn",
+      "type": "string <date>",
+      "required": false,
+      "description": "The date upon which the unit can be leased"
+    },
+    {
+      "name": "data[].LastInspectedDate",
+      "type": "string <date>",
+      "required": false,
+      "description": "The date the unit was last inspected"
+    },
+    {
+      "name": "data[].ReadyForShowingOn",
+      "type": "string <date>",
+      "required": false,
+      "description": "The date upon which the unit is ready for showing"
+    },
+    {
+      "name": "data[].HiddenAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "When the property was marked inactive state by an AppFolio Property Manager user"
+    },
+    {
+      "name": "data[].LastUpdatedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The date the unit's details were last updated"
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/units?filters[Id]=1abcde23-c543-456e-abc9-123456789cba&filters[PropertyId]=1abcde23-c543-456e-abc9-123456789cee,1abcde23-c543-456e-abc9-123456789cbb&filters[UnitGroupId]=abcdef23-c543-456e-abc9-123456789cba&filters[LeasingType]=BedUnit&filters[LastUpdatedAtFrom]=2020-12-15T16:30:46Z' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

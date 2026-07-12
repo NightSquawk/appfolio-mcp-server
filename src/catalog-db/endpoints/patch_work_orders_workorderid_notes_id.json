@@ -1,0 +1,46 @@
+{
+  "operationId": "patch_work_orders_workorderid_notes_id",
+  "resource": "work_orders",
+  "name": "Update Work Order Note",
+  "method": "PATCH",
+  "path": "/work_orders/{WorkOrderId}/notes/{Id}",
+  "description": "Update a work order's note",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "WorkOrderId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "The work order to which the note will be attached"
+    },
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the note to update"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Note object",
+    "attributes": [
+      {
+        "name": "Body",
+        "type": "string",
+        "required": false,
+        "description": "A brief informative message about the work order. A work order note cannot exceed 65,535 characters."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the updated work order note"
+    }
+  ],
+  "requestSample": "{\n\"Body\": \"This work order have scheduled a maintenance service on 11/30/2022 - Updated\"\n}"
+}

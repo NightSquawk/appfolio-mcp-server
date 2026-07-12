@@ -1,0 +1,40 @@
+{
+  "operationId": "post_units_unitid_notes",
+  "resource": "units",
+  "name": "Create Unit Note",
+  "method": "POST",
+  "path": "/units/{UnitId}/notes",
+  "description": "Add a note to a unit",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "UnitId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "The unit to which the note will be attached"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Note object",
+    "attributes": [
+      {
+        "name": "Body",
+        "type": "string",
+        "required": false,
+        "description": "A brief informative message about the unit note. A unit note cannot exceed 65,535 characters."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the unit note"
+    }
+  ],
+  "requestSample": "{\n  \"Body\": \"This unit has a scheduled cleaning service on 11/11/2023\"\n}"
+}

@@ -1,0 +1,62 @@
+{
+  "operationId": "post_showings",
+  "resource": "showings",
+  "name": "Create Showings",
+  "method": "POST",
+  "path": "/showings",
+  "description": "Create a showing",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "requestBody": {
+    "required": true,
+    "description": "Showing object",
+    "attributes": [
+      {
+        "name": "LeadId",
+        "type": "string <uuid>",
+        "required": true,
+        "description": "Unique identifier of the lead associated with the showing. Reference the Leads endpoint for any necessary associations."
+      },
+      {
+        "name": "UnitId",
+        "type": "string <uuid>",
+        "required": true,
+        "description": "Unique identifier of the unit that the interested party will be shown. Reference the Units endpoint for any necessary associations."
+      },
+      {
+        "name": "StartAt",
+        "type": "string <date-time>",
+        "required": true,
+        "description": "The start time of the showing. The value must adhere to the ISO 8601 format YYYY-MM-DDThh:mm:ssZ and the default time zone is Coordinated Universal Time (UTC)."
+      },
+      {
+        "name": "EndAt",
+        "type": "string <date-time>",
+        "required": true,
+        "description": "The end time of the showing. The value must adhere to the ISO 8601 format YYYY-MM-DDThh:mm:ssZ and the default time zone is Coordinated Universal Time (UTC)."
+      },
+      {
+        "name": "AssignedUserId",
+        "type": "string <uuid>",
+        "required": false,
+        "description": "The AppFolio Property Manager user responsible for the showing. Reference the Users endpoint for any necessary associations."
+      },
+      {
+        "name": "Notes",
+        "type": "string",
+        "required": false,
+        "description": "A brief informative message about the showing"
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the created showing"
+    }
+  ],
+  "requestSample": "{\n  \"AssignedUserId\": \"80c5cb28-547f-11ec-bfa5-02975b268737\",\n  \"EndAt\": \"2022-02-08T18:45:00Z\",\n  \"LeadId\": \"71c5cb28-547f-11ec-bfa5-02975b268737\",\n  \"Notes\": \"Prospect was very excited about the unit.\",\n  \"StartAt\": \"2022-02-08T18:30:00Z\",\n  \"UnitId\": \"91c5cb28-547f-11ec-bfa5-02975b268737\"\n}"
+}

@@ -1,0 +1,131 @@
+{
+  "slug": "inventory_usage",
+  "endpoint": "inventory_usage.json",
+  "name": "Inventory Usage",
+  "description": "Returns Inventory Usage report data.",
+  "requiredFilters": [
+    "inventory_added_on_from",
+    "inventory_added_on_to"
+  ],
+  "parameters": [
+    {
+      "name": "property_visibility",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "enum": [
+        "active",
+        "hidden",
+        "all"
+      ],
+      "description": "The property visibility to filter by."
+    },
+    {
+      "name": "unit_ids",
+      "type": "array",
+      "required": false,
+      "description": "Unique reference number of the unit or units to filter by."
+    },
+    {
+      "name": "property",
+      "type": "object",
+      "required": false,
+      "description": "The property filter. Expand to view all attributes associated with this filter. You can only submit ONE of the below filters.",
+      "attributes": [
+        {
+          "name": "property_id",
+          "type": "string",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "work_order_statuses",
+      "type": "array",
+      "required": false,
+      "default": "[\"0\",\"1\",\"2\",\"9\",\"3\"]",
+      "enum": [
+        "'0' denotes 'New'",
+        "'1' denotes 'Estimate Requested'",
+        "'2' denotes 'Estimated'",
+        "'9' denotes 'Assigned'",
+        "'3' denotes 'Scheduled'",
+        "'6' denotes 'Waiting'",
+        "'8' denotes 'Work Done'",
+        "'12' denotes 'Ready to Bill'",
+        "'4' denotes 'Completed'",
+        "'5' denotes 'Canceled'",
+        "'7' denotes 'Completed No Need To Bill'"
+      ],
+      "description": "Current Work Order Status to filter by."
+    },
+    {
+      "name": "unit_turn",
+      "type": "string",
+      "required": false,
+      "default": "0",
+      "enum": [
+        "0",
+        "1"
+      ],
+      "description": "Unit Turn Work Orders only"
+    },
+    {
+      "name": "inventory_added_on_from",
+      "type": "string",
+      "required": true,
+      "format": "YYYY-MM-DD",
+      "description": "The 'Date From' date to filter by."
+    },
+    {
+      "name": "inventory_added_on_to",
+      "type": "string",
+      "required": true,
+      "format": "YYYY-MM-DD",
+      "description": "The 'Date To' date to filter by."
+    },
+    {
+      "name": "inventory_visibility",
+      "type": "string",
+      "required": false,
+      "default": "visible",
+      "enum": [
+        "'visible' denotes 'Show Active Inventory'",
+        "'hidden' denotes 'Show Hidden Inventory'",
+        "'all' denotes 'Show All Inventory'"
+      ],
+      "description": "Inventory to filter by."
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "property_visibility": "active",
+    "unit_ids": [
+      "1",
+      "2",
+      "3"
+    ],
+    "property": {
+      "property_id": "1"
+    },
+    "work_order_statuses": [
+      "1",
+      "2"
+    ],
+    "unit_turn": "1",
+    "inventory_added_on_from": "2023-06-01",
+    "inventory_added_on_to": "2023-06-30",
+    "inventory_visibility": "visible",
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

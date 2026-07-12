@@ -1,0 +1,99 @@
+{
+  "operationId": "get_showings",
+  "resource": "showings",
+  "name": "List All Showings",
+  "method": "GET",
+  "path": "/showings",
+  "description": "Returns all showings that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[Id]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by unique identifier of the showing. All GET requests must include a filter for [Id] (if available), or [LastUpdatedAtFrom]."
+    },
+    {
+      "name": "filters[LastUpdatedAtFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter showings last updated at or after this date-time. All GET requests must include a filter for [Id] (if available), or [LastUpdatedAtFrom]."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of Showing objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the showing"
+    },
+    {
+      "name": "data[].AssignedUserId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "The AppFolio Property Manager user responsible for the showing. Reference the Users endpoint for any necessary associations."
+    },
+    {
+      "name": "data[].LeadId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the lead associated with the showing. Reference the Leads endpoint for any necessary associations."
+    },
+    {
+      "name": "data[].UnitId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the unit that the interested party will be shown. Reference the Units endpoint for any necessary associations."
+    },
+    {
+      "name": "data[].StartAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The start time of the showing. The value must adhere to the ISO 8601 format YYYY-MM-DDThh:mm:ssZ and the default time zone is Coordinated Universal Time (UTC)."
+    },
+    {
+      "name": "data[].EndAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The end time of the showing. The value must adhere to the ISO 8601 format YYYY-MM-DDThh:mm:ssZ and the default time zone is Coordinated Universal Time (UTC)."
+    },
+    {
+      "name": "data[].Notes",
+      "type": "string",
+      "required": false,
+      "description": "A brief informative message about the showing"
+    },
+    {
+      "name": "data[].Status",
+      "type": "string",
+      "required": false,
+      "description": "The status of the showing",
+      "enum": [
+        "scheduled",
+        "canceled",
+        "no-show",
+        "confirmation pending",
+        "prospect confirmed",
+        "prospect canceled",
+        "canceled (unconfirmed)",
+        "cancel in progress",
+        "reschedule in progress"
+      ]
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/showings?page[size]=10&page[number]=2&filters[Id]=7f3230dc-8b9a-11ec-9b4b-14482e0fbe8e&filters[LastUpdatedAtFrom]=2020-12-15T16:30:46Z' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

@@ -1,0 +1,27 @@
+{
+  "operationId": "delete_work_orders_workorderid_attachments_attachmentid",
+  "resource": "work_orders",
+  "name": "Delete Work Order Attachment",
+  "method": "DELETE",
+  "path": "/work_orders/{WorkOrderId}/attachments/{AttachmentId}",
+  "description": "Delete an attachment from a work order",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "WorkOrderId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the work order that contains the attachment to be deleted"
+    },
+    {
+      "name": "AttachmentId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the attachment to be deleted from the work order"
+    }
+  ],
+  "responseFields": [],
+  "requestSample": "curl --location --request DELETE 'https://api.appfolio.com/api/v0/work_orders/972b920c-e048-4a7b-b1f6-eddb6ad6d23c/attachments/57e04805-11c5-4e27-adc9-c75ff9ddc9d9' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

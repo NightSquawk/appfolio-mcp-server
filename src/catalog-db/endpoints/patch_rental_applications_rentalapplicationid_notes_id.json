@@ -1,0 +1,46 @@
+{
+  "operationId": "patch_rental_applications_rentalapplicationid_notes_id",
+  "resource": "rental_applications",
+  "name": "Update Rental Application Note",
+  "method": "PATCH",
+  "path": "/rental_applications/{RentalApplicationId}/notes/{Id}",
+  "description": "Update a note to a rental application",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "RentalApplicationId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "The rental application to which the note will be attached"
+    },
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the note to update"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Note object",
+    "attributes": [
+      {
+        "name": "Body",
+        "type": "string",
+        "required": false,
+        "description": "A brief informative message about the rental application note. A rental application note cannot exceed 65,535 characters."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the updated rental application note"
+    }
+  ],
+  "requestSample": "{\n  \"Body\": \"This rental application has been submitted on 11/11/2023\"\n}"
+}

@@ -1,0 +1,46 @@
+{
+  "operationId": "patch_leads_guestcardid_notes_id",
+  "resource": "leads",
+  "name": "Update Lead Note",
+  "method": "PATCH",
+  "path": "/leads/{GuestCardId}/notes/{Id}",
+  "description": "Update a note to a lead",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "GuestCardId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "The unique identifier of the Guest Card to which the note will be attached. Guest Cards can be linked to multiple leads."
+    },
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the note to update"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Note object",
+    "attributes": [
+      {
+        "name": "Body",
+        "type": "string",
+        "required": false,
+        "description": "A brief informative message about the lead note. A lead note cannot exceed 65,535 characters."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the updated lead note"
+    }
+  ],
+  "requestSample": "{\n  \"Body\": \"This rental application has been submitted on 11/11/2023 - Updated\"\n}"
+}

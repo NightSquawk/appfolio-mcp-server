@@ -1,3 +1,9 @@
 node_modules/
 dist/
 .env
+
+# Vendor API documentation (AppFolio copyright) and internal agent notes - not for publication
+AppFolio Reports API (2.0.0).md
+AppFolio Database API.txt
+AGENTS.md
+CLAUDE.md

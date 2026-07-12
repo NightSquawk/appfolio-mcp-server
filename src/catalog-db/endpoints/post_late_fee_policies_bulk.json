@@ -1,0 +1,115 @@
+{
+  "operationId": "post_late_fee_policies_bulk",
+  "resource": "late_fee_policies",
+  "name": "Bulk Create Late Fee Policies",
+  "method": "POST",
+  "path": "/late_fee_policies/bulk",
+  "description": "Create late fee policies in bulk",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "requestBody": {
+    "required": true,
+    "description": "Late Fee Policy objects",
+    "attributes": [
+      {
+        "name": "data",
+        "type": "array",
+        "required": false,
+        "description": "Array of late fee policy objects to create in bulk",
+        "attributes": [
+          {
+            "name": "ReferenceId",
+            "type": "string",
+            "required": true,
+            "description": "Transient unique ID assigned by the developer. Used to reference individual late fee policy in the bulk-creation of late fee policies."
+          },
+          {
+            "name": "EligibleCharges",
+            "type": "string",
+            "required": true,
+            "description": "The specific charges to which the late fee will be applied",
+            "enum": ["Every Charge", "All Recurring Charges", "Only Recurring Rent"]
+          },
+          {
+            "name": "FeeType",
+            "type": "string",
+            "required": true,
+            "description": "The late fee type",
+            "enum": ["Flat", "Percentage"]
+          },
+          {
+            "name": "GracePeriodType",
+            "type": "string",
+            "required": true,
+            "description": "The type of Grace Period to enforce",
+            "enum": ["Fixed Period", "Fixed Day of Month"]
+          },
+          {
+            "name": "GracePeriodValue",
+            "type": "integer",
+            "required": true,
+            "description": "A number of days after the charge, or a number of days into the following month. Must be between 0 and 365 when GracePeriodType is Fixed Period. Must be between 1 and 28 when GracePeriodType is Fixed Day of Month."
+          },
+          {
+            "name": "LateFeeGraceBalance",
+            "type": "string <decimal>",
+            "required": true,
+            "description": "The late fee grace balance"
+          },
+          {
+            "name": "PolicyEffectiveOn",
+            "type": "string <date>",
+            "required": true,
+            "description": "The date at which the late fee policy will start. It must be in the future. There can only be one current and future late fee policy per property. If you try to create a late fee policy for a property that already has a future late fee policy, it should replace the existing future late fee policy."
+          },
+          {
+            "name": "FlatAmount",
+            "type": "string <decimal>",
+            "required": false,
+            "description": "The flat fee. Must be provided when FeeType is Flat. Must be greater than 0 when LateFeePerDay is not 0 and FeeType is Flat."
+          },
+          {
+            "name": "LateFeePerDay",
+            "type": "string <decimal>",
+            "required": false,
+            "description": "The daily late fees"
+          },
+          {
+            "name": "MaxDailyLateFeesAmount",
+            "type": "string <decimal>",
+            "required": false,
+            "description": "The maximum daily late fees"
+          },
+          {
+            "name": "OccupancyId",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "When present, the Late Fee Policy belongs to a specific occupancy within a MFR property."
+          },
+          {
+            "name": "Percentage",
+            "type": "string <decimal>",
+            "required": false,
+            "description": "The percentage of late fee. Must be a number 0 or greater. Must be provided when FeeType is Percentage. Must be greater than 0 when LateFeePerDay is not 0 and FeeType is Percentage."
+          },
+          {
+            "name": "PropertyId",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "It is filled for both property-based and occupancy-based policies. PropertyId can be used to tie an occupancy-based policy to its MFR building."
+          }
+        ]
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "JobId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the bulk job accepted for processing"
+    }
+  ],
+  "requestSample": "{\n  \"data\": [\n    {},\n    {}\n  ]\n}"
+}

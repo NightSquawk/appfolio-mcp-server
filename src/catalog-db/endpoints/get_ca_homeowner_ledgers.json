@@ -1,0 +1,70 @@
+{
+  "operationId": "get_ca_homeowner_ledgers",
+  "resource": "ca",
+  "name": "List All Community Association Homeowner Ledgers",
+  "method": "GET",
+  "path": "/ca/homeowner_ledgers",
+  "description": "Returns all Community Association ledgers that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[AssociationId]",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Filter by unique identifier of the Community Association. All GET requests must include filters for [AssociationId], [DateFrom], and [DateTo]."
+    },
+    {
+      "name": "filters[DateFrom]",
+      "type": "string <date>",
+      "required": true,
+      "description": "The start date for filtering homeowner ledger records. All GET requests must include filters for [AssociationId], [DateFrom], and [DateTo]."
+    },
+    {
+      "name": "filters[DateTo]",
+      "type": "string <date>",
+      "required": true,
+      "description": "The end date for filtering homeowner ledger records. All GET requests must include filters for [AssociationId], [DateFrom], and [DateTo]."
+    },
+    {
+      "name": "page[number]",
+      "type": "integer",
+      "required": false,
+      "description": "Page number for pagination. Default: 1"
+    },
+    {
+      "name": "page[size]",
+      "type": "integer",
+      "required": false,
+      "description": "Page size for pagination. Default: 1000"
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of CaHomeownerLedger objects"
+    },
+    {
+      "name": "data[].OccupancyId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the occupancy associated with the ledger"
+    },
+    {
+      "name": "data[].Ledger",
+      "type": "Array of objects",
+      "required": false,
+      "description": "This contains the charges, payments, and credits for the occupancy specified by the OccupancyId"
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/ca/homeowner_ledgers?filters[DateFrom]=2020-12-15&filters[DateTo]=2020-12-16&filters[AssociationId]=1abcde23-c543-456e-abc9-123456789cee' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

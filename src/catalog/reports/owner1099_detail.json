@@ -1,0 +1,156 @@
+{
+  "slug": "owner1099_detail",
+  "endpoint": "owner1099_detail.json",
+  "name": "Owner 1099 Detail",
+  "description": "Returns Owner 1099 Detail report data.",
+  "requiredFilters": [
+    "year"
+  ],
+  "parameters": [
+    {
+      "name": "property_visibility",
+      "type": "string",
+      "required": false,
+      "default": "all",
+      "enum": [
+        "active",
+        "hidden",
+        "all"
+      ],
+      "description": "The property visibility to filter by."
+    },
+    {
+      "name": "properties",
+      "type": "object",
+      "required": false,
+      "description": "The property filter. Expand to view all attributes associated with this filter. If required, you must submit an id for at least one of the below filters.",
+      "attributes": [
+        {
+          "name": "properties_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "property_groups_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "portfolios_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "owners_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "party_contact_infos",
+      "type": "object",
+      "required": false,
+      "description": "The Owners filter. Expand to view all attributes associated with this filter.",
+      "attributes": [
+        {
+          "name": "owners_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "year",
+      "type": "string",
+      "required": true,
+      "description": "The Tax Year to filter by."
+    },
+    {
+      "name": "show_eligible_1099_owners",
+      "type": "string",
+      "required": false,
+      "default": "1",
+      "enum": [
+        "0",
+        "1"
+      ],
+      "description": "Show only owners that have been designated to receive a 1099"
+    },
+    {
+      "name": "balance_operator",
+      "type": "object",
+      "required": false,
+      "description": "The Amount to filter by. Expand to view all attributes associated with this filter.",
+      "attributes": [
+        {
+          "name": "amount",
+          "type": "string",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "comparator",
+          "type": "string",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "property_visibility": "active",
+    "properties": {
+      "properties_ids": [],
+      "property_groups_ids": [],
+      "portfolios_ids": [],
+      "owners_ids": []
+    },
+    "party_contact_infos": {
+      "owners_ids": []
+    },
+    "year": "2023",
+    "show_eligible_1099_owners": "1",
+    "balance_operator": {
+      "amount": "100",
+      "comparator": "="
+    },
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": [
+    "owner_id",
+    "owner_name",
+    "recipient_name",
+    "recipient_street",
+    "recipient_city",
+    "recipient_state",
+    "recipient_zip",
+    "recipient_country_code",
+    "recipient_address",
+    "owner_email",
+    "send1099",
+    "owner_electronic_consent",
+    "owner1099_preference",
+    "recipient_tax_id",
+    "recipient_account_number",
+    "property_name",
+    "ownership_period",
+    "total_operating_income",
+    "prepaid_rent",
+    "amount"
+  ]
+}

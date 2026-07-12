@@ -1,0 +1,40 @@
+{
+  "operationId": "post_properties_propertyid_attachments",
+  "resource": "properties",
+  "name": "Create Property Attachment",
+  "method": "POST",
+  "path": "/properties/{PropertyId}/attachments",
+  "description": "Upload an attachment to a property",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "PropertyId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "The property to which the file will be attached"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Attachment object (multipart/form-data)",
+    "attributes": [
+      {
+        "name": "File",
+        "type": "string",
+        "required": false,
+        "description": "The file to upload, specified as Filename.file-extension"
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the property attachment"
+    }
+  ],
+  "requestSample": "{\n  \"File\": \"/path/to/file.pdf\"\n}"
+}

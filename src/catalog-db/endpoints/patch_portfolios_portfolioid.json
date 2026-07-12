@@ -1,0 +1,46 @@
+{
+  "operationId": "patch_portfolios_portfolioid",
+  "resource": "portfolios",
+  "name": "Update a Portfolio",
+  "method": "PATCH",
+  "path": "/portfolios/{portfolioId}",
+  "description": "Update a portfolio",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "portfolioId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the portfolio to update"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Portfolio object",
+    "attributes": [
+      {
+        "name": "Name",
+        "type": "string",
+        "required": false,
+        "description": "The name of the portfolio"
+      },
+      {
+        "name": "PropertyIds",
+        "type": "Array of arrays",
+        "required": false,
+        "description": "Unique identifier(s) of the properties to add or remove from the portfolio. The portfolio you are updating will only include the properties passed in this array. If PropertyIds previously in the portfolio are excluded from the updated array, they'll be added to the Default portfolio in APM. A property can only be linked to a single portfolio. If a PropertyId previously associated with another portfolio is passed, it will be removed from that association."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the updated portfolio"
+    }
+  ],
+  "requestSample": "{\n  \"Name\": \"Updated Portfolio Name\",\n  \"PropertyIds\": [\n    \"96d90af9-15be-4139-b43e-3390358d2602\",\n    \"5683df20-b606-4138-8ec4-d9737f7c12bb\",\n    \"4d53faad-dbf6-4754-a23e-f5c486139e85\"\n  ]\n}"
+}

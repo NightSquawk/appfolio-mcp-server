@@ -1,0 +1,126 @@
+{
+  "slug": "homeowner_directory",
+  "endpoint": "homeowner_directory.json",
+  "name": "Homeowner Directory",
+  "description": "Returns Homeowner Directory report data.",
+  "requiredFilters": [],
+  "parameters": [
+    {
+      "name": "property_visibility",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "enum": [
+        "active",
+        "hidden",
+        "all"
+      ],
+      "description": "The property visibility to filter by."
+    },
+    {
+      "name": "properties",
+      "type": "object",
+      "required": false,
+      "description": "The property filter. Expand to view all attributes associated with this filter. If required, you must submit an id for at least one of the below filters.",
+      "attributes": [
+        {
+          "name": "properties_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "property_groups_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "portfolios_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "owners_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "tenant_statuses",
+      "type": "array",
+      "required": false,
+      "default": "[\"0\"]",
+      "enum": [
+        "'2' denotes 'Future'",
+        "'0' denotes 'Current'",
+        "'4' denotes 'Notice'",
+        "'1' denotes 'Past'"
+      ],
+      "description": "List of Homeowner status to filter by."
+    },
+    {
+      "name": "homeowner_visibility",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "enum": [
+        "active",
+        "hidden",
+        "all"
+      ],
+      "description": ""
+    },
+    {
+      "name": "display_only_primary_homeowners",
+      "type": "string",
+      "required": false,
+      "default": "0",
+      "enum": [
+        "0",
+        "1"
+      ],
+      "description": "Display Primary Contact only for each unit"
+    },
+    {
+      "name": "hoa_homeowner_directory_exclusions",
+      "type": "string",
+      "required": false,
+      "default": "1",
+      "enum": [
+        "0",
+        "1"
+      ],
+      "description": "Hide information checked “exclude from directory”"
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "property_visibility": "active",
+    "properties": {
+      "properties_ids": [],
+      "property_groups_ids": [],
+      "portfolios_ids": [],
+      "owners_ids": []
+    },
+    "tenant_statuses": [
+      "0"
+    ],
+    "homeowner_visibility": "active",
+    "display_only_primary_homeowners": "1",
+    "hoa_homeowner_directory_exclusions": "1",
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

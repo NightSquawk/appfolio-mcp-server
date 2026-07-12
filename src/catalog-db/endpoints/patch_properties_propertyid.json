@@ -1,0 +1,333 @@
+{
+  "operationId": "patch_properties_propertyid",
+  "resource": "properties",
+  "name": "Update Property",
+  "method": "PATCH",
+  "path": "/properties/{propertyId}",
+  "description": "Update a property",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "propertyId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the property to update"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Property object",
+    "attributes": [
+      {
+        "name": "Name",
+        "type": "string",
+        "required": false,
+        "description": "The name of the property"
+      },
+      {
+        "name": "Amenities",
+        "type": "Array of strings",
+        "required": false,
+        "description": "Array of strings to add to the property. Providing an array of valid strings will overwrite all existing amenities. Passing in an empty array [] or an array of empty strings will clear all existing amenities. Passing in null will result in no change."
+      },
+      {
+        "name": "HomeWarrantyInfo",
+        "type": "object",
+        "required": false,
+        "description": "Object containing information about the property's home warranty policy. If set to null, all values within HomeWarrantyInfo will be deleted from the updated property.",
+        "attributes": [
+          {
+            "name": "CompanyName",
+            "type": "string",
+            "required": false,
+            "description": "The name of the company providing the home warranty coverage"
+          },
+          {
+            "name": "ContactNumber",
+            "type": "string",
+            "required": false,
+            "description": "The contact phone number for the home warranty company or policy administrator"
+          },
+          {
+            "name": "Expiration",
+            "type": "string <date>",
+            "required": false,
+            "description": "The expiration date of the home warranty policy"
+          },
+          {
+            "name": "PolicyNumber",
+            "type": "string",
+            "required": false,
+            "description": "Unique reference number associated with the home warranty policy"
+          }
+        ]
+      },
+      {
+        "name": "LeaseFeePolicy",
+        "type": "object",
+        "required": false,
+        "description": "Contains details about the property's lease fee policy",
+        "attributes": [
+          {
+            "name": "FeeType",
+            "type": "string",
+            "required": false,
+            "description": "The property's lease fee type. Determines how much is billed to a property per executed lease by the management company.",
+            "enum": ["Percent", "Flat"]
+          },
+          {
+            "name": "FlatAmount",
+            "type": "string <decimal>",
+            "required": false,
+            "description": "The dollar amount billed to an owner per move in. Can only be used when LeaseFeeType is set to 'Flat'. Defaults to 0.0 if not provided."
+          },
+          {
+            "name": "Percentage",
+            "type": "string <decimal>",
+            "required": false,
+            "description": "The percentage an owner is billed based on a full month's rent amount of an executed lease after move in, rounded to 2 decimal places. Can only be used when LeaseFeeType is set to 'Percent'. Defaults to 0.0 if not provided."
+          }
+        ]
+      },
+      {
+        "name": "PropertyType",
+        "type": "string",
+        "required": false,
+        "description": "The type of property",
+        "enum": ["Commercial", "Multi-Family", "Self-Storage", "Single-Family", "Student-Housing"]
+      },
+      {
+        "name": "PostedToInternet",
+        "type": "boolean",
+        "required": false,
+        "description": "Sets whether to post the Single-Family (SFR) property to third-party listings pages. Requests containing this attribute for non-SFR property types will return an error."
+      },
+      {
+        "name": "PostedToWebsite",
+        "type": "boolean",
+        "required": false,
+        "description": "Sets whether to post the Single-Family (SFR) property to the AppFolio listings page. Requests containing this attribute for non-SFR property types will return an error."
+      },
+      {
+        "name": "CustomFields",
+        "type": "object",
+        "required": false,
+        "description": "The custom fields for the associated entity. CustomFieldId key maps to the value to update. To clear a CustomField, set its value to null (use [] or \"\" for array-type custom fields).",
+        "attributes": [
+          {
+            "name": "CustomFieldId",
+            "type": "object",
+            "required": false,
+            "description": "The value of the CustomField to update. Must match the type set for the CustomField at creation. To clear the value, set to null (use [] or \"\" for array-type custom fields)."
+          }
+        ]
+      },
+      {
+        "name": "AdminFee",
+        "type": "number",
+        "required": false,
+        "description": "The admin fee associated with the property"
+      },
+      {
+        "name": "CatsAllowed",
+        "type": "string",
+        "required": false,
+        "description": "The property's cat policy. Valid values include \"Yes\", \"No\" or null.",
+        "enum": ["Yes", "No"]
+      },
+      {
+        "name": "Class",
+        "type": "string",
+        "required": false,
+        "description": "Indicates the type and quality of the property based on factors such as age, location, amenities, and overall condition.",
+        "enum": ["A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-"]
+      },
+      {
+        "name": "CurrentManagementFeePolicy",
+        "type": "object",
+        "required": false,
+        "description": "Contains details about the property's current management fee policy",
+        "attributes": [
+          {
+            "name": "FeeType",
+            "type": "string",
+            "required": false,
+            "description": "The property's fee type. Determines how much is billed to a property per month by the management company.",
+            "enum": ["Percent", "Flat"]
+          },
+          {
+            "name": "FlatAmount",
+            "type": "string <decimal>",
+            "required": false,
+            "description": "The dollar amount billed once a month. Can only be used when FeeType is set to 'Flat'."
+          },
+          {
+            "name": "Percentage",
+            "type": "string <decimal>",
+            "required": false,
+            "description": "The percentage a property is billed based on the net income generated from General Ledger accounts subject to management fees."
+          },
+          {
+            "name": "Minimum",
+            "type": "string <decimal>",
+            "required": false,
+            "description": "The minimum management fee billed. Can only be used when FeeType is set to 'Percent'."
+          },
+          {
+            "name": "Maximum",
+            "type": "string <decimal>",
+            "required": false,
+            "description": "The maximum management fee billed. Can only be used when FeeType is set to 'Percent'."
+          },
+          {
+            "name": "StartDate",
+            "type": "string <date-time>",
+            "required": false,
+            "description": "The start date of the management fee policy. The date must be the first of a month."
+          },
+          {
+            "name": "WaiveWhenVacant",
+            "type": "boolean",
+            "required": false,
+            "description": "Sets whether to waive the management fee when the property is vacant"
+          }
+        ]
+      },
+      {
+        "name": "DogsAllowed",
+        "type": "string",
+        "required": false,
+        "description": "The property's dog policy.",
+        "enum": ["Large & Small", "Small Only", "No"]
+      },
+      {
+        "name": "InsuranceExpiration",
+        "type": "string <date>",
+        "required": false,
+        "description": "The date the property's insurance expires"
+      },
+      {
+        "name": "MaintenanceLimit",
+        "type": "string <decimal>",
+        "required": false,
+        "description": "The dollar amount limit to not exceed for maintenance"
+      },
+      {
+        "name": "MaintenanceNotes",
+        "type": "string",
+        "required": false,
+        "description": "A brief informative message about the property's maintenance"
+      },
+      {
+        "name": "ManagementEndDate",
+        "type": "string <date-time>",
+        "required": false,
+        "description": "The date when the current management of the property ended"
+      },
+      {
+        "name": "ManagementEndReason",
+        "type": "string",
+        "required": false,
+        "description": "The reason for the end of the current management of the property",
+        "enum": ["Foreclosure", "Maintenance", "Management Company Concerns", "Management Company Terminated", "Owner Moved In", "Owner Self-Managing", "Owner Sold", "Owner Terminated Management", "Property Uninhabitable/Demolition", "Tenant Placement", "Other"]
+      },
+      {
+        "name": "ManagementStartDate",
+        "type": "string <date-time>",
+        "required": false,
+        "description": "The date when the current management of the property began"
+      },
+      {
+        "name": "NsfFee",
+        "type": "number",
+        "required": false,
+        "description": "The non-sufficient funds (NSF) fee associated with the property"
+      },
+      {
+        "name": "SiteManager",
+        "type": "object",
+        "required": false,
+        "description": "Contains the property site manager's contact information and details",
+        "attributes": [
+          {
+            "name": "Salutation",
+            "type": "string",
+            "required": false,
+            "description": "The site manager's salutation. Valid values include null, Mr., Ms. Mrs., Mr. & Mrs. or Dr."
+          },
+          {
+            "name": "FirstName",
+            "type": "string",
+            "required": false,
+            "description": "The site manager's first name"
+          },
+          {
+            "name": "LastName",
+            "type": "string",
+            "required": false,
+            "description": "The site manager's last name"
+          },
+          {
+            "name": "PhoneNumber",
+            "type": "string",
+            "required": false,
+            "description": "The site manager's phone number"
+          }
+        ]
+      },
+      {
+        "name": "UnitEntryPreAuthorized",
+        "type": "boolean",
+        "required": false,
+        "description": "Indicates whether or not entry to the unit was pre-authorized"
+      },
+      {
+        "name": "YearBuilt",
+        "type": "integer",
+        "required": false,
+        "description": "The year in which the property was constructed"
+      },
+      {
+        "name": "Address1",
+        "type": "string",
+        "required": false,
+        "description": "The primary street address of the property"
+      },
+      {
+        "name": "Address2",
+        "type": "string",
+        "required": false,
+        "description": "Additional street address information pertaining to the property"
+      },
+      {
+        "name": "City",
+        "type": "string",
+        "required": false,
+        "description": "The city where the property is located"
+      },
+      {
+        "name": "State",
+        "type": "string",
+        "required": false,
+        "description": "The state where the property is located"
+      },
+      {
+        "name": "Zip",
+        "type": "string",
+        "required": false,
+        "description": "The zip code where the property is located"
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the updated property"
+    }
+  ],
+  "requestSample": "{\n  \"Name\": \"Property A\",\n  \"AdminFee\": 45.15,\n  \"Amenities\": [\n    \"washer and dryer\",\n    \"balcony\"\n  ],\n  \"CatsAllowed\": \"No\",\n  \"Class\": \"B+\",\n  \"DogsAllowed\": \"No\",\n  \"InsuranceExpiration\": \"2025-07-22\",\n  \"MaintenanceLimit\": 3000,\n  \"MaintenanceNotes\": \"Gardening done by Sunset Landscaping\",\n  \"ManagementEndDate\": \"2027-03-08\",\n  \"ManagementEndReason\": \"Owner Self-Managing\",\n  \"ManagementStartDate\": \"2007-09-27\",\n  \"NsfFee\": 33.5,\n  \"PropertyType\": \"Multi-Family\",\n  \"UnitEntryPreAuthorized\": false,\n  \"YearBuilt\": 2007,\n  \"Address1\": \"123 Highland Avenue\",\n  \"Address2\": \"Unit c\",\n  \"City\": \"Santa Barbara\",\n  \"State\": \"CA\",\n  \"Zip\": \"93117\",\n  \"SiteManager\": {\n    \"FirstName\": \"Josh\",\n    \"LastName\": \"Wilkinson\",\n    \"Salutation\": \"Mr.\",\n    \"PhoneNumber\": \"555-555-5555\"\n  },\n  \"CurrentManagementFeePolicy\": {\n    \"FeeType\": \"Percent\",\n    \"Percentage\": 5,\n    \"Minimum\": 100,\n    \"Maximum\": 150,\n    \"StartDate\": \"2025-01-01\",\n    \"WaiveWhenVacant\": true\n  },\n  \"LeaseFeePolicy\": {\n    \"FeeType\": \"Percent\",\n    \"Percentage\": 30.5\n  },\n  \"PostedToInternet\": true,\n  \"PostedToWebsite\": true,\n  \"CustomFields\": {\n    \"a965e7d8-a17d-11ec-b909-0242ac120002\": \"a new value\",\n    \"454d8635-521e-4864-99fb-0bd6200d3a0f\": true,\n    \"c80d3dd1-9eba-45aa-803c-666280b8ff24\": 87.4,\n    \"3277c366-1783-42a9-b925-0bca2afbe391\": \"0e9a7b18-1778-4a03-bc1c-f913aeaef6bc\",\n    \"4f83a1bf-4e49-4463-8113-15c52f79243a\": []\n  }\n}"
+}

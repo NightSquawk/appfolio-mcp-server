@@ -1,0 +1,245 @@
+{
+  "operationId": "post_properties_bulk",
+  "resource": "properties",
+  "name": "Bulk Create Properties",
+  "method": "POST",
+  "path": "/properties/bulk",
+  "description": "Create properties in bulk",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "requestBody": {
+    "required": true,
+    "description": "Property objects",
+    "attributes": [
+      {
+        "name": "data",
+        "type": "array",
+        "required": false,
+        "description": "Array of property objects to create in bulk",
+        "attributes": [
+          {
+            "name": "Name",
+            "type": "string",
+            "required": true,
+            "description": "The name of the property"
+          },
+          {
+            "name": "ReferenceId",
+            "type": "string",
+            "required": true,
+            "description": "Transient unique ID assigned by the developer. Used to reference individual properties in the bulk-creation of properties."
+          },
+          {
+            "name": "PropertyType",
+            "type": "string",
+            "required": true,
+            "description": "The type of property",
+            "enum": ["Commercial", "Multi-Family", "Self-Storage", "Single-Family", "Student-Housing"]
+          },
+          {
+            "name": "Address1",
+            "type": "string",
+            "required": true,
+            "description": "The primary street address of the property"
+          },
+          {
+            "name": "City",
+            "type": "string",
+            "required": true,
+            "description": "The city where the property is located"
+          },
+          {
+            "name": "State",
+            "type": "string",
+            "required": true,
+            "description": "The state where the property is located"
+          },
+          {
+            "name": "Zip",
+            "type": "string",
+            "required": true,
+            "description": "The zip code where the property is located"
+          },
+          {
+            "name": "OperatingCashBankAccountId",
+            "type": "string <uuid>",
+            "required": true,
+            "description": "Unique identifier of the operating cash bank account associated with the property"
+          },
+          {
+            "name": "EscrowCashBankAccountId",
+            "type": "string <uuid>",
+            "required": true,
+            "description": "Unique identifier of the escrow cash bank account associated with the property"
+          },
+          {
+            "name": "ExpensesCashBankAccountId",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "Unique identifier of the expenses cash bank account associated with the property. Used for Dual-Operating Bank Accounts."
+          },
+          {
+            "name": "AdditionalCashAccounts",
+            "type": "array",
+            "required": false,
+            "description": "Array of additional cash GL & bank account combinations associated with the property. Cash accounts can only be assigned once per property.",
+            "attributes": [
+              {
+                "name": "BankAccountId",
+                "type": "string <uuid>",
+                "required": false,
+                "description": "Unique identifier of the additional cash bank account associated with the property"
+              },
+              {
+                "name": "GlAccountId",
+                "type": "string <uuid>",
+                "required": false,
+                "description": "Unique identifier of the additional cash GL account associated with the property"
+              }
+            ]
+          },
+          {
+            "name": "CurrentManagementFeePolicy",
+            "type": "object",
+            "required": false,
+            "description": "Contains details about the property's management fee policy"
+          },
+          {
+            "name": "LeaseFeePolicy",
+            "type": "object",
+            "required": false,
+            "description": "Contains details about the property's lease fee policy"
+          },
+          {
+            "name": "HomeWarrantyInfo",
+            "type": "object",
+            "required": false,
+            "description": "Object containing information about the property's home warranty policy"
+          },
+          {
+            "name": "AdminFee",
+            "type": "number",
+            "required": false,
+            "description": "The admin fee associated with the property"
+          },
+          {
+            "name": "Amenities",
+            "type": "Array of strings",
+            "required": false,
+            "description": "The amenities associated with the property"
+          },
+          {
+            "name": "CatsAllowed",
+            "type": "string",
+            "required": false,
+            "description": "The property's cat policy. Valid values include \"Yes\", \"No\" or null.",
+            "enum": ["Yes", "No"]
+          },
+          {
+            "name": "Class",
+            "type": "string",
+            "required": false,
+            "description": "Indicates the type and quality of the property based on factors such as age, location, amenities, and overall condition.",
+            "enum": ["A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-"]
+          },
+          {
+            "name": "DogsAllowed",
+            "type": "string",
+            "required": false,
+            "description": "The property's dog policy.",
+            "enum": ["Large & Small", "Small Only", "No"]
+          },
+          {
+            "name": "InsuranceExpiration",
+            "type": "string <date>",
+            "required": false,
+            "description": "The date the property's insurance expires"
+          },
+          {
+            "name": "MaintenanceLimit",
+            "type": "string <decimal>",
+            "required": false,
+            "description": "The dollar amount limit to not exceed for maintenance"
+          },
+          {
+            "name": "MaintenanceNotes",
+            "type": "string",
+            "required": false,
+            "description": "A brief informative message about the property's maintenance"
+          },
+          {
+            "name": "ManagementEndDate",
+            "type": "string <date-time>",
+            "required": false,
+            "description": "The date when the current management of the property ended"
+          },
+          {
+            "name": "ManagementEndReason",
+            "type": "string",
+            "required": false,
+            "description": "The reason for the end of the current management of the property",
+            "enum": ["Foreclosure", "Maintenance", "Management Company Concerns", "Management Company Terminated", "Owner Moved In", "Owner Self-Managing", "Owner Sold", "Owner Terminated Management", "Property Uninhabitable/Demolition", "Tenant Placement", "Other"]
+          },
+          {
+            "name": "ManagementStartDate",
+            "type": "string <date-time>",
+            "required": false,
+            "description": "The date when the current management of the property began"
+          },
+          {
+            "name": "NsfFee",
+            "type": "number",
+            "required": false,
+            "description": "The non-sufficient funds (NSF) fee associated with the property"
+          },
+          {
+            "name": "SiteManager",
+            "type": "object",
+            "required": false,
+            "description": "Contains the property site manager's contact information and details"
+          },
+          {
+            "name": "UnitEntryPreAuthorized",
+            "type": "boolean",
+            "required": false,
+            "description": "Indicates whether or not entry to the unit was pre-authorized"
+          },
+          {
+            "name": "YearBuilt",
+            "type": "integer",
+            "required": false,
+            "description": "The year in which the property was constructed"
+          },
+          {
+            "name": "Address2",
+            "type": "string",
+            "required": false,
+            "description": "Additional street address information pertaining to the property"
+          }
+        ]
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of created property status objects"
+    },
+    {
+      "name": "data[].PropertyId",
+      "type": "string",
+      "required": false,
+      "description": "Unique identifier of the created property"
+    },
+    {
+      "name": "data[].ReferenceId",
+      "type": "string",
+      "required": false,
+      "description": "Transient unique ID assigned by the developer. Used to reference individual properties in the bulk-creation of properties."
+    }
+  ],
+  "requestSample": "{\n  \"data\": [\n    {}\n  ]\n}"
+}

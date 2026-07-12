@@ -1,0 +1,40 @@
+{
+  "operationId": "post_properties_propertyid_notes",
+  "resource": "properties",
+  "name": "Create Property Note",
+  "method": "POST",
+  "path": "/properties/{PropertyId}/notes",
+  "description": "Add a note to a property",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "PropertyId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "The property to which the note will be attached"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Note object",
+    "attributes": [
+      {
+        "name": "Body",
+        "type": "string",
+        "required": false,
+        "description": "A brief informative message about the property note. A property note cannot exceed 65,535 characters."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the property note"
+    }
+  ],
+  "requestSample": "{\n  \"Body\": \"This property has a scheduled cleaning service on 11/11/2023\"\n}"
+}

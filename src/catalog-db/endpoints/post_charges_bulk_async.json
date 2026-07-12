@@ -1,0 +1,70 @@
+{
+  "operationId": "post_charges_bulk_async",
+  "resource": "charges",
+  "name": "Bulk Create Charges (Async)",
+  "method": "POST",
+  "path": "/charges/bulk/async",
+  "description": "Create multiple charges in bulk asynchronously. Returns a Job ID that can be used to track the status of the job via the Jobs List endpoint.",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "requestBody": {
+    "required": true,
+    "description": "Charge objects",
+    "attributes": [
+      {
+        "name": "data",
+        "type": "array",
+        "required": false,
+        "description": "Array of Charge objects.",
+        "attributes": [
+          {
+            "name": "AmountDue",
+            "type": "string <decimal>",
+            "required": true,
+            "description": "The dollar amount of the charge."
+          },
+          {
+            "name": "ChargedOn",
+            "type": "string <date>",
+            "required": true,
+            "description": "ChargedOn dates from the past indicate an outstanding charge that has not yet been paid that is \"owed.\" ChargedOn dates in the future indicate an upcoming charge during the next monthly period."
+          },
+          {
+            "name": "GlAccountId",
+            "type": "string <uuid>",
+            "required": true,
+            "description": "Unique identifier of the general ledger account associated with the charge."
+          },
+          {
+            "name": "OccupancyId",
+            "type": "string <uuid>",
+            "required": true,
+            "description": "Unique identifier of the occupancy associated with the charge."
+          },
+          {
+            "name": "ReferenceId",
+            "type": "string",
+            "required": true,
+            "description": "Transient unique ID assigned by the developer. Used to reference individual charges in the bulk-creation of charges."
+          },
+          {
+            "name": "Description",
+            "type": "string",
+            "required": false,
+            "description": "A brief summary or description of the charge."
+          }
+        ]
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "JobId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the async job that can be used to track the status via the Jobs List endpoint."
+    }
+  ],
+  "requestSample": "{\n  \"data\": [\n    {},\n    {}\n  ]\n}"
+}

@@ -1,0 +1,70 @@
+{
+  "operationId": "get_occupancies_documents",
+  "resource": "occupancies",
+  "name": "List All Occupancies Documents",
+  "method": "GET",
+  "path": "/occupancies/documents",
+  "description": "Returns all occupancy's documents that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[OccupancyId]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by occupancy identifier. All GET requests must include a filter for [OccupancyId] or [LastUpdatedAtFrom]."
+    },
+    {
+      "name": "filters[LastUpdatedAtFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter occupancy documents updated at or after this date-time. All GET requests must include a filter for [OccupancyId] or [LastUpdatedAtFrom]."
+    },
+    {
+      "name": "page[number]",
+      "type": "integer",
+      "required": false,
+      "description": "Page number for pagination. Default is 1."
+    },
+    {
+      "name": "page[size]",
+      "type": "integer",
+      "required": false,
+      "description": "Number of results per page. Default is 50."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of occupancy objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the occupancy"
+    },
+    {
+      "name": "data[].LastUpdatedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The date the occupancy's details were last updated"
+    },
+    {
+      "name": "data[].OccupancyDocuments",
+      "type": "array",
+      "required": false,
+      "description": "Array containing a list of documents associated with an occupancy. An occupancy document is classified as either a lease or a supporting document"
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/occupancies/documents?filters[OccupancyId]=1abcde23-c543-456e-abc9-123456789cba&filters[LastUpdatedAtFrom]=2020-12-15T16:30:46Z' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

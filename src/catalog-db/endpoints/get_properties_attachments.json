@@ -1,0 +1,76 @@
+{
+  "operationId": "get_properties_attachments",
+  "resource": "properties",
+  "name": "List All Property Attachments",
+  "method": "GET",
+  "path": "/properties/attachments",
+  "description": "Returns all attachments associated with a property",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[PropertyId]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by the unique identifier of the property. All GET requests must include a filter for [PropertyId] or [CreatedAtFrom]."
+    },
+    {
+      "name": "filters[CreatedAtFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter attachments created at or after this date-time. All GET requests must include a filter for [PropertyId] or [CreatedAtFrom]."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of property attachment objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the attachment"
+    },
+    {
+      "name": "data[].Name",
+      "type": "string",
+      "required": false,
+      "description": "The name given to describe the attachment"
+    },
+    {
+      "name": "data[].ContentType",
+      "type": "string",
+      "required": false,
+      "description": "The content type of the attachment. An example content type is a photo or a PDF."
+    },
+    {
+      "name": "data[].CreatedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The date and time the attachment was created by an AppFolio Property Manager user"
+    },
+    {
+      "name": "data[].EntityId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the property associated with the attachment"
+    },
+    {
+      "name": "data[].URL",
+      "type": "string",
+      "required": false,
+      "description": "The link to download the file in the attachment"
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/properties/attachments?page[size]=10&page[number]=2&filters[PropertyId]=2e67d04f-e02f-449a-9b61-694636189c04&filters[CreatedAtFrom]=2020-12-14T16:30:46Z' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

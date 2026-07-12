@@ -1,0 +1,113 @@
+{
+  "operationId": "patch_inventories_id",
+  "resource": "inventories",
+  "name": "Update Inventory",
+  "method": "PATCH",
+  "path": "/inventories/{Id}",
+  "description": "Update an inventory item. At least one attribute or relationship must be provided.",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the inventory item to update"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Update inventory object. At least one attribute must be provided.",
+    "attributes": [
+      {
+        "name": "Name",
+        "type": "string",
+        "required": false,
+        "description": "The name of the inventory item."
+      },
+      {
+        "name": "Quantity",
+        "type": "number",
+        "required": false,
+        "description": "The quantity of the inventory item."
+      },
+      {
+        "name": "Reorder",
+        "type": "integer",
+        "required": false,
+        "description": "The reorder threshold for the inventory item."
+      },
+      {
+        "name": "Cost",
+        "type": "number",
+        "required": false,
+        "description": "The cost of the inventory item."
+      },
+      {
+        "name": "Description",
+        "type": "string",
+        "required": false,
+        "description": "A description of the inventory item."
+      },
+      {
+        "name": "PartNumber",
+        "type": "string",
+        "required": false,
+        "description": "The part number of the inventory item."
+      },
+      {
+        "name": "Shelf",
+        "type": "string",
+        "required": false,
+        "description": "The bin/shelf location of the inventory item."
+      },
+      {
+        "name": "Category",
+        "type": "string",
+        "required": false,
+        "description": "The category of the inventory item."
+      },
+      {
+        "name": "LocationId",
+        "type": "string <uuid>",
+        "required": false,
+        "description": "Unique identifier of the inventory location."
+      },
+      {
+        "name": "VendorId",
+        "type": "string <uuid>",
+        "required": false,
+        "description": "Unique identifier of the vendor."
+      },
+      {
+        "name": "GlAccountId",
+        "type": "string <uuid>",
+        "required": false,
+        "description": "Unique identifier of the GL account (must be expense type)."
+      },
+      {
+        "name": "MarkUpType",
+        "type": "string",
+        "required": false,
+        "description": "The markup type.",
+        "enum": ["Percentage", "Fixed Amount"]
+      },
+      {
+        "name": "MarkUp",
+        "type": "number",
+        "required": false,
+        "description": "The markup value."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the updated inventory item"
+    }
+  ],
+  "requestSample": "{\n  \"Name\": \"Updated Inventory Item\",\n  \"Quantity\": 10,\n  \"Cost\": \"25.00\"\n}"
+}

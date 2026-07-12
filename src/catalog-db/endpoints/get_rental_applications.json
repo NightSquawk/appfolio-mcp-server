@@ -1,0 +1,186 @@
+{
+  "operationId": "get_rental_applications",
+  "resource": "rental_applications",
+  "name": "List All Rental Applications",
+  "method": "GET",
+  "path": "/rental_applications",
+  "description": "Returns all rental applications that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[Id]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by unique identifier of the rental application"
+    },
+    {
+      "name": "filters[PropertyId]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by unique identifier of the property associated with the rental application"
+    },
+    {
+      "name": "filters[UnitId]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by unique identifier of the unit associated with the rental application"
+    },
+    {
+      "name": "filters[GroupId]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by unique identifier of the application group associated with the rental application"
+    },
+    {
+      "name": "filters[ScreeningId]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by unique identifier of the screening associated with the rental application"
+    },
+    {
+      "name": "filters[SubmittedAtFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter rental applications submitted at or after this date/time"
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of rental application objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the rental application"
+    },
+    {
+      "name": "data[].RequestedBackgroundReport",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether the applicant has requested a copy of their background check report"
+    },
+    {
+      "name": "data[].HasHousingVoucher",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether the applicant has a housing voucher, a government subsidy that assists with rent payments"
+    },
+    {
+      "name": "data[].AgreedToTerms",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether the applicant agreed to the terms and conditions set for the rental application"
+    },
+    {
+      "name": "data[].ScreeningSubmissions",
+      "type": "array",
+      "required": false,
+      "description": "Array containing information about each screening submission associated with this rental application"
+    },
+    {
+      "name": "data[].CampaignId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the campaign associated with the rental application"
+    },
+    {
+      "name": "data[].GroupId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the application group associated with the rental application"
+    },
+    {
+      "name": "data[].UnitId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the unit associated with the rental application"
+    },
+    {
+      "name": "data[].PropertyId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the property associated with the rental application"
+    },
+    {
+      "name": "data[].Bedrooms",
+      "type": "integer",
+      "required": false,
+      "description": "The number of desired bedrooms"
+    },
+    {
+      "name": "data[].Bathrooms",
+      "type": "string <decimal>",
+      "required": false,
+      "description": "The number of desired bathrooms"
+    },
+    {
+      "name": "data[].Deposit",
+      "type": "string <decimal>",
+      "required": false,
+      "description": "The security deposit amount"
+    },
+    {
+      "name": "data[].ListedMarketRent",
+      "type": "string <decimal>",
+      "required": false,
+      "description": "The rent per month as listed on the market",
+      "deprecated": true
+    },
+    {
+      "name": "data[].ListedRent",
+      "type": "string <decimal>",
+      "required": false,
+      "description": "The rent per month as listed on the market. This value reflects either the market rent or the advertised rent, depending on whether \"Use Market Rent On Ads\" is enabled in the AppFolio Property Manager."
+    },
+    {
+      "name": "data[].Status",
+      "type": "string",
+      "required": false,
+      "description": "The rental application's status",
+      "enum": ["new", "decision_pending", "approved", "denied", "canceled", "in_review", "info_needed", "in_screening"]
+    },
+    {
+      "name": "data[].StatusChangedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Timestamp indicating when the application's current status was last modified"
+    },
+    {
+      "name": "data[].SubmittedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The time the rental application was submitted"
+    },
+    {
+      "name": "data[].DesiredMoveInDate",
+      "type": "string <date>",
+      "required": false,
+      "description": "The date the applicant would like to move in"
+    },
+    {
+      "name": "data[].Dependents",
+      "type": "array",
+      "required": false,
+      "description": "Contains details about any dependents of the applicant"
+    },
+    {
+      "name": "data[].Applicant",
+      "type": "object",
+      "required": false,
+      "description": "Contains details about the rental applicant including their name, contact information, and residential and employment history"
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/rental_applications?filters[Id]=1abcde23-c543-456e-abc9-123456789cba&filters[PropertyId]=1abcde23-c543-456e-abc9-123456689cba&filters[UnitId]=1abcde23-c543-456e-abc9-123455789cba&filters[SubmittedAtFrom]=2020-12-15' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

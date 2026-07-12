@@ -1,0 +1,56 @@
+{
+  "operationId": "post_charges",
+  "resource": "charges",
+  "name": "Create Charges",
+  "method": "POST",
+  "path": "/charges",
+  "description": "Create a single charge.",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "requestBody": {
+    "required": true,
+    "description": "Charge object",
+    "attributes": [
+      {
+        "name": "AmountDue",
+        "type": "string <decimal>",
+        "required": true,
+        "description": "The dollar amount of the charge."
+      },
+      {
+        "name": "ChargedOn",
+        "type": "string <date>",
+        "required": true,
+        "description": "ChargedOn dates from the past indicate an outstanding charge that has not yet been paid that is \"owed.\" ChargedOn dates in the future indicate an upcoming charge during the next monthly period."
+      },
+      {
+        "name": "Description",
+        "type": "string",
+        "required": true,
+        "description": "A brief summary or description of the charge."
+      },
+      {
+        "name": "GlAccountId",
+        "type": "string <uuid>",
+        "required": true,
+        "description": "Unique identifier of the general ledger account associated with the charge."
+      },
+      {
+        "name": "OccupancyId",
+        "type": "string <uuid>",
+        "required": true,
+        "description": "Unique identifier of the occupancy associated with the charge."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the created charge."
+    }
+  ],
+  "requestSample": "{\n  \"AmountDue\": \"43.12\",\n  \"ChargedOn\": \"2022-02-01\",\n  \"Description\": \"sample description\",\n  \"GlAccountId\": \"71c5cb28-547f-11ec-bfa5-02975b268737\",\n  \"OccupancyId\": \"71c5cb28-547f-11ec-bfa5-02975b268737\"\n}"
+}

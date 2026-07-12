@@ -1,26 +1,42 @@
 {
-  "name": "@nightsquawk/appfolio-mcp-server",
+  "name": "@nightsquawktech/appfolio-mcp-server",
   "version": "0.0.1",
   "description": "MCP server for AppFolio Reporting API v2",
-  "license": "MIT",
+  "license": "AGPL-3.0-only",
   "main": "dist/index.js",
   "type": "module",
   "bin": "./dist/index.js",
   "files": [
-    "dist"
+    "dist",
+    "README.md",
+    "LICENSE",
+    "COMMERCIAL.md"
   ],
   "scripts": {
-    "build": "tsc && shx chmod +x dist/*.js",
+    "build": "tsc && shx mkdir -p dist/catalog && shx cp -r src/catalog/reports dist/catalog && shx cp src/catalog/index.json dist/catalog && shx mkdir -p dist/catalog-db && shx cp -r src/catalog-db/endpoints dist/catalog-db && shx cp src/catalog-db/index.json dist/catalog-db && shx chmod +x dist/*.js",
     "prepare": "npm run build",
     "watch": "tsc --watch"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.6.0",
+    "@nightsquawktech/mcp-core": "^0.1.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {
     "@types/node": "^22.13.10",
     "shx": "^0.3.4",
     "typescript": "^5.8.2"
+  },
+  "author": "Kevin Reyes (NightSquawk Tech) <hello@nightsquawk.tech>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NightSquawk/appfolio-mcp-server.git"
+  },
+  "homepage": "https://github.com/NightSquawk/appfolio-mcp-server#readme",
+  "bugs": {
+    "url": "https://github.com/NightSquawk/appfolio-mcp-server/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

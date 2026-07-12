@@ -1,0 +1,70 @@
+{
+  "operationId": "get_portfolios",
+  "resource": "portfolios",
+  "name": "List All Portfolios",
+  "method": "GET",
+  "path": "/portfolios",
+  "description": "Returns all portfolios that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[Id]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter portfolios by unique identifier. All GET requests must include a filter for [Id] or [LastUpdatedAtFrom]."
+    },
+    {
+      "name": "filters[LastUpdatedAtFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter portfolios updated at or after this date-time. All GET requests must include a filter for [Id] or [LastUpdatedAtFrom]."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of Portfolio objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the portfolio"
+    },
+    {
+      "name": "data[].Default",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether or not the portfolio is the default portfolio"
+    },
+    {
+      "name": "data[].Name",
+      "type": "string",
+      "required": false,
+      "description": "The name of the portfolio"
+    },
+    {
+      "name": "data[].PropertyIds",
+      "type": "Array of arrays",
+      "required": false,
+      "description": "Unique identifier(s) of the properties associated with the portfolio. Note: The portfolio endpoint returns hidden properties. To associate hidden properties yielded from this endpoint with those from the Properties endpoint, ensure the IncludeHidden filter is enabled."
+    },
+    {
+      "name": "data[].LastUpdatedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The date the portfolio's details were last updated"
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/portfolios?filters[LastUpdatedAtFrom]=2020-12-15T16:30:46Z' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

@@ -1,0 +1,164 @@
+{
+  "slug": "delinquency",
+  "endpoint": "delinquency.json",
+  "name": "Delinquency",
+  "description": "Returns Delinquency report data.",
+  "requiredFilters": [],
+  "parameters": [
+    {
+      "name": "property_visibility",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "enum": [
+        "active",
+        "hidden",
+        "all"
+      ],
+      "description": "The property visibility to filter by."
+    },
+    {
+      "name": "properties",
+      "type": "object",
+      "required": false,
+      "description": "The property filter. Expand to view all attributes associated with this filter. If required, you must submit an id for at least one of the below filters.",
+      "attributes": [
+        {
+          "name": "properties_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "property_groups_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "portfolios_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "owners_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "delinquency_note_range",
+      "type": "string",
+      "required": false,
+      "default": "this and last month",
+      "enum": [
+        "this month",
+        "'this and last month' denotes 'This Month and Last Month'",
+        "last month",
+        "last year",
+        "all time"
+      ],
+      "description": "Delinquency note range to filter by."
+    },
+    {
+      "name": "tenant_statuses",
+      "type": "array",
+      "required": false,
+      "default": [
+        "0",
+        "4"
+      ],
+      "enum": [
+        "'2' denotes 'Future'",
+        "'0' denotes 'Current'",
+        "'4' denotes 'Notice'",
+        "'1' denotes 'Past'",
+        "'3' denotes 'Evict'"
+      ],
+      "description": "List of Tenant status to filter by."
+    },
+    {
+      "name": "tags",
+      "type": "string",
+      "required": false,
+      "description": "The comma-separated tag(s) to filter by"
+    },
+    {
+      "name": "amount_owed_in_account",
+      "type": "string",
+      "required": false,
+      "default": "all",
+      "enum": [
+        "all",
+        "'rent' denotes 'Rent Income'"
+      ],
+      "description": "Amount owed in account to filter by."
+    },
+    {
+      "name": "balance_operator",
+      "type": "object",
+      "required": false,
+      "description": "The Balance to filter by. Expand to view all attributes associated with this filter.",
+      "attributes": [
+        {
+          "name": "amount",
+          "type": "string",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "comparator",
+          "type": "string",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "include_future_dated_charges",
+      "type": "string",
+      "required": false,
+      "default": "0",
+      "enum": [
+        "0",
+        "1"
+      ],
+      "description": "Include future dated charges"
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "property_visibility": "active",
+    "properties": {
+      "properties_ids": [],
+      "property_groups_ids": [],
+      "portfolios_ids": [],
+      "owners_ids": []
+    },
+    "delinquency_note_range": "this month",
+    "tenant_statuses": [
+      "0",
+      "4"
+    ],
+    "tags": "bbq,deck",
+    "amount_owed_in_account": "all",
+    "balance_operator": {
+      "amount": "100",
+      "comparator": "="
+    },
+    "include_future_dated_charges": "1",
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

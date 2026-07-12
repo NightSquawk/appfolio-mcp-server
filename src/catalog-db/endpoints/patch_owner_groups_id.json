@@ -1,0 +1,72 @@
+{
+  "operationId": "patch_owner_groups_id",
+  "resource": "owner_groups",
+  "name": "Update Owner Group",
+  "method": "PATCH",
+  "path": "/owner_groups/{id}",
+  "description": "Update an existing Owner Group",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "id",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the owner group to update"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Owner Group update parameters",
+    "attributes": [
+      {
+        "name": "FiscalYearEnd",
+        "type": "integer",
+        "required": false,
+        "description": "The month number representing the end of the fiscal year"
+      },
+      {
+        "name": "OwnerPacketBasis",
+        "type": "string",
+        "required": false,
+        "description": "The accounting method used for owner packet calculations. Valid values are \"Cash\" or \"Accrual\".",
+        "enum": ["Cash", "Accrual"]
+      },
+      {
+        "name": "PaymentType",
+        "type": "string",
+        "required": false,
+        "description": "The type of payment distribution for the owners. Valid values are \"Net Income\" or \"Flat\".",
+        "enum": ["Net Income", "Flat"]
+      },
+      {
+        "name": "PaymentAmount",
+        "type": "string <decimal>",
+        "required": false,
+        "description": "The fixed payment amount to distribute to owners. This value is required when PaymentType is \"Flat\"."
+      },
+      {
+        "name": "StartDate",
+        "type": "string <date>",
+        "required": false,
+        "description": "The date when this ownership group becomes effective. The date must be in YYYY-MM-DD format and cannot be set in the future. When updating an existing property's ownership, this date must be later than the current ownership group's StartDate. Creating a new owner group will automatically set the previous owner group's EndDate to one day before this StartDate to maintain ownership continuity."
+      },
+      {
+        "name": "ReserveFunds",
+        "type": "string <decimal>",
+        "required": false,
+        "description": "The amount of funds to maintain in reserve for the property"
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the updated owner group"
+    }
+  ],
+  "requestSample": "{\n  \"FiscalYearEnd\": 4,\n  \"ReserveFunds\": \"2000.55\",\n  \"PaymentType\": \"Flat\",\n  \"PaymentAmount\": \"1000.00\",\n  \"OwnerPacketBasis\": \"Cash\",\n  \"StartDate\": \"2021-09-01\"\n}"
+}

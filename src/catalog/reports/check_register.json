@@ -1,0 +1,181 @@
+{
+  "slug": "check_register",
+  "endpoint": "check_register.json",
+  "name": "Check Register",
+  "description": "Returns Check Register report data.",
+  "requiredFilters": [
+    "occurred_on_from",
+    "occurred_on_to"
+  ],
+  "parameters": [
+    {
+      "name": "property_visibility",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "enum": [
+        "active",
+        "hidden",
+        "all"
+      ],
+      "description": "The property visibility to filter by."
+    },
+    {
+      "name": "properties",
+      "type": "object",
+      "required": false,
+      "description": "The property filter. Expand to view all attributes associated with this filter. If required, you must submit an id for at least one of the below filters.",
+      "attributes": [
+        {
+          "name": "properties_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "property_groups_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "portfolios_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "owners_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "occurred_on_from",
+      "type": "string",
+      "format": "YYYY-MM-DD",
+      "required": true,
+      "description": "The 'Date From' date to filter by."
+    },
+    {
+      "name": "occurred_on_to",
+      "type": "string",
+      "format": "YYYY-MM-DD",
+      "required": true,
+      "description": "The 'Date To' date to filter by."
+    },
+    {
+      "name": "bank_account_ids",
+      "type": "array",
+      "required": false,
+      "description": "The bank account ids to filter by."
+    },
+    {
+      "name": "party_contact_info",
+      "type": "object",
+      "required": false,
+      "description": "The Payee filter. Expand to view all attributes associated with this filter. You can only submit ONE of the below filters.",
+      "attributes": [
+        {
+          "name": "company_id",
+          "type": "string",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "payment_type",
+      "type": "string",
+      "required": false,
+      "default": "All",
+      "enum": [
+        "All",
+        "ACH Payments Only",
+        "Checks Only",
+        "Other Payments Only"
+      ],
+      "description": "The Payment Type to filter by."
+    },
+    {
+      "name": "range",
+      "type": "object",
+      "required": false,
+      "description": "The Check Numbers to filter by. Expand to view all attributes associated with this filter.",
+      "attributes": [
+        {
+          "name": "check_number_from",
+          "type": "string",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "check_number_to",
+          "type": "string",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "reverse_transaction",
+      "type": "string",
+      "required": false,
+      "default": "0",
+      "enum": [
+        "0",
+        "1"
+      ],
+      "description": "Whether or not to Include Voided Checks"
+    },
+    {
+      "name": "exclude_cleared_checks",
+      "type": "string",
+      "required": false,
+      "default": "0",
+      "enum": [
+        "0",
+        "1"
+      ],
+      "description": "Exclude Cleared Checks"
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "property_visibility": "active",
+    "properties": {
+      "properties_ids": [],
+      "property_groups_ids": [],
+      "portfolios_ids": [],
+      "owners_ids": []
+    },
+    "occurred_on_from": "2023-06-01",
+    "occurred_on_to": "2023-06-30",
+    "bank_account_ids": [
+      "1",
+      "2"
+    ],
+    "party_contact_info": {
+      "company_id": "1"
+    },
+    "payment_type": "All",
+    "range": {
+      "check_number_from": "9",
+      "check_number_to": "29"
+    },
+    "reverse_transaction": "0",
+    "exclude_cleared_checks": "1",
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

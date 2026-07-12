@@ -1,0 +1,77 @@
+{
+  "operationId": "patch_inspections_inspectionid",
+  "resource": "inspections",
+  "name": "Update Inspection",
+  "method": "PATCH",
+  "path": "/inspections/{InspectionId}",
+  "description": "Update an inspection record",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "InspectionId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the inspection to update"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Attributes to update for the inspection",
+    "attributes": [
+      {
+        "name": "Name",
+        "type": "string",
+        "required": false,
+        "description": "The user-provided name of the inspection."
+      },
+      {
+        "name": "URL",
+        "type": "string",
+        "required": false,
+        "description": "The URL link to an external page hosted by the partner with additional details about the inspection."
+      },
+      {
+        "name": "InspectionDate",
+        "type": "string <date>",
+        "required": false,
+        "description": "The date the inspection was or is scheduled to be conducted. Valid format is \"YYYY-MM-DD\" e.g. \"2025-03-25\"."
+      },
+      {
+        "name": "Status",
+        "type": "string",
+        "required": false,
+        "description": "Indicates the current status of the inspection. Valid values for update include \"NEW\", \"IN PROGRESS\", \"DONE\", \"OUT FOR SIGNING\", or \"SIGNED\".",
+        "enum": ["NEW", "IN PROGRESS", "DONE", "OUT FOR SIGNING", "SIGNED"]
+      },
+      {
+        "name": "OccupancyId",
+        "type": "string <uuid>",
+        "required": false,
+        "description": "Unique identifier of the occupancy to associate with the inspection. Only one of OccupancyId, PropertyId, or UnitId may be specified."
+      },
+      {
+        "name": "PropertyId",
+        "type": "string <uuid>",
+        "required": false,
+        "description": "Unique identifier of the property to associate with the inspection. Only one of OccupancyId, PropertyId, or UnitId may be specified."
+      },
+      {
+        "name": "UnitId",
+        "type": "string <uuid>",
+        "required": false,
+        "description": "Unique identifier of the unit to associate with the inspection. Only one of OccupancyId, PropertyId, or UnitId may be specified."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the updated inspection"
+    }
+  ],
+  "requestSample": "{\n  \"Name\": \"New Name\",\n  \"URL\": \"https://partner.com/inspections/updated-123\",\n  \"InspectionDate\": \"2025-06-10\",\n  \"Status\": \"DONE\"\n}"
+}

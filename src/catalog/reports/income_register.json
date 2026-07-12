@@ -1,0 +1,131 @@
+{
+  "slug": "income_register",
+  "endpoint": "income_register.json",
+  "name": "Income Register",
+  "description": "Returns Income Register report data.",
+  "requiredFilters": [
+    "receipt_date_from",
+    "receipt_date_to"
+  ],
+  "parameters": [
+    {
+      "name": "property_visibility",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "enum": [
+        "active",
+        "hidden",
+        "all"
+      ],
+      "description": "The property visibility to filter by."
+    },
+    {
+      "name": "properties",
+      "type": "object",
+      "required": false,
+      "description": "The property filter. Expand to view all attributes associated with this filter. If required, you must submit an id for at least one of the below filters.",
+      "attributes": [
+        {
+          "name": "properties_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "property_groups_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "portfolios_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "owners_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "receipt_date_from",
+      "type": "string",
+      "required": true,
+      "format": "YYYY-MM-DD",
+      "description": "The 'Receipt Date From' date to filter by."
+    },
+    {
+      "name": "receipt_date_to",
+      "type": "string",
+      "required": true,
+      "format": "YYYY-MM-DD",
+      "description": "The 'Receipt Date To' date to filter by."
+    },
+    {
+      "name": "party_contact_info",
+      "type": "object",
+      "required": false,
+      "description": "The Payer filter. Expand to view all attributes associated with this filter. You can only submit ONE of the below filters.",
+      "attributes": [
+        {
+          "name": "company_id",
+          "type": "string",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "property_visibility": "active",
+    "properties": {
+      "properties_ids": [],
+      "property_groups_ids": [],
+      "portfolios_ids": [],
+      "owners_ids": []
+    },
+    "receipt_date_from": "2023-06-01",
+    "receipt_date_to": "2023-06-30",
+    "party_contact_info": {
+      "company_id": "1"
+    },
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": [
+    "type",
+    "reference",
+    "property",
+    "property_name",
+    "property_id",
+    "property_address",
+    "property_street",
+    "property_street2",
+    "property_city",
+    "property_state",
+    "property_zip",
+    "unit",
+    "payer",
+    "receipt_date",
+    "cash_gl",
+    "receipt_amount",
+    "charge_amount",
+    "receipt_description",
+    "txn_id",
+    "receipt_id",
+    "unit_id"
+  ]
+}

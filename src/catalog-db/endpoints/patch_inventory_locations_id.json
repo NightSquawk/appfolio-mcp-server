@@ -1,0 +1,52 @@
+{
+  "operationId": "patch_inventory_locations_id",
+  "resource": "inventory_locations",
+  "name": "Update Inventory Location",
+  "method": "PATCH",
+  "path": "/inventory_locations/{Id}",
+  "description": "Update an inventory location. At least one attribute or relationship must be provided.",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the inventory location to update"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Update inventory location object. At least one attribute must be provided.",
+    "attributes": [
+      {
+        "name": "Name",
+        "type": "string",
+        "required": false,
+        "description": "The name of the inventory location."
+      },
+      {
+        "name": "Description",
+        "type": "string",
+        "required": false,
+        "description": "A description of the inventory location."
+      },
+      {
+        "name": "PropertyId",
+        "type": "string <uuid>",
+        "required": false,
+        "description": "Unique identifier of the property associated with the inventory location."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the updated inventory location"
+    }
+  ],
+  "requestSample": "{\n  \"Name\": \"Storage Room A\",\n  \"Description\": \"Main storage room on the first floor\",\n  \"PropertyId\": \"1abcde23-c543-456e-abc9-123456789cba\"\n}"
+}

@@ -1,0 +1,273 @@
+{
+  "operationId": "get_tenants",
+  "resource": "tenants",
+  "name": "List All Tenants",
+  "method": "GET",
+  "path": "/tenants",
+  "description": "Returns all tenants that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[Id]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by tenant unique identifier"
+    },
+    {
+      "name": "filters[UnitId]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by unit unique identifier. Multiple values should be separated by commas."
+    },
+    {
+      "name": "filters[MoveInOnFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter tenants by move-in date (from)"
+    },
+    {
+      "name": "filters[LastUpdatedAtFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter tenants updated at or after this date-time. All GET requests must include a filter for [Id] (if available), or [LastUpdatedAtFrom]."
+    },
+    {
+      "name": "filters[Status]",
+      "type": "string",
+      "required": false,
+      "description": "Filter the results based on one or more statuses. Multiple values should be separated by commas.",
+      "enum": ["Current", "Past", "Future", "Evict", "Notice"]
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of tenant objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the tenant"
+    },
+    {
+      "name": "data[].OccupancyId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique Identifier of an occupancy of one or more tenants"
+    },
+    {
+      "name": "data[].UnitId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "The unit the tenant occupies"
+    },
+    {
+      "name": "data[].PropertyId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "The property with the unit occupied by the tenant"
+    },
+    {
+      "name": "data[].FirstName",
+      "type": "string",
+      "required": false,
+      "description": "The tenant's first name"
+    },
+    {
+      "name": "data[].MiddleName",
+      "type": "string",
+      "required": false,
+      "description": "The tenant's middle name"
+    },
+    {
+      "name": "data[].LastName",
+      "type": "string",
+      "required": false,
+      "description": "The tenant's last name"
+    },
+    {
+      "name": "data[].BirthDate",
+      "type": "string <date>",
+      "required": false,
+      "description": "The tenant's birthdate"
+    },
+    {
+      "name": "data[].SocialSecurityNumber",
+      "type": "string",
+      "required": false,
+      "description": "The tenant's social security number"
+    },
+    {
+      "name": "data[].Link",
+      "type": "string <uri>",
+      "required": false,
+      "description": "A link to the tenant's page in the AppFolio Property manager"
+    },
+    {
+      "name": "data[].CompanyName",
+      "type": "string",
+      "required": false,
+      "description": "The display name of the tenant's company"
+    },
+    {
+      "name": "data[].CurrentRent",
+      "type": "number <float>",
+      "required": false,
+      "description": "The amount the tenant currently pays for rent"
+    },
+    {
+      "name": "data[].Status",
+      "type": "string",
+      "required": false,
+      "description": "The status of the tenant",
+      "enum": ["Current", "Past", "Future", "Evict", "Notice"]
+    },
+    {
+      "name": "data[].Addresses",
+      "type": "array",
+      "required": false,
+      "description": "The tenant's address(es)"
+    },
+    {
+      "name": "data[].PhoneNumber",
+      "type": "string",
+      "required": false,
+      "description": "The tenant's primary phone number",
+      "deprecated": true
+    },
+    {
+      "name": "data[].PhoneNumbers",
+      "type": "array",
+      "required": false,
+      "description": "The tenant's phone number(s)"
+    },
+    {
+      "name": "data[].Email",
+      "type": "string <email>",
+      "required": false,
+      "description": "The tenant's primary email address",
+      "deprecated": true
+    },
+    {
+      "name": "data[].Emails",
+      "type": "array",
+      "required": false,
+      "description": "The tenant's emails"
+    },
+    {
+      "name": "data[].MoveInOn",
+      "type": "string <date>",
+      "required": false,
+      "description": "The date the tenant physically started or will start occupancy. Dictates whether the \"future\" or \"current\" option is displayed in the status field."
+    },
+    {
+      "name": "data[].MoveOutOn",
+      "type": "string <date>",
+      "required": false,
+      "description": "The date the tenant physically ended or will end occupancy. Dictates whether the \"notice\" or \"past\" option is displayed in the status field."
+    },
+    {
+      "name": "data[].OccupancyCustomFields",
+      "type": "object",
+      "required": false,
+      "description": "The custom fields for the associated entity"
+    },
+    {
+      "name": "data[].RentalApplicationId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier for a tenant-submitted rental application"
+    },
+    {
+      "name": "data[].TenantType",
+      "type": "string",
+      "required": false,
+      "description": "The type of tenant",
+      "enum": ["Financially Responsible", "Other Occupant", "Co-signer"]
+    },
+    {
+      "name": "data[].PrimaryTenant",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether or not the tenant is the primary leaseholder for the occupancy"
+    },
+    {
+      "name": "data[].LastLeaseRenewal",
+      "type": "string <date>",
+      "required": false,
+      "description": "The date the last lease renewal agreement was started"
+    },
+    {
+      "name": "data[].LeaseSignedDate",
+      "type": "string <date>",
+      "required": false,
+      "description": "The date the lease was executed by the tenant"
+    },
+    {
+      "name": "data[].LeaseStartDate",
+      "type": "string <date>",
+      "required": false,
+      "description": "The day the lease agreement starts"
+    },
+    {
+      "name": "data[].LeaseEndDate",
+      "type": "string <date>",
+      "required": false,
+      "description": "The last day of the lease agreement"
+    },
+    {
+      "name": "data[].IsMonthlyLease",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether the tenant is currently on a month-to-month lease"
+    },
+    {
+      "name": "data[].NextRentIncrease",
+      "type": "string <date>",
+      "required": false,
+      "description": "The date of the tenant is eligible for a rent increase"
+    },
+    {
+      "name": "data[].Pets",
+      "type": "array",
+      "required": false,
+      "description": "Contains details about the tenant's pet(s)"
+    },
+    {
+      "name": "data[].Vehicles",
+      "type": "array",
+      "required": false,
+      "description": "Contains details about the tenant's vehicle(s)"
+    },
+    {
+      "name": "data[].Tags",
+      "type": "Array of strings",
+      "required": false,
+      "description": "User-defined tag(s) that categorize the tenant"
+    },
+    {
+      "name": "data[].HiddenAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "When the tenant was placed into an inactive state by an AppFolio Property Manager user"
+    },
+    {
+      "name": "data[].LastUpdatedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The date the tenant's details were last updated"
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/tenants?filters[Id]=1abcde23-c543-456e-abc9-123456789cba&filters[UnitId]=1abcde23-c543-456e-abc9-123456789cba,234abcde-c543-456e-abc9-123456789abc&filters[MoveInOnFrom]=2020-12-15T16:30:46Z&filters[LastUpdatedAtFrom]=2020-12-15T16:30:46Z&filters[Status]=Current' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

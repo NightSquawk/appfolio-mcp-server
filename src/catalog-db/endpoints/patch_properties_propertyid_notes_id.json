@@ -1,0 +1,46 @@
+{
+  "operationId": "patch_properties_propertyid_notes_id",
+  "resource": "properties",
+  "name": "Update Property Note",
+  "method": "PATCH",
+  "path": "/properties/{PropertyId}/notes/{Id}",
+  "description": "Update a property note",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "PropertyId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "The property to which the note will be attached"
+    },
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the note to update"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Note object",
+    "attributes": [
+      {
+        "name": "Body",
+        "type": "string",
+        "required": false,
+        "description": "A brief informative message about the property note. A property note cannot exceed 65,535 characters."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the updated property note"
+    }
+  ],
+  "requestSample": "curl --location --request PATCH 'https://api.appfolio.com/api/v0/properties/57e04805-01c4-4e39-adc9-c74ff9ddc8d9/notes/45e04805-01c4-4e39-adc9-c75ff9ddc8d7' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002' \\\n     --header 'Content-Type: application/json' \\\n     --data '{\"Body\": \"This property has a scheduled cleaning service on 11/30/2022 - Updated\"}'"
+}

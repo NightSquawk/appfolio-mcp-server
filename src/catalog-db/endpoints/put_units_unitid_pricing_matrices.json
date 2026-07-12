@@ -1,0 +1,66 @@
+{
+  "operationId": "put_units_unitid_pricing_matrices",
+  "resource": "units",
+  "name": "Put Unit Pricing Matrix",
+  "method": "PUT",
+  "path": "/units/{UnitId}/pricing_matrices",
+  "description": "Manage the rent pricing structure for a specific unit",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "UnitId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the unit associated with the rent pricing matrix entry"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Pricing matrix object",
+    "attributes": [
+      {
+        "name": "PricingMatrix",
+        "type": "array",
+        "required": true,
+        "description": "Array of objects that defines the rent pricing structure and lease terms for a unit",
+        "attributes": [
+          {
+            "name": "StartDate",
+            "type": "string <date>",
+            "required": true,
+            "description": "The date when the specific rent price becomes effective for the unit"
+          },
+          {
+            "name": "Price",
+            "type": "integer",
+            "required": true,
+            "description": "The monthly rent amount for the unit"
+          },
+          {
+            "name": "ExpirationDate",
+            "type": "string <date>",
+            "required": false,
+            "description": "The date when the specific rent price expires for the unit"
+          },
+          {
+            "name": "LeaseTerm",
+            "type": "integer",
+            "required": false,
+            "description": "The number of months for which the specified rent price applies"
+          }
+        ]
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the unit associated with the rent pricing matrix entry"
+    }
+  ],
+  "requestSample": "{\n  \"PricingMatrix\": [\n    {}\n  ]\n}"
+}

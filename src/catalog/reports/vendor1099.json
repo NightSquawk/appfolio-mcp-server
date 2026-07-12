@@ -1,0 +1,84 @@
+{
+  "slug": "vendor1099",
+  "endpoint": "vendor1099.json",
+  "name": "Vendor 1099 Summary",
+  "description": "Returns Vendor 1099 Summary report data.",
+  "requiredFilters": [
+    "year"
+  ],
+  "parameters": [
+    {
+      "name": "party_contact_infos",
+      "type": "object",
+      "required": false,
+      "description": "The Vendors filter. Expand to view all attributes associated with this filter.",
+      "attributes": [
+        {
+          "name": "vendors_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "balance_operator",
+      "type": "object",
+      "required": false,
+      "description": "The Amount to filter by. Expand to view all attributes associated with this filter.",
+      "attributes": [
+        {
+          "name": "amount",
+          "type": "string",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "comparator",
+          "type": "string",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "year",
+      "type": "string",
+      "required": true,
+      "description": "The Tax Year to filter by."
+    },
+    {
+      "name": "show_eligible_1099_vendors",
+      "type": "string",
+      "required": false,
+      "default": "1",
+      "enum": [
+        "0",
+        "1"
+      ],
+      "description": "Show only vendors that have been designated to receive a 1099"
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "party_contact_infos": {
+      "vendors_ids": []
+    },
+    "balance_operator": {
+      "amount": "100",
+      "comparator": "="
+    },
+    "year": "2023",
+    "show_eligible_1099_vendors": "1",
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

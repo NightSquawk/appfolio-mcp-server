@@ -1,0 +1,40 @@
+{
+  "operationId": "post_owners_ownerid_attachments",
+  "resource": "owners",
+  "name": "Create Owner Attachment",
+  "method": "POST",
+  "path": "/owners/{OwnerId}/attachments",
+  "description": "Upload an attachment to an owner",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "OwnerId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "The owner to which the file will be attached"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Attachment object (multipart/form-data)",
+    "attributes": [
+      {
+        "name": "File",
+        "type": "string",
+        "required": false,
+        "description": "Filename.file-extension"
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the owner attachment"
+    }
+  ],
+  "requestSample": "{\n  \"File\": \"/path/to/file.pdf\"\n}"
+}

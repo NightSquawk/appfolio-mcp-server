@@ -1,0 +1,90 @@
+{
+  "operationId": "patch_journal_entries_journalentryid",
+  "resource": "journal_entries",
+  "name": "Update Journal Entries",
+  "method": "PATCH",
+  "path": "/journal_entries/{JournalEntryId}",
+  "description": "Update a journal entry",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "JournalEntryId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the journal entry to update"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Journal Entry object",
+    "attributes": [
+      {
+        "name": "Id",
+        "type": "string <uuid>",
+        "required": false,
+        "description": "Unique identifier of the journal entry"
+      },
+      {
+        "name": "EntryDate",
+        "type": "string",
+        "required": false,
+        "description": "The date the journal entry was created. Valid format is \"YYYY-MM-DD\" e.g. \"2022-03-03\"."
+      },
+      {
+        "name": "LineItems",
+        "type": "array",
+        "required": false,
+        "description": "Array of line-item objects. Two or more line-item objects must be passed to create a journal entry. The sum of the total debits must equal the total credits for all line-item objects.",
+        "attributes": [
+          {
+            "name": "Credit",
+            "type": "string <decimal>",
+            "required": false,
+            "description": "The credit amount. Total debits and credits must be equal. For example, if line-item 1 has a credit of \"10.00\", line-item 2 must have a debit of \"10.00\"."
+          },
+          {
+            "name": "Debit",
+            "type": "string <decimal>",
+            "required": false,
+            "description": "The debit amount. Total debits and credits must be equal. For example, if line-item 1 has a credit of \"10.00\", line-item 2 must have a debit of \"10.00\"."
+          },
+          {
+            "name": "Description",
+            "type": "string",
+            "required": false,
+            "description": "A brief, informative description of the journal entry's line item"
+          },
+          {
+            "name": "GlAccountId",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "Unique identifier of the general ledger account associated with the journal entry line item"
+          }
+        ]
+      },
+      {
+        "name": "PropertyId",
+        "type": "string <uuid>",
+        "required": false,
+        "description": "Unique identifier of the property or association related to the journal entry"
+      },
+      {
+        "name": "Remarks",
+        "type": "string",
+        "required": false,
+        "description": "A description or summary of the journal entry"
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the updated journal entry"
+    }
+  ],
+  "requestSample": "{\n  \"EntryDate\": \"2022-02-01\",\n  \"PropertyId\": \"71c5cb28-547f-11ec-bfa5-02975b268737\",\n  \"LineItems\": [\n    {},\n    {}\n  ],\n  \"Remarks\": \"Payroll November\"\n}"
+}

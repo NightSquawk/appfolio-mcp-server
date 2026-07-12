@@ -1,0 +1,54 @@
+{
+  "slug": "leasing_agent_performance",
+  "endpoint": "leasing_agent_performance.json",
+  "name": "Leasing Agent Performance",
+  "description": "Returns Leasing Agent Performance report data.",
+  "requiredFilters": [
+    "received_on_from",
+    "received_on_to"
+  ],
+  "parameters": [
+    {
+      "name": "received_on_from",
+      "type": "string",
+      "required": true,
+      "format": "YYYY-MM-DD",
+      "description": "The 'Guest Cards Received From' date to filter by."
+    },
+    {
+      "name": "received_on_to",
+      "type": "string",
+      "required": true,
+      "format": "YYYY-MM-DD",
+      "description": "The 'Guest Cards Received To' date to filter by."
+    },
+    {
+      "name": "visibility",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "enum": [
+        "active",
+        "hidden",
+        "all"
+      ],
+      "description": ""
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "received_on_from": "2023-06-01",
+    "received_on_to": "2023-06-30",
+    "visibility": "active",
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

@@ -1,0 +1,123 @@
+{
+  "slug": "showings",
+  "endpoint": "showings.json",
+  "name": "Showings",
+  "description": "Returns Showings report data.",
+  "requiredFilters": [
+    "showing_date_from",
+    "showing_date_to"
+  ],
+  "parameters": [
+    {
+      "name": "showing_date_from",
+      "type": "string",
+      "format": "YYYY-MM-DD",
+      "required": true,
+      "description": "The 'Showing Time From' date to filter by."
+    },
+    {
+      "name": "showing_date_to",
+      "type": "string",
+      "format": "YYYY-MM-DD",
+      "required": true,
+      "description": "The 'Showing Time To' date to filter by."
+    },
+    {
+      "name": "property_visibility",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "enum": [
+        "active",
+        "hidden",
+        "all"
+      ],
+      "description": "The property visibility to filter by."
+    },
+    {
+      "name": "properties",
+      "type": "object",
+      "required": false,
+      "description": "The property filter. Expand to view all attributes associated with this filter. If required, you must submit an id for at least one of the below filters.",
+      "attributes": [
+        {
+          "name": "properties_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "property_groups_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "portfolios_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "owners_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "statuses",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "enum": [
+        "all",
+        "Completed",
+        "Scheduled",
+        "Canceled",
+        "No Show",
+        "Confirmation Pending",
+        "Prospect Confirmed",
+        "Prospect Canceled",
+        "Canceled (Unconfirmed)",
+        "Cancel In Progress",
+        "Reschedule In Progress"
+      ],
+      "description": "Statuses to filter by."
+    },
+    {
+      "name": "assigned_user",
+      "type": "string",
+      "required": false,
+      "default": "All",
+      "description": "Assigned user id to filter by."
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "showing_date_from": "2023-06-01",
+    "showing_date_to": "2023-06-30",
+    "property_visibility": "active",
+    "properties": {
+      "properties_ids": [],
+      "property_groups_ids": [],
+      "portfolios_ids": [],
+      "owners_ids": []
+    },
+    "statuses": [
+      "all"
+    ],
+    "assigned_user": "All",
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

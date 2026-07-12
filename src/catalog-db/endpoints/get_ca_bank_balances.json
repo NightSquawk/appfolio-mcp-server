@@ -1,0 +1,101 @@
+{
+  "operationId": "get_ca_bank_balances",
+  "resource": "ca",
+  "name": "List All Community Association Bank Account Balances",
+  "method": "GET",
+  "path": "/ca/bank_balances",
+  "description": "Returns Community Association (CA) bank account balances that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[AssociationId]",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Filter by unique identifier of the Community Association. All GET requests must include this filter."
+    },
+    {
+      "name": "page[number]",
+      "type": "integer",
+      "required": false,
+      "description": "Page number for pagination. Default: 1"
+    },
+    {
+      "name": "page[size]",
+      "type": "integer",
+      "required": false,
+      "description": "Page size for pagination. Default: 1000"
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of CABankBalance objects"
+    },
+    {
+      "name": "data[].BankAccountId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the CA bank account"
+    },
+    {
+      "name": "data[].AssociationId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the Community Association attached to the bank account"
+    },
+    {
+      "name": "data[].BankAccountName",
+      "type": "string",
+      "required": false,
+      "description": "The name of the CA's bank account"
+    },
+    {
+      "name": "data[].BankAccountNumber",
+      "type": "string",
+      "required": false,
+      "description": "Unique reference number of the CA bank account"
+    },
+    {
+      "name": "data[].BankAccountType",
+      "type": "null or string",
+      "required": false,
+      "description": "The type of bank account used for the Community Association",
+      "enum": ["Personal Checking", "Personal Savings", "Business Checking", "Business Saving", "Other", null]
+    },
+    {
+      "name": "data[].Balance",
+      "type": "number <float>",
+      "required": false,
+      "description": "The CA bank account's most recent statement balance"
+    },
+    {
+      "name": "data[].BalanceAsOf",
+      "type": "string <date>",
+      "required": false,
+      "description": "The date of the CA bank account's most recent statement balance"
+    },
+    {
+      "name": "data[].GlAccountIds",
+      "type": "Array of arrays",
+      "required": false,
+      "description": "Unique identifier of the general ledger account(s) associated with the CA bank account"
+    },
+    {
+      "name": "data[].Reserve",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether or not the CA bank account is a reserve bank account"
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/ca/bank_balances?filters[AssociationId]=1abcde23-c543-456e-abc9-123456789cee' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

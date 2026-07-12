@@ -1,0 +1,170 @@
+{
+  "slug": "owner_withholdings",
+  "endpoint": "owner_withholdings.json",
+  "name": "Owner Withholdings",
+  "description": "Returns Owner Withholdings report data.",
+  "requiredFilters": [
+    "posted_on_from",
+    "posted_on_to"
+  ],
+  "parameters": [
+    {
+      "name": "property_visibility",
+      "type": "string",
+      "required": false,
+      "default": "all",
+      "enum": [
+        "active",
+        "hidden",
+        "all"
+      ],
+      "description": "The property visibility to filter by."
+    },
+    {
+      "name": "properties",
+      "type": "object",
+      "required": false,
+      "description": "The property filter. Expand to view all attributes associated with this filter. If required, you must submit an id for at least one of the below filters.",
+      "attributes": [
+        {
+          "name": "properties_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "property_groups_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "portfolios_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "owners_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "party_contact_info",
+      "type": "object",
+      "required": false,
+      "description": "The Owner filter. Expand to view all attributes associated with this filter. You can only submit ONE of the below filters.",
+      "attributes": [
+        {
+          "name": "owner_id",
+          "type": "string",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "posted_on_from",
+      "type": "string",
+      "required": true,
+      "format": "YYYY-MM-DD",
+      "description": "The 'Date From' date to filter by."
+    },
+    {
+      "name": "posted_on_to",
+      "type": "string",
+      "required": true,
+      "format": "YYYY-MM-DD",
+      "description": "The 'Date To' date to filter by."
+    },
+    {
+      "name": "out_of_state_owners_only",
+      "type": "string",
+      "required": false,
+      "default": "1",
+      "enum": [
+        "0",
+        "1"
+      ],
+      "description": "Show out of state owners only?"
+    },
+    {
+      "name": "withholding_percentage",
+      "type": "string",
+      "required": false,
+      "default": "7.0",
+      "enum": [
+        "'1.0' denotes '1.0%'",
+        "'1.5' denotes '1.5%'",
+        "'2.0' denotes '2.0%'",
+        "'2.5' denotes '2.5%'",
+        "'3.0' denotes '3.0%'",
+        "'3.5' denotes '3.5%'",
+        "'4.0' denotes '4.0%'",
+        "'4.5' denotes '4.5%'",
+        "'5.0' denotes '5.0%'",
+        "'5.5' denotes '5.5%'",
+        "'6.0' denotes '6.0%'",
+        "'6.5' denotes '6.5%'",
+        "'7.0' denotes '7.0%'",
+        "'7.5' denotes '7.5%'",
+        "'8.0' denotes '8.0%'",
+        "'8.5' denotes '8.5%'",
+        "'9.0' denotes '9.0%'",
+        "'9.5' denotes '9.5%'",
+        "'10.0' denotes '10.0%'",
+        "'10.5' denotes '10.5%'",
+        "'11.0' denotes '11.0%'",
+        "'11.5' denotes '11.5%'",
+        "'12.0' denotes '12.0%'",
+        "'12.5' denotes '12.5%'",
+        "'13.0' denotes '13.0%'",
+        "'13.5' denotes '13.5%'",
+        "'14.0' denotes '14.0%'",
+        "'14.5' denotes '14.5%'",
+        "'15.0' denotes '15.0%'",
+        "'15.5' denotes '15.5%'",
+        "'16.0' denotes '16.0%'",
+        "'16.5' denotes '16.5%'",
+        "'17.0' denotes '17.0%'",
+        "'17.5' denotes '17.5%'",
+        "'18.0' denotes '18.0%'",
+        "'18.5' denotes '18.5%'",
+        "'19.0' denotes '19.0%'",
+        "'19.5' denotes '19.5%'",
+        "'20.0' denotes '20.0%'"
+      ],
+      "description": "Withhold percent to filter by."
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "property_visibility": "active",
+    "properties": {
+      "properties_ids": [],
+      "property_groups_ids": [],
+      "portfolios_ids": [],
+      "owners_ids": []
+    },
+    "party_contact_info": {
+      "owner_id": "1"
+    },
+    "posted_on_from": "2023-06-01",
+    "posted_on_to": "2023-06-30",
+    "out_of_state_owners_only": "1",
+    "withholding_percentage": "1.0",
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

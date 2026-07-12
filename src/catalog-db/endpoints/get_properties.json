@@ -1,0 +1,267 @@
+{
+  "operationId": "get_properties",
+  "resource": "properties",
+  "name": "List All Properties",
+  "method": "GET",
+  "path": "/properties",
+  "description": "Returns all properties that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[Id]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by the unique identifier of the property. All GET requests must include a filter for [Id] (if available) or [LastUpdatedAtFrom]."
+    },
+    {
+      "name": "filters[LastUpdatedAtFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter properties updated at or after this date-time. All GET requests must include a filter for [Id] (if available) or [LastUpdatedAtFrom]."
+    },
+    {
+      "name": "filters[PropertyType]",
+      "type": "string",
+      "required": false,
+      "description": "Filter by property type. Accepts comma-separated values such as Single-Family, Multi-Family, Commercial."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of property objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the property retrieved"
+    },
+    {
+      "name": "data[].CustomFields",
+      "type": "object",
+      "required": false,
+      "description": "The custom fields for the associated entity"
+    },
+    {
+      "name": "data[].HasHomeWarrantyCoverage",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether or not the property has home warranty coverage"
+    },
+    {
+      "name": "data[].HomeWarrantyInfo",
+      "type": "object",
+      "required": false,
+      "description": "Contains information about the property's home warranty coverage"
+    },
+    {
+      "name": "data[].HiddenAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "When the property was placed into an inactive state by an AppFolio Property Manager user"
+    },
+    {
+      "name": "data[].LastUpdatedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The date the property group's details were last updated"
+    },
+    {
+      "name": "data[].LeaseFeePolicy",
+      "type": "object",
+      "required": false,
+      "description": "Contains details about the property's lease fee policy"
+    },
+    {
+      "name": "data[].Link",
+      "type": "string <uri>",
+      "required": false,
+      "description": "A link to the property page in the AppFolio Property Manager"
+    },
+    {
+      "name": "data[].PortfolioId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the portfolio associated with the property"
+    },
+    {
+      "name": "data[].PropertyGroupIds",
+      "type": "Array of strings",
+      "required": false,
+      "description": "Unique identifier(s) of the property group(s) associated with the property"
+    },
+    {
+      "name": "data[].PropertyType",
+      "type": "string",
+      "required": false,
+      "description": "The type of property",
+      "enum": ["Commercial", "Corporate", "Manufactured-Housing", "Mixed-Use", "Multi-Family", "Self-Storage", "Single-Family", "Student-Housing", "Vacation"]
+    },
+    {
+      "name": "data[].PostedToInternet",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether the Single-Family (SFR) property has been posted to a third-party listings page. Returns null if property type is not SFR."
+    },
+    {
+      "name": "data[].PostedToWebsite",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether a vacant Single-Family (SFR) property was posted to the AppFolio listings page. Returns null if property type is not SFR."
+    },
+    {
+      "name": "data[].TenantPortalLink",
+      "type": "string",
+      "required": false,
+      "description": "Link that can be used to direct a resident to their tenant portal"
+    },
+    {
+      "name": "data[].AdminFee",
+      "type": "number",
+      "required": false,
+      "description": "The admin fee associated with the property"
+    },
+    {
+      "name": "data[].Amenities",
+      "type": "Array of strings",
+      "required": false,
+      "description": "The amenities associated with the property"
+    },
+    {
+      "name": "data[].CatsAllowed",
+      "type": "string",
+      "required": false,
+      "description": "The property's cat policy. Valid values include \"Yes\", \"No\" or null.",
+      "enum": ["Yes", "No"]
+    },
+    {
+      "name": "data[].Class",
+      "type": "string",
+      "required": false,
+      "description": "Indicates the type and quality of the property based on factors such as age, location, amenities, and overall condition.",
+      "enum": ["A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-"]
+    },
+    {
+      "name": "data[].CurrentManagementFeePolicy",
+      "type": "object",
+      "required": false,
+      "description": "Contains details about the property's current management fee policy"
+    },
+    {
+      "name": "data[].DogsAllowed",
+      "type": "string",
+      "required": false,
+      "description": "The property's dog policy.",
+      "enum": ["Large & Small", "Small Only", "No"]
+    },
+    {
+      "name": "data[].InsuranceExpiration",
+      "type": "string <date>",
+      "required": false,
+      "description": "The date the property's insurance expires"
+    },
+    {
+      "name": "data[].MaintenanceLimit",
+      "type": "string <decimal>",
+      "required": false,
+      "description": "The dollar amount limit to not exceed for maintenance"
+    },
+    {
+      "name": "data[].MaintenanceNotes",
+      "type": "string",
+      "required": false,
+      "description": "A brief informative message about the property's maintenance"
+    },
+    {
+      "name": "data[].ManagementEndDate",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The date when the current management of the property ended"
+    },
+    {
+      "name": "data[].ManagementEndReason",
+      "type": "string",
+      "required": false,
+      "description": "The reason for the end of the current management of the property",
+      "enum": ["Foreclosure", "Maintenance", "Management Company Concerns", "Management Company Terminated", "Owner Moved In", "Owner Self-Managing", "Owner Sold", "Owner Terminated Management", "Property Uninhabitable/Demolition", "Tenant Placement", "Other"]
+    },
+    {
+      "name": "data[].ManagementStartDate",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The date when the current management of the property began"
+    },
+    {
+      "name": "data[].Name",
+      "type": "string",
+      "required": false,
+      "description": "The name of the property"
+    },
+    {
+      "name": "data[].NsfFee",
+      "type": "number",
+      "required": false,
+      "description": "The non-sufficient funds (NSF) fee associated with the property"
+    },
+    {
+      "name": "data[].SiteManager",
+      "type": "object",
+      "required": false,
+      "description": "Contains the property site manager's contact information and details"
+    },
+    {
+      "name": "data[].UnitEntryPreAuthorized",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether or not entry to the unit was pre-authorized"
+    },
+    {
+      "name": "data[].YearBuilt",
+      "type": "integer",
+      "required": false,
+      "description": "The year in which the property was constructed"
+    },
+    {
+      "name": "data[].Address1",
+      "type": "string",
+      "required": false,
+      "description": "The primary street address of the property"
+    },
+    {
+      "name": "data[].Address2",
+      "type": "string",
+      "required": false,
+      "description": "Additional street address information pertaining to the property"
+    },
+    {
+      "name": "data[].City",
+      "type": "string",
+      "required": false,
+      "description": "The city where the property is located"
+    },
+    {
+      "name": "data[].State",
+      "type": "string",
+      "required": false,
+      "description": "The state where the property is located"
+    },
+    {
+      "name": "data[].Zip",
+      "type": "string",
+      "required": false,
+      "description": "The zip code where the property is located"
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/properties?filters[Id]=1abcde234-c543-456e-abc9-123456789cba&filters[LastUpdatedAtFrom]=2020-12-15T16:30:46Z&filters[PropertyType]=Single-Family,Multi-Family,Commercial' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

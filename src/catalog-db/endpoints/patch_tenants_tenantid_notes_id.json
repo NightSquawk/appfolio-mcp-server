@@ -1,0 +1,46 @@
+{
+  "operationId": "patch_tenants_tenantid_notes_id",
+  "resource": "tenants",
+  "name": "Update Tenant Note",
+  "method": "PATCH",
+  "path": "/tenants/{TenantId}/notes/{Id}",
+  "description": "Update a note to a tenant",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "TenantId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "The tenant to which the note will be attached"
+    },
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the note to update"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Note object",
+    "attributes": [
+      {
+        "name": "Body",
+        "type": "string",
+        "required": false,
+        "description": "A brief informative message about the tenant note. A tenant note cannot exceed 65,535 characters."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the updated tenant note"
+    }
+  ],
+  "requestSample": "{\n  \"Body\": \"This tenant have scheduled a cleaning service on 11/30/2022 - Updated\"\n}"
+}

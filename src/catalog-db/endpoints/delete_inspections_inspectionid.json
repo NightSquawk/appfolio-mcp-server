@@ -1,0 +1,21 @@
+{
+  "operationId": "delete_inspections_inspectionid",
+  "resource": "inspections",
+  "name": "Delete Inspection",
+  "method": "DELETE",
+  "path": "/inspections/{InspectionId}",
+  "description": "Delete an inspection record",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "InspectionId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the inspection to delete"
+    }
+  ],
+  "responseFields": [],
+  "requestSample": "curl --location -g \\\n    --request DELETE 'https://api.appfolio.com/api/v0/inspections/2f7232fb-e23b-11ee-8c46-06b43963c6f4' \\\n    --header 'Authorization: Basic {Auth}' \\\n    --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

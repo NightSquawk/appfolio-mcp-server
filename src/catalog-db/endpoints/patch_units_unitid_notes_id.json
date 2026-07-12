@@ -1,0 +1,46 @@
+{
+  "operationId": "patch_units_unitid_notes_id",
+  "resource": "units",
+  "name": "Update Unit Note",
+  "method": "PATCH",
+  "path": "/units/{UnitId}/notes/{Id}",
+  "description": "Update a note to a unit",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "UnitId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "The unit to which the note will be attached"
+    },
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the note to update"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Note object",
+    "attributes": [
+      {
+        "name": "Body",
+        "type": "string",
+        "required": false,
+        "description": "A brief informative message about the unit note. A unit note cannot exceed 65,535 characters."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the updated unit note"
+    }
+  ],
+  "requestSample": "{\n  \"Body\": \"This unit has a scheduled cleaning service on 11/30/2022 - Updated\"\n}"
+}

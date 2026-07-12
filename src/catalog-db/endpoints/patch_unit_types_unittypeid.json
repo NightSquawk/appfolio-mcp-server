@@ -1,0 +1,126 @@
+{
+  "operationId": "patch_unit_types_unittypeid",
+  "resource": "unit_types",
+  "name": "Update Unit Type",
+  "method": "PATCH",
+  "path": "/unit_types/{unitTypeId}",
+  "description": "Update a unit Type.",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "unitTypeId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the unit type to update."
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Attributes to update on the unit type.",
+    "attributes": [
+      {
+        "name": "ApplicationFee",
+        "type": "number",
+        "required": false,
+        "description": "The fee charged when applying for a unit of this type. If the property associated with the unit type is payments enabled (if the property's bank account is payment enabled), then the ApplicationFee must be $0.00 or between $6 and $200."
+      },
+      {
+        "name": "Amenities",
+        "type": "Array of strings",
+        "required": false,
+        "description": "The amenities associated with the unit type. Amenity names are case-sensitive. Providing an array of valid strings will overwrite all existing amenities. Passing in an empty array [] or an array of empty strings [\"\"] or [\"\", \"\"] will clear all existing amenities. Passing in an array of a valid string and an empty string [\"amenity_name\", \"\"] will result in Amenities: [\"amenity_name\"]. Passing in null will result in no change."
+      },
+      {
+        "name": "Bathrooms",
+        "type": "number",
+        "required": false,
+        "description": "The number of bathrooms for this unit type."
+      },
+      {
+        "name": "Bedrooms",
+        "type": "integer",
+        "required": false,
+        "description": "The number of bedrooms for this unit type."
+      },
+      {
+        "name": "CatsAllowed",
+        "type": "string",
+        "required": false,
+        "description": "The unit type's cat policy. Valid values include \"Yes\", \"No\" or null. A null value indicates that the unit type may not have specified a policy for cats.",
+        "enum": ["Yes", "No"]
+      },
+      {
+        "name": "Deposit",
+        "type": "number",
+        "required": false,
+        "description": "The security deposit amount."
+      },
+      {
+        "name": "DogsAllowed",
+        "type": "string",
+        "required": false,
+        "description": "The unit type's dog policy.",
+        "enum": ["Large & Small", "Small Only", "No"]
+      },
+      {
+        "name": "FutureMarketRent",
+        "type": "number",
+        "required": false,
+        "description": "The projected future market rent for the unit type. This attribute must be provided together with FutureMarketRentEffectiveOn date. Both attributes must either be present or absent together."
+      },
+      {
+        "name": "FutureMarketRentEffectiveOn",
+        "type": "string <date-time>",
+        "required": false,
+        "description": "The date when the FutureMarketRent will take effect. This attribute must be provided together with FutureMarketRent. Both attributes must either be present or absent together."
+      },
+      {
+        "name": "MarketRent",
+        "type": "number <decimal>",
+        "required": false,
+        "description": "The current market rent for the unit type."
+      },
+      {
+        "name": "MarketingTitle",
+        "type": "string",
+        "required": false,
+        "description": "The title of the listing for syndication."
+      },
+      {
+        "name": "MarketingDescription",
+        "type": "string",
+        "required": false,
+        "description": "A description of the listing for syndication."
+      },
+      {
+        "name": "Name",
+        "type": "string",
+        "required": false,
+        "description": "The name of the unit type. This value must be unique per PropertyId, meaning different unit types can use the same Name only when their PropertyIds are different."
+      },
+      {
+        "name": "SquareFeet",
+        "type": "number",
+        "required": false,
+        "description": "The size of the unit type in square feet."
+      },
+      {
+        "name": "YouTubeURL",
+        "type": "string <uri>",
+        "required": false,
+        "description": "The URL of the YouTube video for the listing(s)."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the updated unit type."
+    }
+  ],
+  "requestSample": "{\n  \"Name\": \"Unit Type A\",\n  \"Amenities\": [\n    \"gym\",\n    \"covered parking\"\n  ],\n  \"ApplicationFee\": 20.23,\n  \"Bathrooms\": 2.5,\n  \"Bedrooms\": 3,\n  \"CatsAllowed\": \"Yes\",\n  \"Deposit\": 300.34,\n  \"DogsAllowed\": \"Large & Small\",\n  \"MarketRent\": 1569.05,\n  \"FutureMarketRent\": 699.99,\n  \"FutureMarketRentEffectiveOn\": \"2022-02-08\",\n  \"MarketingDescription\": \"Sample marketing description\",\n  \"MarketingTitle\": \"Sample marketing title\",\n  \"SquareFeet\": 2000,\n  \"YouTubeURL\": \"https://www.youtube.com/watch?v=abc\"\n}"
+}

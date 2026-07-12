@@ -1,0 +1,107 @@
+{
+  "slug": "inspection_detail",
+  "endpoint": "inspection_detail.json",
+  "name": "Inspection Detail",
+  "description": "Returns Inspection Detail report data.",
+  "requiredFilters": [],
+  "parameters": [
+    {
+      "name": "property_visibility",
+      "type": "string",
+      "required": false,
+      "default": "all",
+      "enum": [
+        "active",
+        "hidden",
+        "all"
+      ],
+      "description": "The property visibility to filter by."
+    },
+    {
+      "name": "properties",
+      "type": "object",
+      "required": false,
+      "description": "The property filter. Expand to view all attributes associated with this filter. If required, you must submit an id for at least one of the below filters.",
+      "attributes": [
+        {
+          "name": "properties_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "property_groups_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "portfolios_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "owners_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "inspected_on_from",
+      "type": "string",
+      "format": "YYYY-MM-DD",
+      "required": false,
+      "default": "",
+      "description": "The 'Inspection Date From' date to filter by."
+    },
+    {
+      "name": "inspected_on_to",
+      "type": "string",
+      "format": "YYYY-MM-DD",
+      "required": false,
+      "default": "",
+      "description": "The 'Inspection Date To' date to filter by."
+    },
+    {
+      "name": "inspection_status",
+      "type": "string",
+      "required": false,
+      "default": "all",
+      "enum": [
+        "all",
+        "NEW",
+        "IN PROGRESS",
+        "DONE",
+        "OUT FOR SIGNING",
+        "SIGNED"
+      ],
+      "description": "Inspection status to filter by."
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "property_visibility": "active",
+    "properties": {
+      "properties_ids": [],
+      "property_groups_ids": [],
+      "portfolios_ids": [],
+      "owners_ids": []
+    },
+    "inspected_on_from": "2023-06-01",
+    "inspected_on_to": "2023-06-30",
+    "inspection_status": "all",
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

@@ -1,0 +1,167 @@
+{
+  "operationId": "post_bank_accounts_bulk",
+  "resource": "bank_accounts",
+  "name": "Bulk Create Bank Accounts",
+  "method": "POST",
+  "path": "/bank_accounts/bulk",
+  "description": "Create bank accounts in bulk",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "requestBody": {
+    "required": true,
+    "description": "Bank Account objects",
+    "attributes": [
+      {
+        "name": "data",
+        "type": "array",
+        "required": false,
+        "description": "Array of bank account objects to create in bulk",
+        "attributes": [
+          {
+            "name": "ReferenceId",
+            "type": "string",
+            "required": true,
+            "description": "Transient unique ID assigned by the developer. Used to reference individual bank accounts in the bulk-creation process."
+          },
+          {
+            "name": "AccountNumber",
+            "type": "string",
+            "required": true,
+            "description": "Account number of the bank account"
+          },
+          {
+            "name": "AccountName",
+            "type": "string",
+            "required": true,
+            "description": "The user-provided name for the bank account"
+          },
+          {
+            "name": "AccountType",
+            "type": "string",
+            "required": true,
+            "description": "The type of bank account",
+            "enum": [
+              "Personal Checking",
+              "Personal Savings",
+              "Business Checking",
+              "Business Saving",
+              "Other"
+            ]
+          },
+          {
+            "name": "BankName",
+            "type": "string",
+            "required": true,
+            "description": "Name of the bank associated with the bank account"
+          },
+          {
+            "name": "RoutingNumber",
+            "type": "string",
+            "required": true,
+            "description": "The routing number of the bank associated with the bank account"
+          },
+          {
+            "name": "BankAddress1",
+            "type": "string",
+            "required": true,
+            "description": "The primary street address of the bank associated with the bank account"
+          },
+          {
+            "name": "BankCity",
+            "type": "string",
+            "required": true,
+            "description": "The city where the bank associated with the bank account is located"
+          },
+          {
+            "name": "NextCheckNumber",
+            "type": "integer",
+            "required": false,
+            "description": "The number checks for this bank account should start at. Must be a positive integer (not zero)"
+          },
+          {
+            "name": "BankAddress2",
+            "type": "string",
+            "required": false,
+            "description": "Additional street address information pertaining to the bank associated with the bank account"
+          },
+          {
+            "name": "BankState",
+            "type": "string",
+            "required": false,
+            "description": "The state where the bank associated with the bank account is located"
+          },
+          {
+            "name": "BankZip",
+            "type": "string",
+            "required": false,
+            "description": "The zip code where the bank associated with the bank account is located"
+          },
+          {
+            "name": "CompanyAddress1",
+            "type": "string",
+            "required": false,
+            "description": "The primary street address of the company. Will be printed on any blank checkstock"
+          },
+          {
+            "name": "CompanyAddress2",
+            "type": "string",
+            "required": false,
+            "description": "Additional street address information of the company"
+          },
+          {
+            "name": "CompanyCity",
+            "type": "string",
+            "required": false,
+            "description": "The city where the company is located. Must be provided if entering a company address"
+          },
+          {
+            "name": "CompanyState",
+            "type": "string",
+            "required": false,
+            "description": "The state where the company is located. Must be provided if entering a company address"
+          },
+          {
+            "name": "CompanyZip",
+            "type": "string",
+            "required": false,
+            "description": "The zip code where the company is located. Must be provided if entering a company address"
+          },
+          {
+            "name": "CompanyNameOnChecks",
+            "type": "string",
+            "required": false,
+            "description": "The company name printed on checks issued from this bank account"
+          }
+        ]
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of results for each bank account creation attempt"
+    },
+    {
+      "name": "data[].ReferenceId",
+      "type": "string",
+      "required": false,
+      "description": "Transient unique ID assigned by the developer. Used to reference individual bank accounts in the bulk-creation process."
+    },
+    {
+      "name": "data[].successful",
+      "type": "boolean",
+      "required": false,
+      "description": "Indication of successful creation"
+    },
+    {
+      "name": "data[].BankAccountId",
+      "type": "string",
+      "required": false,
+      "description": "Unique identifier of the created bank account"
+    }
+  ],
+  "requestSample": "{\n  \"data\": [\n    {}\n  ]\n}"
+}

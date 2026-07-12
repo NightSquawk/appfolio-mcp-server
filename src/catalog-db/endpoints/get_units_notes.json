@@ -1,0 +1,71 @@
+{
+  "operationId": "get_units_notes",
+  "resource": "units",
+  "name": "List All Units Notes",
+  "method": "GET",
+  "path": "/units/notes",
+  "description": "Returns all notes for a unit that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[UnitId]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by unit ID. All GET requests must include a filter for [UnitId] or [LastUpdatedAtFrom]."
+    },
+    {
+      "name": "filters[LastUpdatedAtFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter by last updated date from. All GET requests must include a filter for [UnitId] or [LastUpdatedAtFrom]."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of unit note objects"
+    },
+    {
+      "name": "data[].Body",
+      "type": "string",
+      "required": false,
+      "description": "A brief informative message about the unit note. A unit note cannot exceed 63,535 characters."
+    },
+    {
+      "name": "data[].EntityId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "The unit to which the note will be attached"
+    },
+    {
+      "name": "data[].LastUpdatedAt",
+      "type": "string",
+      "required": false,
+      "description": "The date the unit note's details were last updated"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the note associated with the unit"
+    },
+    {
+      "name": "data[].NoteId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the note associated with the unit. Deprecated in favor of Id.",
+      "deprecated": true
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/units/notes?filters[UnitId]=1abcde23-c543-456e-abc9-123456789cba&filters[LastUpdatedAtFrom]=2020-12-15T16:30:46Z' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

@@ -1,0 +1,22 @@
+{
+  "slug": "vendor_custom_fields",
+  "endpoint": "vendor_custom_fields.json",
+  "name": "Vendor Custom Fields",
+  "description": "Returns Vendor Custom Fields report data.",
+  "requiredFilters": [],
+  "parameters": [
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

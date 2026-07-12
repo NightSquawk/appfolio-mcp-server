@@ -1,0 +1,59 @@
+{
+  "slug": "homeowner_ledger",
+  "endpoint": "homeowner_ledger.json",
+  "name": "Homeowner Ledger",
+  "description": "Returns Homeowner Ledger report data.",
+  "requiredFilters": [
+    "parties_ids",
+    "occurred_on_from",
+    "occurred_on_to"
+  ],
+  "parameters": [
+    {
+      "name": "parties_ids",
+      "type": "object",
+      "required": true,
+      "description": "The occupancy ids to filter by. Expand to view all attributes associated with this filter. If required, you must submit an id for at least one of the below filters.",
+      "attributes": [
+        {
+          "name": "occupancies_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "occurred_on_from",
+      "type": "string",
+      "required": true,
+      "format": "YYYY-MM-DD",
+      "description": "The 'Date From' date to filter by."
+    },
+    {
+      "name": "occurred_on_to",
+      "type": "string",
+      "required": true,
+      "format": "YYYY-MM-DD",
+      "description": "The 'Date To' date to filter by."
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "parties_ids": {
+      "occupancies_ids": []
+    },
+    "occurred_on_from": "2023-06-01",
+    "occurred_on_to": "2023-06-30",
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

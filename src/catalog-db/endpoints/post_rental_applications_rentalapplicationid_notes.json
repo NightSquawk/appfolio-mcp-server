@@ -1,0 +1,40 @@
+{
+  "operationId": "post_rental_applications_rentalapplicationid_notes",
+  "resource": "rental_applications",
+  "name": "Create Rental Application Note",
+  "method": "POST",
+  "path": "/rental_applications/{RentalApplicationId}/notes",
+  "description": "Add a note to a rental application",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "RentalApplicationId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "The rental application to which the note will be attached"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Note object",
+    "attributes": [
+      {
+        "name": "Body",
+        "type": "string",
+        "required": false,
+        "description": "A brief informative message about the rental applications note. A rental applications note cannot exceed 65,535 characters."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the rental applications note"
+    }
+  ],
+  "requestSample": "{\n  \"Body\": \"This rental application has been submitted on 11/11/2023\"\n}"
+}

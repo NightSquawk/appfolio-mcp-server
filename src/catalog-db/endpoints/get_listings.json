@@ -1,0 +1,259 @@
+{
+  "operationId": "get_listings",
+  "resource": "listings",
+  "name": "List All Listings",
+  "method": "GET",
+  "path": "/listings",
+  "description": "Returns all units that are not manually excluded, have no active occupancy with a move-out, notice, or move-in date, are currently advertised on the website or external listing platforms, and satisfy the filter criteria.",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[LastUpdatedAtFrom]",
+      "type": "string <date-time>",
+      "required": true,
+      "description": "Filter listings by last updated date/time (from). All GET requests must include this filter."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of Listing objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string",
+      "required": false,
+      "description": "Unique identifier of the listing"
+    },
+    {
+      "name": "data[].AcceptingApplications",
+      "type": "boolean",
+      "required": false,
+      "deprecated": true,
+      "description": "Indicates whether or not the listing is accepting applications"
+    },
+    {
+      "name": "data[].Address1",
+      "type": "string",
+      "required": false,
+      "description": "The primary street address of the listing"
+    },
+    {
+      "name": "data[].Address2",
+      "type": "string",
+      "required": false,
+      "description": "Additional street address information pertaining to the listing"
+    },
+    {
+      "name": "data[].AdvertisedRent",
+      "type": "number <float>",
+      "required": false,
+      "deprecated": true,
+      "description": "The rent per month as advertised"
+    },
+    {
+      "name": "data[].ApplicationFee",
+      "type": "string",
+      "required": false,
+      "description": "The application fee amount for the listing"
+    },
+    {
+      "name": "data[].ApplicationURL",
+      "type": "string",
+      "required": false,
+      "description": "The URL link(s) to the application page of the listing(s) accepting online applications"
+    },
+    {
+      "name": "data[].AvailableOn",
+      "type": "string <date>",
+      "required": false,
+      "description": "The date upon which the listing can be leased"
+    },
+    {
+      "name": "data[].Bathrooms",
+      "type": "number <float>",
+      "required": false,
+      "description": "The number of bathrooms listed for the unit"
+    },
+    {
+      "name": "data[].Bedrooms",
+      "type": "integer",
+      "required": false,
+      "description": "The number of bedrooms listed for the unit"
+    },
+    {
+      "name": "data[].CatsAllowed",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether or not the listing allows cats. A null value indicates that the listing may not have specified a policy for cats."
+    },
+    {
+      "name": "data[].City",
+      "type": "string",
+      "required": false,
+      "description": "The city where the listing is located"
+    },
+    {
+      "name": "data[].Deposit",
+      "type": "number <float>",
+      "required": false,
+      "description": "The security, rent, or pet and cleaning deposit amount"
+    },
+    {
+      "name": "data[].DogPolicy",
+      "type": "string",
+      "required": false,
+      "enum": ["Large & Small", "Small Only", "Not Allowed"],
+      "description": "Indicates whether or not the listing allows dogs. If dogs are allowed, valid values are: \"Large & Small\" or \"Small Only.\""
+    },
+    {
+      "name": "data[].Email",
+      "type": "string",
+      "required": false,
+      "description": "The contact email address associated with the listing"
+    },
+    {
+      "name": "data[].HighAdvertisedRent",
+      "type": "number <float>",
+      "required": false,
+      "description": "The highest rent per month as advertised"
+    },
+    {
+      "name": "data[].IsCampaign",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether or not the listing is a part of a campaign"
+    },
+    {
+      "name": "data[].LastUpdatedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The date the listing's details were last updated"
+    },
+    {
+      "name": "data[].ListedRent",
+      "type": "string <decimal>",
+      "required": false,
+      "description": "The rent per month as listed on the market. This value reflects either the market rent or the advertised rent, depending on whether \"Use Market Rent On Ads\" is enabled in the AppFolio Property Manager."
+    },
+    {
+      "name": "data[].LowAdvertisedRent",
+      "type": "number <float>",
+      "required": false,
+      "description": "The lowest rent per month as advertised"
+    },
+    {
+      "name": "data[].MarketingDescription",
+      "type": "string",
+      "required": false,
+      "description": "A description of the listing for syndication"
+    },
+    {
+      "name": "data[].MarketingTitle",
+      "type": "string",
+      "required": false,
+      "description": "The title of the listing for syndication"
+    },
+    {
+      "name": "data[].PhoneNumber",
+      "type": "string",
+      "required": false,
+      "description": "The contact phone number associated with the listing. Includes the extension number if applicable."
+    },
+    {
+      "name": "data[].PostedToWebsite",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether or not a vacant unit was posted to the AppFolio listings page. If true, the unit is displayed on the AppFolio listings page and accepting applications. If false, the unit is not displayed on the AppFolio listings page."
+    },
+    {
+      "name": "data[].PropertyId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the property associated with the listing"
+    },
+    {
+      "name": "data[].PropertyMarketingDescription",
+      "type": "string",
+      "required": false,
+      "description": "A description of the property associated with the listing for syndication"
+    },
+    {
+      "name": "data[].PropertyMarketingTitle",
+      "type": "string",
+      "required": false,
+      "description": "The title of the property associated with the listing for syndication"
+    },
+    {
+      "name": "data[].SquareFeet",
+      "type": "number <float>",
+      "required": false,
+      "description": "The size of the listing in square feet"
+    },
+    {
+      "name": "data[].State",
+      "type": "string",
+      "required": false,
+      "description": "The state where the listing is located"
+    },
+    {
+      "name": "data[].UnitAmenities",
+      "type": "array of strings",
+      "required": false,
+      "description": "The amenities offered by the building in the listing"
+    },
+    {
+      "name": "data[].UnitId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the unit associated with the listing"
+    },
+    {
+      "name": "data[].UnitPhotos",
+      "type": "array of objects (ListingsPhoto)",
+      "required": false,
+      "description": "Photos of the listing"
+    },
+    {
+      "name": "data[].UnitType",
+      "type": "string",
+      "required": false,
+      "description": "The floor plan of the listing"
+    },
+    {
+      "name": "data[].UnitTypeId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the UnitType for the listing"
+    },
+    {
+      "name": "data[].UtilitiesIncluded",
+      "type": "array of strings",
+      "required": false,
+      "description": "The utilities which are included with rent"
+    },
+    {
+      "name": "data[].YouTubeURL",
+      "type": "string",
+      "required": false,
+      "description": "The URL of the YouTube video for the listing"
+    },
+    {
+      "name": "data[].Zip",
+      "type": "string",
+      "required": false,
+      "description": "The zip code where the listing is located"
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/listings?filters[LastUpdatedAtFrom]=2022-10-01T16:30:46Z' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

@@ -1,0 +1,40 @@
+{
+  "operationId": "patch_property_groups_propertygroupid",
+  "resource": "property_groups",
+  "name": "Update a Property Group",
+  "method": "PATCH",
+  "path": "/property_groups/{propertyGroupId}",
+  "description": "Update a property group",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "propertyGroupId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the property group to update"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Property Group object",
+    "attributes": [
+      {
+        "name": "PropertyIds",
+        "type": "Array of arrays",
+        "required": false,
+        "description": "Array of PropertyIds to add to the property group. Any properties previously linked to the property group before this update will be substituted with the properties specified by this attribute. Passing in an empty array will clear all properties from the property group."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the updated property group"
+    }
+  ],
+  "requestSample": "{\n  \"PropertyIds\": [\n    \"96d90af9-15be-4139-b43e-3390358d2602\",\n    \"5683df20-b606-4138-8ec4-d9737f7c12bb\",\n    \"4d53faad-dbf6-4754-a23e-f5c486139e85\"\n  ]\n}"
+}

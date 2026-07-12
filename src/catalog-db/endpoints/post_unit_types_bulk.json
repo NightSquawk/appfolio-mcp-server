@@ -1,0 +1,138 @@
+{
+  "operationId": "post_unit_types_bulk",
+  "resource": "unit_types",
+  "name": "Bulk Create Unit Types",
+  "method": "POST",
+  "path": "/unit_types/bulk",
+  "description": "Create unit types in bulk.",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "requestBody": {
+    "required": true,
+    "description": "Unit Type objects",
+    "attributes": [
+      {
+        "name": "data",
+        "type": "array",
+        "required": false,
+        "description": "Array of unit type objects to create in bulk.",
+        "attributes": [
+          {
+            "name": "Name",
+            "type": "string",
+            "required": true,
+            "description": "The name of the unit type. This value must be unique per PropertyId, meaning different unit types can use the same Name only when their PropertyIds are different."
+          },
+          {
+            "name": "ReferenceId",
+            "type": "string",
+            "required": true,
+            "description": "Transient unique ID assigned by the developer. Used to reference individual unit types in the bulk-creation of unit types."
+          },
+          {
+            "name": "PropertyId",
+            "type": "string <uuid>",
+            "required": true,
+            "description": "Unique identifier of the property associated with the unit type."
+          },
+          {
+            "name": "ApplicationFee",
+            "type": "number",
+            "required": false,
+            "description": "The fee charged when applying for a unit of this type. If the property associated with the unit type is payments enabled (if the property's bank account is payment enabled), then the ApplicationFee must be $0.00 or between $6.00 and $200.00."
+          },
+          {
+            "name": "Amenities",
+            "type": "Array of strings",
+            "required": false,
+            "description": "The amenities associated with the unit type. Amenity names are case-sensitive."
+          },
+          {
+            "name": "Bathrooms",
+            "type": "number",
+            "required": false,
+            "description": "The number of bathrooms for this unit type."
+          },
+          {
+            "name": "Bedrooms",
+            "type": "integer",
+            "required": false,
+            "description": "The number of bedrooms for this unit type."
+          },
+          {
+            "name": "CatsAllowed",
+            "type": "string",
+            "required": false,
+            "description": "The unit type's cat policy. Valid values include \"Yes\", \"No\" or null. A null value indicates that the unit type may not have specified a policy for cats.",
+            "enum": ["Yes", "No"]
+          },
+          {
+            "name": "Deposit",
+            "type": "number",
+            "required": false,
+            "description": "The security deposit amount."
+          },
+          {
+            "name": "DogsAllowed",
+            "type": "string",
+            "required": false,
+            "description": "The unit type's dog policy.",
+            "enum": ["Large & Small", "Small Only", "No"]
+          },
+          {
+            "name": "FutureMarketRent",
+            "type": "number",
+            "required": false,
+            "description": "The projected future market rent for the unit type. This attribute must be provided together with FutureMarketRentEffectiveOn date. Both attributes must either be present or absent together."
+          },
+          {
+            "name": "FutureMarketRentEffectiveOn",
+            "type": "string <date-time>",
+            "required": false,
+            "description": "The date when the FutureMarketRent will take effect. This attribute must be provided together with FutureMarketRent. Both attributes must either be present or absent together."
+          },
+          {
+            "name": "MarketRent",
+            "type": "number <decimal>",
+            "required": false,
+            "description": "The current market rent for the unit type."
+          },
+          {
+            "name": "MarketingTitle",
+            "type": "string",
+            "required": false,
+            "description": "The title of the listing for syndication."
+          },
+          {
+            "name": "MarketingDescription",
+            "type": "string",
+            "required": false,
+            "description": "A description of the listing for syndication."
+          },
+          {
+            "name": "SquareFeet",
+            "type": "number",
+            "required": false,
+            "description": "The size of the unit type in square feet."
+          },
+          {
+            "name": "YouTubeURL",
+            "type": "string <uri>",
+            "required": false,
+            "description": "The URL of the YouTube video for the listing(s)."
+          }
+        ]
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "JobId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier for the bulk creation job."
+    }
+  ],
+  "requestSample": "{\n  \"data\": [\n    {}\n  ]\n}"
+}

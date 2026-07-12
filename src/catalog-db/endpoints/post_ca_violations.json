@@ -1,0 +1,63 @@
+{
+  "operationId": "post_ca_violations",
+  "resource": "ca",
+  "name": "Create Community Association Violations",
+  "method": "POST",
+  "path": "/ca/violations",
+  "description": "Create a Community Association (CA) Violation",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "requestBody": {
+    "required": true,
+    "description": "Violation object",
+    "attributes": [
+      {
+        "name": "InspectionDate",
+        "type": "string",
+        "required": true,
+        "description": "The date of the CA unit's inspection"
+      },
+      {
+        "name": "Status",
+        "type": "string",
+        "required": true,
+        "description": "Indicates the current status of the CA violation",
+        "enum": ["In Progress", "In Dispute", "Corrected", "On Hold"]
+      },
+      {
+        "name": "UnitId",
+        "type": "string <uuid>",
+        "required": true,
+        "description": "Unique identifier of the unit associated with the CA violation"
+      },
+      {
+        "name": "Description",
+        "type": "string",
+        "required": false,
+        "description": "A brief summary or description of the CA violation"
+      },
+      {
+        "name": "MarkedForEscalation",
+        "type": "boolean",
+        "required": false,
+        "description": "Indicates whether or not the CA violation was marked for escalation"
+      },
+      {
+        "name": "ViolatedRuleId",
+        "type": "string <uuid>",
+        "required": false,
+        "description": "Unique identifier of the CA rule that was violated"
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the created violation"
+    }
+  ],
+  "requestSample": "{\n  \"Description\": \"sample description\",\n  \"InspectionDate\": \"2022-05-11\",\n  \"MarkedForEscalation\": false,\n  \"Status\": \"In Progress\",\n  \"UnitId\": \"2ca1275d-2db6-4013-87a6-686dedc705c3\",\n  \"ViolatedRuleId\": \"f303fb98-6d0d-4d01-b876-a3ebfa8f8294\"\n}"
+}

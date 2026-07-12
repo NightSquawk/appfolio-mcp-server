@@ -1,0 +1,104 @@
+{
+  "slug": "email_delivery_errors",
+  "endpoint": "email_delivery_errors.json",
+  "name": "Email Delivery Errors",
+  "description": "Returns Email Delivery Errors report data.",
+  "requiredFilters": [
+    "sent_at_from",
+    "sent_at_to"
+  ],
+  "parameters": [
+    {
+      "name": "party_type",
+      "type": "string",
+      "required": false,
+      "default": "Tenant",
+      "enum": [
+        "'Tenant' denotes 'Tenants and Homeowners'",
+        "'Owner' denotes 'Owners'"
+      ],
+      "description": "Category to filter by."
+    },
+    {
+      "name": "property_visibility",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "enum": [
+        "active",
+        "hidden",
+        "all"
+      ],
+      "description": "The property visibility to filter by."
+    },
+    {
+      "name": "properties",
+      "type": "object",
+      "required": false,
+      "description": "The property filter. Expand to view all attributes associated with this filter. If required, you must submit an id for at least one of the below filters.",
+      "attributes": [
+        {
+          "name": "properties_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "property_groups_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "portfolios_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "owners_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "sent_at_from",
+      "type": "string",
+      "required": true,
+      "format": "YYYY-MM-DD",
+      "description": "The 'Sent At From' date to filter by."
+    },
+    {
+      "name": "sent_at_to",
+      "type": "string",
+      "required": true,
+      "format": "YYYY-MM-DD",
+      "description": "The 'Sent At To' date to filter by."
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "party_type": "Tenant",
+    "property_visibility": "active",
+    "properties": {
+      "properties_ids": [],
+      "property_groups_ids": [],
+      "portfolios_ids": [],
+      "owners_ids": []
+    },
+    "sent_at_from": "2023-06-01",
+    "sent_at_to": "2023-06-30",
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

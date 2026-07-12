@@ -1,0 +1,105 @@
+{
+  "operationId": "post_inventories",
+  "resource": "inventories",
+  "name": "Create Inventory",
+  "method": "POST",
+  "path": "/inventories",
+  "description": "Create a new inventory item",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "requestBody": {
+    "required": true,
+    "description": "Inventory object",
+    "attributes": [
+      {
+        "name": "Name",
+        "type": "string",
+        "required": true,
+        "description": "The name of the inventory item."
+      },
+      {
+        "name": "Cost",
+        "type": "string <decimal>",
+        "required": true,
+        "description": "The cost of the inventory item."
+      },
+      {
+        "name": "Quantity",
+        "type": "integer",
+        "required": true,
+        "description": "The current quantity of the inventory item."
+      },
+      {
+        "name": "LocationId",
+        "type": "string <uuid>",
+        "required": true,
+        "description": "Unique identifier of the inventory location where this item is stored."
+      },
+      {
+        "name": "Reorder",
+        "type": "integer",
+        "required": false,
+        "description": "The quantity threshold at which the inventory item should be reordered."
+      },
+      {
+        "name": "Description",
+        "type": "string",
+        "required": false,
+        "description": "A brief summary or description of the inventory item."
+      },
+      {
+        "name": "PartNumber",
+        "type": "string",
+        "required": false,
+        "description": "The part number of the inventory item."
+      },
+      {
+        "name": "Shelf",
+        "type": "string",
+        "required": false,
+        "description": "The shelf or bin location where the inventory item is stored."
+      },
+      {
+        "name": "Category",
+        "type": "string",
+        "required": false,
+        "description": "The category of the inventory item. If the category does not exist it will be created."
+      },
+      {
+        "name": "VendorId",
+        "type": "string <uuid>",
+        "required": false,
+        "description": "Unique identifier of the vendor associated with the inventory item."
+      },
+      {
+        "name": "GlAccountId",
+        "type": "string <uuid>",
+        "required": false,
+        "description": "Unique identifier of the general ledger account associated with the inventory item."
+      },
+      {
+        "name": "MarkUpType",
+        "type": "string",
+        "required": false,
+        "description": "The type of markup applied to the inventory item. Valid values are Percentage or Fixed Amount. Required when MarkUp is provided.",
+        "enum": ["Percentage", "Fixed Amount"]
+      },
+      {
+        "name": "MarkUp",
+        "type": "number",
+        "required": false,
+        "description": "The markup value applied to the inventory item."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier for the created inventory item"
+    }
+  ],
+  "requestSample": "{\n  \"Name\": \"HVAC Filter\",\n  \"Cost\": \"15.50\",\n  \"Quantity\": \"25\",\n  \"LocationId\": \"630964fb-bc9b-4f9a-b649-01cfe309ccc2\",\n  \"Description\": \"20x25x1 air filter\",\n  \"PartNumber\": \"HVAC-20-25-1\",\n  \"Shelf\": \"A3\",\n  \"MarkUpType\": \"Percentage\",\n  \"MarkUp\": \"20.0\"\n}"
+}

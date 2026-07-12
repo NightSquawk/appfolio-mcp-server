@@ -1,0 +1,27 @@
+{
+  "operationId": "delete_properties_propertyid_marketing_photos_marketingphotoid",
+  "resource": "properties",
+  "name": "Delete Property Marketing Photo",
+  "method": "DELETE",
+  "path": "/properties/{PropertyId}/marketing_photos/{MarketingPhotoId}",
+  "description": "Delete a marketing photo from a property",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "PropertyId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the property that contains the marketing photo to be deleted"
+    },
+    {
+      "name": "MarketingPhotoId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the marketing photo to be deleted from the property"
+    }
+  ],
+  "responseFields": [],
+  "requestSample": "curl --location --request DELETE 'https://api.appfolio.com/api/v0/properties/972b920c-e048-4a7b-b1f6-eddb6ad6d23c/marketing_photos/57e04805-11c5-4e27-adc9-c75ff9ddc9d9' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

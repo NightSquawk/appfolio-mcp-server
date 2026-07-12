@@ -1,0 +1,79 @@
+{
+  "operationId": "get_jobs",
+  "resource": "jobs",
+  "name": "List All Jobs",
+  "method": "GET",
+  "path": "/jobs",
+  "description": "List endpoint to display all of the jobs related to bulk operations",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[Id]",
+      "type": "string",
+      "required": true,
+      "description": "Filters for jobs. Accepts one or more job UUIDs (comma-separated) to retrieve specific bulk operation jobs."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of Job objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the asynchronous bulk create job for the selected resource. This identifier tracks the bulk creation of general ledger accounts, and other supported resources."
+    },
+    {
+      "name": "data[].Status",
+      "type": "string",
+      "required": false,
+      "description": "Indicates the current status of the asynchronous job.",
+      "enum": ["new", "pending", "finished"]
+    },
+    {
+      "name": "data[].Result",
+      "type": "array",
+      "required": false,
+      "description": "The result of the bulk operation job. The result contains either an empty array during processing or the final results after completion, returning an array of objects with a ReferenceId, a Successful status, and a created resource Id. An Errors array will return with a message if the Successful status returns false.",
+      "attributes": [
+        {
+          "name": "ReferenceId",
+          "type": "string",
+          "required": false,
+          "description": "Unique identifier provided in the original bulk create request to track individual items"
+        },
+        {
+          "name": "ResourceId",
+          "type": "string",
+          "required": false,
+          "description": "Unique identifier of the item created. Example: GlAccountId"
+        },
+        {
+          "name": "successful",
+          "type": "boolean",
+          "required": false,
+          "description": "Indicates whether the individual item in the bulk operation was created successfully"
+        },
+        {
+          "name": "errors",
+          "type": "array",
+          "required": false,
+          "description": "An array of error messages that describes why the creation failed, only present when Successful is false"
+        }
+      ]
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/jobs?filters[Id]=1abcde23-c543-456e-abc9-123456789cee,3b5344d0-482b-4b50-b30f-2dd67412b517' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002' \\\n     --header 'Authorization: Basic {Auth}'"
+}

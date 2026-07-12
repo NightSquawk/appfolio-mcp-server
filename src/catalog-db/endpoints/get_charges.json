@@ -1,0 +1,76 @@
+{
+  "operationId": "get_charges",
+  "resource": "charges",
+  "name": "List All Charges",
+  "method": "GET",
+  "path": "/charges",
+  "description": "Returns all open charges for all occupants residing at the property.",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[Id]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by charge ID. All GET requests must include a filter for [Id] or [PropertyId]."
+    },
+    {
+      "name": "filters[PropertyId]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by property ID. All GET requests must include a filter for [Id] or [PropertyId]."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of Charge objects."
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the charge."
+    },
+    {
+      "name": "data[].AmountDue",
+      "type": "string <decimal>",
+      "required": false,
+      "description": "The current amount outstanding, and/or future amounts not yet paid."
+    },
+    {
+      "name": "data[].ChargedOn",
+      "type": "string <date>",
+      "required": false,
+      "description": "ChargedOn dates from the past indicate an outstanding charge(s) that have not yet been paid that are \"owed.\" ChargedOn dates in the future indicate upcoming charge(s) during the next monthly period."
+    },
+    {
+      "name": "data[].Description",
+      "type": "string",
+      "required": false,
+      "description": "A brief summary or description of the charge."
+    },
+    {
+      "name": "data[].GlAccountId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the General Ledger Account associated with the charge."
+    },
+    {
+      "name": "data[].OccupancyId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the occupancy associated with the charge."
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses."
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/charges?filters[Id]=1abcde23-c543-456e-abc9-123456789cba&filters[PropertyId]=3b5344d0-482b-4b50-b30f-2dd67412b517' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002' \\\n     --header 'Authorization: Basic {Auth}'"
+}

@@ -1,0 +1,115 @@
+{
+  "operationId": "post_journal_entries_bulk",
+  "resource": "journal_entries",
+  "name": "Bulk Create Journal Entries",
+  "method": "POST",
+  "path": "/journal_entries/bulk",
+  "description": "Create journal entries in bulk",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "requestBody": {
+    "required": true,
+    "description": "Journal Entry objects",
+    "attributes": [
+      {
+        "name": "data",
+        "type": "array",
+        "required": false,
+        "description": "Array of JournalEntry objects",
+        "attributes": [
+          {
+            "name": "EntryDate",
+            "type": "string",
+            "required": true,
+            "description": "The date the journal entry was created. Valid format is \"YYYY-MM-DD\" e.g. \"2022-03-03\"."
+          },
+          {
+            "name": "PropertyId",
+            "type": "string <uuid>",
+            "required": true,
+            "description": "Unique identifier of the property or association related to the journal entry"
+          },
+          {
+            "name": "LineItems",
+            "type": "array",
+            "required": true,
+            "description": "Array of line-item objects. Two or more line-item objects must be passed to create a journal entry. The sum of the total debits must equal the total credits for all line-item objects.",
+            "attributes": [
+              {
+                "name": "Credit",
+                "type": "string",
+                "required": false,
+                "description": "The credit amount. Total debits and credits must be equal."
+              },
+              {
+                "name": "Debit",
+                "type": "string",
+                "required": false,
+                "description": "The debit amount. Total debits and credits must be equal."
+              },
+              {
+                "name": "Description",
+                "type": "string",
+                "required": false,
+                "description": "A brief, informative description of the journal entry's line item"
+              },
+              {
+                "name": "GlAccountId",
+                "type": "string",
+                "required": false,
+                "description": "Unique identifier of the general ledger account associated with the journal entry line item"
+              }
+            ]
+          },
+          {
+            "name": "ReferenceId",
+            "type": "string",
+            "required": true,
+            "description": "Transient unique ID assigned by the developer. Used to reference an individual journal entry in the bulk-creation of journal entries."
+          },
+          {
+            "name": "ReferenceNumber",
+            "type": "string",
+            "required": false,
+            "description": "The reference number representing the transaction in your ledger. This will be automatically assigned unless provided."
+          },
+          {
+            "name": "AccountingBasis",
+            "type": "string",
+            "required": false,
+            "description": "The accounting basis for the journal entry. Defaults to All.",
+            "enum": ["All", "CashOnly", "AccrualOnly"]
+          },
+          {
+            "name": "ScheduledReversalDate",
+            "type": "string <date>",
+            "required": false,
+            "description": "The date on which this journal entry should be automatically reversed. Must not be before EntryDate."
+          },
+          {
+            "name": "Id",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "Unique identifier of the journal entry"
+          },
+          {
+            "name": "Remarks",
+            "type": "string",
+            "required": false,
+            "description": "A description or summary of the journal entry"
+          }
+        ]
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "JobId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the bulk job"
+    }
+  ],
+  "requestSample": "{\n  \"data\": [\n    {}\n  ]\n}"
+}

@@ -1,0 +1,58 @@
+{
+  "operationId": "post_inventory_locations_bulk",
+  "resource": "inventory_locations",
+  "name": "Bulk Create Inventory Locations",
+  "method": "POST",
+  "path": "/inventory_locations/bulk",
+  "description": "Create inventory locations in bulk",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "requestBody": {
+    "required": true,
+    "description": "Inventory Location objects",
+    "attributes": [
+      {
+        "name": "data",
+        "type": "array",
+        "required": false,
+        "description": "Array of inventory location objects to create in bulk",
+        "attributes": [
+          {
+            "name": "ReferenceId",
+            "type": "string",
+            "required": true,
+            "description": "Transient unique ID assigned by the developer. Used to reference individual inventory locations in the bulk-creation of inventory locations."
+          },
+          {
+            "name": "Name",
+            "type": "string",
+            "required": true,
+            "description": "The name of the inventory location"
+          },
+          {
+            "name": "Description",
+            "type": "string",
+            "required": false,
+            "description": "A brief summary or description of the inventory location"
+          },
+          {
+            "name": "PropertyId",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "Unique identifier of the property associated with the inventory location"
+          }
+        ]
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "JobId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the bulk creation job"
+    }
+  ],
+  "requestSample": "{\n  \"data\": [\n    {}\n  ]\n}"
+}

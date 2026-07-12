@@ -1,0 +1,41 @@
+{
+  "operationId": "post_inspections_inspectionid_attachments",
+  "resource": "inspections",
+  "name": "Create Inspection Attachment",
+  "method": "POST",
+  "path": "/inspections/{InspectionId}/attachments",
+  "description": "Upload an attachment to a inspection",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "InspectionId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "The inspection to which the file will be attached"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Attachment object",
+    "attributes": [
+      {
+        "name": "File",
+        "type": "string",
+        "required": false,
+        "description": "Filename.file-extension",
+        "format": "multipart/form-data"
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the inspection attachment"
+    }
+  ],
+  "requestSample": "{\n  \"File\": \"/path/to/file.pdf\"\n}"
+}

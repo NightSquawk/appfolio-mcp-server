@@ -1,0 +1,46 @@
+{
+  "operationId": "put_units_pricing_matrices_bulk_async",
+  "resource": "units",
+  "name": "Bulk Put Unit Pricing Matrix (Async)",
+  "method": "PUT",
+  "path": "/units/pricing_matrices/bulk/async",
+  "description": "Asynchronously manage the rent pricing structure for units",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "requestBody": {
+    "required": true,
+    "description": "Unit Pricing objects",
+    "attributes": [
+      {
+        "name": "data",
+        "type": "array",
+        "required": false,
+        "description": "Array of unit pricing objects",
+        "attributes": [
+          {
+            "name": "PricingMatrix",
+            "type": "array",
+            "required": true,
+            "description": "Array of objects that defines the rent pricing structure and lease terms for a unit"
+          },
+          {
+            "name": "UnitId",
+            "type": "string <uuid>",
+            "required": true,
+            "description": "Unique identifier of the unit associated with the rent pricing matrix entry. A unit should only be included once per call"
+          }
+        ]
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "JobId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the asynchronous job"
+    }
+  ],
+  "requestSample": "{\n  \"data\": [\n    {},\n    {}\n  ]\n}"
+}

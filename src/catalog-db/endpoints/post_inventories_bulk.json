@@ -1,0 +1,119 @@
+{
+  "operationId": "post_inventories_bulk",
+  "resource": "inventories",
+  "name": "Bulk Create Inventories",
+  "method": "POST",
+  "path": "/inventories/bulk",
+  "description": "Create inventory items in bulk. Returns a JobId that can be used to retrieve the results of the bulk creation.",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "requestBody": {
+    "required": true,
+    "description": "Inventory objects",
+    "attributes": [
+      {
+        "name": "data",
+        "type": "array",
+        "required": false,
+        "description": "Array of inventory objects to create in bulk",
+        "attributes": [
+          {
+            "name": "ReferenceId",
+            "type": "string",
+            "required": true,
+            "description": "Transient unique ID assigned by the developer. Used to reference individual inventory items in the bulk creation. Must be unique within the request."
+          },
+          {
+            "name": "Name",
+            "type": "string",
+            "required": true,
+            "description": "The name of the inventory item."
+          },
+          {
+            "name": "Cost",
+            "type": "string <decimal>",
+            "required": true,
+            "description": "The cost of the inventory item."
+          },
+          {
+            "name": "Quantity",
+            "type": "string",
+            "required": true,
+            "description": "The current quantity of the inventory item."
+          },
+          {
+            "name": "LocationId",
+            "type": "string <uuid>",
+            "required": true,
+            "description": "Unique identifier of the inventory location where this item is stored."
+          },
+          {
+            "name": "Reorder",
+            "type": "string",
+            "required": false,
+            "description": "The quantity threshold at which the inventory item should be reordered."
+          },
+          {
+            "name": "Description",
+            "type": "string",
+            "required": false,
+            "description": "A brief summary or description of the inventory item."
+          },
+          {
+            "name": "PartNumber",
+            "type": "string",
+            "required": false,
+            "description": "The part number of the inventory item."
+          },
+          {
+            "name": "Shelf",
+            "type": "string",
+            "required": false,
+            "description": "The shelf or bin location where the inventory item is stored."
+          },
+          {
+            "name": "Category",
+            "type": "string",
+            "required": false,
+            "description": "The category of the inventory item. If the category does not exist it will be created."
+          },
+          {
+            "name": "VendorId",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "Unique identifier of the vendor associated with the inventory item."
+          },
+          {
+            "name": "GlAccountId",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "Unique identifier of the general ledger account associated with the inventory item."
+          },
+          {
+            "name": "MarkUpType",
+            "type": "string",
+            "required": false,
+            "description": "The type of markup applied to the inventory item. Valid values are Percentage or Fixed Amount. Required when MarkUp is provided.",
+            "enum": ["Percentage", "Fixed Amount"]
+          },
+          {
+            "name": "MarkUp",
+            "type": "string",
+            "required": false,
+            "description": "The markup value applied to the inventory item."
+          }
+        ]
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "JobId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the bulk creation job, used to retrieve the results"
+    }
+  ],
+  "requestSample": "{\n  \"data\": [\n    {}\n  ]\n}"
+}

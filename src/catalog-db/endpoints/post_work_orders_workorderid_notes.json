@@ -1,0 +1,40 @@
+{
+  "operationId": "post_work_orders_workorderid_notes",
+  "resource": "work_orders",
+  "name": "Create Work Order Note",
+  "method": "POST",
+  "path": "/work_orders/{WorkOrderId}/notes",
+  "description": "Add a note to a work order",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "WorkOrderId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "The work order to which the note will be attached"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Note object",
+    "attributes": [
+      {
+        "name": "Body",
+        "type": "string",
+        "required": false,
+        "description": "A brief informative message about the work order. A work order note cannot exceed 65,535 characters."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the work order note"
+    }
+  ],
+  "requestSample": "{\n  \"Body\": \"This work order have scheduled a maintenance service on 11/11/2022\"\n}"
+}

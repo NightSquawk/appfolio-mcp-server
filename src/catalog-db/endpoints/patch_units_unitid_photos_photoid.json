@@ -1,0 +1,46 @@
+{
+  "operationId": "patch_units_unitid_photos_photoid",
+  "resource": "units",
+  "name": "Update Unit Photo",
+  "method": "PATCH",
+  "path": "/units/{UnitId}/photos/{PhotoId}",
+  "description": "Update a unit photo",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "UnitId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "The unit to which the photo is attached. Note: Photos cannot be updated through this endpoint if the unit is using Unit Type photos."
+    },
+    {
+      "name": "PhotoId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the photo to update"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Photo object",
+    "attributes": [
+      {
+        "name": "Position",
+        "type": "string",
+        "required": false,
+        "description": "The position of the photo in the unit photo gallery. The position must be a non-negative integer. If multiple photos are associated with a unit, the order of the remaining photos (positions 1 and above) will not change automatically if some photos are deleted. For example, if there are photos in positions 1, 2, 3, and 4, and photos 1 and 3 are deleted, the remaining photos will retain their original positions of 2 and 4"
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the updated unit photo"
+    }
+  ],
+  "requestSample": "{\n  \"Position\": 1\n}"
+}

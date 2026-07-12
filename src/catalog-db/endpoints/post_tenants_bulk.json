@@ -1,0 +1,161 @@
+{
+  "operationId": "post_tenants_bulk",
+  "resource": "tenants",
+  "name": "Bulk Create Tenants",
+  "method": "POST",
+  "path": "/tenants/bulk",
+  "description": "Create Tenants in bulk",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "requestBody": {
+    "required": true,
+    "description": "Tenant objects",
+    "attributes": [
+      {
+        "name": "data",
+        "type": "array",
+        "required": false,
+        "description": "Array of tenant objects to create",
+        "attributes": [
+          {
+            "name": "ReferenceId",
+            "type": "string",
+            "required": true,
+            "description": "Transient unique ID assigned by the developer. Used to reference individual tenant in the bulk-creation of tenants."
+          },
+          {
+            "name": "MoveInOn",
+            "type": "string <date>",
+            "required": true,
+            "description": "The date the tenant physically started or will start occupancy. Dictates whether the \"future\" or \"current\" option is displayed in the status field."
+          },
+          {
+            "name": "UnitId",
+            "type": "string <uuid>",
+            "required": true,
+            "description": "The unit the tenant occupies."
+          },
+          {
+            "name": "FirstName",
+            "type": "string",
+            "required": false,
+            "description": "The tenant's first name. Required if IsCompany is false or not provided."
+          },
+          {
+            "name": "LastName",
+            "type": "string",
+            "required": false,
+            "description": "The tenant's last name. Required if IsCompany is false or not provided."
+          },
+          {
+            "name": "MiddleName",
+            "type": "string",
+            "required": false,
+            "description": "The tenant's middle name"
+          },
+          {
+            "name": "CompanyName",
+            "type": "string",
+            "required": false,
+            "description": "The display name of the tenant's company. Required if IsCompany is true."
+          },
+          {
+            "name": "IsCompany",
+            "type": "boolean",
+            "required": false,
+            "description": "Whether the tenant is a company (controls if the company name should be used as the name of the tenant). When true, CompanyName is required. When false, FirstName and LastName are required."
+          },
+          {
+            "name": "MoveOutOn",
+            "type": "string <date>",
+            "required": false,
+            "description": "The date the tenant physically ended or will end occupancy. Dictates whether the \"notice\" or \"past\" option is displayed in the status field."
+          },
+          {
+            "name": "PrimaryTenant",
+            "type": "boolean",
+            "required": false,
+            "description": "Indicates whether or not the tenant is the primary leaseholder for the occupancy. At least one PrimaryTenant is required per UnitId. Note: PrimaryTenant: true automatically sets the TenantType to Financially Responsible."
+          },
+          {
+            "name": "TenantType",
+            "type": "string",
+            "required": false,
+            "description": "The type of tenant. At least one tenant with TenantType Financially Responsible is required per UnitId.",
+            "enum": ["Financially Responsible", "Other Occupant", "Co-signer"]
+          },
+          {
+            "name": "Addresses",
+            "type": "array",
+            "required": false,
+            "description": "The tenant's address(es)"
+          },
+          {
+            "name": "PhoneNumbers",
+            "type": "array",
+            "required": false,
+            "description": "The tenant's phone number(s)"
+          },
+          {
+            "name": "Pets",
+            "type": "array",
+            "required": false,
+            "description": "Contains details about the tenant's pet(s)"
+          },
+          {
+            "name": "Vehicles",
+            "type": "array",
+            "required": false,
+            "description": "Contains details about the tenant's vehicle(s)"
+          },
+          {
+            "name": "Emails",
+            "type": "array",
+            "required": false,
+            "description": "The tenant's email address(es)"
+          },
+          {
+            "name": "Tags",
+            "type": "Array of strings",
+            "required": false,
+            "description": "User-defined tag(s) that categorize the tenant"
+          },
+          {
+            "name": "NextRentIncrease",
+            "type": "string <date>",
+            "required": false,
+            "description": "The date of the tenant is eligible for a rent increase"
+          },
+          {
+            "name": "LeaseStartDate",
+            "type": "string <date>",
+            "required": false,
+            "description": "The day the lease agreement starts"
+          },
+          {
+            "name": "LeaseEndDate",
+            "type": "string <date>",
+            "required": false,
+            "description": "The last day of the lease agreement"
+          },
+          {
+            "name": "LastLeaseRenewal",
+            "type": "string <date>",
+            "required": false,
+            "description": "The date the last lease renewal agreement was started"
+          }
+        ]
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "JobId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the bulk create job"
+    }
+  ],
+  "requestSample": "{\n  \"data\": [\n    {},\n    {},\n    {},\n    {},\n    {}\n  ]\n}"
+}

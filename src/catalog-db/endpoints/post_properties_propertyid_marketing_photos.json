@@ -1,0 +1,52 @@
+{
+  "operationId": "post_properties_propertyid_marketing_photos",
+  "resource": "properties",
+  "name": "Create Property Marketing Photo",
+  "method": "POST",
+  "path": "/properties/{PropertyId}/marketing_photos",
+  "description": "Upload a marketing photo to a multi-family residential property. Marketing photos are not available for single-family residential properties.",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "PropertyId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "The property to which the marketing photo will be attached"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Marketing photo object",
+    "attributes": [
+      {
+        "name": "File",
+        "type": "string",
+        "required": false,
+        "description": "Filename.file-extension"
+      },
+      {
+        "name": "Position",
+        "type": "integer",
+        "required": false,
+        "description": "The position of the photo in the property marketing photo gallery. The position must be a non-negative integer. If multiple photos are associated with a property, the order of the remaining photos (positions 1 and above) will not change automatically if some photos are deleted."
+      },
+      {
+        "name": "MarketingCategory",
+        "type": "string",
+        "required": false,
+        "description": "The type of marketing photo"
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the property marketing photo"
+    }
+  ],
+  "requestSample": "{\n  \"File\": \"/path/to/file.pdf\",\n  \"Position\": 1\n}"
+}

@@ -1,0 +1,51 @@
+{
+  "slug": "deposit_register",
+  "endpoint": "deposit_register.json",
+  "name": "Deposit Register",
+  "description": "Returns Deposit Register report data.",
+  "requiredFilters": [
+    "occurred_on_from",
+    "occurred_on_to"
+  ],
+  "parameters": [
+    {
+      "name": "occurred_on_from",
+      "type": "string",
+      "format": "YYYY-MM-DD",
+      "required": true,
+      "description": "The 'Date From' date to filter by."
+    },
+    {
+      "name": "occurred_on_to",
+      "type": "string",
+      "format": "YYYY-MM-DD",
+      "required": true,
+      "description": "The 'Date To' date to filter by."
+    },
+    {
+      "name": "bank_account_ids",
+      "type": "array",
+      "required": false,
+      "description": "The bank account ids to filter by."
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "occurred_on_from": "2023-06-01",
+    "occurred_on_to": "2023-06-30",
+    "bank_account_ids": [
+      "1",
+      "2"
+    ],
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

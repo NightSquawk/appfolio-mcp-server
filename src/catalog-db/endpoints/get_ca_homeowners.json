@@ -1,0 +1,151 @@
+{
+  "operationId": "get_ca_homeowners",
+  "resource": "ca",
+  "name": "List All Community Association Homeowners",
+  "method": "GET",
+  "path": "/ca/homeowners",
+  "description": "Returns Community Association (CA) homeowners that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[Id]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by unique identifier of the CA homeowner. All GET requests must include a filter for [Id] (if available), or [LastUpdatedAtFrom]."
+    },
+    {
+      "name": "filters[LastUpdatedAtFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter CA homeowners by last updated date. All GET requests must include a filter for [Id] (if available), or [LastUpdatedAtFrom]."
+    },
+    {
+      "name": "page[number]",
+      "type": "integer",
+      "required": false,
+      "description": "Page number for pagination. Default: 1"
+    },
+    {
+      "name": "page[size]",
+      "type": "integer",
+      "required": false,
+      "description": "Page size for pagination. Default: 1000"
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of CAHomeowner objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the CA homeowner"
+    },
+    {
+      "name": "data[].UnitId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the unit associated with the CA homeowner"
+    },
+    {
+      "name": "data[].AssociationId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the association associated with the CA homeowner"
+    },
+    {
+      "name": "data[].OccupancyId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique Identifier of a CA occupancy of one or more CA homeowners"
+    },
+    {
+      "name": "data[].FirstName",
+      "type": "string",
+      "required": false,
+      "description": "The first name of the CA homeowner"
+    },
+    {
+      "name": "data[].MailingAddress",
+      "type": "Array of objects",
+      "required": false,
+      "description": "The homeowner's mailing address"
+    },
+    {
+      "name": "data[].MiddleName",
+      "type": "string",
+      "required": false,
+      "description": "The middle name of the CA homeowner"
+    },
+    {
+      "name": "data[].LastName",
+      "type": "string",
+      "required": false,
+      "description": "The last name of the CA homeowner"
+    },
+    {
+      "name": "data[].PhoneNumber",
+      "type": "string",
+      "required": false,
+      "description": "The CA homeowner's primary phone number",
+      "deprecated": true
+    },
+    {
+      "name": "data[].PhoneNumbers",
+      "type": "Array of objects",
+      "required": false,
+      "description": "The CA homeowner's phone numbers"
+    },
+    {
+      "name": "data[].Status",
+      "type": "string",
+      "required": false,
+      "description": "The status of the Community Association homeowner",
+      "enum": ["Current", "Past", "Future", "Notice", "Foreclosure"]
+    },
+    {
+      "name": "data[].Email",
+      "type": "string",
+      "required": false,
+      "description": "The CA homeowner's primary email address",
+      "deprecated": true
+    },
+    {
+      "name": "data[].Emails",
+      "type": "Array of objects",
+      "required": false,
+      "description": "The CA homeowner's emails"
+    },
+    {
+      "name": "data[].InCollections",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether or not the CA Homeowner is in collections"
+    },
+    {
+      "name": "data[].LastUpdatedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The date the CA homeowner's details were last updated"
+    },
+    {
+      "name": "data[].Link",
+      "type": "string <uri>",
+      "required": false,
+      "description": "A link to the occupancy page of the homeowner"
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/ca/homeowners?filters[AssociationId]=1abcde23-c543-456e-abc9-123456789cee&filters[LastUpdatedAtFrom]=2020-12-15T16:30:46Z' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

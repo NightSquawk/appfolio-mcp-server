@@ -1,0 +1,88 @@
+{
+  "operationId": "get_delinquent_charges",
+  "resource": "delinquent_charges",
+  "name": "List All Delinquent Charges",
+  "method": "GET",
+  "path": "/delinquent_charges",
+  "description": "Returns all delinquent charges that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[Id]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by the unique identifier of the delinquent charge"
+    },
+    {
+      "name": "filters[PropertyId]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by the unique identifier of the property associated with the delinquent charge. Accepts comma-separated values for multiple properties."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of delinquent charge objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the delinquent charge"
+    },
+    {
+      "name": "data[].AmountDue",
+      "type": "string <decimal>",
+      "required": false,
+      "description": "The current amount outstanding for the delinquent charge"
+    },
+    {
+      "name": "data[].ChargedOn",
+      "type": "string <date>",
+      "required": false,
+      "description": "ChargedOn dates from the past indicate an outstanding charge(s) that have not yet been paid that are \"owed.\" The endpoint will return all currently outstanding charges with their respective amounts and ChargedOn date."
+    },
+    {
+      "name": "data[].Description",
+      "type": "string",
+      "required": false,
+      "description": "A brief summary or description of the delinquent charge"
+    },
+    {
+      "name": "data[].GlAccountId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the general ledger account associated with the delinquent charge"
+    },
+    {
+      "name": "data[].OccupancyId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the occupancy associated with the delinquent charge"
+    },
+    {
+      "name": "data[].LastUpdatedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The last time the delinquent charge was updated. On the date the charge becomes delinquent, this value will always be the current time."
+    },
+    {
+      "name": "data[].Subsidy",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether or not the delinquent charge is subsidized"
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/delinquent_charges?filters[Id]=1abcde23-c543-456e-abc9-123456789cba&filters[PropertyId]=1abcde23-c543-456e-abc9-123456789cee,3b5344d0-482b-4b50-b30f-2dd67412b517' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002' \\\n     --header 'Authorization: Basic {Auth}'"
+}

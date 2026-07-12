@@ -1,0 +1,185 @@
+{
+  "operationId": "post_bills_bulk",
+  "resource": "bills",
+  "name": "Bulk Create Bills",
+  "method": "POST",
+  "path": "/bills/bulk",
+  "description": "Create multiple bills in bulk",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "requestBody": {
+    "required": true,
+    "description": "Bill objects",
+    "attributes": [
+      {
+        "name": "data",
+        "type": "array",
+        "required": false,
+        "description": "Array of Bill objects",
+        "attributes": [
+          {
+            "name": "DueDate",
+            "type": "string <date>",
+            "required": true,
+            "description": "The date the bill is due"
+          },
+          {
+            "name": "InvoiceDate",
+            "type": "string <date>",
+            "required": true,
+            "description": "The date the invoice was received"
+          },
+          {
+            "name": "LineItems",
+            "type": "array",
+            "required": true,
+            "description": "Array of line item attributes present on the bill(s)",
+            "attributes": [
+              {
+                "name": "Amount",
+                "type": "string",
+                "required": false,
+                "description": "The amount due for the line item. Valid format is \"DD.CC\", e.g. \"23.33\""
+              },
+              {
+                "name": "Description",
+                "type": "string",
+                "required": false,
+                "description": "A brief description of the line item"
+              },
+              {
+                "name": "GlAccountId",
+                "type": "string",
+                "required": false,
+                "description": "The general ledger account ID relevant to the line item. UUID format e.g. \"d9009724-9f32-11ec-bc31-d46a96ab9b08\""
+              },
+              {
+                "name": "PropertyId",
+                "type": "string",
+                "required": false,
+                "description": "The PropertyId associated with the line item. This takes precedence over the top-level PropertyId connected to the bill. UUID format e.g. \"d9009724-9f32-11ec-bc31-d46a96ab9b08\""
+              },
+              {
+                "name": "ServiceFrom",
+                "type": "string",
+                "required": false,
+                "description": "The start date of the utility vendor's service. Valid format is \"YYYY-MM-DD\""
+              },
+              {
+                "name": "ServiceTo",
+                "type": "string",
+                "required": false,
+                "description": "The end date of the utility vendor's service. Valid format is \"YYYY-MM-DD\""
+              },
+              {
+                "name": "UnitId",
+                "type": "string",
+                "required": false,
+                "description": "The unit ID relevant to the line item. UUID format e.g. \"914a2a8e-f5d3-11e9-a485-1876da4c83b5\""
+              }
+            ]
+          },
+          {
+            "name": "PropertyId",
+            "type": "string <uuid>",
+            "required": true,
+            "description": "Unique identifier of the property on the bill. If a PropertyId is not found within the LineItem array, use this value for reference purposes."
+          },
+          {
+            "name": "ReferenceId",
+            "type": "string",
+            "required": true,
+            "description": "Transient unique ID assigned by the developer. Used to reference individual bills in the bulk-creation of bills."
+          },
+          {
+            "name": "TotalAmount",
+            "type": "string <decimal>",
+            "required": true,
+            "description": "The total amount due. Ensure that the total amount is equal to the total of all line items summed."
+          },
+          {
+            "name": "AttachmentURL",
+            "type": "string <uri>",
+            "required": false,
+            "description": "The public link to the bill PDF that the developer hosts. This downloadable PDF creates the attachment and should not exceed 30MB. Note: Validation of the content type of this file is done in a background job. It is up to the developer to reconcile any validation failures at a later time."
+          },
+          {
+            "name": "PaymentDate",
+            "type": "string <date>",
+            "required": false,
+            "description": "The date of the payment. Supplying this value with a PaymentReference will mark the bill as paid."
+          },
+          {
+            "name": "PaymentReference",
+            "type": "string",
+            "required": false,
+            "description": "Unique reference number of the payment. Supplying this value with a PaymentDate will mark the bill as paid."
+          },
+          {
+            "name": "AccountNumber",
+            "type": "string",
+            "required": false,
+            "description": "For utility billing. The account number associated with the bill, used by a utility vendor to identify the account. Note: WorkOrderId and AccountNumber are mutually exclusive. Therefore, only one of them can be provided in the request."
+          },
+          {
+            "name": "CashAccountId",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "The general ledger account ID of the Cash Account the bill will be paid out of. If the property is corporate, the CashAccountID must be a corporate gl account. If it is not, it cannot be a corporate GL account"
+          },
+          {
+            "name": "CheckMemo",
+            "type": "string",
+            "required": false,
+            "description": "The memo on the check"
+          },
+          {
+            "name": "CreateCorporateCharges",
+            "type": "boolean",
+            "required": false,
+            "description": "When true, automatically create corporate charges for this bill. Only applies when ManagementCompanyAsPayee is true and Corporate Charge Automation is configured in Corporate Accounting Settings; otherwise no charges are created. Defaults to false when omitted."
+          },
+          {
+            "name": "ManagementCompanyAsPayee",
+            "type": "boolean",
+            "required": false,
+            "description": "Indicates whether the management company is the payee for the bill. Required and must be true when VendorId is null or not provided. When true and CreateCorporateCharges is also true, if Corporate Charge and Receipt Automation are configured in Corporate Accounting Settings, charges and receipts will automatically post."
+          },
+          {
+            "name": "PostingDate",
+            "type": "string <date>",
+            "required": false,
+            "description": "The accrual-accounting invoice date"
+          },
+          {
+            "name": "Reference",
+            "type": "string",
+            "required": false,
+            "description": "The reference number of the bill. This number must be unique, no duplicate record is allowed."
+          },
+          {
+            "name": "Remarks",
+            "type": "string",
+            "required": false,
+            "description": "A description or summary of the bill"
+          },
+          {
+            "name": "VendorId",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "Unique identifier of the the payee's vendor ID. Required when ManagementCompanyAsPayee is false or not provided. When present, ManagementCompanyAsPayee cannot be true."
+          },
+          {
+            "name": "WorkOrderId",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "Unique identifier of the work order corresponding to the bill(s). The value of WorkOrderId cannot be null. Note: WorkOrderId and AccountNumber are mutually exclusive. Therefore, only one of them can be provided in the request."
+          }
+        ]
+      }
+    ]
+  },
+  "responseFields": [],
+  "requestSample": "{\n  \"data\": [\n    {},\n    {}\n  ]\n}"
+}

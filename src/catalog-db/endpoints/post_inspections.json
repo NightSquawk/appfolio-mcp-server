@@ -1,0 +1,70 @@
+{
+  "operationId": "post_inspections",
+  "resource": "inspections",
+  "name": "Create Inspection",
+  "method": "POST",
+  "path": "/inspections",
+  "description": "Create a new inspection",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "requestBody": {
+    "required": true,
+    "description": "Inspection object",
+    "attributes": [
+      {
+        "name": "inspection",
+        "type": "object",
+        "required": false,
+        "description": "Inspection object",
+        "attributes": [
+          {
+            "name": "Name",
+            "type": "string",
+            "required": true,
+            "description": "The user-provided name of the inspection."
+          },
+          {
+            "name": "URL",
+            "type": "string",
+            "required": true,
+            "description": "The URL link to an external page hosted by the partner with additional details about the inspection."
+          },
+          {
+            "name": "InspectionDate",
+            "type": "string <date>",
+            "required": true,
+            "description": "The date the inspection was conducted. Valid format is \"YYYY-MM-DD\" e.g. \"2025-03-25\"."
+          },
+          {
+            "name": "OccupancyId",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "Unique identifier of the occupancy or association related to the inspection. Note: OccupancyId, PropertyId, and UnitId are mutually exclusive. One of the three are required, and only one of them can be provided in the request."
+          },
+          {
+            "name": "PropertyId",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "Unique identifier of the property or association related to the inspection. Note: OccupancyId, PropertyId, and UnitId are mutually exclusive. One of the three are required, and only one of them can be provided in the request."
+          },
+          {
+            "name": "UnitId",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "Unique identifier of the unit or association related to the inspection. Note: OccupancyId, PropertyId, and UnitId are mutually exclusive. One of the three are required, and only one of them can be provided in the request."
+          }
+        ]
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier for the created inspection"
+    }
+  ],
+  "requestSample": "{\n  \"inspection\": {\n    \"Name\": \"Inspection Name\",\n    \"URL\": \"https://example.com/inspections/54321\",\n    \"InspectionDate\": \"2025-06-30\",\n    \"UnitId\": \"ac00dc0a-9f44-42f7-b01f-cfb2ec92ee19\"\n  }\n}"
+}

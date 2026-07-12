@@ -1,0 +1,76 @@
+{
+  "operationId": "post_inspections_bulk",
+  "resource": "inspections",
+  "name": "Bulk Create Inspections",
+  "method": "POST",
+  "path": "/inspections/bulk",
+  "description": "Create Inspection in bulk",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "requestBody": {
+    "required": true,
+    "description": "Inspection objects",
+    "attributes": [
+      {
+        "name": "data",
+        "type": "array",
+        "required": false,
+        "description": "Array of Inspection objects",
+        "attributes": [
+          {
+            "name": "ReferenceId",
+            "type": "string",
+            "required": true,
+            "description": "Transient unique ID assigned by the developer. Used to reference individual inspection in the bulk-creation of inspections."
+          },
+          {
+            "name": "Name",
+            "type": "string",
+            "required": true,
+            "description": "The user-provided name of the inspections."
+          },
+          {
+            "name": "URL",
+            "type": "string",
+            "required": true,
+            "description": "The URL link to an external page hosted by the partner with additional details about the inspection."
+          },
+          {
+            "name": "InspectionDate",
+            "type": "string <date>",
+            "required": false,
+            "description": "The date the inspection was conducted. Valid format is \"YYYY-MM-DD\" e.g. \"2025-03-25\". If not provided, defaults to the current date."
+          },
+          {
+            "name": "OccupancyId",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "Unique identifier of the occupancy related to the inspection. Only one of OccupancyId, PropertyId, or UnitId may be specified."
+          },
+          {
+            "name": "PropertyId",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "Unique identifier of the property related to the inspection. Only one of OccupancyId, PropertyId, or UnitId may be specified."
+          },
+          {
+            "name": "UnitId",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "Unique identifier of the unit related to the inspection. Only one of OccupancyId, PropertyId, or UnitId may be specified."
+          }
+        ]
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "JobId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier for the bulk creation job"
+    }
+  ],
+  "requestSample": "{\n  \"data\": [\n    {}\n  ]\n}"
+}

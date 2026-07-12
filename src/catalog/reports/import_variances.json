@@ -1,0 +1,41 @@
+{
+  "slug": "import_variances",
+  "endpoint": "import_variances.json",
+  "name": "Import Variances",
+  "description": "Returns Import Variances report data.",
+  "requiredFilters": [],
+  "parameters": [
+    {
+      "name": "groups",
+      "type": "array",
+      "required": false,
+      "default": "[\"all\"]",
+      "enum": [
+        "all",
+        "'Commercial Tenant Past Charges' denotes 'Commercial Tenant Past Charges (1 message)'",
+        "'Open Bills/Credits' denotes 'Open Bills/Credits (1 message)'",
+        "'Prepayments' denotes 'Prepayments (1 message)'",
+        "'Tenant Unpaid Charges/Credits' denotes 'Tenant Unpaid Charges/Credits (1 message)'",
+        "'Uncleared Items' denotes 'Uncleared Items (1 message)'",
+        "'Vendor 1099 Balances' denotes 'Vendor 1099 Balances (1 message)'"
+      ],
+      "description": "Sections to filter by."
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "groups": [
+      "all"
+    ],
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

@@ -1,0 +1,27 @@
+{
+  "operationId": "delete_properties_propertyid_photos_photoid",
+  "resource": "properties",
+  "name": "Delete Property Photo",
+  "method": "DELETE",
+  "path": "/properties/{PropertyId}/photos/{PhotoId}",
+  "description": "Delete a photo from a property",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "PropertyId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the property that contains the photo to be deleted"
+    },
+    {
+      "name": "PhotoId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the photo to be deleted from the property"
+    }
+  ],
+  "responseFields": [],
+  "requestSample": "curl --location --request DELETE 'https://api.appfolio.com/api/v0/properties/972b920c-e048-4a7b-b1f6-eddb6ad6d23c/photos/57e04805-11c5-4e27-adc9-c75ff9ddc9d9' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

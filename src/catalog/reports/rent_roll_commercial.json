@@ -1,0 +1,106 @@
+{
+  "slug": "rent_roll_commercial",
+  "endpoint": "rent_roll_commercial.json",
+  "name": "Rent Roll (Commercial)",
+  "description": "Returns Rent Roll (Commercial) report data.",
+  "requiredFilters": [
+    "as_of_to"
+  ],
+  "parameters": [
+    {
+      "name": "property_visibility",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "enum": [
+        "active",
+        "hidden",
+        "all"
+      ],
+      "description": "The property visibility to filter by."
+    },
+    {
+      "name": "properties",
+      "type": "object",
+      "required": false,
+      "description": "The property filter. Expand to view all attributes associated with this filter. If required, you must submit an id for at least one of the below filters.",
+      "attributes": [
+        {
+          "name": "properties_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "property_groups_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "portfolios_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "owners_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "as_of_to",
+      "type": "string",
+      "required": true,
+      "format": "YYYY-MM-DD",
+      "description": "The 'As of To' date to filter by."
+    },
+    {
+      "name": "gl_account_ids",
+      "type": "array",
+      "required": false,
+      "default": "[]",
+      "description": "The gl account ids to filter by."
+    },
+    {
+      "name": "include_vacant",
+      "type": "string",
+      "required": false,
+      "default": "1",
+      "enum": [
+        "0",
+        "1"
+      ],
+      "description": "Include units that have no recurring charges"
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "property_visibility": "active",
+    "properties": {
+      "properties_ids": [],
+      "property_groups_ids": [],
+      "portfolios_ids": [],
+      "owners_ids": []
+    },
+    "as_of_to": "2023-06-30",
+    "gl_account_ids": [
+      "1",
+      "2"
+    ],
+    "include_vacant": "1",
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

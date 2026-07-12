@@ -1,0 +1,71 @@
+{
+  "operationId": "get_rental_applications_notes",
+  "resource": "rental_applications",
+  "name": "List All Rental Applications Notes",
+  "method": "GET",
+  "path": "/rental_applications/notes",
+  "description": "Returns all rental applications notes that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[RentalApplicationId]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by rental application ID; all GET requests must include a filter for [RentalApplicationId] or [LastUpdatedAtFrom]"
+    },
+    {
+      "name": "filters[LastUpdatedAtFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter rental application notes last updated at or after this date/time; all GET requests must include a filter for [RentalApplicationId] or [LastUpdatedAtFrom]"
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of rental application note objects"
+    },
+    {
+      "name": "data[].Body",
+      "type": "string",
+      "required": false,
+      "description": "A brief informative message about the rental application note. A rental application note cannot exceed 63,535 characters."
+    },
+    {
+      "name": "data[].EntityId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "The rental application to which the note will be attached"
+    },
+    {
+      "name": "data[].LastUpdatedAt",
+      "type": "string",
+      "required": false,
+      "description": "The date the rental application note's details were last updated"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the note associated with the rental application"
+    },
+    {
+      "name": "data[].NoteId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the note associated with the rental application. Deprecated in favor of Id.",
+      "deprecated": true
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/rental_applications/notes?filters[RentalApplicationId]=1abcde23-c543-456e-abc9-123456789cba&filters[LastUpdatedAtFrom]=2020-12-15T16:30:46Z' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

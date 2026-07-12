@@ -1,0 +1,247 @@
+{
+  "operationId": "get_owners_ownerid",
+  "resource": "owners",
+  "name": "Fetch an Owner by ID",
+  "method": "GET",
+  "path": "/owners/{ownerId}",
+  "description": "Returns the owner",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "ownerId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the owner to fetch. Filter the results based on a single value."
+    }
+  ],
+  "queryFilters": [],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "object",
+      "required": false,
+      "description": "Owner object"
+    },
+    {
+      "name": "data.Id",
+      "type": "string",
+      "required": false,
+      "description": "Unique identifier of an owner within an owner group"
+    },
+    {
+      "name": "data.CompanyName",
+      "type": "string",
+      "required": false,
+      "description": "The company name associated with the owner"
+    },
+    {
+      "name": "data.CustomFields",
+      "type": "object",
+      "required": false,
+      "description": "The custom fields for the associated entity"
+    },
+    {
+      "name": "data.Email",
+      "type": "string",
+      "required": false,
+      "deprecated": true,
+      "description": "The primary email address of the owner"
+    },
+    {
+      "name": "data.Emails",
+      "type": "array",
+      "required": false,
+      "description": "The owner's emails"
+    },
+    {
+      "name": "data.EmailEcheckReceipt",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether or not to send a notification to the payee after an eCheck payment is made."
+    },
+    {
+      "name": "data.HoldPayments",
+      "type": "boolean",
+      "required": false,
+      "description": "When true, bills created for the owner through the Pay Owner or Owner Draw function will not be available in the Pay Bills flow."
+    },
+    {
+      "name": "data.FirstName",
+      "type": "string",
+      "required": false,
+      "description": "The first name of the owner"
+    },
+    {
+      "name": "data.HiddenAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "When the owner was marked inactive by an AppFolio Property Manager user"
+    },
+    {
+      "name": "data.IsCompany",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether or not the owner identifies as a company"
+    },
+    {
+      "name": "data.LastName",
+      "type": "string",
+      "required": false,
+      "description": "The last name of the owner"
+    },
+    {
+      "name": "data.LastUpdatedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The date the owner was last updated"
+    },
+    {
+      "name": "data.Link",
+      "type": "string <uri>",
+      "required": false,
+      "description": "A link to the owner's page in the AppFolio Property Manager"
+    },
+    {
+      "name": "data.MaintenanceNotes",
+      "type": "string",
+      "required": false,
+      "description": "Maintenance notes for the properties owned"
+    },
+    {
+      "name": "data.PhoneNumber",
+      "type": "string",
+      "required": false,
+      "deprecated": true,
+      "description": "The owner's primary phone number"
+    },
+    {
+      "name": "data.PhoneNumbers",
+      "type": "array",
+      "required": false,
+      "description": "The owner's phone number(s)"
+    },
+    {
+      "name": "data.Address1",
+      "type": "string",
+      "required": false,
+      "deprecated": true,
+      "description": "The primary street address of the owner"
+    },
+    {
+      "name": "data.Address2",
+      "type": "string",
+      "required": false,
+      "deprecated": true,
+      "description": "Additional street address information pertaining to the owner"
+    },
+    {
+      "name": "data.City",
+      "type": "string",
+      "required": false,
+      "deprecated": true,
+      "description": "The city where the owner is located"
+    },
+    {
+      "name": "data.State",
+      "type": "string",
+      "required": false,
+      "deprecated": true,
+      "description": "The state where the owner is located"
+    },
+    {
+      "name": "data.Zip",
+      "type": "string",
+      "required": false,
+      "deprecated": true,
+      "description": "The zip code where the owner is located"
+    },
+    {
+      "name": "data.CountryCode",
+      "type": "string",
+      "required": false,
+      "deprecated": true,
+      "description": "The country code of the owner (e.g. US for United states)"
+    },
+    {
+      "name": "data.Tags",
+      "type": "Array of strings",
+      "required": false,
+      "description": "User-defined tag(s) that categorize the owner"
+    },
+    {
+      "name": "data.UseAlternatePayee",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether or not the owner payments are submitted to an alternate person other than what is listed for Owner First, Last and/or Company Name"
+    },
+    {
+      "name": "data.AlternatePayeeName",
+      "type": "string",
+      "required": false,
+      "description": "The name of the alternate payee"
+    },
+    {
+      "name": "data.AlternatePaymentAddress1",
+      "type": "string",
+      "required": false,
+      "description": "The street address of the Alternate Payee"
+    },
+    {
+      "name": "data.AlternatePaymentAddress2",
+      "type": "string",
+      "required": false,
+      "description": "Additional street address information pertaining to the alternate payee"
+    },
+    {
+      "name": "data.AlternatePaymentCity",
+      "type": "string",
+      "required": false,
+      "description": "The city where the alternate payee is located"
+    },
+    {
+      "name": "data.AlternatePaymentState",
+      "type": "string",
+      "required": false,
+      "description": "The state where the alternate payee is located"
+    },
+    {
+      "name": "data.AlternatePaymentPostalCode",
+      "type": "string",
+      "required": false,
+      "description": "The zip code where the alternate payee is located"
+    },
+    {
+      "name": "data.AlternatePaymentCountryCode",
+      "type": "string",
+      "required": false,
+      "description": "The country code of the alternate payee (e.g. US for United states)"
+    },
+    {
+      "name": "data.Addresses",
+      "type": "array",
+      "required": false,
+      "description": "The owner's address(es)"
+    },
+    {
+      "name": "data.Send1099",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether a 1099 form is sent to the owner."
+    },
+    {
+      "name": "data.OwnerConsentedToReceiveElectronic1099",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether the owner has consented to receive the 1099 tax form electronically. If Send1099 is false, this value will also be false."
+    },
+    {
+      "name": "data.Sending1099Preference",
+      "type": "string",
+      "required": false,
+      "description": "Indicates the owner's 1099 sending preference. Valid values include \"Paper\", \"Electronic\", \"PaperAndElectronic\", or \"null\". If Send1099 is false, this value will be null."
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/owners/1abcde23-c543-456e-abc9-123456789cba' \\\n     --header 'Authorization: Basic {Auth}'"
+}

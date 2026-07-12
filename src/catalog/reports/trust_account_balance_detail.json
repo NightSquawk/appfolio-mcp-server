@@ -1,0 +1,112 @@
+{
+  "slug": "trust_account_balance_detail",
+  "endpoint": "trust_account_balance_detail.json",
+  "name": "Trust Account Detail",
+  "description": "Returns Trust Account Detail report data.",
+  "requiredFilters": [
+    "posted_on_from",
+    "posted_on_to"
+  ],
+  "parameters": [
+    {
+      "name": "property_visibility",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "enum": [
+        "active",
+        "hidden",
+        "all"
+      ],
+      "description": "The property visibility to filter by."
+    },
+    {
+      "name": "properties",
+      "type": "object",
+      "required": false,
+      "description": "The property filter. Expand to view all attributes associated with this filter. If required, you must submit an id for at least one of the below filters.",
+      "attributes": [
+        {
+          "name": "properties_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "property_groups_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "portfolios_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "owners_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "gl_account_ids",
+      "type": "string",
+      "required": false,
+      "default": "Your Operating Cash Key Account IDs",
+      "description": "The gl account id to filter by."
+    },
+    {
+      "name": "posted_on_from",
+      "type": "string",
+      "required": true,
+      "format": "YYYY-MM-DD",
+      "description": "The 'Date From' date to filter by."
+    },
+    {
+      "name": "posted_on_to",
+      "type": "string",
+      "required": true,
+      "format": "YYYY-MM-DD",
+      "description": "The 'Date To' date to filter by."
+    },
+    {
+      "name": "reverse_transaction",
+      "type": "string",
+      "required": false,
+      "default": "1",
+      "enum": [
+        "0",
+        "1"
+      ],
+      "description": "Whether or not to Show Reversed Transactions"
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "property_visibility": "active",
+    "properties": {
+      "properties_ids": [],
+      "property_groups_ids": [],
+      "portfolios_ids": [],
+      "owners_ids": []
+    },
+    "gl_account_ids": "1",
+    "posted_on_from": "2023-06-01",
+    "posted_on_to": "2023-06-30",
+    "reverse_transaction": "0",
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

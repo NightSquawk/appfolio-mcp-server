@@ -1,0 +1,40 @@
+{
+  "operationId": "post_owners_ownerid_notes",
+  "resource": "owners",
+  "name": "Create Owner Note",
+  "method": "POST",
+  "path": "/owners/{OwnerId}/notes",
+  "description": "Add a note to an owner.",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "OwnerId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "The owner to which the note will be attached."
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Note object",
+    "attributes": [
+      {
+        "name": "Body",
+        "type": "string",
+        "required": false,
+        "description": "A brief informative message about the owner note. An owner note cannot exceed 65,535 characters."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the owner note."
+    }
+  ],
+  "requestSample": "{\n  \"Body\": \"This owner have scheduled a cleaning service on 11/11/2023\"\n}"
+}

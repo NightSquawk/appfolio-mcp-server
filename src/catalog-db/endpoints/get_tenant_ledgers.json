@@ -1,0 +1,82 @@
+{
+  "operationId": "get_tenant_ledgers",
+  "resource": "tenant_ledgers",
+  "name": "List All Tenant Ledgers",
+  "method": "GET",
+  "path": "/tenant_ledgers",
+  "description": "Returns all tenant ledgers that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[PropertyId]",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the property. All requests must include this filter."
+    },
+    {
+      "name": "filters[DateFrom]",
+      "type": "string <date>",
+      "required": true,
+      "description": "Start date for the ledger date range filter. All requests must include this filter."
+    },
+    {
+      "name": "filters[DateTo]",
+      "type": "string <date>",
+      "required": true,
+      "description": "End date for the ledger date range filter. All requests must include this filter."
+    },
+    {
+      "name": "filters[OccupancyId]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the occupancy to filter ledgers by."
+    },
+    {
+      "name": "filters[ExcludeSubsidies]",
+      "type": "boolean",
+      "required": false,
+      "description": "When true, excludes subsidy entries from the ledger results."
+    },
+    {
+      "name": "page[number]",
+      "type": "integer",
+      "required": false,
+      "description": "Page number for pagination. Default is 1."
+    },
+    {
+      "name": "page[size]",
+      "type": "integer",
+      "required": false,
+      "description": "Number of results per page. Default is 1000."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of TenantLedger objects"
+    },
+    {
+      "name": "data[].OccupancyId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the occupancy associated with the ledger"
+    },
+    {
+      "name": "data[].Ledger",
+      "type": "array",
+      "required": false,
+      "description": "Array of ledger data. Contains the charges, payments, and credits for the occupancy specified by the OccupancyId."
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/tenant_ledgers?filters[DateFrom]=2020-12-15&filters[DateTo]=2020-12-16&filters[PropertyId]=1abcde23-c543-456e-abc9-123456789cee&filters[ExcludeSubsidies]=false&filters[OccupancyId]=8rbcde234-c543-456e-abc9-123456789cee' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

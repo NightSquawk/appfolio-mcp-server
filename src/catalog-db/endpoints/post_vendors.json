@@ -1,0 +1,279 @@
+{
+  "operationId": "post_vendors",
+  "resource": "vendors",
+  "name": "Create Vendor",
+  "method": "POST",
+  "path": "/vendors",
+  "description": "Create a vendor",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "requestBody": {
+    "required": true,
+    "description": "Vendor creation object",
+    "attributes": [
+      {
+        "name": "IsCompany",
+        "type": "boolean",
+        "required": true,
+        "description": "Indicates whether or not the vendor identifies as a company"
+      },
+      {
+        "name": "UseCompanyNameAsTaxpayerName",
+        "type": "boolean",
+        "required": true,
+        "description": "Indicates whether or not to use the company name for tax paying purposes"
+      },
+      {
+        "name": "TaxpayerName",
+        "type": "string",
+        "required": false,
+        "description": "The taxpayer name of the vendor. If UseCompanyNameAsTaxpayerName is true, then TaxpayerName will be CompanyName. If IsCompany is true, and TaxpayerName is not provided, then TaxpayerName will be set to CompanyName. If IsCompany is false, and TaxpayerName is not provided, then TaxpayerName will be set to the concatenation of FirstName and LastName. If TaxpayerName is provided, and UseCompanyNameAsTaxpayerName is false, then TaxpayerName will be set as provided value."
+      },
+      {
+        "name": "TaxpayerId",
+        "type": "string",
+        "required": false,
+        "description": "The tax identification number of the vendor. This field accepts either a Employer Identification Number (EIN), a Social Security Number (SSN), or an Individual Taxpayer Identification Number (ITIN)."
+      },
+      {
+        "name": "CompanyName",
+        "type": "string",
+        "required": false,
+        "description": "Optional display name of vendor's company. If IsCompany is true, this field is required."
+      },
+      {
+        "name": "Send1099",
+        "type": "boolean",
+        "required": false,
+        "description": "Indicates whether or not the vendor needs a 1099 tax form from the management company"
+      },
+      {
+        "name": "FirstName",
+        "type": "string",
+        "required": false,
+        "description": "The vendor's first name. If IsCompany is false, this field is required."
+      },
+      {
+        "name": "LastName",
+        "type": "string",
+        "required": false,
+        "description": "The vendor's last name. If IsCompany is false, this field is required."
+      },
+      {
+        "name": "Address1",
+        "type": "string",
+        "required": false,
+        "description": "The primary street address of the vendor. If provided, City, State, and Zip must also be provided. A primary address is required when UseOnlinePayables is true."
+      },
+      {
+        "name": "Address2",
+        "type": "string",
+        "required": false,
+        "description": "Additional street information pertaining to the vendor. If provided, Address1, City, State, and Zip must also be provided."
+      },
+      {
+        "name": "City",
+        "type": "string",
+        "required": false,
+        "description": "The city where the vendor is located. If provided, Address1, State, and Zip must also be provided. This attribute is required when UseOnlinePayables is true."
+      },
+      {
+        "name": "State",
+        "type": "string",
+        "required": false,
+        "description": "The state where the vendor is located (e.g. \"CA\" for California). If provided, Address1, City, and Zip must also be provided. This attribute is required when UseOnlinePayables is true. This value must not be an unincorporated US territory (AS, FM, MH, MP, or VI) for primary address when UseOnlinePayables and VendorPaidByACH are both true."
+      },
+      {
+        "name": "Zip",
+        "type": "string",
+        "required": false,
+        "description": "The zip code where the vendor is located. Must be a string in 5-digit ZIP code format (e.g., 93013) or ZIP+4 format (e.g., 93013-0429). If provided, Address1, City, and State must also be provided. This attribute is required for primary address when UseOnlinePayables is true."
+      },
+      {
+        "name": "CountryCode",
+        "type": "string",
+        "required": false,
+        "description": "The country code of the vendor (e.g. \"US\" for United States). This attribute is required when UseOnlinePayables is true. This value must be \"US\" for primary address when UseOnlinePayables and VendorPaidByAch are both true."
+      },
+      {
+        "name": "PhoneNumber",
+        "type": "string",
+        "required": false,
+        "description": "The vendor's primary phone number",
+        "deprecated": true
+      },
+      {
+        "name": "PhoneNumbers",
+        "type": "array",
+        "required": false,
+        "description": "The vendor's phone number(s). PhoneNumber and PhoneNumbers cannot be provided together.",
+        "attributes": [
+          {
+            "name": "Number",
+            "type": "string",
+            "required": true,
+            "description": "The vendor's phone number"
+          },
+          {
+            "name": "AdditionalDetails",
+            "type": "string",
+            "required": false,
+            "description": "Additional detailed information pertaining to the phone number associated with the vendor"
+          },
+          {
+            "name": "IsPrimary",
+            "type": "boolean",
+            "required": false,
+            "description": "Indicates whether the phone number provided is the vendor's main contact number"
+          },
+          {
+            "name": "Label",
+            "type": "string",
+            "required": false,
+            "description": "The label of the phone number, e.g. 'Home'",
+            "enum": ["Fax", "Home", "Mobile", "Office"]
+          }
+        ]
+      },
+      {
+        "name": "Email",
+        "type": "string",
+        "required": false,
+        "description": "The vendor's primary email address",
+        "deprecated": true
+      },
+      {
+        "name": "Emails",
+        "type": "array",
+        "required": false,
+        "description": "The vendor's email address(es). Email and Emails cannot be provided together.",
+        "attributes": [
+          {
+            "name": "EmailAddress",
+            "type": "string",
+            "required": true,
+            "description": "The vendor's email address"
+          },
+          {
+            "name": "IsPrimary",
+            "type": "boolean",
+            "required": false,
+            "description": "Indicates whether the email address provided is the vendor's primary email address"
+          }
+        ]
+      },
+      {
+        "name": "CompanyURL",
+        "type": "string",
+        "required": false,
+        "description": "The internet address of the vendor's website"
+      },
+      {
+        "name": "LiabilityInsuranceExpiration",
+        "type": "string <date>",
+        "required": false,
+        "description": "The expiration date of the vendor's liability insurance. ISO 8601 format (YYYY-MM-DD) is required. Legacy MM/DD/YYYY format is supported for backward compatibility but will be deprecated in a future release."
+      },
+      {
+        "name": "AutoInsuranceExpiration",
+        "type": "string <date>",
+        "required": false,
+        "description": "The expiration date of the vendor's automobile insurance. ISO 8601 format (YYYY-MM-DD) is required. Legacy MM/DD/YYYY format is supported for backward compatibility but will be deprecated in a future release."
+      },
+      {
+        "name": "WorkersCompExpiration",
+        "type": "string <date>",
+        "required": false,
+        "description": "The expiration date of the vendor's worker's compensation insurance. ISO 8601 format (YYYY-MM-DD) is required. Legacy MM/DD/YYYY format is supported for backward compatibility but will be deprecated in a future release."
+      },
+      {
+        "name": "ContractExpiration",
+        "type": "string <date>",
+        "required": false,
+        "description": "The expiration date of the contract. ISO 8601 format (YYYY-MM-DD) is required. Legacy MM/DD/YYYY format is supported for backward compatibility but will be deprecated in a future release."
+      },
+      {
+        "name": "UmbrellaInsuranceExpiration",
+        "type": "string <date>",
+        "required": false,
+        "description": "The expiration date of the vendor's umbrella insurance. ISO 8601 format (YYYY-MM-DD) is required. Legacy MM/DD/YYYY format is supported for backward compatibility but will be deprecated in a future release."
+      },
+      {
+        "name": "CompliantStatus",
+        "type": "boolean",
+        "required": false,
+        "description": "Indicates whether or not the vendor meets compliance"
+      },
+      {
+        "name": "NetVendorId",
+        "type": "string",
+        "required": false,
+        "description": "The vendor's NetVendor ID"
+      },
+      {
+        "name": "PaymentTerms",
+        "type": "integer",
+        "required": false,
+        "description": "Represents the number of days the payment is due after the invoice date. A null value indicates that no payment terms were defined. A value of 0 indicates the payment is due on receipt. A value greater than 0, for example, 15, indicates the payment is due 15 days after the invoice date. Required value of 1-31 if UsingEomTerms is true."
+      },
+      {
+        "name": "UsingEomTerms",
+        "type": "boolean",
+        "required": false,
+        "description": "Indicates whether or not the payment terms include an end-of-month (EOM) stipulation. For example, if PaymentTerms is 15, and EOM is true, the payment is due within 15 days of the end of the month."
+      },
+      {
+        "name": "DefaultAutoAcceptWorkOrders",
+        "type": "boolean",
+        "required": false,
+        "description": "Indicates whether the vendor is ineligible for auto-accept work order assignments. When set to true, this vendor will auto-accept all work orders assigned to them."
+      },
+      {
+        "name": "Tags",
+        "type": "Array of strings",
+        "required": false,
+        "description": "User-defined tag(s) that categorize the vendor"
+      },
+      {
+        "name": "VendorPaidByACH",
+        "type": "boolean",
+        "required": false,
+        "description": "Indicates whether or not the vendor is paid via ACH (Automated Clearing House) transfer."
+      },
+      {
+        "name": "UseOnlinePayables",
+        "type": "boolean",
+        "required": false,
+        "description": "Indicates whether or not the vendor uses Online Payables for receiving payments."
+      },
+      {
+        "name": "BankAccountRoutingNumber",
+        "type": "string",
+        "required": false,
+        "description": "The vendor's bank account routing number. Must be a valid 9-digit ABA routing number. This attribute is required when both UseOnlinePayables and VendorPaidByACH are true."
+      },
+      {
+        "name": "BankAccountNumber",
+        "type": "string",
+        "required": false,
+        "description": "The vendor's bank account number. Must be 4-17 characters and can only contain numbers and hyphens. This attribute is required when both UseOnlinePayables and VendorPaidByACH are true."
+      },
+      {
+        "name": "SavingsAccount",
+        "type": "boolean",
+        "required": false,
+        "description": "Indicates whether or not the bank account is a savings account. If false or not provided, the account is assumed to be a checking account."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the created vendor"
+    }
+  ],
+  "requestSample": "{\n  \"TaxpayerName\": \"John Doe\",\n  \"TaxpayerId\": \"55-2345678\",\n  \"CompanyName\": \"Fake Company\",\n  \"IsCompany\": true,\n  \"UseCompanyNameAsTaxpayerName\": false,\n  \"Send1099\": true,\n  \"FirstName\": \"John\",\n  \"LastName\": \"Doe\",\n  \"Address1\": \"25 Example Way\",\n  \"Address2\": \"34 Example Way\",\n  \"City\": \"Los Angeles\",\n  \"State\": \"CA\",\n  \"Zip\": \"92114\",\n  \"CountryCode\": \"US\",\n  \"Emails\": [{}],\n  \"PhoneNumbers\": [{}],\n  \"CompanyURL\": \"https://example.com\",\n  \"LiabilityInsuranceExpiration\": \"2022-01-23\",\n  \"AutoInsuranceExpiration\": \"2022-02-23\",\n  \"WorkersCompExpiration\": \"2022-03-23\",\n  \"ContractExpiration\": \"2022-04-23\",\n  \"UmbrellaInsuranceExpiration\": \"2022-05-23\",\n  \"CompliantStatus\": true,\n  \"NetVendorId\": \"1\",\n  \"DefaultAutoAcceptWorkOrders\": true,\n  \"PaymentTerms\": 30,\n  \"UsingEomTerms\": true,\n  \"Tags\": [\"tag1\", \"tag2\"],\n  \"VendorPaidByACH\": true,\n  \"UseOnlinePayables\": true,\n  \"BankAccountRoutingNumber\": \"121042882\",\n  \"BankAccountNumber\": \"1234567890\",\n  \"SavingsAccount\": false\n}"
+}

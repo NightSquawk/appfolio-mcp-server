@@ -1,0 +1,177 @@
+{
+  "slug": "guest_card_inquiries",
+  "endpoint": "guest_card_inquiries.json",
+  "name": "Guest Card Inquiries",
+  "description": "Returns Guest Card Inquiries report data.",
+  "requiredFilters": [
+    "received_on_from",
+    "received_on_to"
+  ],
+  "parameters": [
+    {
+      "name": "property_visibility",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "enum": [
+        "active",
+        "hidden",
+        "all"
+      ],
+      "description": "The property visibility to filter by."
+    },
+    {
+      "name": "properties",
+      "type": "object",
+      "required": false,
+      "description": "The property filter. Expand to view all attributes associated with this filter. If required, you must submit an id for at least one of the below filters.",
+      "attributes": [
+        {
+          "name": "properties_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "property_groups_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "portfolios_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "owners_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "guest_card_sources",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "enum": [
+        "all",
+        "Apartment Advisor",
+        "Apartment List",
+        "Apartments.com",
+        "Phone",
+        "Realtor.com",
+        "Rent.",
+        "Rentable",
+        "Shared Application Link",
+        "Uloop",
+        "Website",
+        "Zillow Rental Network",
+        "Zumper"
+      ],
+      "description": "The Guest Card Source to filter by."
+    },
+    {
+      "name": "guest_card_statuses",
+      "type": "array",
+      "required": false,
+      "default": [
+        "prequalified",
+        "active",
+        "waitlisted"
+      ],
+      "enum": [
+        "all",
+        "'prequalified' denotes 'Pre-Qualified'",
+        "active",
+        "waitlisted",
+        "'application_completed' denotes 'Application Completed'",
+        "inactive",
+        "cold"
+      ],
+      "description": "The Guest Card Status to filter by."
+    },
+    {
+      "name": "guest_card_lead_types",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "enum": [
+        "all",
+        "Free",
+        "Premium",
+        "Hang Up",
+        "Refunded"
+      ],
+      "description": "The Guest Card Lead Type to filter by."
+    },
+    {
+      "name": "assigned_user",
+      "type": "string",
+      "required": false,
+      "default": "All",
+      "description": "Assigned user id to filter by."
+    },
+    {
+      "name": "filter_date_range_by",
+      "type": "string",
+      "required": false,
+      "default": "inquiry",
+      "enum": [
+        "'inquiry' denotes 'Inquiry Received'",
+        "'interest' denotes 'Interest Received'"
+      ],
+      "description": "Filter date range by to filter by."
+    },
+    {
+      "name": "received_on_from",
+      "type": "string",
+      "required": true,
+      "format": "YYYY-MM-DD",
+      "description": "The 'Date From' date to filter by."
+    },
+    {
+      "name": "received_on_to",
+      "type": "string",
+      "required": true,
+      "format": "YYYY-MM-DD",
+      "description": "The 'Date To' date to filter by."
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "property_visibility": "active",
+    "properties": {
+      "properties_ids": [],
+      "property_groups_ids": [],
+      "portfolios_ids": [],
+      "owners_ids": []
+    },
+    "guest_card_sources": [
+      "all"
+    ],
+    "guest_card_statuses": [
+      "all"
+    ],
+    "guest_card_lead_types": [
+      "all"
+    ],
+    "assigned_user": "All",
+    "filter_date_range_by": "inquiry",
+    "received_on_from": "2023-06-01",
+    "received_on_to": "2023-06-30",
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

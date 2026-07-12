@@ -1,0 +1,58 @@
+{
+  "operationId": "get_bank_accounts",
+  "resource": "bank_accounts",
+  "name": "List All Bank Accounts",
+  "method": "GET",
+  "path": "/bank_accounts",
+  "description": "Returns all bank accounts that meet the filter criteria. Hidden and corporate bank accounts are not returned.",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[Id]",
+      "type": "string",
+      "required": false,
+      "description": "Comma-separated list of bank account UUIDs to filter by."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of BankAccount objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the bank account"
+    },
+    {
+      "name": "data[].AccountName",
+      "type": "string",
+      "required": false,
+      "description": "The name of the bank account"
+    },
+    {
+      "name": "data[].BankName",
+      "type": "string",
+      "required": false,
+      "description": "The name of the bank"
+    },
+    {
+      "name": "data[].LegalEntityName",
+      "type": "string",
+      "required": false,
+      "description": "The full legal name given to the business or individual owning the bank account"
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/bank_accounts?filters[Id]=1abcde23-c543-456e-abc9-123456789cee,3b5344d0-482b-4b50-b30f-2dd67412b517' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002' \\\n     --header 'Authorization: Basic {Auth}'"
+}

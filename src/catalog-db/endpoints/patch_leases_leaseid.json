@@ -1,0 +1,52 @@
+{
+  "operationId": "patch_leases_leaseid",
+  "resource": "leases",
+  "name": "Update Lease",
+  "method": "PATCH",
+  "path": "/leases/{LeaseId}",
+  "description": "Update a lease. Note: IsMtm and EndOn are mutually exclusive and cannot be set in the same request.",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "LeaseId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the lease to update"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Update lease object. At least one attribute must be provided. Note: IsMtm and EndOn are mutually exclusive and cannot be set in the same request.",
+    "attributes": [
+      {
+        "name": "EndOn",
+        "type": "string <date>",
+        "required": false,
+        "description": "The end date of the lease. The value must adhere to the ISO 8601 format YYYY-MM-DD. Cannot be set if IsMtm is true."
+      },
+      {
+        "name": "IsMtm",
+        "type": "boolean",
+        "required": false,
+        "description": "Indicates if the lease is month-to-month. Cannot be set to true if EndOn is provided."
+      },
+      {
+        "name": "RenewedOn",
+        "type": "string <date>",
+        "required": false,
+        "description": "The date the lease was renewed. The value must adhere to the ISO 8601 format YYYY-MM-DD."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the updated lease"
+    }
+  ],
+  "requestSample": "{\n  \"EndOn\": \"2026-12-31\",\n  \"RenewedOn\": \"2026-01-15\"\n}"
+}

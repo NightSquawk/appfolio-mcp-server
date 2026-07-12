@@ -1,0 +1,48 @@
+{
+  "operationId": "patch_tenants_tenantid",
+  "resource": "tenants",
+  "name": "Update Tenant",
+  "method": "PATCH",
+  "path": "/tenants/{tenantId}",
+  "description": "Update a Tenant",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "tenantId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the tenant to update"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Tenant object",
+    "attributes": [
+      {
+        "name": "OccupancyCustomFields",
+        "type": "object",
+        "required": false,
+        "description": "The custom fields for the associated entity",
+        "attributes": [
+          {
+            "name": "CustomFieldId",
+            "type": "object",
+            "required": false,
+            "description": "The value of the CustomField to update. Ensure the value set for CustomFieldId matches the type that was set for the CustomField at creation. For example, if boolean is the type set for the CustomField associated with this CustomFieldId, the value set here must be either true or false. Note: To clear the value of a CustomField, set CustomFieldId to null in the PATCH request. For array-type custom fields (select_multiple), use an empty array [] or empty string \"\" instead of null, as null will be ignored."
+          }
+        ]
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the updated tenant"
+    }
+  ],
+  "requestSample": "{\n  \"OccupancyCustomFields\": {\n    \"a965e7d8-a17d-11ec-b909-0242ac120002\": \"a new value\",\n    \"454d8635-521e-4864-99fb-0bd6200d3a0f\": true,\n    \"c80d3dd1-9eba-45aa-803c-666280b8ff24\": 87.4,\n    \"3277c366-1783-42a9-b925-0bca2afbe391\": \"0e9a7b18-1778-4a03-bc1c-f913aeaef6bc\"\n  }\n}"
+}

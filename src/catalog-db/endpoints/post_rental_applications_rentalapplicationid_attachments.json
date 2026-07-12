@@ -1,0 +1,41 @@
+{
+  "operationId": "post_rental_applications_rentalapplicationid_attachments",
+  "resource": "rental_applications",
+  "name": "Create Rental Application Attachment",
+  "method": "POST",
+  "path": "/rental_applications/{RentalApplicationId}/attachments",
+  "description": "Add an attachment to a rental application",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "RentalApplicationId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "The rental application to which the file will be attached"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Attachment object",
+    "attributes": [
+      {
+        "name": "File",
+        "type": "string",
+        "required": false,
+        "description": "Filename.file-extension",
+        "format": "multipart/form-data"
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the rental application attachment"
+    }
+  ],
+  "requestSample": "{\n  \"File\": \"/path/to/file.pdf\"\n}"
+}

@@ -1,0 +1,83 @@
+{
+  "operationId": "get_leads_notes",
+  "resource": "leads",
+  "name": "List All Leads Notes",
+  "method": "GET",
+  "path": "/leads/notes",
+  "description": "Returns all notes for a lead that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[GuestCardId]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by GuestCardId. All GET requests must include a filter for [GuestCardId] or [LastUpdatedAtFrom]."
+    },
+    {
+      "name": "filters[LastUpdatedAtFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter lead notes last updated at or after this date-time. All GET requests must include a filter for [GuestCardId] or [LastUpdatedAtFrom]."
+    },
+    {
+      "name": "page[number]",
+      "type": "integer",
+      "required": false,
+      "description": "Page number for pagination. Default is 1."
+    },
+    {
+      "name": "page[size]",
+      "type": "integer",
+      "required": false,
+      "description": "Page size for pagination. Default is 1000."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "Array of objects (Lead.Note)",
+      "required": false,
+      "description": "Array of lead note objects meeting the filter criteria"
+    },
+    {
+      "name": "data[].Body",
+      "type": "string",
+      "required": false,
+      "description": "A brief informative message about the lead note. A lead note cannot exceed 63,535 characters."
+    },
+    {
+      "name": "data[].EntityId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "The unique identifier of the Guest Card to which the note will be attached"
+    },
+    {
+      "name": "data[].LastUpdatedAt",
+      "type": "string",
+      "required": false,
+      "description": "The date the lead note's details were last updated"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the note associated with the guest card"
+    },
+    {
+      "name": "data[].NoteId",
+      "type": "string <uuid>",
+      "required": false,
+      "deprecated": true,
+      "description": "Unique identifier of the note associated with the guest card. Deprecated in favor of Id."
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/leads/notes?filters[GuestCardId]=1abcde23-c543-456e-abc9-123456789cba&filters[LastUpdatedAtFrom]=2020-12-15T16:30:46Z' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

@@ -1,0 +1,46 @@
+{
+  "operationId": "patch_properties_propertyid_marketing_photos_marketingphotoid",
+  "resource": "properties",
+  "name": "Update Property Marketing Photo",
+  "method": "PATCH",
+  "path": "/properties/{PropertyId}/marketing_photos/{MarketingPhotoId}",
+  "description": "Update a property marketing photo",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "PropertyId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "The property to which the marketing photo is attached"
+    },
+    {
+      "name": "MarketingPhotoId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the marketing photo to update"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Marketing Photo object",
+    "attributes": [
+      {
+        "name": "Position",
+        "type": "string",
+        "required": false,
+        "description": "The position of the marketing photo in the property marketing photo gallery. The position must be a positive integer. The other marketing photos in the gallery will be shifted to accommodate the new position."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the updated property marketing photo"
+    }
+  ],
+  "requestSample": "{\n  \"Position\": 1\n}"
+}

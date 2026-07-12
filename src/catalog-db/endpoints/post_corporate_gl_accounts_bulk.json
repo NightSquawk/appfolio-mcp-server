@@ -1,0 +1,71 @@
+{
+  "operationId": "post_corporate_gl_accounts_bulk",
+  "resource": "corporate",
+  "name": "Bulk Create Corporate General Ledger Accounts",
+  "method": "POST",
+  "path": "/corporate/gl_accounts/bulk",
+  "description": "Create Corporate General Ledger Account in bulk",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "requestBody": {
+    "required": true,
+    "description": "Corporate General Ledger account objects",
+    "attributes": [
+      {
+        "name": "data",
+        "type": "array",
+        "required": false,
+        "description": "Array of General Ledger account objects",
+        "attributes": [
+          {
+            "name": "ReferenceId",
+            "type": "string",
+            "required": true,
+            "description": "Transient unique ID assigned by the developer. Used to reference individual gl account in the bulk-creation of corporate gl accounts."
+          },
+          {
+            "name": "Name",
+            "type": "string",
+            "required": true,
+            "description": "The user-provided name of the corporate general ledger account. This name must be unique, no duplicate record is allowed."
+          },
+          {
+            "name": "Type",
+            "type": "string",
+            "required": true,
+            "description": "The account type or category of the corporate GL account. Valid values include asset capital cash expense income liability other_expense or other_income.",
+            "enum": ["asset", "capital", "cash", "expense", "income", "liability", "other_expense", "other_income"]
+          },
+          {
+            "name": "Number",
+            "type": "string",
+            "required": false,
+            "description": "The user-provided number of the corporate general ledger account. This number must be unique, no duplicate record is allowed."
+          },
+          {
+            "name": "OffsetAccountId",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "Unique identifier of the corporate offset account"
+          },
+          {
+            "name": "ParentGlAccountId",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "Unique identifier of the parent general ledger account. If present, it indicates the parent account to which the sub-account belongs."
+          }
+        ]
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "JobId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the bulk creation job"
+    }
+  ],
+  "requestSample": "{\n  \"data\": [\n    {}\n  ]\n}"
+}

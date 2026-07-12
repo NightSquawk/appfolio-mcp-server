@@ -1,0 +1,203 @@
+{
+  "operationId": "post_owners_bulk",
+  "resource": "owners",
+  "name": "Bulk Create Owners",
+  "method": "POST",
+  "path": "/owners/bulk",
+  "description": "Create owners in bulk",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "requestBody": {
+    "required": true,
+    "description": "Owner objects",
+    "attributes": [
+      {
+        "name": "data",
+        "type": "array",
+        "required": false,
+        "description": "Array of owner objects to create in bulk",
+        "attributes": [
+          {
+            "name": "ReferenceId",
+            "type": "string",
+            "required": true,
+            "description": "Transient unique ID assigned by the developer. Used to reference individual owner in the bulk-creation of owners."
+          },
+          {
+            "name": "FirstName",
+            "type": "string",
+            "required": false,
+            "description": "The first name of the owner. This value is required when CompanyName is not provided."
+          },
+          {
+            "name": "LastName",
+            "type": "string",
+            "required": false,
+            "description": "The last name of the owner. This value is required when CompanyName is not provided."
+          },
+          {
+            "name": "CompanyName",
+            "type": "string",
+            "required": false,
+            "description": "The company name associated with the owner. This value is required when FirstName or LastName is not provided."
+          },
+          {
+            "name": "OwnerPaidByACH",
+            "type": "boolean",
+            "required": false,
+            "description": "Indicates whether the owner is paid via ACH (Automated Clearing House) transfer"
+          },
+          {
+            "name": "UseOnlinePayables",
+            "type": "boolean",
+            "required": false,
+            "description": "Indicates whether the owner is paid via online payables"
+          },
+          {
+            "name": "BankAccountRoutingNumber",
+            "type": "string",
+            "required": false,
+            "description": "The owner's bank account routing number. This attribute is required when UseOnlinePayables and OwnerPaidByACH are both true."
+          },
+          {
+            "name": "BankAccountNumber",
+            "type": "string",
+            "required": false,
+            "description": "The owner's bank account number. This attribute is required when UseOnlinePayables and OwnerPaidByACH are both true."
+          },
+          {
+            "name": "SavingsAccount",
+            "type": "boolean",
+            "required": false,
+            "description": "Indicates whether the owner's bank account is a checking or savings account. If true, the owner is using a savings account; otherwise, the bank account in use is a checking account."
+          },
+          {
+            "name": "TaxpayerName",
+            "type": "string",
+            "required": false,
+            "description": "The name of the taxpayer associated with the owner's account"
+          },
+          {
+            "name": "TaxpayerId",
+            "type": "string",
+            "required": false,
+            "description": "The tax identification number of the taxpayer associated with the owner's account"
+          },
+          {
+            "name": "Send1099",
+            "type": "boolean",
+            "required": false,
+            "description": "Indicates whether a 1099 form is sent to the owner. Note: If Send1099 is set to false, only Send1099 will be considered in the request. The OwnerConsentedToReceiveElectronic1099 and Sending1099Preference values will not be processed."
+          },
+          {
+            "name": "OwnerConsentedToReceiveElectronic1099",
+            "type": "boolean",
+            "required": false,
+            "description": "Indicates whether the owner has consented to receive the 1099 tax form electronically. If true, the owner's Email must be provided in the request."
+          },
+          {
+            "name": "Sending1099Preference",
+            "type": "string",
+            "required": false,
+            "enum": ["Paper", "Electronic", "PaperAndElectronic"],
+            "description": "Indicates the owner's 1099 sending preference. Valid values include \"Paper\", \"Electronic\" or \"PaperAndElectronic\"."
+          },
+          {
+            "name": "EmailEcheckReceipt",
+            "type": "boolean",
+            "required": false,
+            "description": "Indicates whether or not to send a notification to the owner after an eCheck payment is made. It can only be set when Owner Vendor eCheck is enabled and the owner has a primary email address. Additionally, OwnerPaidByACH must be true. If Online Payables is enabled, UseOnlinePayables must also be true."
+          },
+          {
+            "name": "HoldPayments",
+            "type": "boolean",
+            "required": false,
+            "description": "When set to true, bills created for the owner through the Pay Owner or Owner Draw function will not be available in the Pay Bills flow."
+          },
+          {
+            "name": "Tags",
+            "type": "Array of strings",
+            "required": false,
+            "description": "User-defined tag(s) that categorize the owner"
+          },
+          {
+            "name": "UseAlternatePayee",
+            "type": "boolean",
+            "required": false,
+            "description": "Indicates whether or not the owner payments are submitted to an alternate person other than what is listed for Owner First, Last and/or Company Name"
+          },
+          {
+            "name": "AlternatePayeeName",
+            "type": "string",
+            "required": false,
+            "description": "The name of the alternate payee. This attribute can be provided only when UseAlternatePayee is true."
+          },
+          {
+            "name": "AlternatePaymentAddress1",
+            "type": "string",
+            "required": false,
+            "description": "The street address of the Alternate Payee. This attribute must be provided when UseAlternatePayee is true."
+          },
+          {
+            "name": "AlternatePaymentAddress2",
+            "type": "string",
+            "required": false,
+            "description": "Additional street address information pertaining to the alternate payee. This attribute can be provided only when UseAlternatePayee is true."
+          },
+          {
+            "name": "AlternatePaymentCity",
+            "type": "string",
+            "required": false,
+            "description": "The city where the alternate payee is located. This attribute must be provided when UseAlternatePayee is true."
+          },
+          {
+            "name": "AlternatePaymentState",
+            "type": "string",
+            "required": false,
+            "description": "The state where the alternate payee is located. This attribute can be provided only when UseAlternatePayee is true. This attribute is required and must be valid when UseOnlinePayables is true and OwnerPaidByACH is false or not provided."
+          },
+          {
+            "name": "AlternatePaymentPostalCode",
+            "type": "string",
+            "required": false,
+            "description": "The zip code where the alternate payee is located. This attribute can be provided only when UseAlternatePayee is true. Must be a string in 5-digit ZIP code format (e.g., 93013) or ZIP+4 format (e.g., 93013-0429). This attribute is required when UseOnlinePayables is true and OwnerPaidByACH is false or not provided."
+          },
+          {
+            "name": "AlternatePaymentCountryCode",
+            "type": "string",
+            "required": false,
+            "description": "The country code of the alternate payee (e.g. US for United states). This attribute must be provided when UseAlternatePayee is true. This attribute must be US when UseOnlinePayables is true and OwnerPaidByACH is false or not provided."
+          },
+          {
+            "name": "Emails",
+            "type": "array",
+            "required": false,
+            "description": "The owner's emails."
+          },
+          {
+            "name": "PhoneNumbers",
+            "type": "array",
+            "required": false,
+            "description": "The owner's phone number(s)."
+          },
+          {
+            "name": "Addresses",
+            "type": "array",
+            "required": false,
+            "description": "The owner's address(es). The primary address is required when UseOnlinePayables and OwnerPaidByACH are both true, or when UseOnlinePayables is true, OwnerPaidByACH and UseAlternatePayee are both false or not provided."
+          }
+        ]
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "JobId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "The job identifier for the bulk create operation"
+    }
+  ],
+  "requestSample": "{\n  \"data\": [\n    {}\n  ]\n}"
+}

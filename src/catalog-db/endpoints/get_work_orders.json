@@ -1,0 +1,322 @@
+{
+  "operationId": "get_work_orders",
+  "resource": "work_orders",
+  "name": "List All Work Orders",
+  "method": "GET",
+  "path": "/work_orders",
+  "description": "Returns all work orders that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[Id]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by unique identifier of the work order. All GET requests must include a filter for [Id] (if available), or [LastUpdatedAtFrom]."
+    },
+    {
+      "name": "filters[LastUpdatedAtFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter work orders updated at or after this date-time."
+    },
+    {
+      "name": "filters[CreatedAtFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter work orders created at or after this date-time."
+    },
+    {
+      "name": "filters[Status]",
+      "type": "string",
+      "required": false,
+      "description": "Filter the results based on one or more statuses. Multiple values should be separated by commas. Enum: \"Assigned\" \"Canceled\" \"Completed\" \"Estimate Requested\" \"Estimated\" \"New\" \"Scheduled\" \"Waiting\" \"Work Completed\""
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of work order objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the work order"
+    },
+    {
+      "name": "data[].AssignedUsers",
+      "type": "Array of objects",
+      "required": false,
+      "description": "User ID of the AppFolio Property Manager user assigned to the work order. Reference the Users endpoint for any necessary associations."
+    },
+    {
+      "name": "data[].AssignedUsers[].Name",
+      "type": "string",
+      "required": false,
+      "description": "The name of the user the work order is assigned to"
+    },
+    {
+      "name": "data[].AssignedUsers[].FirstName",
+      "type": "string",
+      "required": false,
+      "description": "The first name of the user the work order is assigned to"
+    },
+    {
+      "name": "data[].AssignedUsers[].LastName",
+      "type": "string",
+      "required": false,
+      "description": "The last name of the user the work order is assigned to"
+    },
+    {
+      "name": "data[].AssignedUsers[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "The UUID of the user the work order is assigned to"
+    },
+    {
+      "name": "data[].CanceledOn",
+      "type": "string <date>",
+      "required": false,
+      "description": "The date the work order's status changed to \"canceled\""
+    },
+    {
+      "name": "data[].CancellationReason",
+      "type": "string",
+      "required": false,
+      "description": "The comments provided by the resident when requesting cancellation via resident portal."
+    },
+    {
+      "name": "data[].CancellationRequested",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether or not cancellation of the work order was requested by the Resident."
+    },
+    {
+      "name": "data[].CompletedOn",
+      "type": "string <date>",
+      "required": false,
+      "description": "The date the work order's status changed to \"completed\""
+    },
+    {
+      "name": "data[].CreatedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "A timestamp of when the work order's status changed to \"new\""
+    },
+    {
+      "name": "data[].Description",
+      "type": "string",
+      "required": false,
+      "description": "The top-level description for a grouping of work orders in AppFolio"
+    },
+    {
+      "name": "data[].EntryInstructions",
+      "type": "string",
+      "required": false,
+      "description": "The additional information regarding entry to a unit, provided by the tenant when granting permission to enter the residence."
+    },
+    {
+      "name": "data[].Estimates",
+      "type": "Array of objects",
+      "required": false,
+      "description": "Use estimates to track anticipated costs for Work Orders. Estimates created via API are not automatically sent to Vendors or Owners, but are visible to assigned Vendors in the Vendor Portal."
+    },
+    {
+      "name": "data[].WorkOrderIssue",
+      "type": "string",
+      "required": false,
+      "description": "The display name of the issue on the work order"
+    },
+    {
+      "name": "data[].InspectionId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the inspection associated with the work order"
+    },
+    {
+      "name": "data[].JobDescription",
+      "type": "string",
+      "required": false,
+      "description": "A brief description of the work order to be performed"
+    },
+    {
+      "name": "data[].ManagementCompanyAsVendor",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether or not the management company is acting as the vendor for the work order"
+    },
+    {
+      "name": "data[].OccupancyId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the occupancy associated with the work order"
+    },
+    {
+      "name": "data[].PermissionToEnter",
+      "type": "boolean or string",
+      "required": false,
+      "description": "Indicates whether or not the occupancy has given permission to enter the unit"
+    },
+    {
+      "name": "data[].PreferredTimes",
+      "type": "Array of objects",
+      "required": false,
+      "description": "An array of preferred time slots as indicated by the tenant. Each time slot is defined by StartAt and EndAt attributes. Only populated when TenantAvailability is set to preferred_times."
+    },
+    {
+      "name": "data[].Priority",
+      "type": "string",
+      "required": false,
+      "description": "The priority of the work order. Enum: \"Urgent\" \"Normal\" \"Low\""
+    },
+    {
+      "name": "data[].PropertyId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the property where the work order will be performed"
+    },
+    {
+      "name": "data[].Recurring",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether a particular work order is recurring or not"
+    },
+    {
+      "name": "data[].RequestingTenantId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the tenant who submitted the maintenance request"
+    },
+    {
+      "name": "data[].ScheduledEnd",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "When the work order is scheduled to be completed"
+    },
+    {
+      "name": "data[].ScheduledStart",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "When the work order is scheduled to start"
+    },
+    {
+      "name": "data[].ServiceRequestId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "The ServiceRequestId can be provided to create a new work order under an existing service request (grouping of work orders)."
+    },
+    {
+      "name": "data[].SmartMaintenanceIntake",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates if the work order was dispatched through Smart Maintenance"
+    },
+    {
+      "name": "data[].SmartMaintenanceUrgency",
+      "type": "string",
+      "required": false,
+      "description": "The urgency level of the work order as determined by Smart Maintenance. Enum: \"Low\" \"Normal\" \"Critical\" \"Emergency\""
+    },
+    {
+      "name": "data[].Status",
+      "type": "string",
+      "required": false,
+      "description": "The status of the work order. Enum: \"Assigned\" \"Canceled\" \"Completed\" \"Estimate Requested\" \"Estimated\" \"New\" \"Scheduled\" \"Waiting\" \"Work Completed\""
+    },
+    {
+      "name": "data[].TenantAvailability",
+      "type": "string",
+      "required": false,
+      "description": "Indicates when the tenant is available to allow the work order to be completed. Enum: \"urgent\" \"anytime\" \"preferred_times\""
+    },
+    {
+      "name": "data[].Type",
+      "type": "string",
+      "required": false,
+      "description": "The purpose or origin of the work order request. Enum: \"Unit Turn\" \"Resident\" \"Internal\""
+    },
+    {
+      "name": "data[].TenantRemarks",
+      "type": "string",
+      "required": false,
+      "description": "A brief description of the work order by the tenant"
+    },
+    {
+      "name": "data[].UnitId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the unit associated with the work order"
+    },
+    {
+      "name": "data[].VendorId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the vendor associated with the work order"
+    },
+    {
+      "name": "data[].VendorInstructions",
+      "type": "string",
+      "required": false,
+      "description": "Instructions for the vendor on how to complete the work order"
+    },
+    {
+      "name": "data[].VendorTrade",
+      "type": "string",
+      "required": false,
+      "description": "The type of service offered by the vendor"
+    },
+    {
+      "name": "data[].VendorPortalLink",
+      "type": "string <uri>",
+      "required": false,
+      "description": "A link to the vendor portal page for the work order"
+    },
+    {
+      "name": "data[].WithholdApprovedEstimateAmount",
+      "type": "boolean",
+      "required": false,
+      "description": "When True, Estimate amounts with the status Approved will be withheld from Owner Distributions."
+    },
+    {
+      "name": "data[].WorkCompletedOn",
+      "type": "string <date>",
+      "required": false,
+      "description": "The date the work order was completed"
+    },
+    {
+      "name": "data[].WorkOrderNumber",
+      "type": "string",
+      "required": false,
+      "description": "Sequential number of the work order"
+    },
+    {
+      "name": "data[].LastUpdatedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The date the work order's details were last updated"
+    },
+    {
+      "name": "data[].Link",
+      "type": "string <uri>",
+      "required": false,
+      "description": "A link to the work order page in the AppFolio Property Manager"
+    },
+    {
+      "name": "data[].UnitTurnCategory",
+      "type": "string",
+      "required": false,
+      "description": "The category of the unit turn work order. This field requires a valid UnitId or OccupancyId if provided."
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/work_orders?page[size]=10&page[number]=2&filters[Id]=1abcde23-c543-456e-abc9-123456789cba&filters[CreatedAtFrom]=2020-12-14T16:30:46Z&filters[LastUpdatedAtFrom]=2020-12-15T16:30:46Z' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

@@ -1,0 +1,111 @@
+{
+  "slug": "fixed_assets",
+  "endpoint": "fixed_assets.json",
+  "name": "Fixed Assets",
+  "description": "Returns Fixed Assets report data.",
+  "requiredFilters": [],
+  "parameters": [
+    {
+      "name": "property_visibility",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "enum": [
+        "active",
+        "hidden",
+        "all"
+      ],
+      "description": "The property visibility to filter by."
+    },
+    {
+      "name": "unit_ids",
+      "type": "array",
+      "required": false,
+      "description": "Unique reference number of the unit or units to filter by."
+    },
+    {
+      "name": "property",
+      "type": "object",
+      "required": false,
+      "description": "The property filter. Expand to view all attributes associated with this filter. You can only submit ONE of the below filters.",
+      "attributes": [
+        {
+          "name": "property_id",
+          "type": "string",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "include_property_level_fixed_assets",
+      "type": "string",
+      "required": false,
+      "default": "1",
+      "enum": [
+        "0",
+        "1"
+      ],
+      "description": "Include Property Level Fixed Assets"
+    },
+    {
+      "name": "asset_types",
+      "type": "string",
+      "required": false,
+      "default": "All",
+      "enum": [
+        "All",
+        "'1' denotes 'Blinds'",
+        "'2' denotes 'Dryer'",
+        "'3' denotes 'Elevator'",
+        "'4' denotes 'Flooring'",
+        "'5' denotes 'Hot Water Heater'",
+        "'6' denotes 'HVAC'",
+        "'7' denotes 'Oven'",
+        "'8' denotes 'Refrigerator'",
+        "'9' denotes 'Roof'",
+        "'10' denotes 'Vehicle'",
+        "'11' denotes 'Washing Machine'"
+      ],
+      "description": "Asset types to filter by."
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "required": false,
+      "default": "all",
+      "enum": [
+        "all",
+        "'0' denotes 'In Storage'",
+        "'1' denotes 'Installed'",
+        "'2' denotes 'Retired'"
+      ],
+      "description": "Status to filter by."
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "property_visibility": "active",
+    "unit_ids": [
+      "1",
+      "2",
+      "3"
+    ],
+    "property": {
+      "property_id": "1"
+    },
+    "include_property_level_fixed_assets": "1",
+    "asset_types": "All",
+    "status": "all",
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

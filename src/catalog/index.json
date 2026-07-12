@@ -1,0 +1,1511 @@
+{
+  "generatedFrom": "AppFolio Reports API (2.0.0).md",
+  "reportCount": 137,
+  "universalParameters": [
+    "paginate_results",
+    "page",
+    "limit"
+  ],
+  "reports": [
+    {
+      "slug": "board_of_directors",
+      "name": "Board of Directors",
+      "category": "Association / HOA",
+      "description": "Returns Board of Directors report data.",
+      "requiredFilters": [],
+      "paramCount": 4,
+      "endpoint": "board_of_directors.json"
+    },
+    {
+      "slug": "dues_roll",
+      "name": "Dues Roll",
+      "category": "Association / HOA",
+      "description": "Returns Dues Roll report data.",
+      "requiredFilters": [
+        "as_of_to"
+      ],
+      "paramCount": 5,
+      "endpoint": "dues_roll.json"
+    },
+    {
+      "slug": "dues_roll_itemized",
+      "name": "Dues Roll (Itemized)",
+      "category": "Association / HOA",
+      "description": "Returns Dues Roll (Itemized) report data.",
+      "requiredFilters": [
+        "as_of_to"
+      ],
+      "paramCount": 7,
+      "endpoint": "dues_roll_itemized.json"
+    },
+    {
+      "slug": "eligible_debt_summary",
+      "name": "Eligible Debt Summary",
+      "category": "Association / HOA",
+      "description": "Returns Eligible Debt Summary report data.",
+      "requiredFilters": [],
+      "paramCount": 3,
+      "endpoint": "eligible_debt_summary.json"
+    },
+    {
+      "slug": "fund_balance_sheet",
+      "name": "Fund Balance Sheet",
+      "category": "Association / HOA",
+      "description": "Returns Fund Balance Sheet report data.",
+      "requiredFilters": [
+        "posted_on_to"
+      ],
+      "paramCount": 6,
+      "endpoint": "fund_balance_sheet.json"
+    },
+    {
+      "slug": "fund_balance_sheet_active_funds",
+      "name": "Fund Balance Sheet - Active Funds",
+      "category": "Association / HOA",
+      "description": "Returns Fund Balance Sheet - Active Funds report data.",
+      "requiredFilters": [
+        "posted_on_to"
+      ],
+      "paramCount": 6,
+      "endpoint": "fund_balance_sheet_active_funds.json"
+    },
+    {
+      "slug": "fund_income_statement",
+      "name": "Fund Income Statement",
+      "category": "Association / HOA",
+      "description": "Returns Fund Income Statement report data.",
+      "requiredFilters": [
+        "occurred_on_to"
+      ],
+      "paramCount": 7,
+      "endpoint": "fund_income_statement.json"
+    },
+    {
+      "slug": "homeowner_delinquency",
+      "name": "Homeowner Delinquency",
+      "category": "Association / HOA",
+      "description": "Returns Homeowner Delinquency report data.",
+      "requiredFilters": [],
+      "paramCount": 8,
+      "endpoint": "homeowner_delinquency.json"
+    },
+    {
+      "slug": "homeowner_delinquency_as_of",
+      "name": "Homeowner Delinquency (As Of)",
+      "category": "Association / HOA",
+      "description": "Returns Homeowner Delinquency (As Of) report data.",
+      "requiredFilters": [
+        "occurred_on_to"
+      ],
+      "paramCount": 9,
+      "endpoint": "homeowner_delinquency_as_of.json"
+    },
+    {
+      "slug": "homeowner_directory",
+      "name": "Homeowner Directory",
+      "category": "Association / HOA",
+      "description": "Returns Homeowner Directory report data.",
+      "requiredFilters": [],
+      "paramCount": 7,
+      "endpoint": "homeowner_directory.json"
+    },
+    {
+      "slug": "homeowner_ledger",
+      "name": "Homeowner Ledger",
+      "category": "Association / HOA",
+      "description": "Returns Homeowner Ledger report data.",
+      "requiredFilters": [
+        "parties_ids",
+        "occurred_on_from",
+        "occurred_on_to"
+      ],
+      "paramCount": 4,
+      "endpoint": "homeowner_ledger.json"
+    },
+    {
+      "slug": "homeowner_prepayment_balance",
+      "name": "Homeowner Prepayment Balance",
+      "category": "Association / HOA",
+      "description": "Returns Homeowner Prepayment Balance report data.",
+      "requiredFilters": [
+        "occurred_on_to"
+      ],
+      "paramCount": 7,
+      "endpoint": "homeowner_prepayment_balance.json"
+    },
+    {
+      "slug": "homeowner_resale",
+      "name": "Homeowner Resale",
+      "category": "Association / HOA",
+      "description": "Returns Homeowner Resale report data.",
+      "requiredFilters": [
+        "occurred_on_from",
+        "occurred_on_to"
+      ],
+      "paramCount": 6,
+      "endpoint": "homeowner_resale.json"
+    },
+    {
+      "slug": "homeowner_vehicle_info",
+      "name": "Homeowner Vehicle Info",
+      "category": "Association / HOA",
+      "description": "Returns Homeowner Vehicle Info report data.",
+      "requiredFilters": [],
+      "paramCount": 5,
+      "endpoint": "homeowner_vehicle_info.json"
+    },
+    {
+      "slug": "insurance_enforcement",
+      "name": "Insurance Enforcement",
+      "category": "Association / HOA",
+      "description": "Returns Insurance Enforcement report data.",
+      "requiredFilters": [],
+      "paramCount": 1,
+      "endpoint": "insurance_enforcement.json"
+    },
+    {
+      "slug": "violation_detail",
+      "name": "Violation Detail",
+      "category": "Association / HOA",
+      "description": "Returns Violation Detail report data.",
+      "requiredFilters": [
+        "noted_on_from",
+        "noted_on_to"
+      ],
+      "paramCount": 7,
+      "endpoint": "violation_detail.json"
+    },
+    {
+      "slug": "account_totals",
+      "name": "Account Totals",
+      "category": "Financial",
+      "description": "Returns Account Totals report data.",
+      "requiredFilters": [
+        "gl_account_ids",
+        "posted_on_from",
+        "posted_on_to"
+      ],
+      "paramCount": 7,
+      "endpoint": "account_totals.json"
+    },
+    {
+      "slug": "additional_fees",
+      "name": "Additional Fees",
+      "category": "Financial",
+      "description": "Returns Additional Fees report data.",
+      "requiredFilters": [],
+      "paramCount": 3,
+      "endpoint": "additional_fees.json"
+    },
+    {
+      "slug": "aged_payables_summary",
+      "name": "Aged Payables Summary",
+      "category": "Financial",
+      "description": "Returns Aged Payables Summary report data.",
+      "requiredFilters": [
+        "occurred_on_to"
+      ],
+      "paramCount": 6,
+      "endpoint": "aged_payables_summary.json"
+    },
+    {
+      "slug": "aged_receivables_detail",
+      "name": "Aged Receivable Detail",
+      "category": "Financial",
+      "description": "Returns Aged Receivable Detail report data.",
+      "requiredFilters": [
+        "occurred_on_to"
+      ],
+      "paramCount": 7,
+      "endpoint": "aged_receivables_detail.json"
+    },
+    {
+      "slug": "annual_budget_comparative",
+      "name": "Annual Budget - Comparative",
+      "category": "Financial",
+      "description": "Returns Annual Budget - Comparative report data.",
+      "requiredFilters": [
+        "occurred_on_to"
+      ],
+      "paramCount": 7,
+      "endpoint": "annual_budget_comparative.json"
+    },
+    {
+      "slug": "annual_budget_forecast",
+      "name": "Annual Budget - Forecast",
+      "category": "Financial",
+      "description": "Returns Annual Budget - Forecast report data.",
+      "requiredFilters": [
+        "period_from",
+        "period_to"
+      ],
+      "paramCount": 7,
+      "endpoint": "annual_budget_forecast.json"
+    },
+    {
+      "slug": "balance_sheet",
+      "name": "Balance Sheet",
+      "category": "Financial",
+      "description": "Returns Balance Sheet report data.",
+      "requiredFilters": [
+        "posted_on_to",
+        "properties"
+      ],
+      "paramCount": 7,
+      "endpoint": "balance_sheet.json"
+    },
+    {
+      "slug": "balance_sheet_comparative",
+      "name": "Balance Sheet - Comparative",
+      "category": "Financial",
+      "description": "Returns Balance Sheet - Comparative report data.",
+      "requiredFilters": [
+        "posted_on_to"
+      ],
+      "paramCount": 7,
+      "endpoint": "balance_sheet_comparative.json"
+    },
+    {
+      "slug": "balance_sheet_comparison",
+      "name": "Balance Sheet - Property Comparison",
+      "category": "Financial",
+      "description": "Returns Balance Sheet - Property Comparison report data.",
+      "requiredFilters": [
+        "properties",
+        "posted_on_to"
+      ],
+      "paramCount": 6,
+      "endpoint": "balance_sheet_comparison.json"
+    },
+    {
+      "slug": "bank_account_association",
+      "name": "Bank Account Association",
+      "category": "Financial",
+      "description": "Returns Bank Account Association report data.",
+      "requiredFilters": [],
+      "paramCount": 5,
+      "endpoint": "bank_account_association.json"
+    },
+    {
+      "slug": "budget_comparative",
+      "name": "Budget - Comparative",
+      "category": "Financial",
+      "description": "Returns Budget - Comparative report data.",
+      "requiredFilters": [
+        "period_from",
+        "period_to",
+        "comparison_period_from",
+        "comparison_period_to"
+      ],
+      "paramCount": 10,
+      "endpoint": "budget_comparative.json"
+    },
+    {
+      "slug": "budget_comparison",
+      "name": "Budget - Property Comparison",
+      "category": "Financial",
+      "description": "Returns Budget - Property Comparison report data.",
+      "requiredFilters": [
+        "properties",
+        "period_from",
+        "period_to"
+      ],
+      "paramCount": 8,
+      "endpoint": "budget_comparison.json"
+    },
+    {
+      "slug": "cash_flow",
+      "name": "Cash Flow",
+      "category": "Financial",
+      "description": "Returns Cash Flow report data.",
+      "requiredFilters": [
+        "posted_on_from",
+        "posted_on_to"
+      ],
+      "paramCount": 10,
+      "endpoint": "cash_flow.json"
+    },
+    {
+      "slug": "twelve_month_cash_flow",
+      "name": "Cash Flow - 12 Month",
+      "category": "Financial",
+      "description": "Returns Cash Flow - 12 Month report data.",
+      "requiredFilters": [
+        "posted_on_from",
+        "posted_on_to"
+      ],
+      "paramCount": 10,
+      "endpoint": "twelve_month_cash_flow.json"
+    },
+    {
+      "slug": "cash_flow_comparison",
+      "name": "Cash Flow - Property Comparison",
+      "category": "Financial",
+      "description": "Returns Cash Flow - Property Comparison report data.",
+      "requiredFilters": [
+        "properties",
+        "posted_on_from",
+        "posted_on_to"
+      ],
+      "paramCount": 10,
+      "endpoint": "cash_flow_comparison.json"
+    },
+    {
+      "slug": "cash_flow_detail",
+      "name": "Cash Flow Detail",
+      "category": "Financial",
+      "description": "Returns Cash Flow Detail report data.",
+      "requiredFilters": [
+        "posted_on_from",
+        "posted_on_to"
+      ],
+      "paramCount": 7,
+      "endpoint": "cash_flow_detail.json"
+    },
+    {
+      "slug": "chart_of_accounts",
+      "name": "Chart of Accounts",
+      "category": "Financial",
+      "description": "Returns Chart of Accounts report data.",
+      "requiredFilters": [],
+      "paramCount": 1,
+      "endpoint": "chart_of_accounts.json"
+    },
+    {
+      "slug": "email_delivery_errors",
+      "name": "Email Delivery Errors",
+      "category": "Financial",
+      "description": "Returns Email Delivery Errors report data.",
+      "requiredFilters": [
+        "sent_at_from",
+        "sent_at_to"
+      ],
+      "paramCount": 6,
+      "endpoint": "email_delivery_errors.json"
+    },
+    {
+      "slug": "expense_distribution",
+      "name": "Expense Distribution",
+      "category": "Financial",
+      "description": "Returns Expense Distribution report data.",
+      "requiredFilters": [
+        "posted_on_from",
+        "posted_on_to"
+      ],
+      "paramCount": 6,
+      "endpoint": "expense_distribution.json"
+    },
+    {
+      "slug": "fixed_assets",
+      "name": "Fixed Assets",
+      "category": "Financial",
+      "description": "Returns Fixed Assets report data.",
+      "requiredFilters": [],
+      "paramCount": 7,
+      "endpoint": "fixed_assets.json"
+    },
+    {
+      "slug": "general_ledger",
+      "name": "General Ledger",
+      "category": "Financial",
+      "description": "Returns General Ledger report data.",
+      "requiredFilters": [
+        "posted_on_from",
+        "posted_on_to"
+      ],
+      "paramCount": 12,
+      "endpoint": "general_ledger.json"
+    },
+    {
+      "slug": "import_variances",
+      "name": "Import Variances",
+      "category": "Financial",
+      "description": "Returns Import Variances report data.",
+      "requiredFilters": [],
+      "paramCount": 2,
+      "endpoint": "import_variances.json"
+    },
+    {
+      "slug": "income_statement",
+      "name": "Income Statement",
+      "category": "Financial",
+      "description": "Returns Income Statement report data.",
+      "requiredFilters": [
+        "posted_on_to"
+      ],
+      "paramCount": 7,
+      "endpoint": "income_statement.json"
+    },
+    {
+      "slug": "twelve_month_income_statement",
+      "name": "Income Statement - 12 Month",
+      "category": "Financial",
+      "description": "Returns Income Statement - 12 Month report data.",
+      "requiredFilters": [
+        "posted_on_from",
+        "posted_on_to"
+      ],
+      "paramCount": 9,
+      "endpoint": "twelve_month_income_statement.json"
+    },
+    {
+      "slug": "income_statement_comparative",
+      "name": "Income Statement - Comparative",
+      "category": "Financial",
+      "description": "Returns Income Statement - Comparative report data.",
+      "requiredFilters": [
+        "posted_on_from",
+        "posted_on_to"
+      ],
+      "paramCount": 8,
+      "endpoint": "income_statement_comparative.json"
+    },
+    {
+      "slug": "income_statement_comparison",
+      "name": "Income Statement - Property Comparison",
+      "category": "Financial",
+      "description": "Returns Income Statement - Property Comparison report data.",
+      "requiredFilters": [
+        "properties",
+        "posted_on_from",
+        "posted_on_to"
+      ],
+      "paramCount": 8,
+      "endpoint": "income_statement_comparison.json"
+    },
+    {
+      "slug": "income_statement_date_range",
+      "name": "Income Statement (Date Range)",
+      "category": "Financial",
+      "description": "Returns Income Statement (Date Range) report data.",
+      "requiredFilters": [
+        "posted_on_from",
+        "posted_on_to"
+      ],
+      "paramCount": 8,
+      "endpoint": "income_statement_date_range.json"
+    },
+    {
+      "slug": "insurance_usage",
+      "name": "Insurance Usage",
+      "category": "Financial",
+      "description": "Returns Insurance Usage report data.",
+      "requiredFilters": [
+        "month_for_from",
+        "month_for_to"
+      ],
+      "paramCount": 5,
+      "endpoint": "insurance_usage.json"
+    },
+    {
+      "slug": "late_fee_policy_comparison",
+      "name": "Late Fee Policy Comparison",
+      "category": "Financial",
+      "description": "Returns Late Fee Policy Comparison report data.",
+      "requiredFilters": [
+        "effective_on_to"
+      ],
+      "paramCount": 7,
+      "endpoint": "late_fee_policy_comparison.json"
+    },
+    {
+      "slug": "loans",
+      "name": "Loans",
+      "category": "Financial",
+      "description": "Returns Loans report data.",
+      "requiredFilters": [
+        "reference_to"
+      ],
+      "paramCount": 5,
+      "endpoint": "loans.json"
+    },
+    {
+      "slug": "trial_balance",
+      "name": "Trial Balance",
+      "category": "Financial",
+      "description": "Returns Trial Balance report data.",
+      "requiredFilters": [
+        "posted_on_from",
+        "posted_on_to"
+      ],
+      "paramCount": 6,
+      "endpoint": "trial_balance.json"
+    },
+    {
+      "slug": "trial_balance_by_property",
+      "name": "Trial Balance by Property",
+      "category": "Financial",
+      "description": "Returns Trial Balance by Property report data.",
+      "requiredFilters": [
+        "posted_on_from",
+        "posted_on_to"
+      ],
+      "paramCount": 6,
+      "endpoint": "trial_balance_by_property.json"
+    },
+    {
+      "slug": "trust_account_balance",
+      "name": "Trust Account Balance",
+      "category": "Financial",
+      "description": "Returns Trust Account Balance report data.",
+      "requiredFilters": [
+        "occurred_on_to"
+      ],
+      "paramCount": 7,
+      "endpoint": "trust_account_balance.json"
+    },
+    {
+      "slug": "trust_account_balance_detail",
+      "name": "Trust Account Detail",
+      "category": "Financial",
+      "description": "Returns Trust Account Detail report data.",
+      "requiredFilters": [
+        "posted_on_from",
+        "posted_on_to"
+      ],
+      "paramCount": 7,
+      "endpoint": "trust_account_balance_detail.json"
+    },
+    {
+      "slug": "guest_card_inquiries",
+      "name": "Guest Card Inquiries",
+      "category": "Leasing",
+      "description": "Returns Guest Card Inquiries report data.",
+      "requiredFilters": [
+        "received_on_from",
+        "received_on_to"
+      ],
+      "paramCount": 10,
+      "endpoint": "guest_card_inquiries.json"
+    },
+    {
+      "slug": "guest_cards",
+      "name": "Guest Card Interests",
+      "category": "Leasing",
+      "description": "Returns Guest Card Interests report data.",
+      "requiredFilters": [
+        "received_on_from",
+        "received_on_to"
+      ],
+      "paramCount": 9,
+      "endpoint": "guest_cards.json"
+    },
+    {
+      "slug": "historical_advertised_rent",
+      "name": "Historical Advertised Rent",
+      "category": "Leasing",
+      "description": "Returns Historical Advertised Rent report data.",
+      "requiredFilters": [
+        "rents_advertised_on_from",
+        "rents_advertised_on_to"
+      ],
+      "paramCount": 5,
+      "endpoint": "historical_advertised_rent.json"
+    },
+    {
+      "slug": "inactive_guest_cards",
+      "name": "Inactive Guest Card Interests",
+      "category": "Leasing",
+      "description": "Returns Inactive Guest Card Interests report data.",
+      "requiredFilters": [
+        "received_on_from",
+        "received_on_to"
+      ],
+      "paramCount": 7,
+      "endpoint": "inactive_guest_cards.json"
+    },
+    {
+      "slug": "lease_expiration_detail",
+      "name": "Lease Expiration Detail By Month",
+      "category": "Leasing",
+      "description": "Returns Lease Expiration Detail By Month report data.",
+      "requiredFilters": [
+        "filter_lease_date_range_by",
+        "ends_on_from",
+        "ends_on_to"
+      ],
+      "paramCount": 10,
+      "endpoint": "lease_expiration_detail.json"
+    },
+    {
+      "slug": "lease_expiration_summary",
+      "name": "Lease Expiration Summary By Month",
+      "category": "Leasing",
+      "description": "Returns Lease Expiration Summary By Month report data.",
+      "requiredFilters": [
+        "ends_on_from"
+      ],
+      "paramCount": 5,
+      "endpoint": "lease_expiration_summary.json"
+    },
+    {
+      "slug": "lease_history",
+      "name": "Lease History",
+      "category": "Leasing",
+      "description": "Returns Lease History report data.",
+      "requiredFilters": [
+        "lease_history_filter_by",
+        "start_on_from",
+        "start_on_to"
+      ],
+      "paramCount": 9,
+      "endpoint": "lease_history.json"
+    },
+    {
+      "slug": "leasing_agent_performance",
+      "name": "Leasing Agent Performance",
+      "category": "Leasing",
+      "description": "Returns Leasing Agent Performance report data.",
+      "requiredFilters": [
+        "received_on_from",
+        "received_on_to"
+      ],
+      "paramCount": 4,
+      "endpoint": "leasing_agent_performance.json"
+    },
+    {
+      "slug": "leasing_funnel_performance",
+      "name": "Leasing Funnel Performance",
+      "category": "Leasing",
+      "description": "Returns Leasing Funnel Performance report data.",
+      "requiredFilters": [
+        "received_on_from",
+        "received_on_to"
+      ],
+      "paramCount": 7,
+      "endpoint": "leasing_funnel_performance.json"
+    },
+    {
+      "slug": "leasing_summary",
+      "name": "Leasing Summary",
+      "category": "Leasing",
+      "description": "Returns Leasing Summary report data.",
+      "requiredFilters": [
+        "posted_on_from",
+        "posted_on_to"
+      ],
+      "paramCount": 5,
+      "endpoint": "leasing_summary.json"
+    },
+    {
+      "slug": "prospect_source_tracking",
+      "name": "Prospect Source Tracking",
+      "category": "Leasing",
+      "description": "Returns Prospect Source Tracking report data.",
+      "requiredFilters": [
+        "received_on_from",
+        "received_on_to"
+      ],
+      "paramCount": 5,
+      "endpoint": "prospect_source_tracking.json"
+    },
+    {
+      "slug": "renewal_summary",
+      "name": "Renewal Summary",
+      "category": "Leasing",
+      "description": "Returns Renewal Summary report data.",
+      "requiredFilters": [
+        "start_on_from",
+        "start_on_to"
+      ],
+      "paramCount": 8,
+      "endpoint": "renewal_summary.json"
+    },
+    {
+      "slug": "rental_applications",
+      "name": "Rental Applications",
+      "category": "Leasing",
+      "description": "Returns Rental Applications report data.",
+      "requiredFilters": [
+        "received_on_from",
+        "received_on_to"
+      ],
+      "paramCount": 8,
+      "endpoint": "rental_applications.json"
+    },
+    {
+      "slug": "screening_assessments",
+      "name": "Screening Assessments",
+      "category": "Leasing",
+      "description": "Returns Screening Assessments report data.",
+      "requiredFilters": [
+        "screen_ran_at_from",
+        "screen_ran_at_to"
+      ],
+      "paramCount": 6,
+      "endpoint": "screening_assessments.json"
+    },
+    {
+      "slug": "screening_usage",
+      "name": "Screening Usage",
+      "category": "Leasing",
+      "description": "Returns Screening Usage report data.",
+      "requiredFilters": [
+        "occurred_on_from",
+        "occurred_on_to"
+      ],
+      "paramCount": 5,
+      "endpoint": "screening_usage.json"
+    },
+    {
+      "slug": "showings",
+      "name": "Showings",
+      "category": "Leasing",
+      "description": "Returns Showings report data.",
+      "requiredFilters": [
+        "showing_date_from",
+        "showing_date_to"
+      ],
+      "paramCount": 7,
+      "endpoint": "showings.json"
+    },
+    {
+      "slug": "upcoming_activities",
+      "name": "Activities Summary",
+      "category": "Maintenance & Workflow",
+      "description": "Returns Activities Summary report data.",
+      "requiredFilters": [
+        "due_at_from",
+        "due_at_to"
+      ],
+      "paramCount": 9,
+      "endpoint": "upcoming_activities.json"
+    },
+    {
+      "slug": "association_work_order",
+      "name": "Association Work Order",
+      "category": "Maintenance & Workflow",
+      "description": "Returns Association Work Order report data.",
+      "requiredFilters": [],
+      "paramCount": 15,
+      "endpoint": "association_work_order.json"
+    },
+    {
+      "slug": "cancelled_processes",
+      "name": "Cancelled Workflows",
+      "category": "Maintenance & Workflow",
+      "description": "Returns Cancelled Workflows report data.",
+      "requiredFilters": [],
+      "paramCount": 10,
+      "endpoint": "cancelled_processes.json"
+    },
+    {
+      "slug": "completed_processes",
+      "name": "Completed Workflows",
+      "category": "Maintenance & Workflow",
+      "description": "Returns Completed Workflows report data.",
+      "requiredFilters": [],
+      "paramCount": 9,
+      "endpoint": "completed_processes.json"
+    },
+    {
+      "slug": "in_progress_workflows",
+      "name": "In-Progress Workflows",
+      "category": "Maintenance & Workflow",
+      "description": "Returns In-Progress Workflows report data.",
+      "requiredFilters": [],
+      "paramCount": 9,
+      "endpoint": "in_progress_workflows.json"
+    },
+    {
+      "slug": "inspection_detail",
+      "name": "Inspection Detail",
+      "category": "Maintenance & Workflow",
+      "description": "Returns Inspection Detail report data.",
+      "requiredFilters": [],
+      "paramCount": 6,
+      "endpoint": "inspection_detail.json"
+    },
+    {
+      "slug": "project_budget_detail",
+      "name": "Project Budget Detail",
+      "category": "Maintenance & Workflow",
+      "description": "Returns Project Budget Detail report data.",
+      "requiredFilters": [
+        "project_id"
+      ],
+      "paramCount": 3,
+      "endpoint": "project_budget_detail.json"
+    },
+    {
+      "slug": "project_directory",
+      "name": "Project Directory",
+      "category": "Maintenance & Workflow",
+      "description": "Returns Project Directory report data.",
+      "requiredFilters": [],
+      "paramCount": 9,
+      "endpoint": "project_directory.json"
+    },
+    {
+      "slug": "flows_assigned_tasks",
+      "name": "Realm-X Flows Assigned Tasks",
+      "category": "Maintenance & Workflow",
+      "description": "Returns Realm-X Flows Assigned Tasks report data.",
+      "requiredFilters": [],
+      "paramCount": 5,
+      "endpoint": "flows_assigned_tasks.json"
+    },
+    {
+      "slug": "unit_inspection",
+      "name": "Unit Inspection",
+      "category": "Maintenance & Workflow",
+      "description": "Returns Unit Inspection report data.",
+      "requiredFilters": [
+        "last_inspection_on_from"
+      ],
+      "paramCount": 5,
+      "endpoint": "unit_inspection.json"
+    },
+    {
+      "slug": "work_order",
+      "name": "Work Order",
+      "category": "Maintenance & Workflow",
+      "description": "Returns Work Order report data.",
+      "requiredFilters": [],
+      "paramCount": 17,
+      "endpoint": "work_order.json"
+    },
+    {
+      "slug": "work_order_labor_summary",
+      "name": "Work Order Labor Summary",
+      "category": "Maintenance & Workflow",
+      "description": "Returns Work Order Labor Summary report data.",
+      "requiredFilters": [
+        "labor_performed_from",
+        "labor_performed_to"
+      ],
+      "paramCount": 8,
+      "endpoint": "work_order_labor_summary.json"
+    },
+    {
+      "slug": "receivables_activity",
+      "name": "Receivables Activity",
+      "category": "Other",
+      "description": "Returns Receivables Activity report data.",
+      "requiredFilters": [
+        "receipt_date_from",
+        "receipt_date_to"
+      ],
+      "paramCount": 8,
+      "endpoint": "receivables_activity.json"
+    },
+    {
+      "slug": "surveys_summary",
+      "name": "Survey Responses",
+      "category": "Other",
+      "description": "Returns Survey Responses report data.",
+      "requiredFilters": [
+        "occurred_on_from",
+        "occurred_on_to"
+      ],
+      "paramCount": 7,
+      "endpoint": "surveys_summary.json"
+    },
+    {
+      "slug": "owner1099_detail",
+      "name": "Owner 1099 Detail",
+      "category": "Owner",
+      "description": "Returns Owner 1099 Detail report data.",
+      "requiredFilters": [
+        "year"
+      ],
+      "paramCount": 7,
+      "endpoint": "owner1099_detail.json"
+    },
+    {
+      "slug": "owner1099",
+      "name": "Owner 1099 Summary",
+      "category": "Owner",
+      "description": "Returns Owner 1099 Summary report data.",
+      "requiredFilters": [
+        "year"
+      ],
+      "paramCount": 7,
+      "endpoint": "owner1099.json"
+    },
+    {
+      "slug": "owner_custom_fields",
+      "name": "Owner Custom Fields",
+      "category": "Owner",
+      "description": "Returns Owner Custom Fields report data.",
+      "requiredFilters": [],
+      "paramCount": 3,
+      "endpoint": "owner_custom_fields.json"
+    },
+    {
+      "slug": "owner_directory",
+      "name": "Owner Directory",
+      "category": "Owner",
+      "description": "Returns Owner Directory report data.",
+      "requiredFilters": [],
+      "paramCount": 6,
+      "endpoint": "owner_directory.json"
+    },
+    {
+      "slug": "owner_leasing",
+      "name": "Owner Leasing",
+      "category": "Owner",
+      "description": "Returns Owner Leasing report data.",
+      "requiredFilters": [
+        "received_on_from",
+        "received_on_to"
+      ],
+      "paramCount": 7,
+      "endpoint": "owner_leasing.json"
+    },
+    {
+      "slug": "owner_withholdings",
+      "name": "Owner Withholdings",
+      "category": "Owner",
+      "description": "Returns Owner Withholdings report data.",
+      "requiredFilters": [
+        "posted_on_from",
+        "posted_on_to"
+      ],
+      "paramCount": 8,
+      "endpoint": "owner_withholdings.json"
+    },
+    {
+      "slug": "amenities_by_property",
+      "name": "Amenities By Property",
+      "category": "Property & Unit",
+      "description": "Returns Amenities By Property report data.",
+      "requiredFilters": [],
+      "paramCount": 3,
+      "endpoint": "amenities_by_property.json"
+    },
+    {
+      "slug": "appfolio_stack_usage",
+      "name": "AppFolio Stack™ Usage",
+      "category": "Property & Unit",
+      "description": "Returns AppFolio Stack™ Usage report data.",
+      "requiredFilters": [],
+      "paramCount": 6,
+      "endpoint": "appfolio_stack_usage.json"
+    },
+    {
+      "slug": "inventory_status",
+      "name": "Inventory Status",
+      "category": "Property & Unit",
+      "description": "Returns Inventory Status report data.",
+      "requiredFilters": [],
+      "paramCount": 5,
+      "endpoint": "inventory_status.json"
+    },
+    {
+      "slug": "inventory_usage",
+      "name": "Inventory Usage",
+      "category": "Property & Unit",
+      "description": "Returns Inventory Usage report data.",
+      "requiredFilters": [
+        "inventory_added_on_from",
+        "inventory_added_on_to"
+      ],
+      "paramCount": 9,
+      "endpoint": "inventory_usage.json"
+    },
+    {
+      "slug": "keys_detail",
+      "name": "Keys Detail",
+      "category": "Property & Unit",
+      "description": "Returns Keys Detail report data.",
+      "requiredFilters": [],
+      "paramCount": 6,
+      "endpoint": "keys_detail.json"
+    },
+    {
+      "slug": "occupancy_custom_fields",
+      "name": "Occupancy Custom Fields",
+      "category": "Property & Unit",
+      "description": "Returns Occupancy Custom Fields report data.",
+      "requiredFilters": [],
+      "paramCount": 3,
+      "endpoint": "occupancy_custom_fields.json"
+    },
+    {
+      "slug": "occupancy_summary",
+      "name": "Occupancy Summary",
+      "category": "Property & Unit",
+      "description": "Returns Occupancy Summary report data.",
+      "requiredFilters": [
+        "as_of_to"
+      ],
+      "paramCount": 5,
+      "endpoint": "occupancy_summary.json"
+    },
+    {
+      "slug": "premium_leads_billing_detail",
+      "name": "Premium Listing Billing Detail",
+      "category": "Property & Unit",
+      "description": "Returns Premium Listing Billing Detail report data.",
+      "requiredFilters": [
+        "charged_or_refunded_at_from"
+      ],
+      "paramCount": 3,
+      "endpoint": "premium_leads_billing_detail.json"
+    },
+    {
+      "slug": "property_budget",
+      "name": "Property Budget",
+      "category": "Property & Unit",
+      "description": "Returns Property Budget report data.",
+      "requiredFilters": [
+        "year_to"
+      ],
+      "paramCount": 4,
+      "endpoint": "property_budget.json"
+    },
+    {
+      "slug": "property_custom_fields",
+      "name": "Property Custom Fields",
+      "category": "Property & Unit",
+      "description": "Returns Property Custom Fields report data.",
+      "requiredFilters": [],
+      "paramCount": 3,
+      "endpoint": "property_custom_fields.json"
+    },
+    {
+      "slug": "property_directory",
+      "name": "Property Directory",
+      "category": "Property & Unit",
+      "description": "Returns Property Directory report data.",
+      "requiredFilters": [],
+      "paramCount": 3,
+      "endpoint": "property_directory.json"
+    },
+    {
+      "slug": "property_group_directory",
+      "name": "Property Group Directory",
+      "category": "Property & Unit",
+      "description": "Returns Property Group Directory report data.",
+      "requiredFilters": [],
+      "paramCount": 4,
+      "endpoint": "property_group_directory.json"
+    },
+    {
+      "slug": "property_performance",
+      "name": "Property Performance",
+      "category": "Property & Unit",
+      "description": "Returns Property Performance report data.",
+      "requiredFilters": [
+        "posted_on_from",
+        "posted_on_to"
+      ],
+      "paramCount": 7,
+      "endpoint": "property_performance.json"
+    },
+    {
+      "slug": "property_staff_assignments",
+      "name": "Property Staff Assignments",
+      "category": "Property & Unit",
+      "description": "Returns Property Staff Assignments report data.",
+      "requiredFilters": [],
+      "paramCount": 3,
+      "endpoint": "property_staff_assignments.json"
+    },
+    {
+      "slug": "rentable_items",
+      "name": "Rentable Items",
+      "category": "Property & Unit",
+      "description": "Returns Rentable Items report data.",
+      "requiredFilters": [],
+      "paramCount": 5,
+      "endpoint": "rentable_items.json"
+    },
+    {
+      "slug": "unit_custom_fields",
+      "name": "Unit Custom Fields",
+      "category": "Property & Unit",
+      "description": "Returns Unit Custom Fields report data.",
+      "requiredFilters": [],
+      "paramCount": 3,
+      "endpoint": "unit_custom_fields.json"
+    },
+    {
+      "slug": "unit_directory",
+      "name": "Unit Directory",
+      "category": "Property & Unit",
+      "description": "Returns Unit Directory report data.",
+      "requiredFilters": [],
+      "paramCount": 4,
+      "endpoint": "unit_directory.json"
+    },
+    {
+      "slug": "unit_turn_detail",
+      "name": "Unit Turn Detail",
+      "category": "Property & Unit",
+      "description": "Returns Unit Turn Detail report data.",
+      "requiredFilters": [],
+      "paramCount": 6,
+      "endpoint": "unit_turn_detail.json"
+    },
+    {
+      "slug": "unit_vacancy",
+      "name": "Unit Vacancy Detail",
+      "category": "Property & Unit",
+      "description": "Returns Unit Vacancy Detail report data.",
+      "requiredFilters": [],
+      "paramCount": 12,
+      "endpoint": "unit_vacancy.json"
+    },
+    {
+      "slug": "bill_detail",
+      "name": "Bill Detail",
+      "category": "Registers & Transactions",
+      "description": "Returns Bill Detail report data.",
+      "requiredFilters": [
+        "occurred_on_from",
+        "occurred_on_to"
+      ],
+      "paramCount": 12,
+      "endpoint": "bill_detail.json"
+    },
+    {
+      "slug": "charge_detail",
+      "name": "Charge Detail",
+      "category": "Registers & Transactions",
+      "description": "Returns Charge Detail report data.",
+      "requiredFilters": [
+        "charge_date_from",
+        "charge_date_to"
+      ],
+      "paramCount": 13,
+      "endpoint": "charge_detail.json"
+    },
+    {
+      "slug": "check_register",
+      "name": "Check Register",
+      "category": "Registers & Transactions",
+      "description": "Returns Check Register report data.",
+      "requiredFilters": [
+        "occurred_on_from",
+        "occurred_on_to"
+      ],
+      "paramCount": 11,
+      "endpoint": "check_register.json"
+    },
+    {
+      "slug": "check_register_detail",
+      "name": "Check Register Detail (Enhanced)",
+      "category": "Registers & Transactions",
+      "description": "Returns Check Register Detail (Enhanced) report data.",
+      "requiredFilters": [
+        "occurred_on_from",
+        "occurred_on_to"
+      ],
+      "paramCount": 11,
+      "endpoint": "check_register_detail.json"
+    },
+    {
+      "slug": "deposit_register",
+      "name": "Deposit Register",
+      "category": "Registers & Transactions",
+      "description": "Returns Deposit Register report data.",
+      "requiredFilters": [
+        "occurred_on_from",
+        "occurred_on_to"
+      ],
+      "paramCount": 4,
+      "endpoint": "deposit_register.json"
+    },
+    {
+      "slug": "expense_register",
+      "name": "Expense Register",
+      "category": "Registers & Transactions",
+      "description": "Returns Expense Register report data.",
+      "requiredFilters": [
+        "occurred_on_from",
+        "occurred_on_to"
+      ],
+      "paramCount": 7,
+      "endpoint": "expense_register.json"
+    },
+    {
+      "slug": "income_register",
+      "name": "Income Register",
+      "category": "Registers & Transactions",
+      "description": "Returns Income Register report data.",
+      "requiredFilters": [
+        "receipt_date_from",
+        "receipt_date_to"
+      ],
+      "paramCount": 6,
+      "endpoint": "income_register.json"
+    },
+    {
+      "slug": "payment_plans",
+      "name": "Payment Plans",
+      "category": "Registers & Transactions",
+      "description": "Returns Payment Plans report data.",
+      "requiredFilters": [
+        "occurred_on_from",
+        "occurred_on_to"
+      ],
+      "paramCount": 8,
+      "endpoint": "payment_plans.json"
+    },
+    {
+      "slug": "purchase_order",
+      "name": "Purchase Order",
+      "category": "Registers & Transactions",
+      "description": "Returns Purchase Order report data.",
+      "requiredFilters": [
+        "created_date_from",
+        "created_date_to"
+      ],
+      "paramCount": 12,
+      "endpoint": "purchase_order.json"
+    },
+    {
+      "slug": "gross_potential_rent_enhanced",
+      "name": "Gross Potential Rent",
+      "category": "Rent Roll",
+      "description": "Returns Gross Potential Rent report data.",
+      "requiredFilters": [
+        "month_of_to"
+      ],
+      "paramCount": 6,
+      "endpoint": "gross_potential_rent_enhanced.json"
+    },
+    {
+      "slug": "rent_roll",
+      "name": "Rent Roll",
+      "category": "Rent Roll",
+      "description": "Returns Rent Roll report data.",
+      "requiredFilters": [
+        "as_of_to"
+      ],
+      "paramCount": 7,
+      "endpoint": "rent_roll.json"
+    },
+    {
+      "slug": "student_housing_rent_roll_by_bed",
+      "name": "Rent Roll (By Bed)",
+      "category": "Rent Roll",
+      "description": "Returns Rent Roll (By Bed) report data.",
+      "requiredFilters": [
+        "as_of_to"
+      ],
+      "paramCount": 8,
+      "endpoint": "student_housing_rent_roll_by_bed.json"
+    },
+    {
+      "slug": "rent_roll_commercial",
+      "name": "Rent Roll (Commercial)",
+      "category": "Rent Roll",
+      "description": "Returns Rent Roll (Commercial) report data.",
+      "requiredFilters": [
+        "as_of_to"
+      ],
+      "paramCount": 6,
+      "endpoint": "rent_roll_commercial.json"
+    },
+    {
+      "slug": "rent_roll_itemized",
+      "name": "Rent Roll (Itemized)",
+      "category": "Rent Roll",
+      "description": "Returns Rent Roll (Itemized) report data.",
+      "requiredFilters": [
+        "as_of_to"
+      ],
+      "paramCount": 8,
+      "endpoint": "rent_roll_itemized.json"
+    },
+    {
+      "slug": "tenant_debt_collections_status",
+      "name": "Debt Collections Status",
+      "category": "Tenant",
+      "description": "Returns Debt Collections Status report data.",
+      "requiredFilters": [],
+      "paramCount": 4,
+      "endpoint": "tenant_debt_collections_status.json"
+    },
+    {
+      "slug": "delinquency",
+      "name": "Delinquency",
+      "category": "Tenant",
+      "description": "Returns Delinquency report data.",
+      "requiredFilters": [],
+      "paramCount": 9,
+      "endpoint": "delinquency.json"
+    },
+    {
+      "slug": "delinquency_as_of",
+      "name": "Delinquency (As Of)",
+      "category": "Tenant",
+      "description": "Returns Delinquency (As Of) report data.",
+      "requiredFilters": [
+        "occurred_on_to"
+      ],
+      "paramCount": 9,
+      "endpoint": "delinquency_as_of.json"
+    },
+    {
+      "slug": "renter_directory",
+      "name": "Renter Directory",
+      "category": "Tenant",
+      "description": "Returns Renter Directory report data.",
+      "requiredFilters": [],
+      "paramCount": 2,
+      "endpoint": "renter_directory.json"
+    },
+    {
+      "slug": "resident_financial_activity",
+      "name": "Resident Financial Activity",
+      "category": "Tenant",
+      "description": "Returns Resident Financial Activity report data.",
+      "requiredFilters": [
+        "properties",
+        "occurred_on_from",
+        "occurred_on_to"
+      ],
+      "paramCount": 6,
+      "endpoint": "resident_financial_activity.json"
+    },
+    {
+      "slug": "security_deposit_funds_detail",
+      "name": "Security Deposit Funds Detail",
+      "category": "Tenant",
+      "description": "Returns Security Deposit Funds Detail report data.",
+      "requiredFilters": [
+        "occurred_on_to"
+      ],
+      "paramCount": 8,
+      "endpoint": "security_deposit_funds_detail.json"
+    },
+    {
+      "slug": "tenant_directory",
+      "name": "Tenant Directory",
+      "category": "Tenant",
+      "description": "Returns Tenant Directory report data.",
+      "requiredFilters": [],
+      "paramCount": 6,
+      "endpoint": "tenant_directory.json"
+    },
+    {
+      "slug": "tenant_ledger",
+      "name": "Tenant Ledger",
+      "category": "Tenant",
+      "description": "Returns Tenant Ledger report data.",
+      "requiredFilters": [
+        "parties_ids",
+        "occurred_on_from",
+        "occurred_on_to"
+      ],
+      "paramCount": 5,
+      "endpoint": "tenant_ledger.json"
+    },
+    {
+      "slug": "tenant_tickler",
+      "name": "Tenant Tickler",
+      "category": "Tenant",
+      "description": "Returns Tenant Tickler report data.",
+      "requiredFilters": [
+        "occurred_on_from",
+        "occurred_on_to"
+      ],
+      "paramCount": 6,
+      "endpoint": "tenant_tickler.json"
+    },
+    {
+      "slug": "tenant_transactions_summary",
+      "name": "Tenant Transactions Summary",
+      "category": "Tenant",
+      "description": "Returns Tenant Transactions Summary report data.",
+      "requiredFilters": [
+        "properties",
+        "month_of_to"
+      ],
+      "paramCount": 5,
+      "endpoint": "tenant_transactions_summary.json"
+    },
+    {
+      "slug": "tenant_unpaid_charges_summary",
+      "name": "Tenant Unpaid Charges Summary",
+      "category": "Tenant",
+      "description": "Returns Tenant Unpaid Charges Summary report data.",
+      "requiredFilters": [
+        "occurred_on_to",
+        "balance_operator"
+      ],
+      "paramCount": 6,
+      "endpoint": "tenant_unpaid_charges_summary.json"
+    },
+    {
+      "slug": "tenant_vehicle_info",
+      "name": "Tenant Vehicle Info",
+      "category": "Tenant",
+      "description": "Returns Tenant Vehicle Info report data.",
+      "requiredFilters": [],
+      "paramCount": 5,
+      "endpoint": "tenant_vehicle_info.json"
+    },
+    {
+      "slug": "unpaid_balances_by_month",
+      "name": "Unpaid Balances by Month",
+      "category": "Tenant",
+      "description": "Returns Unpaid Balances by Month report data.",
+      "requiredFilters": [
+        "occurred_on_from",
+        "occurred_on_to"
+      ],
+      "paramCount": 11,
+      "endpoint": "unpaid_balances_by_month.json"
+    },
+    {
+      "slug": "vendor1099",
+      "name": "Vendor 1099 Summary",
+      "category": "Vendor",
+      "description": "Returns Vendor 1099 Summary report data.",
+      "requiredFilters": [
+        "year"
+      ],
+      "paramCount": 5,
+      "endpoint": "vendor1099.json"
+    },
+    {
+      "slug": "vendor_custom_fields",
+      "name": "Vendor Custom Fields",
+      "category": "Vendor",
+      "description": "Returns Vendor Custom Fields report data.",
+      "requiredFilters": [],
+      "paramCount": 1,
+      "endpoint": "vendor_custom_fields.json"
+    },
+    {
+      "slug": "vendor_directory",
+      "name": "Vendor Directory",
+      "category": "Vendor",
+      "description": "Returns Vendor Directory report data.",
+      "requiredFilters": [],
+      "paramCount": 12,
+      "endpoint": "vendor_directory.json"
+    },
+    {
+      "slug": "vendor_ledger",
+      "name": "Vendor Ledger",
+      "category": "Vendor",
+      "description": "Returns Vendor Ledger report data.",
+      "requiredFilters": [
+        "party_contact_info",
+        "occurred_on_from",
+        "occurred_on_to"
+      ],
+      "paramCount": 7,
+      "endpoint": "vendor_ledger.json"
+    },
+    {
+      "slug": "vendor_ledger_enhanced",
+      "name": "Vendor Ledger (Enhanced)",
+      "category": "Vendor",
+      "description": "Returns Vendor Ledger (Enhanced) report data.",
+      "requiredFilters": [
+        "party_contact_info",
+        "occurred_on_from",
+        "occurred_on_to"
+      ],
+      "paramCount": 7,
+      "endpoint": "vendor_ledger_enhanced.json"
+    }
+  ]
+}

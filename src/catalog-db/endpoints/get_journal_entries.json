@@ -1,0 +1,137 @@
+{
+  "operationId": "get_journal_entries",
+  "resource": "journal_entries",
+  "name": "List All Journal Entries",
+  "method": "GET",
+  "path": "/journal_entries",
+  "description": "Returns all journal entries that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[Id]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by journal entry unique identifier"
+    },
+    {
+      "name": "filters[PropertyId]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by unique identifier of the property or association related to the journal entry"
+    },
+    {
+      "name": "filters[LastUpdatedAtFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter journal entries last updated at or after this date-time. All GET requests must include a filter for [Id] (if available), or [LastUpdatedAtFrom]."
+    },
+    {
+      "name": "page[number]",
+      "type": "integer",
+      "required": false,
+      "description": "Page number for pagination. Default is 1."
+    },
+    {
+      "name": "page[size]",
+      "type": "integer",
+      "required": false,
+      "description": "Page size for pagination. Default is 1000."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of journal entry objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the journal entry"
+    },
+    {
+      "name": "data[].AccountingBasis",
+      "type": "string",
+      "required": false,
+      "description": "The accounting basis for the journal entry.",
+      "enum": ["All", "CashOnly", "AccrualOnly"]
+    },
+    {
+      "name": "data[].EntryDate",
+      "type": "string",
+      "required": false,
+      "description": "The date the journal entry was created. Valid format is \"YYYY-MM-DD\" e.g. \"2022-03-03\"."
+    },
+    {
+      "name": "data[].LastUpdatedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The date the journal entry's details were last updated"
+    },
+    {
+      "name": "data[].LineItems",
+      "type": "array",
+      "required": false,
+      "description": "Array of line-item objects"
+    },
+    {
+      "name": "data[].LineItems[].Credit",
+      "type": "string",
+      "required": false,
+      "description": "The credit amount"
+    },
+    {
+      "name": "data[].LineItems[].Debit",
+      "type": "string",
+      "required": false,
+      "description": "The debit amount"
+    },
+    {
+      "name": "data[].LineItems[].Description",
+      "type": "string",
+      "required": false,
+      "description": "A brief, informative description of the journal entry's line item"
+    },
+    {
+      "name": "data[].LineItems[].GlAccountId",
+      "type": "string",
+      "required": false,
+      "description": "Unique identifier of the general ledger account associated with the journal entry line item"
+    },
+    {
+      "name": "data[].PropertyId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the property or association related to the journal entry"
+    },
+    {
+      "name": "data[].ReferenceNumber",
+      "type": "string",
+      "required": false,
+      "description": "The reference number representing the transaction in your ledger. This will be automatically assigned unless provided."
+    },
+    {
+      "name": "data[].Remarks",
+      "type": "string",
+      "required": false,
+      "description": "A description or summary of the journal entry"
+    },
+    {
+      "name": "data[].ScheduledReversalDate",
+      "type": "string <date>",
+      "required": false,
+      "description": "The date on which this journal entry is scheduled to be automatically reversed."
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/journal_entries?page[size]=10&page[number]=2&filters[Id]=1abcde23-c543-456e-abc9-123456789cbaZ&filters[PropertyId]=1abcde23-c543-456e-abc9-123456789cbaZ&filters[LastUpdatedAtFrom]=2020-12-15T16:30:46Z' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

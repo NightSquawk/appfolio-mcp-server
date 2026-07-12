@@ -1,0 +1,52 @@
+{
+  "operationId": "get_leases_renewal_pricings",
+  "resource": "leases",
+  "name": "List All Lease Renewal Pricings",
+  "method": "GET",
+  "path": "/leases/renewal_pricings",
+  "description": "Returns all lease renewal pricing options that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[LeaseId]",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the lease to filter renewal pricings by. LeaseId is required."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the renewal pricing option"
+    },
+    {
+      "name": "LeaseId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the lease associated with this renewal pricing option"
+    },
+    {
+      "name": "StartDate",
+      "type": "string <date>",
+      "required": false,
+      "description": "The start date of the renewal pricing option. The format is YYYY-MM-DD."
+    },
+    {
+      "name": "Price",
+      "type": "integer",
+      "required": false,
+      "description": "The monthly rent price for this renewal pricing option"
+    },
+    {
+      "name": "LeaseTerm",
+      "type": "integer",
+      "required": false,
+      "description": "The lease term in months for this renewal pricing option"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/leases/renewal_pricings?filters[LeaseId]=1abcde23-c543-456e-abc9-123456789cba' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002' \\\n     --header 'Authorization: Basic {Auth}'"
+}

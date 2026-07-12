@@ -1,0 +1,146 @@
+{
+  "operationId": "get_ca_board_members",
+  "resource": "ca",
+  "name": "List All Community Association Board Members",
+  "method": "GET",
+  "path": "/ca/board_members",
+  "description": "Returns Community Association (CA) Board of Director Member's details that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[AssociationId]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by unique identifier of the Community Association. All GET requests must include a filter for [AssociationId] or [LastUpdatedAtFrom]."
+    },
+    {
+      "name": "filters[LastUpdatedAtFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter by last updated date. All GET requests must include a filter for [AssociationId] or [LastUpdatedAtFrom]."
+    },
+    {
+      "name": "page[number]",
+      "type": "integer",
+      "required": false,
+      "description": "Page number for pagination. Default: 1"
+    },
+    {
+      "name": "page[size]",
+      "type": "integer",
+      "required": false,
+      "description": "Page size for pagination. Default: 1000"
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of CABoardMember objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the homeowner on the Board of Directors"
+    },
+    {
+      "name": "data[].AssociationId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the association related to the Board of Directors"
+    },
+    {
+      "name": "data[].Email",
+      "type": "string",
+      "required": false,
+      "description": "The Board of Director member's primary email address",
+      "deprecated": true
+    },
+    {
+      "name": "data[].Emails",
+      "type": "Array of objects",
+      "required": false,
+      "description": "The Board of Director member's emails"
+    },
+    {
+      "name": "data[].FirstName",
+      "type": "string",
+      "required": false,
+      "description": "The first name of the Board of Director member"
+    },
+    {
+      "name": "data[].LastName",
+      "type": "string",
+      "required": false,
+      "description": "The last name of the Board of Director member"
+    },
+    {
+      "name": "data[].LastUpdatedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The date the CA Board of Director's details were last updated"
+    },
+    {
+      "name": "data[].MiddleName",
+      "type": "string",
+      "required": false,
+      "description": "The middle name of the Board of Director member"
+    },
+    {
+      "name": "data[].PhoneNumber",
+      "type": "string",
+      "required": false,
+      "description": "The Board of Director member's primary phone number",
+      "deprecated": true
+    },
+    {
+      "name": "data[].PhoneNumbers",
+      "type": "Array of objects",
+      "required": false,
+      "description": "The Board of Director member's phone numbers"
+    },
+    {
+      "name": "data[].UnitId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the unit related to the Board of Directors"
+    },
+    {
+      "name": "data[].BoardMemberships",
+      "type": "Array of objects",
+      "required": false,
+      "description": "Array containing details about Board of Director memberships",
+      "attributes": [
+        {
+          "name": "Role",
+          "type": "string",
+          "required": false,
+          "description": "The Board of Director member's role. Valid roles include President, Vice President, Treasurer, Secretary/Treasurer, Board Member or other."
+        },
+        {
+          "name": "StartDate",
+          "type": "string <date>",
+          "required": false,
+          "description": "The Board of Director member's term start date"
+        },
+        {
+          "name": "EndDate",
+          "type": "string <date>",
+          "required": false,
+          "description": "The Board of Director member's term end date"
+        }
+      ]
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/ca/board_members?filters[AssociationId]=1abcde23-c543-456e-abc9-123456789cee&filters[LastUpdatedAtFrom]=2020-12-15T16:30:46Z' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

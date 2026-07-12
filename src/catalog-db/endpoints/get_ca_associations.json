@@ -1,0 +1,106 @@
+{
+  "operationId": "get_ca_associations",
+  "resource": "ca",
+  "name": "List All Community Associations",
+  "method": "GET",
+  "path": "/ca/associations",
+  "description": "Returns all Community Associations that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[Id]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by unique identifier of the Community Association"
+    },
+    {
+      "name": "filters[LastUpdatedAtFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter Community Associations by last updated date. All GET requests must include a filter for [Id] (if available), or [LastUpdatedAtFrom]."
+    },
+    {
+      "name": "page[number]",
+      "type": "integer",
+      "required": false,
+      "description": "Page number for pagination. Default: 1"
+    },
+    {
+      "name": "page[size]",
+      "type": "integer",
+      "required": false,
+      "description": "Page size for pagination. Default: 1000"
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of CommunityAssociation objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the Community Association"
+    },
+    {
+      "name": "data[].Name",
+      "type": "string",
+      "required": false,
+      "description": "The name of the Community Association"
+    },
+    {
+      "name": "data[].Address1",
+      "type": "string",
+      "required": false,
+      "description": "The primary address of the Community Association"
+    },
+    {
+      "name": "data[].Address2",
+      "type": "string",
+      "required": false,
+      "description": "The secondary address of the Community Association"
+    },
+    {
+      "name": "data[].City",
+      "type": "string",
+      "required": false,
+      "description": "The city where the Community Association is located"
+    },
+    {
+      "name": "data[].State",
+      "type": "string",
+      "required": false,
+      "description": "The state where the Community Association is located"
+    },
+    {
+      "name": "data[].Zip",
+      "type": "string",
+      "required": false,
+      "description": "The zip code where the Community Association is located"
+    },
+    {
+      "name": "data[].LastUpdatedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The date the Community Association's details were last updated"
+    },
+    {
+      "name": "data[].CustomFields",
+      "type": "object",
+      "required": false,
+      "description": "The custom fields for the associated entity"
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/ca/associations?filters[Id]=1abcde23-c543-456e-abc9-123456789cba&filters[LastUpdatedAtFrom]=2020-12-15T16:30:46Z' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

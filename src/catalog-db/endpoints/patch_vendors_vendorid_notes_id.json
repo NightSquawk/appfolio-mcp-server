@@ -1,0 +1,46 @@
+{
+  "operationId": "patch_vendors_vendorid_notes_id",
+  "resource": "vendors",
+  "name": "Update Vendor Note",
+  "method": "PATCH",
+  "path": "/vendors/{VendorId}/notes/{Id}",
+  "description": "Update a note to a vendor",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "VendorId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "The vendor to which the note will be attached"
+    },
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the note to update"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Note object",
+    "attributes": [
+      {
+        "name": "Body",
+        "type": "string",
+        "required": false,
+        "description": "A brief informative message about the vendor note. A vendor note cannot exceed 65,535 characters."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the updated vendor note"
+    }
+  ],
+  "requestSample": "{\n  \"Body\": \"This vendor completed maintenance on 11/30/2022 - Updated\"\n}"
+}

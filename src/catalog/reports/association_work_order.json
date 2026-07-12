@@ -1,0 +1,232 @@
+{
+  "slug": "association_work_order",
+  "endpoint": "association_work_order.json",
+  "name": "Association Work Order",
+  "description": "Returns Association Work Order report data.",
+  "requiredFilters": [],
+  "parameters": [
+    {
+      "name": "property_visibility",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "enum": [
+        "active",
+        "hidden",
+        "all"
+      ],
+      "description": "The property visibility to filter by."
+    },
+    {
+      "name": "unit_ids",
+      "type": "array",
+      "required": false,
+      "description": "Unique reference number of the unit or units to filter by."
+    },
+    {
+      "name": "property",
+      "type": "object",
+      "required": false,
+      "description": "The property filter. Expand to view all attributes associated with this filter. You can only submit ONE of the below filters.",
+      "attributes": [
+        {
+          "name": "property_id",
+          "type": "string",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "parties_ids",
+      "type": "object",
+      "required": false,
+      "description": "The occupancy ids to filter by. Expand to view all attributes associated with this filter. If required, you must submit an id for at least one of the below filters.",
+      "attributes": [
+        {
+          "name": "occupancies_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "party_contact_info",
+      "type": "object",
+      "required": false,
+      "description": "The Vendor filter. Expand to view all attributes associated with this filter. You can only submit ONE of the below filters.",
+      "attributes": [
+        {
+          "name": "company_id",
+          "type": "string",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "assigned_user",
+      "type": "string",
+      "required": false,
+      "default": "All",
+      "description": "Assigned user id to filter by."
+    },
+    {
+      "name": "created_by",
+      "type": "string",
+      "required": false,
+      "default": "All",
+      "description": "Created by id to filter by."
+    },
+    {
+      "name": "priority",
+      "type": "string",
+      "required": false,
+      "default": "All",
+      "enum": [
+        "All",
+        "Urgent",
+        "Normal",
+        "Low"
+      ],
+      "description": "Priority to filter by."
+    },
+    {
+      "name": "work_order_statuses",
+      "type": "array",
+      "required": false,
+      "default": [
+        "0",
+        "1",
+        "2",
+        "9",
+        "3"
+      ],
+      "enum": [
+        "'0' denotes 'New'",
+        "'1' denotes 'Estimate Requested'",
+        "'2' denotes 'Estimated'",
+        "'9' denotes 'Assigned'",
+        "'3' denotes 'Scheduled'",
+        "'6' denotes 'Waiting'",
+        "'8' denotes 'Work Done'",
+        "'12' denotes 'Ready to Bill'",
+        "'4' denotes 'Completed'",
+        "'5' denotes 'Canceled'",
+        "'7' denotes 'Completed No Need To Bill'"
+      ],
+      "description": "Current Work Order Status to filter by."
+    },
+    {
+      "name": "work_order_types",
+      "type": "array",
+      "required": false,
+      "default": [
+        "unit_turn",
+        "tenant_requested",
+        "internal"
+      ],
+      "enum": [
+        "internal",
+        "'tenant_requested' denotes 'Resident'",
+        "'unit_turn' denotes 'Unit Turn'"
+      ],
+      "description": "Work Order Type to filter by."
+    },
+    {
+      "name": "unit_turn_category",
+      "type": "array",
+      "required": false,
+      "default": [],
+      "enum": [
+        "all",
+        "'3' denotes 'Appliances'",
+        "'4' denotes 'Floors / Carpets'",
+        "'6' denotes 'Housekeeping'",
+        "'7' denotes 'Keys / Locks'",
+        "'1' denotes 'Maintenance / Repair'",
+        "'5' denotes 'Other'",
+        "'2' denotes 'Paint'"
+      ],
+      "description": "Unit turn category to filter by."
+    },
+    {
+      "name": "status_date_range_from",
+      "type": "string",
+      "required": false,
+      "default": "3 months ago",
+      "format": "YYYY-MM-DD",
+      "description": "The 'Date From' date to filter by."
+    },
+    {
+      "name": "status_date_range_to",
+      "type": "string",
+      "required": false,
+      "default": "Current date",
+      "format": "YYYY-MM-DD",
+      "description": "The 'Date To' date to filter by."
+    },
+    {
+      "name": "status_date",
+      "type": "string",
+      "required": false,
+      "default": "0",
+      "enum": [
+        "all",
+        "'0' denotes 'Created On'",
+        "'1' denotes 'Estimate Requested On'",
+        "'2' denotes 'Estimated On'",
+        "'3' denotes 'Scheduled Start'",
+        "'8' denotes 'Work Done On'",
+        "'4' denotes 'Completed On'"
+      ],
+      "description": "The Status Date to filter by."
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "property_visibility": "active",
+    "unit_ids": [
+      "1",
+      "2",
+      "3"
+    ],
+    "property": {
+      "property_id": "1"
+    },
+    "parties_ids": {
+      "occupancies_ids": []
+    },
+    "party_contact_info": {
+      "company_id": "1"
+    },
+    "assigned_user": "All",
+    "created_by": "All",
+    "priority": "All",
+    "work_order_statuses": [
+      "1",
+      "2"
+    ],
+    "work_order_types": [
+      "unit_turn",
+      "tenant_requested"
+    ],
+    "unit_turn_category": [
+      "all"
+    ],
+    "status_date_range_from": "2023-06-01",
+    "status_date_range_to": "2023-06-30",
+    "status_date": "all",
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

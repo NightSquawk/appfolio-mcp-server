@@ -1,0 +1,70 @@
+{
+  "operationId": "get_leases",
+  "resource": "leases",
+  "name": "List All Leases",
+  "method": "GET",
+  "path": "/leases",
+  "description": "Returns all leases that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[LeaseId]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter leases by lease identifier"
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Id of lease"
+    },
+    {
+      "name": "IsMtm",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates if the lease is month-to-month"
+    },
+    {
+      "name": "StartOn",
+      "type": "string",
+      "required": false,
+      "description": "Indicates the start date of the lease"
+    },
+    {
+      "name": "EndOn",
+      "type": "string",
+      "required": false,
+      "description": "Indicates the end date of the lease"
+    },
+    {
+      "name": "RenewedOn",
+      "type": "string",
+      "required": false,
+      "description": "Indicates the date the lease was renewed"
+    },
+    {
+      "name": "LastUpdatedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Indicates the date the lease was last updated"
+    },
+    {
+      "name": "Status",
+      "type": "string",
+      "required": false,
+      "description": "Indicates the status of the lease"
+    },
+    {
+      "name": "OccupancyId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Id of associated occupancy"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/leases?filters[LeaseId]=1abcde23-c543-456e-abc9-123456789cba' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002' \\\n     --header 'Authorization: Basic {Auth}'"
+}

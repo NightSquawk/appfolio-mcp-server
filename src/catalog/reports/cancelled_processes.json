@@ -1,0 +1,122 @@
+{
+  "slug": "cancelled_processes",
+  "endpoint": "cancelled_processes.json",
+  "name": "Cancelled Workflows",
+  "description": "Returns Cancelled Workflows report data.",
+  "requiredFilters": [],
+  "parameters": [
+    {
+      "name": "attachables",
+      "type": "object",
+      "required": false,
+      "description": "The attachables filter. Expand to view all attributes associated with this filter.",
+      "attributes": [
+        { "name": "properties_ids", "type": "array", "required": false, "description": "" },
+        { "name": "units_ids", "type": "array", "required": false, "description": "" },
+        { "name": "tenants_ids", "type": "array", "required": false, "description": "" },
+        { "name": "owners_ids", "type": "array", "required": false, "description": "" },
+        { "name": "rental_applications_ids", "type": "array", "required": false, "description": "" },
+        { "name": "guest_cards_ids", "type": "array", "required": false, "description": "" },
+        { "name": "guest_card_interests_ids", "type": "array", "required": false, "description": "" },
+        { "name": "service_requests_ids", "type": "array", "required": false, "description": "" },
+        { "name": "vendors_ids", "type": "array", "required": false, "description": "" }
+      ]
+    },
+    {
+      "name": "property_visibility",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "enum": ["active", "hidden", "all"],
+      "description": "The property visibility to filter by."
+    },
+    {
+      "name": "properties",
+      "type": "object",
+      "required": false,
+      "description": "The property filter. Expand to view all attributes associated with this filter. If required, you must submit an id for at least one of the below filters.",
+      "attributes": [
+        { "name": "properties_ids", "type": "array", "required": false, "description": "" },
+        { "name": "property_groups_ids", "type": "array", "required": false, "description": "" },
+        { "name": "portfolios_ids", "type": "array", "required": false, "description": "" }
+      ]
+    },
+    {
+      "name": "process_template",
+      "type": "string",
+      "required": false,
+      "default": "All",
+      "description": "The workflow template id to filter by."
+    },
+    {
+      "name": "workflow_step",
+      "type": "string",
+      "required": false,
+      "default": "All",
+      "description": "The workflow step id to filter by."
+    },
+    {
+      "name": "assigned_user",
+      "type": "string",
+      "required": false,
+      "default": "All",
+      "description": "Assigned user id to filter by."
+    },
+    {
+      "name": "date_range_from",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "format": "YYYY-MM-DD",
+      "description": "The 'Date From' date to filter by."
+    },
+    {
+      "name": "date_range_to",
+      "type": "string",
+      "required": false,
+      "default": "",
+      "format": "YYYY-MM-DD",
+      "description": "The 'Date To' date to filter by."
+    },
+    {
+      "name": "cancelled_by",
+      "type": "string",
+      "required": false,
+      "default": "All",
+      "description": "The user id to filter by."
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "attachables": {
+      "properties_ids": [],
+      "units_ids": [],
+      "tenants_ids": [],
+      "owners_ids": [],
+      "rental_applications_ids": [],
+      "guest_cards_ids": [],
+      "guest_card_interests_ids": [],
+      "service_requests_ids": [],
+      "vendors_ids": []
+    },
+    "property_visibility": "active",
+    "properties": {
+      "properties_ids": [],
+      "property_groups_ids": [],
+      "portfolios_ids": []
+    },
+    "process_template": "All",
+    "workflow_step": "All",
+    "assigned_user": "All",
+    "date_range_from": "2023-06-01",
+    "date_range_to": "2023-06-30",
+    "cancelled_by": "All",
+    "columns": ["some_column", "some_other_column"]
+  },
+  "responseColumns": []
+}

@@ -1,0 +1,230 @@
+{
+  "operationId": "get_owner_groups",
+  "resource": "owner_groups",
+  "name": "List All Owner Groups",
+  "method": "GET",
+  "path": "/owner_groups",
+  "description": "Returns all property owner groups that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[Id]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by the unique identifier of the owner group. All GET requests must include a filter for [Id] (if available), or [LastUpdatedAtFrom]."
+    },
+    {
+      "name": "filters[LastUpdatedAtFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter owner groups last updated at or after this date-time. All GET requests must include a filter for [Id] (if available), or [LastUpdatedAtFrom]."
+    },
+    {
+      "name": "page[number]",
+      "type": "integer",
+      "required": false,
+      "description": "Page number for pagination. Default is 1."
+    },
+    {
+      "name": "page[size]",
+      "type": "integer",
+      "required": false,
+      "description": "Number of results per page. Default is 1000."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of owner group objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the owner group"
+    },
+    {
+      "name": "data[].Current",
+      "type": "boolean",
+      "required": false,
+      "description": "The current owner(s) of the properties in the property group"
+    },
+    {
+      "name": "data[].FiscalYearEnd",
+      "type": "integer",
+      "required": false,
+      "description": "The month number representing the end of the fiscal year"
+    },
+    {
+      "name": "data[].LastUpdatedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The date owners groups details were last updated"
+    },
+    {
+      "name": "data[].Owners",
+      "type": "array",
+      "required": false,
+      "description": "List of owners within an ownership group",
+      "attributes": [
+        {
+          "name": "Id",
+          "type": "string",
+          "required": false,
+          "description": "Unique identifier an owner within an owner group. UUID format e.g. \"38a5a5bb-dc30-49a2-b175-1de0d1488c43\""
+        },
+        {
+          "name": "ContractExpiration",
+          "type": "string",
+          "required": false,
+          "description": "The date when the owner's contract expires. The date must be in YYYY-MM-DD format."
+        },
+        {
+          "name": "CompanyName",
+          "type": "string",
+          "required": false,
+          "description": "Optional display name of the owner's company"
+        },
+        {
+          "name": "Email",
+          "type": "string",
+          "required": false,
+          "description": "The owner's primary email address"
+        },
+        {
+          "name": "PhoneNumber",
+          "type": "string",
+          "required": false,
+          "description": "Primary phone number"
+        },
+        {
+          "name": "FirstName",
+          "type": "string",
+          "required": false,
+          "description": "The owner's first name"
+        },
+        {
+          "name": "LastName",
+          "type": "string",
+          "required": false,
+          "description": "The owner's last name"
+        },
+        {
+          "name": "Link",
+          "type": "string",
+          "required": false,
+          "description": "A link to the owner's page in the AppFolio Property Manager."
+        },
+        {
+          "name": "MaintenanceNotes",
+          "type": "string",
+          "required": false,
+          "description": "Maintenance notes for the properties owned"
+        },
+        {
+          "name": "HiddenAt",
+          "type": "string",
+          "required": false,
+          "description": "When the owner group was labeled no longer active by an AppFolio Property Manager user. Valid format is in ISO 8601 format: \"YYYY-MM-DDTHH:mm:ssZ\" e.g. \"2022-06-00T12:00:00Z\". The default time zone is Coordinated Universal Time (UTC)."
+        },
+        {
+          "name": "IsCompany",
+          "type": "boolean",
+          "required": false,
+          "description": "Indicates whether or not the owner identifies as a company"
+        },
+        {
+          "name": "Address1",
+          "type": "string",
+          "required": false,
+          "description": "The primary street address of the owner"
+        },
+        {
+          "name": "Address2",
+          "type": "string",
+          "required": false,
+          "description": "Additional street address information pertaining to the owner"
+        },
+        {
+          "name": "City",
+          "type": "string",
+          "required": false,
+          "description": "The city where the owner is located"
+        },
+        {
+          "name": "State",
+          "type": "string",
+          "required": false,
+          "description": "The state where the owner is located"
+        },
+        {
+          "name": "Zip",
+          "type": "string",
+          "required": false,
+          "description": "The zip code where the owner is located"
+        },
+        {
+          "name": "CountryCode",
+          "type": "string",
+          "required": false,
+          "description": "The country code of the owner (e.g. \"JP\" for Japan)"
+        },
+        {
+          "name": "PercentOwned",
+          "type": "string",
+          "required": false,
+          "description": "The percentage of ownership assigned to this owner. The sum of PercentOwned across all owners must equal 100%."
+        }
+      ]
+    },
+    {
+      "name": "data[].OwnerPacketBasis",
+      "type": "string",
+      "required": false,
+      "description": "The accounting method used for owner packet calculations. Valid values are \"Cash\" or \"Accrual\".",
+      "enum": ["Cash", "Accrual"]
+    },
+    {
+      "name": "data[].PaymentType",
+      "type": "string",
+      "required": false,
+      "description": "The type of payment distribution for the owners. Valid values are \"Net Income\" or \"Flat\".",
+      "enum": ["Net Income", "Flat"]
+    },
+    {
+      "name": "data[].PaymentAmount",
+      "type": "string <decimal>",
+      "required": false,
+      "description": "The fixed payment amount to distribute to owners. This value is required when PaymentType is \"Flat\"."
+    },
+    {
+      "name": "data[].PropertyId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the property associated with all owners within the owner group"
+    },
+    {
+      "name": "data[].StartDate",
+      "type": "string <date>",
+      "required": false,
+      "description": "The date when this ownership group becomes effective. The date must be in YYYY-MM-DD format and cannot be set in the future."
+    },
+    {
+      "name": "data[].ReserveFunds",
+      "type": "string <decimal>",
+      "required": false,
+      "description": "The amount of funds to maintain in reserve for the property"
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/owner_groups?filters[PropertyId]=bfcb95e8-d5fb-448c-b811-88d9f832e79c' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

@@ -1,0 +1,21 @@
+{
+  "operationId": "delete_inventories_id",
+  "resource": "inventories",
+  "name": "Delete Inventory",
+  "method": "DELETE",
+  "path": "/inventories/{Id}",
+  "description": "Delete an inventory item",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the inventory item to delete"
+    }
+  ],
+  "responseFields": [],
+  "requestSample": "curl --location --request DELETE 'https://api.appfolio.com/api/v0/inventories/630964fb-bc9b-4f9a-b649-01cfe309cb52' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

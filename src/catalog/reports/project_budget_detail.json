@@ -1,0 +1,56 @@
+{
+  "slug": "project_budget_detail",
+  "endpoint": "project_budget_detail.json",
+  "name": "Project Budget Detail",
+  "description": "Returns Project Budget Detail report data.",
+  "requiredFilters": [
+    "project_id"
+  ],
+  "parameters": [
+    {
+      "name": "project_visibility",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "enum": [
+        "active",
+        "hidden",
+        "all"
+      ],
+      "description": "The Project visibility to filter by"
+    },
+    {
+      "name": "project_id",
+      "type": "string",
+      "required": true,
+      "description": "The Project to filter by"
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "project_visibility": "active",
+    "project_id": "1",
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": [
+    "account_name",
+    "original_budget",
+    "revisions",
+    "revised_budget",
+    "purchase_orders",
+    "actuals",
+    "remaining_dollar",
+    "remaining_percent",
+    "notes",
+    "project_id",
+    "gl_account_id"
+  ]
+}

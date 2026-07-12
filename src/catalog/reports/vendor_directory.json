@@ -1,0 +1,134 @@
+{
+  "slug": "vendor_directory",
+  "endpoint": "vendor_directory.json",
+  "name": "Vendor Directory",
+  "description": "Returns Vendor Directory report data.",
+  "requiredFilters": [],
+  "parameters": [
+    {
+      "name": "workers_comp_expiration_to",
+      "type": "string",
+      "required": false,
+      "format": "YYYY-MM-DD",
+      "default": "",
+      "description": "The 'Worker's Comp. Expires before To' date to filter by."
+    },
+    {
+      "name": "liability_expiration_to",
+      "type": "string",
+      "required": false,
+      "format": "YYYY-MM-DD",
+      "default": "",
+      "description": "The 'Liability Insurance Expires before To' date to filter by."
+    },
+    {
+      "name": "epa_expiration_to",
+      "type": "string",
+      "required": false,
+      "format": "YYYY-MM-DD",
+      "default": "",
+      "description": "The 'EPA Certification Expires before To' date to filter by."
+    },
+    {
+      "name": "auto_insurance_expiration_to",
+      "type": "string",
+      "required": false,
+      "format": "YYYY-MM-DD",
+      "default": "",
+      "description": "The 'Auto Insurance Expires before To' date to filter by."
+    },
+    {
+      "name": "state_license_expiration_to",
+      "type": "string",
+      "required": false,
+      "format": "YYYY-MM-DD",
+      "default": "",
+      "description": "The 'State License Expires before To' date to filter by."
+    },
+    {
+      "name": "contract_expiration_to",
+      "type": "string",
+      "required": false,
+      "format": "YYYY-MM-DD",
+      "default": "",
+      "description": "The 'Contract Expires before To' date to filter by."
+    },
+    {
+      "name": "tags",
+      "type": "string",
+      "required": false,
+      "description": "The comma-separated tag(s) to filter by"
+    },
+    {
+      "name": "vendor_visibility",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "enum": [
+        "active",
+        "hidden",
+        "all"
+      ],
+      "description": ""
+    },
+    {
+      "name": "payment_type",
+      "type": "string",
+      "required": false,
+      "default": "All",
+      "enum": [
+        "eCheck",
+        "check",
+        "'billPayCheck' denotes 'CheckSend'",
+        "NACHA",
+        "All"
+      ],
+      "description": "Payment type to filter by."
+    },
+    {
+      "name": "created_by",
+      "type": "string",
+      "required": false,
+      "default": "All",
+      "description": "Created by id to filter by."
+    },
+    {
+      "name": "vendor_type",
+      "type": "string",
+      "required": false,
+      "default": "All",
+      "enum": [
+        "All",
+        "general",
+        "utility",
+        "'external_management_company' denotes 'External management company'",
+        "'in-house_maintenance' denotes 'In-house maintenance'"
+      ],
+      "description": "Vendor type to filter by."
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "workers_comp_expiration_to": "2023-06-30",
+    "liability_expiration_to": "2023-06-30",
+    "epa_expiration_to": "2023-06-30",
+    "auto_insurance_expiration_to": "2023-06-30",
+    "state_license_expiration_to": "2023-06-30",
+    "contract_expiration_to": "2023-06-30",
+    "tags": "bbq,deck",
+    "vendor_visibility": "active",
+    "payment_type": "eCheck",
+    "created_by": "All",
+    "vendor_type": "All",
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

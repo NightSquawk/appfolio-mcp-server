@@ -1,0 +1,236 @@
+{
+  "operationId": "post_units_bulk",
+  "resource": "units",
+  "name": "Bulk Create Units",
+  "method": "POST",
+  "path": "/units/bulk",
+  "description": "Create units in bulk",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "requestBody": {
+    "required": true,
+    "description": "Unit objects",
+    "attributes": [
+      {
+        "name": "data",
+        "type": "array",
+        "required": false,
+        "description": "Array of unit objects to create",
+        "attributes": [
+          {
+            "name": "Name",
+            "type": "string",
+            "required": true,
+            "description": "The unit name as displayed in the AppFolio Property Manager"
+          },
+          {
+            "name": "ReferenceId",
+            "type": "string",
+            "required": true,
+            "description": "Transient unique ID assigned by the developer. Used to reference individual units in the bulk-creation of units."
+          },
+          {
+            "name": "PropertyId",
+            "type": "string <uuid>",
+            "required": true,
+            "description": "Unique identifier of the property associated with the unit"
+          },
+          {
+            "name": "Address1",
+            "type": "string",
+            "required": true,
+            "description": "The primary street address of the unit"
+          },
+          {
+            "name": "City",
+            "type": "string",
+            "required": true,
+            "description": "The city where the unit is located"
+          },
+          {
+            "name": "State",
+            "type": "string",
+            "required": true,
+            "description": "The state where the unit is located"
+          },
+          {
+            "name": "Zip",
+            "type": "string",
+            "required": true,
+            "description": "The zip code where the unit is located"
+          },
+          {
+            "name": "UnitTypeId",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "When present, the unit type can dictate fields like bedrooms, bathrooms, sq. feet, etc. Attempting to create a Unit with values that conflict with the Unit Type will cause an error."
+          },
+          {
+            "name": "Bathrooms",
+            "type": "number",
+            "required": false,
+            "description": "The number of desired bathrooms"
+          },
+          {
+            "name": "Bedrooms",
+            "type": "integer",
+            "required": false,
+            "description": "The number of desired bedrooms"
+          },
+          {
+            "name": "SquareFeet",
+            "type": "number",
+            "required": false,
+            "description": "The size of the unit in square feet"
+          },
+          {
+            "name": "Description",
+            "type": "string",
+            "required": false,
+            "description": "A brief, informative description of the unit"
+          },
+          {
+            "name": "ListedMarketRent",
+            "type": "string <decimal>",
+            "required": false,
+            "description": "The rent per month as listed on the market",
+            "deprecated": true
+          },
+          {
+            "name": "ListedRent",
+            "type": "string <decimal>",
+            "required": false,
+            "description": "The rent per month as listed on the market. This value reflects either the market rent or the advertised rent, depending on whether \"Use Market Rent On Ads\" is enabled in AppFolio Property Manager.",
+            "deprecated": true
+          },
+          {
+            "name": "MarketRent",
+            "type": "string <decimal>",
+            "required": false,
+            "description": "The unit's base market rent, representing its estimated fair market value based on current market conditions and comparable properties. It does not include advertised adjustments or amenity fees."
+          },
+          {
+            "name": "AdvertiseUsingListedMarketRent",
+            "type": "boolean",
+            "required": false,
+            "description": "Indicates whether or not to use the listed market rent as the advertised rent. Defaults to true if no value is provided or null is passed in."
+          },
+          {
+            "name": "CatsAllowed",
+            "type": "string",
+            "required": false,
+            "description": "The unit's cat policy. Enum: \"Yes\" \"No\" or null",
+            "enum": ["Yes", "No"]
+          },
+          {
+            "name": "DogsAllowed",
+            "type": "string",
+            "required": false,
+            "description": "The unit's dog policy. Enum: \"Large & Small\" \"Small Only\" \"No\" or null",
+            "enum": ["Large & Small", "Small Only", "No"]
+          },
+          {
+            "name": "Address2",
+            "type": "string",
+            "required": false,
+            "description": "Additional street address information pertaining to the unit"
+          },
+          {
+            "name": "MaintenanceNotes",
+            "type": "string",
+            "required": false,
+            "description": "A brief informative message about the unit's maintenance"
+          },
+          {
+            "name": "MarketingTitle",
+            "type": "string",
+            "required": false,
+            "description": "The title of the listing for syndication"
+          },
+          {
+            "name": "MarketingDescription",
+            "type": "string",
+            "required": false,
+            "description": "A description of the listing for syndication"
+          },
+          {
+            "name": "NonRevenue",
+            "type": "boolean",
+            "required": false,
+            "description": "Indicates whether or not the unit is rentable and is a model unit, office or other non revenue unit"
+          },
+          {
+            "name": "Deposit",
+            "type": "number",
+            "required": false,
+            "description": "The security deposit amount"
+          },
+          {
+            "name": "ApplicationFee",
+            "type": "number",
+            "required": false,
+            "description": "The application fee amount"
+          },
+          {
+            "name": "RentReady",
+            "type": "boolean",
+            "required": false,
+            "description": "Indicates whether or not the unit is ready to be occupied by a tenant"
+          },
+          {
+            "name": "Amenities",
+            "type": "Array of strings",
+            "required": false,
+            "description": "The amenities associated with the unit. Amenity names are case-sensitive. Cannot be specified when a Unit Type that defines amenities is assigned."
+          },
+          {
+            "name": "Tags",
+            "type": "Array of strings",
+            "required": false,
+            "description": "User-defined tag(s) that categorize the unit"
+          },
+          {
+            "name": "LastInspectedDate",
+            "type": "string <date>",
+            "required": false,
+            "description": "The date the unit was last inspected"
+          },
+          {
+            "name": "YouTubeURL",
+            "type": "string <uri>",
+            "required": false,
+            "description": "The URL of the YouTube video for the listing(s)"
+          },
+          {
+            "name": "AvailableOn",
+            "type": "string <date>",
+            "required": false,
+            "description": "The date upon which the unit can be leased. The date must be within three years of today's date"
+          }
+        ]
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of created unit status objects"
+    },
+    {
+      "name": "data[].UnitId",
+      "type": "string",
+      "required": false,
+      "description": "Unique identifier of the created unit"
+    },
+    {
+      "name": "data[].ReferenceId",
+      "type": "string",
+      "required": false,
+      "description": "Transient unique ID assigned by the developer. Used to reference individual units in the bulk-creation of units."
+    }
+  ],
+  "requestSample": "{\n  \"data\": [\n    {}\n  ]\n}"
+}

@@ -1,0 +1,120 @@
+{
+  "slug": "tenant_directory",
+  "endpoint": "tenant_directory.json",
+  "name": "Tenant Directory",
+  "description": "Returns Tenant Directory report data.",
+  "requiredFilters": [],
+  "parameters": [
+    {
+      "name": "tenant_visibility",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "enum": [
+        "active",
+        "hidden",
+        "all"
+      ],
+      "description": ""
+    },
+    {
+      "name": "tenant_statuses",
+      "type": "array",
+      "required": false,
+      "default": "[\"0\",\"4\"]",
+      "enum": [
+        "'2' denotes 'Future'",
+        "'0' denotes 'Current'",
+        "'4' denotes 'Notice'",
+        "'1' denotes 'Past'",
+        "'3' denotes 'Evict'"
+      ],
+      "description": "List of Tenant status to filter by."
+    },
+    {
+      "name": "tenant_types",
+      "type": "array",
+      "required": false,
+      "default": "[\"all\"]",
+      "enum": [
+        "all",
+        "'0' denotes 'Financially Responsible'",
+        "'1' denotes 'Other Occupant'",
+        "'2' denotes 'Co-signer'"
+      ],
+      "description": "List of Tenant type to filter by."
+    },
+    {
+      "name": "property_visibility",
+      "type": "string",
+      "required": false,
+      "default": "active",
+      "enum": [
+        "active",
+        "hidden",
+        "all"
+      ],
+      "description": "The property visibility to filter by."
+    },
+    {
+      "name": "properties",
+      "type": "object",
+      "required": false,
+      "description": "The property filter. Expand to view all attributes associated with this filter. If required, you must submit an id for at least one of the below filters.",
+      "attributes": [
+        {
+          "name": "properties_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "property_groups_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "portfolios_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "owners_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "tenant_visibility": "active",
+    "tenant_statuses": [
+      "0",
+      "4"
+    ],
+    "tenant_types": [
+      "all"
+    ],
+    "property_visibility": "active",
+    "properties": {
+      "properties_ids": [],
+      "property_groups_ids": [],
+      "portfolios_ids": [],
+      "owners_ids": []
+    },
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

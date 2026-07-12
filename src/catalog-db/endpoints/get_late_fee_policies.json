@@ -1,0 +1,148 @@
+{
+  "operationId": "get_late_fee_policies",
+  "resource": "late_fee_policies",
+  "name": "List All Late Fee Policies",
+  "method": "GET",
+  "path": "/late_fee_policies",
+  "description": "Returns all late fee policies that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[Id]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by the unique identifier of the late fee policy. All GET requests must include a filter for [Id] or [LastUpdatedAtFrom]."
+    },
+    {
+      "name": "filters[LastUpdatedAtFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter by the date the late fee policy was last updated (from). All GET requests must include a filter for [Id] or [LastUpdatedAtFrom]."
+    },
+    {
+      "name": "filters[PropertyId]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by the unique identifier of the property."
+    },
+    {
+      "name": "filters[PartyType]",
+      "type": "string",
+      "required": false,
+      "description": "Filter by party type (e.g. Property)."
+    },
+    {
+      "name": "page[number]",
+      "type": "integer",
+      "required": false,
+      "description": "Page number for pagination. Default is 1."
+    },
+    {
+      "name": "page[size]",
+      "type": "integer",
+      "required": false,
+      "description": "Page size for pagination. Default is 1000."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of late fee policy objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the late fee policy"
+    },
+    {
+      "name": "data[].EligibleCharges",
+      "type": "string",
+      "required": false,
+      "description": "The specific charges to which the late fee will be applied"
+    },
+    {
+      "name": "data[].FeeType",
+      "type": "string",
+      "required": false,
+      "description": "The late fee type"
+    },
+    {
+      "name": "data[].FlatAmount",
+      "type": "string <decimal>",
+      "required": false,
+      "description": "The flat fee"
+    },
+    {
+      "name": "data[].GracePeriodType",
+      "type": "string",
+      "required": false,
+      "description": "The type of Grace Period to enforce"
+    },
+    {
+      "name": "data[].GracePeriodValue",
+      "type": "integer",
+      "required": false,
+      "description": "A number of days after the charge, or a number of days into the following month."
+    },
+    {
+      "name": "data[].LateFeePerDay",
+      "type": "string <decimal>",
+      "required": false,
+      "description": "The daily late fees"
+    },
+    {
+      "name": "data[].LateFeeGraceBalance",
+      "type": "string <decimal>",
+      "required": false,
+      "description": "The late fee grace balance"
+    },
+    {
+      "name": "data[].LastUpdatedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The date the late fee policy was last updated"
+    },
+    {
+      "name": "data[].MaxDailyLateFeesAmount",
+      "type": "string <decimal>",
+      "required": false,
+      "description": "The maximum daily late fees"
+    },
+    {
+      "name": "data[].OccupancyId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "When present, the Late Fee Policy belongs to a specific occupancy within a MFR property."
+    },
+    {
+      "name": "data[].Percentage",
+      "type": "string <decimal>",
+      "required": false,
+      "description": "The percentage of late fee"
+    },
+    {
+      "name": "data[].PolicyEffectiveOn",
+      "type": "string <date>",
+      "required": false,
+      "description": "The date at which the late fee policy will start"
+    },
+    {
+      "name": "data[].PropertyId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "It is filled for both property-based and occupancy-based policies. PropertyId can be used to tie an occupancy-based policy to its MFR building."
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/late_fee_policies?filters[Id]=fabcde23-c543-456e-abc9-123456789cba&filters[PropertyId]=12bcde23-c543-456e-abc9-123456789cba&filters[PartyType]=Property&filters[LastUpdatedAtFrom]=2020-12-15T16:30:46Z' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

@@ -1,0 +1,131 @@
+{
+  "operationId": "get_inventories",
+  "resource": "inventories",
+  "name": "List All Inventories",
+  "method": "GET",
+  "path": "/inventories",
+  "description": "Returns all inventory items that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[LastUpdatedAtFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter inventory items last updated at or after this date-time."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of inventory item objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the inventory item"
+    },
+    {
+      "name": "data[].Name",
+      "type": "string",
+      "required": false,
+      "description": "The name of the inventory item"
+    },
+    {
+      "name": "data[].Quantity",
+      "type": "string",
+      "required": false,
+      "description": "The current quantity of the inventory item"
+    },
+    {
+      "name": "data[].Reorder",
+      "type": "string",
+      "required": false,
+      "description": "The quantity threshold at which the inventory item should be reordered"
+    },
+    {
+      "name": "data[].Cost",
+      "type": "string",
+      "required": false,
+      "description": "The dollar amount cost of the inventory item"
+    },
+    {
+      "name": "data[].Description",
+      "type": "string",
+      "required": false,
+      "description": "A brief summary or description of the inventory item"
+    },
+    {
+      "name": "data[].PartNumber",
+      "type": "string",
+      "required": false,
+      "description": "The part number of the inventory item"
+    },
+    {
+      "name": "data[].Shelf",
+      "type": "string",
+      "required": false,
+      "description": "The shelf or bin location where the inventory item is stored"
+    },
+    {
+      "name": "data[].Category",
+      "type": "string",
+      "required": false,
+      "description": "The category of the inventory item"
+    },
+    {
+      "name": "data[].HiddenAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The date and time the inventory item was hidden. Null if the item is not hidden."
+    },
+    {
+      "name": "data[].LocationId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the inventory location associated with the inventory item"
+    },
+    {
+      "name": "data[].VendorId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the vendor associated with the inventory item"
+    },
+    {
+      "name": "data[].GlAccountId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the general ledger account associated with the inventory item"
+    },
+    {
+      "name": "data[].MarkUpType",
+      "type": "string",
+      "required": false,
+      "description": "The type of markup applied to the inventory item. Valid values are Percentage or Fixed Amount.",
+      "enum": ["Percentage", "Fixed Amount"]
+    },
+    {
+      "name": "data[].MarkUp",
+      "type": "string",
+      "required": false,
+      "description": "The markup value applied to the inventory item"
+    },
+    {
+      "name": "data[].LastUpdatedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The date and time the inventory item was last updated"
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/inventories?filters[LastUpdatedAtFrom]=2020-12-15T16:30:46Z' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

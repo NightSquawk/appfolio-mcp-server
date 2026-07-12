@@ -1,0 +1,115 @@
+{
+  "slug": "owner_leasing",
+  "endpoint": "owner_leasing.json",
+  "name": "Owner Leasing",
+  "description": "Returns Owner Leasing report data.",
+  "requiredFilters": [
+    "received_on_from",
+    "received_on_to"
+  ],
+  "parameters": [
+    {
+      "name": "properties",
+      "type": "object",
+      "required": false,
+      "description": "The property filter. Expand to view all attributes associated with this filter. If required, you must submit an id for at least one of the below filters.",
+      "attributes": [
+        {
+          "name": "properties_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "property_groups_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "portfolios_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        },
+        {
+          "name": "owners_ids",
+          "type": "array",
+          "required": false,
+          "description": ""
+        }
+      ]
+    },
+    {
+      "name": "received_on_from",
+      "type": "string",
+      "format": "YYYY-MM-DD",
+      "required": true,
+      "description": "The 'Received From' date to filter by."
+    },
+    {
+      "name": "received_on_to",
+      "type": "string",
+      "format": "YYYY-MM-DD",
+      "required": true,
+      "description": "The 'Received To' date to filter by."
+    },
+    {
+      "name": "include_units_which_are_not_rent_ready",
+      "type": "string",
+      "required": false,
+      "default": "1",
+      "enum": [
+        "0",
+        "1"
+      ],
+      "description": "Include units which are not rent ready"
+    },
+    {
+      "name": "include_units_which_are_hidden_from_the_vacancies_dashboard",
+      "type": "string",
+      "required": false,
+      "default": "0",
+      "enum": [
+        "0",
+        "1"
+      ],
+      "description": "Include units which are hidden from the vacancies dashboard"
+    },
+    {
+      "name": "include_non_revenue_units",
+      "type": "string",
+      "required": false,
+      "default": "0",
+      "enum": [
+        "0",
+        "1"
+      ],
+      "description": "Include non-revenue units"
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "properties": {
+      "properties_ids": [],
+      "property_groups_ids": [],
+      "portfolios_ids": [],
+      "owners_ids": []
+    },
+    "received_on_from": "2023-06-01",
+    "received_on_to": "2023-06-30",
+    "include_units_which_are_not_rent_ready": "1",
+    "include_units_which_are_hidden_from_the_vacancies_dashboard": "1",
+    "include_non_revenue_units": "1",
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

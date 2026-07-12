@@ -1,0 +1,22 @@
+{
+  "slug": "chart_of_accounts",
+  "endpoint": "chart_of_accounts.json",
+  "name": "Chart of Accounts",
+  "description": "Returns Chart of Accounts report data.",
+  "requiredFilters": [],
+  "parameters": [
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

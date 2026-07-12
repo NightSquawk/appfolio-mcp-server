@@ -1,0 +1,41 @@
+{
+  "operationId": "post_journal_entries_journalentryid_attachments",
+  "resource": "journal_entries",
+  "name": "Create Journal Entry Attachment",
+  "method": "POST",
+  "path": "/journal_entries/{JournalEntryId}/attachments",
+  "description": "Upload an attachment to a journal entry",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "JournalEntryId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "The journal entry to which the file will be attached"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Attachment object (multipart/form-data)",
+    "attributes": [
+      {
+        "name": "File",
+        "type": "string",
+        "required": false,
+        "description": "Filename.file-extension",
+        "format": "binary"
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the journal_entries attachment"
+    }
+  ],
+  "requestSample": "{\n  \"File\": \"/path/to/file.pdf\"\n}"
+}

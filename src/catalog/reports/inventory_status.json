@@ -1,0 +1,73 @@
+{
+  "slug": "inventory_status",
+  "endpoint": "inventory_status.json",
+  "name": "Inventory Status",
+  "description": "Returns Inventory Status report data.",
+  "requiredFilters": [],
+  "parameters": [
+    {
+      "name": "locations",
+      "type": "array",
+      "required": false,
+      "default": "[\"all\"]",
+      "description": "Locations to filter by."
+    },
+    {
+      "name": "category",
+      "type": "string",
+      "required": false,
+      "default": "All",
+      "enum": [
+        "All",
+        "'1' denotes 'Appliances'",
+        "'2' denotes 'Blinds'",
+        "'3' denotes 'Electrical'",
+        "'4' denotes 'Lighting'",
+        "'5' denotes 'Plumbing'"
+      ],
+      "description": "Category to filter by."
+    },
+    {
+      "name": "inventory_visibility",
+      "type": "string",
+      "required": false,
+      "default": "visible",
+      "enum": [
+        "'visible' denotes 'Show Active Inventory'",
+        "'hidden' denotes 'Show Hidden Inventory'",
+        "'all' denotes 'Show All Inventory'"
+      ],
+      "description": "Inventory to filter by."
+    },
+    {
+      "name": "inventory_need_reorder",
+      "type": "string",
+      "required": false,
+      "default": "0",
+      "enum": [
+        "0",
+        "1"
+      ],
+      "description": "Only show items at or below reorder threshold"
+    },
+    {
+      "name": "columns",
+      "type": "array",
+      "required": false,
+      "description": "Returns the specified columns. All columns are returned by default. Look at the response schema to see the available columns."
+    }
+  ],
+  "requestSample": {
+    "locations": [
+      "all"
+    ],
+    "category": "All",
+    "inventory_visibility": "visible",
+    "inventory_need_reorder": "1",
+    "columns": [
+      "some_column",
+      "some_other_column"
+    ]
+  },
+  "responseColumns": []
+}

@@ -1,0 +1,77 @@
+{
+  "operationId": "post_gl_accounts_bulk",
+  "resource": "gl_accounts",
+  "name": "Bulk Create General Ledger Accounts",
+  "method": "POST",
+  "path": "/gl_accounts/bulk",
+  "description": "Create General Ledger Account in bulk",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "requestBody": {
+    "required": true,
+    "description": "General Ledger account objects",
+    "attributes": [
+      {
+        "name": "data",
+        "type": "array",
+        "required": false,
+        "description": "Array of General Ledger account objects",
+        "attributes": [
+          {
+            "name": "ReferenceId",
+            "type": "string",
+            "required": true,
+            "description": "Transient unique ID assigned by the developer. Used to reference individual gl account in the bulk-creation of gl accounts."
+          },
+          {
+            "name": "Name",
+            "type": "string",
+            "required": true,
+            "description": "The user-provided name of the general ledger account. This name must be unique, no duplicate record is allowed."
+          },
+          {
+            "name": "Type",
+            "type": "string",
+            "required": true,
+            "description": "The account type or category of the GL account. Valid values include asset capital cash expense income liability other_expense or other_income.",
+            "enum": ["asset", "capital", "cash", "expense", "income", "liability", "other_expense", "other_income"]
+          },
+          {
+            "name": "Number",
+            "type": "string",
+            "required": false,
+            "description": "The user-provided number of the general ledger account. This number must be unique, no duplicate record is allowed."
+          },
+          {
+            "name": "FundAccount",
+            "type": "object",
+            "required": false,
+            "description": "The type of fund account. Options: Reserve (funds set aside for specific future purposes), Operating (funds set aside for regular operating expenses)"
+          },
+          {
+            "name": "OffsetAccountId",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "Unique identifier of the offset account"
+          },
+          {
+            "name": "ParentGlAccountId",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "Unique identifier of the parent general ledger account. If present, it indicates the parent account to which the sub-account belongs."
+          }
+        ]
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "JobId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the async job. Can be used to track the status of the job via the Jobs List endpoint."
+    }
+  ],
+  "requestSample": "{\n  \"data\": [\n    {}\n  ]\n}"
+}

@@ -1,0 +1,69 @@
+{
+  "operationId": "patch_showings_showingid",
+  "resource": "showings",
+  "name": "Update Showing",
+  "method": "PATCH",
+  "path": "/showings/{showingId}",
+  "description": "Update a showing",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "showingId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the showing to update"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Showing update object",
+    "attributes": [
+      {
+        "name": "AssignedUserId",
+        "type": "string <uuid>",
+        "required": false,
+        "description": "AppFolio Property Manager user assigned to the showing. A null value passed to AssignedUserId will unassign the user previously assigned to the showing. Omitting AssignedUserId from the request body will not update the assigned user. Reference the Users endpoint for any necessary associations."
+      },
+      {
+        "name": "StartAt",
+        "type": "string <date-time>",
+        "required": false,
+        "description": "The start time of the showing. The value must adhere to the ISO 8601 format YYYY-MM-DDThh:mm:ssZ and the default time zone is Coordinated Universal Time (UTC)."
+      },
+      {
+        "name": "EndAt",
+        "type": "string <date-time>",
+        "required": false,
+        "description": "The end time of the showing. The value must adhere to the ISO 8601 format YYYY-MM-DDThh:mm:ssZ and the default time zone is Coordinated Universal Time (UTC)."
+      },
+      {
+        "name": "Notes",
+        "type": "string",
+        "required": false,
+        "description": "A brief informative message about the showing"
+      },
+      {
+        "name": "Status",
+        "type": "string",
+        "required": false,
+        "description": "The status of the showing",
+        "enum": [
+          "scheduled",
+          "canceled",
+          "no-show"
+        ]
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the updated showing"
+    }
+  ],
+  "requestSample": "{\n  \"AssignedUserId\": \"f6b42b23-85e1-4a8a-a581-ceab1055e310\",\n  \"EndAt\": \"2022-02-08T18:45:00Z\",\n  \"Notes\": \"Prospect wants to see the unit.\",\n  \"StartAt\": \"2022-02-08T18:30:00Z\",\n  \"Status\": \"canceled\"\n}"
+}

@@ -1,0 +1,44 @@
+{
+  "operationId": "post_inventory_locations",
+  "resource": "inventory_locations",
+  "name": "Create an Inventory Location",
+  "method": "POST",
+  "path": "/inventory_locations",
+  "description": "Creates a new inventory location",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "requestBody": {
+    "required": true,
+    "description": "Inventory Location object",
+    "attributes": [
+      {
+        "name": "Name",
+        "type": "string",
+        "required": true,
+        "description": "The name of the inventory location"
+      },
+      {
+        "name": "Description",
+        "type": "string",
+        "required": false,
+        "description": "A brief summary or description of the inventory location"
+      },
+      {
+        "name": "PropertyId",
+        "type": "string <uuid>",
+        "required": false,
+        "description": "Unique identifier of the property associated with the inventory location"
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the created inventory location"
+    }
+  ],
+  "requestSample": "{\n  \"Name\": \"Main Warehouse\",\n  \"Description\": \"Primary storage location\",\n  \"PropertyId\": \"1abcde23-c543-456e-abc9-123456789cba\"\n}"
+}

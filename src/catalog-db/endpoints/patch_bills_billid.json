@@ -1,0 +1,156 @@
+{
+  "operationId": "patch_bills_billid",
+  "resource": "bills",
+  "name": "Update Bill",
+  "method": "PATCH",
+  "path": "/bills/{billId}",
+  "description": "Update a bill",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "billId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "Unique identifier of the bill to update"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Bill object",
+    "attributes": [
+      {
+        "name": "AccountNumber",
+        "type": "string",
+        "required": false,
+        "description": "For utility billing. The account number associated with the bill, used by a utility vendor to identify the account"
+      },
+      {
+        "name": "CheckMemo",
+        "type": "string",
+        "required": false,
+        "description": "The memo on the check"
+      },
+      {
+        "name": "DueDate",
+        "type": "string <date>",
+        "required": false,
+        "description": "The date the invoice is due"
+      },
+      {
+        "name": "InvoiceDate",
+        "type": "string <date>",
+        "required": false,
+        "description": "The date the invoice was received"
+      },
+      {
+        "name": "LineItems",
+        "type": "array",
+        "required": false,
+        "description": "Array of line item attributes present on the bill(s). DO NOT INCLUDE Line Items unless one or more details have changed (including them causes other parts of system to assume changes and create new Auditing/version history entries)",
+        "attributes": [
+          {
+            "name": "Amount",
+            "type": "string <decimal>",
+            "required": false,
+            "description": "The amount due for the line item"
+          },
+          {
+            "name": "Description",
+            "type": "string",
+            "required": false,
+            "description": "A brief description of line item"
+          },
+          {
+            "name": "GlAccountId",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "The general ledger account ID relevant to line item"
+          },
+          {
+            "name": "PropertyId",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "The PropertyId associated with the line item. This takes precedence over the top-level PropertyId connected to the bill."
+          },
+          {
+            "name": "ServiceFrom",
+            "type": "string <date>",
+            "required": false,
+            "description": "The start date of the utility vendor's service"
+          },
+          {
+            "name": "ServiceTo",
+            "type": "string <date>",
+            "required": false,
+            "description": "The end date of the utility vendor's service"
+          },
+          {
+            "name": "UnitId",
+            "type": "string <uuid>",
+            "required": false,
+            "description": "The unit ID relevant to the line item"
+          }
+        ]
+      },
+      {
+        "name": "ManagementCompanyAsPayee",
+        "type": "boolean",
+        "required": false,
+        "description": "Indicates whether the management company is the payee for the bill. Required and must be true when VendorId is null or not provided."
+      },
+      {
+        "name": "PostingDate",
+        "type": "string <date>",
+        "required": false,
+        "description": "The accrual-accounting invoice date"
+      },
+      {
+        "name": "PropertyId",
+        "type": "string <uuid>",
+        "required": false,
+        "description": "Unique identifier of the the property associated with the bill. If a PropertyId is not found within the LineItem array, use this value for reference purposes."
+      },
+      {
+        "name": "Reference",
+        "type": "string",
+        "required": false,
+        "description": "The reference number to the invoice number. This number must be unique, no duplicate record is allowed."
+      },
+      {
+        "name": "Remarks",
+        "type": "string",
+        "required": false,
+        "description": "A description or summary of the invoice"
+      },
+      {
+        "name": "TotalAmount",
+        "type": "string <decimal>",
+        "required": false,
+        "description": "The total amount due. Ensure that the total amount is equal to the total of all items summed."
+      },
+      {
+        "name": "VendorId",
+        "type": "string <uuid>",
+        "required": false,
+        "description": "Unique identifier of the payee's vendor ID. Required when ManagementCompanyAsPayee is false or not provided. When present, ManagementCompanyAsPayee cannot be true."
+      },
+      {
+        "name": "WorkOrderId",
+        "type": "string <uuid>",
+        "required": false,
+        "description": "Unique identifier of the work order corresponding to the invoice. The value of WorkOrderId cannot be null."
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the updated bill"
+    }
+  ],
+  "requestSample": "{\n  \"AccountNumber\": \"1334567800\",\n  \"CheckMemo\": \"sample memo\",\n  \"DueDate\": \"2022-02-03\",\n  \"InvoiceDate\": \"2022-02-01\",\n  \"LineItems\": [\n    {},\n    {}\n  ],\n  \"PostingDate\": \"2022-02-01\",\n  \"PropertyId\": \"71c5cb28-547f-11ec-bfa5-02975b268737\",\n  \"Reference\": \"invoice #123\",\n  \"Remarks\": \"November Bill\",\n  \"TotalAmount\": \"112.31\",\n  \"VendorId\": \"80c5cb28-547f-11ec-bfa5-02975b268737\",\n  \"WorkOrderId\": \"61c5cb28-547f-11ec-bfa5-02975b268737\"\n}"
+}

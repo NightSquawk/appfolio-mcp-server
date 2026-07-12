@@ -1,0 +1,41 @@
+{
+  "operationId": "post_ca_violations_violationid_attachments",
+  "resource": "ca",
+  "name": "Create Community Association Violations Attachment",
+  "method": "POST",
+  "path": "/ca/violations/{violationId}/attachments",
+  "description": "Create Community Association (CA) Violations Attachment",
+  "deprecated": false,
+  "writeOperation": true,
+  "pagination": false,
+  "pathParams": [
+    {
+      "name": "violationId",
+      "type": "string <uuid>",
+      "required": true,
+      "description": "The CA violation to which the file will be attached"
+    }
+  ],
+  "requestBody": {
+    "required": true,
+    "description": "Violation Attachment object",
+    "attributes": [
+      {
+        "name": "File",
+        "type": "string",
+        "required": false,
+        "description": "Filename.file-extension",
+        "format": "multipart/form-data"
+      }
+    ]
+  },
+  "responseFields": [
+    {
+      "name": "Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the CA violation attachment"
+    }
+  ],
+  "requestSample": "{\n  \"File\": \"/path/to/file.pdf\"\n}"
+}

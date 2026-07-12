@@ -1,0 +1,130 @@
+{
+  "operationId": "get_ca_units",
+  "resource": "ca",
+  "name": "List All Community Association Units",
+  "method": "GET",
+  "path": "/ca/units",
+  "description": "Returns all Community Association (CA) units that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[Id]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by unique identifier of the CA unit"
+    },
+    {
+      "name": "filters[LastUpdatedAtFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter for CA units updated at or after this date. All GET requests must include a filter for [Id] (if available), or [LastUpdatedAtFrom]."
+    },
+    {
+      "name": "filters[AssociationId]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter by unique identifier of the association associated with the unit"
+    },
+    {
+      "name": "page[number]",
+      "type": "integer",
+      "required": false,
+      "description": "Page number for pagination. Default: 1"
+    },
+    {
+      "name": "page[size]",
+      "type": "integer",
+      "required": false,
+      "description": "Page size for pagination. Default: 1000"
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "Array of objects (CAUnit)",
+      "required": false,
+      "description": "Array of CA unit objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the CA unit"
+    },
+    {
+      "name": "data[].Name",
+      "type": "string",
+      "required": false,
+      "description": "The name of the CA unit"
+    },
+    {
+      "name": "data[].AssociationId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the CA associated with the unit"
+    },
+    {
+      "name": "data[].CurrentOccupancyId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the current occupancy associated with the CA unit"
+    },
+    {
+      "name": "data[].CustomFields",
+      "type": "object (CustomFields.Attribute)",
+      "required": false,
+      "description": "The custom fields for the associated entity"
+    },
+    {
+      "name": "data[].Address1",
+      "type": "string",
+      "required": false,
+      "description": "The primary street address of the CA unit"
+    },
+    {
+      "name": "data[].Address2",
+      "type": "string",
+      "required": false,
+      "description": "Additional street address information pertaining to the CA unit"
+    },
+    {
+      "name": "data[].City",
+      "type": "string",
+      "required": false,
+      "description": "The city where the CA unit is located"
+    },
+    {
+      "name": "data[].RenterOccupied",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether or not the CA unit is occupied by a renter"
+    },
+    {
+      "name": "data[].State",
+      "type": "string",
+      "required": false,
+      "description": "The state where the CA unit is located"
+    },
+    {
+      "name": "data[].Zip",
+      "type": "string",
+      "required": false,
+      "description": "The zip code where the CA unit is located"
+    },
+    {
+      "name": "data[].LastUpdatedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The date the CA unit's details were last updated"
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/ca/units?filters[AssociationId]=1abcde23-c543-456e-abc9-123456789cee&filters[LastUpdatedAtFrom]=2020-12-15T16:30:46Z' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}

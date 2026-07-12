@@ -1,0 +1,317 @@
+{
+  "operationId": "get_vendors",
+  "resource": "vendors",
+  "name": "List All Vendors",
+  "method": "GET",
+  "path": "/vendors",
+  "description": "Returns all vendors that meet the filter criteria",
+  "deprecated": false,
+  "writeOperation": false,
+  "pagination": true,
+  "queryFilters": [
+    {
+      "name": "filters[Id]",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Filter vendors by unique identifier"
+    },
+    {
+      "name": "filters[LastUpdatedAtFrom]",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "Filter vendors updated at or after this date-time. All GET requests must include a filter for [Id] (if available), or [LastUpdatedAtFrom]."
+    }
+  ],
+  "responseFields": [
+    {
+      "name": "data",
+      "type": "array",
+      "required": false,
+      "description": "Array of Vendor objects"
+    },
+    {
+      "name": "data[].Id",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the vendor"
+    },
+    {
+      "name": "data[].Tags",
+      "type": "Array of strings",
+      "required": false,
+      "description": "User-defined tag(s) that categorize the vendor"
+    },
+    {
+      "name": "data[].TaxpayerId",
+      "type": "string",
+      "required": false,
+      "description": "The tax identification number of the vendor. This field accepts either a Employer Identification Number (EIN), a Social Security Number (SSN), or an Individual Taxpayer Identification Number (ITIN)."
+    },
+    {
+      "name": "data[].TaxpayerName",
+      "type": "string",
+      "required": false,
+      "description": "The taxpayer name of the vendor"
+    },
+    {
+      "name": "data[].CompanyName",
+      "type": "string",
+      "required": false,
+      "description": "The display name of a vendor's company"
+    },
+    {
+      "name": "data[].IsCompany",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether or not the vendor identifies as a company"
+    },
+    {
+      "name": "data[].UseCompanyNameAsTaxpayerName",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether or not to use the company name as the taxpayer name"
+    },
+    {
+      "name": "data[].CustomFields",
+      "type": "object",
+      "required": false,
+      "description": "The custom fields for the associated entity"
+    },
+    {
+      "name": "data[].CheckConsolidation",
+      "type": "string",
+      "required": false,
+      "description": "How to consolidate checks for payment",
+      "enum": [
+        "Print 1 check for each bill",
+        "10 bills per check",
+        "All bills on single check (hide extra stub detail)",
+        "All bills on single check"
+      ]
+    },
+    {
+      "name": "data[].CheckStubBreakdown",
+      "type": "string",
+      "required": false,
+      "description": "How to break down the components of a check stub",
+      "enum": [
+        "List each bill (consolidated view)",
+        "List each bill detail line item (expanded view)"
+      ]
+    },
+    {
+      "name": "data[].HoldPayments",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether or not to hold payments until the work order is completed"
+    },
+    {
+      "name": "data[].EmailEcheckReceipt",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether or not to send a notification to the payee after an eCheck payment is made"
+    },
+    {
+      "name": "data[].PaymentTerms",
+      "type": "integer",
+      "required": false,
+      "description": "Represents the number of days the payment is due after the invoice date. A null value indicates that no payment terms were defined. A value of 0 indicates the payment is due on receipt. A value greater than 0, for example, 15, indicates the payment is due 15 days after the invoice date."
+    },
+    {
+      "name": "data[].UsingEomTerms",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether or not the payment terms include an end-of-month (EOM) stipulation."
+    },
+    {
+      "name": "data[].DefaultCheckMemo",
+      "type": "string",
+      "required": false,
+      "description": "The check memo that will appear when creating a bill for this vendor"
+    },
+    {
+      "name": "data[].DefaultGlAccountId",
+      "type": "string <uuid>",
+      "required": false,
+      "description": "Unique identifier of the general ledger account that will appear when creating a bill or work order for this vendor"
+    },
+    {
+      "name": "data[].DoNotUseForWorkOrder",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether the vendor is ineligible for work order assignments. When set to true, this vendor should not be considered for new work orders."
+    },
+    {
+      "name": "data[].WorkOrderAdjustment",
+      "type": "number <float>",
+      "required": false,
+      "description": "The percent amount to discount or markup the work order's bill. The work order adjustment is defaulted to zero percent."
+    },
+    {
+      "name": "data[].AdjustmentType",
+      "type": "string",
+      "required": false,
+      "description": "The type of adjustment, discount or markup to apply to the work order. The default value is discount.",
+      "enum": ["discount", "markup"]
+    },
+    {
+      "name": "data[].Send1099",
+      "type": "boolean",
+      "required": false,
+      "description": "Whether or not the vendor needs a 1099 tax form from the management company"
+    },
+    {
+      "name": "data[].FirstName",
+      "type": "string",
+      "required": false,
+      "description": "The vendor's first name"
+    },
+    {
+      "name": "data[].LastName",
+      "type": "string",
+      "required": false,
+      "description": "The vendor's last name"
+    },
+    {
+      "name": "data[].Address1",
+      "type": "string",
+      "required": false,
+      "description": "The primary street address of the vendor"
+    },
+    {
+      "name": "data[].Address2",
+      "type": "string",
+      "required": false,
+      "description": "Additional street address information pertaining to the vendor"
+    },
+    {
+      "name": "data[].City",
+      "type": "string",
+      "required": false,
+      "description": "The city where the vendor is located"
+    },
+    {
+      "name": "data[].State",
+      "type": "string",
+      "required": false,
+      "description": "The state where the vendor is located"
+    },
+    {
+      "name": "data[].Zip",
+      "type": "string",
+      "required": false,
+      "description": "The zip code where the vendor is located"
+    },
+    {
+      "name": "data[].CountryCode",
+      "type": "string",
+      "required": false,
+      "description": "The country code of the vendor (e.g. \"JP\" for Japan)"
+    },
+    {
+      "name": "data[].PhoneNumber",
+      "type": "string",
+      "required": false,
+      "description": "The vendor's primary phone number",
+      "deprecated": true
+    },
+    {
+      "name": "data[].PhoneNumbers",
+      "type": "Array of objects",
+      "required": false,
+      "description": "The vendor's phone numbers"
+    },
+    {
+      "name": "data[].Email",
+      "type": "string <email>",
+      "required": false,
+      "description": "The vendor's primary email address",
+      "deprecated": true
+    },
+    {
+      "name": "data[].Emails",
+      "type": "Array of objects",
+      "required": false,
+      "description": "The vendor's emails"
+    },
+    {
+      "name": "data[].CompanyURL",
+      "type": "string <uri>",
+      "required": false,
+      "description": "The internet address of the vendor's website"
+    },
+    {
+      "name": "data[].LiabilityInsuranceExpiration",
+      "type": "string <date>",
+      "required": false,
+      "description": "The expiration date of the vendor's liability insurance"
+    },
+    {
+      "name": "data[].AutoInsuranceExpiration",
+      "type": "string <date>",
+      "required": false,
+      "description": "The expiration date of the vendor's automobile insurance"
+    },
+    {
+      "name": "data[].WorkersCompExpiration",
+      "type": "string <date>",
+      "required": false,
+      "description": "The expiration date of the vendor's worker's compensation insurance"
+    },
+    {
+      "name": "data[].ContractExpiration",
+      "type": "string <date>",
+      "required": false,
+      "description": "The expiration date of the vendor's contract"
+    },
+    {
+      "name": "data[].UmbrellaInsuranceExpiration",
+      "type": "string <date>",
+      "required": false,
+      "description": "The expiration date of the vendor's umbrella insurance"
+    },
+    {
+      "name": "data[].CompliantStatus",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether or not the vendor meets compliance"
+    },
+    {
+      "name": "data[].NetVendorId",
+      "type": "string",
+      "required": false,
+      "description": "The vendor's NetVendor ID"
+    },
+    {
+      "name": "data[].Link",
+      "type": "string <uri>",
+      "required": false,
+      "description": "A link to the vendor's page in the AppFolio Property Manager"
+    },
+    {
+      "name": "data[].HiddenAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "When the vendor was marked inactive by an AppFolio Property Manager user"
+    },
+    {
+      "name": "data[].LastUpdatedAt",
+      "type": "string <date-time>",
+      "required": false,
+      "description": "The date the vendor's details were last updated"
+    },
+    {
+      "name": "data[].DefaultAutoAcceptWorkOrders",
+      "type": "boolean",
+      "required": false,
+      "description": "Indicates whether the vendor is ineligible for auto-accept work order assignments. When set to true, this vendor will auto-accept all work orders assigned to them."
+    },
+    {
+      "name": "next_page_path",
+      "type": "any",
+      "required": false,
+      "description": "The URL path to the next page of responses"
+    }
+  ],
+  "requestSample": "curl --location -g \\\n     --request GET 'https://api.appfolio.com/api/v0/vendors?filters[Id]=1abcde23-c543-456e-abc9-123456789cba&filters[LastUpdatedAtFrom]=2020-12-15T16:30:46Z' \\\n     --header 'Authorization: Basic {Auth}' \\\n     --header 'X-AppFolio-Developer-ID: a965e7d8-a17d-11ec-b909-0242ac120002'"
+}
