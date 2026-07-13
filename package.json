@@ -1,6 +1,6 @@
 {
   "name": "@nightsquawktech/appfolio-mcp-server",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "MCP server for AppFolio Reporting API v2",
   "license": "AGPL-3.0-only",
   "main": "dist/index.js",
@@ -38,5 +38,19 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "modelcontextprotocol",
+    "claude",
+    "cursor",
+    "ai-agent",
+    "llm",
+    "appfolio",
+    "property-management",
+    "real-estate",
+    "reporting"
+  ]
 }

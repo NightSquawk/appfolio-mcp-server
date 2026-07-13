@@ -1,0 +1,90 @@
+{
+  "manifest_version": "0.4",
+  "name": "appfolio-mcp-server",
+  "display_name": "AppFolio MCP Server",
+  "version": "0.1.0",
+  "description": "MCP server for AppFolio Property Manager: Reports API and Database API.",
+  "long_description": "Connect Claude to your [AppFolio Property Manager](https://www.appfolio.com) data. 6 catalog-backed tools covering 137 reports (Reports API v2, read-only) and 156 Database API v0 endpoints (58 reads, 98 writes that execute live). Each API uses its own credentials; configure one set or both. For a read-only posture, fill in only the Reports API fields.",
+  "author": {
+    "name": "NightSquawk Tech",
+    "email": "hello@nightsquawk.tech",
+    "url": "https://nightsquawk.tech"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NightSquawk/appfolio-mcp-server"
+  },
+  "homepage": "https://github.com/NightSquawk/appfolio-mcp-server",
+  "documentation": "https://github.com/NightSquawk/appfolio-mcp-server#readme",
+  "support": "https://github.com/NightSquawk/appfolio-mcp-server/issues",
+  "server": {
+    "type": "node",
+    "entry_point": "dist/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/dist/index.js"],
+      "env": {
+        "APPFOLIO_VHOST": "${user_config.vhost}",
+        "APPFOLIO_CLIENT_ID": "${user_config.client_id}",
+        "APPFOLIO_CLIENT_SECRET": "${user_config.client_secret}",
+        "APPFOLIO_DB_DEVELOPER_ID": "${user_config.db_developer_id}",
+        "APPFOLIO_DB_CLIENT_ID": "${user_config.db_client_id}",
+        "APPFOLIO_DB_CLIENT_SECRET": "${user_config.db_client_secret}"
+      }
+    }
+  },
+  "user_config": {
+    "vhost": {
+      "type": "string",
+      "title": "AppFolio Database Name (vhost)",
+      "description": "Reports API tools. The subdomain in {vhost}.appfolio.com, for example 'yourcompany'.",
+      "required": false
+    },
+    "client_id": {
+      "type": "string",
+      "title": "Reports API Client ID",
+      "description": "Reports API tools. From Account Settings > Manage API Settings > Reports API Credentials.",
+      "required": false
+    },
+    "client_secret": {
+      "type": "string",
+      "title": "Reports API Client Secret",
+      "description": "Reports API tools. From Account Settings > Manage API Settings > Reports API Credentials.",
+      "sensitive": true,
+      "required": false
+    },
+    "db_developer_id": {
+      "type": "string",
+      "title": "Database API Developer ID",
+      "description": "Database API tools. Your AppFolio Developer ID (Admin > Developer ID).",
+      "required": false
+    },
+    "db_client_id": {
+      "type": "string",
+      "title": "Database API Client ID",
+      "description": "Database API tools. Basic Auth Client ID (API Credentials > Basic Auth).",
+      "required": false
+    },
+    "db_client_secret": {
+      "type": "string",
+      "title": "Database API Client Secret",
+      "description": "Database API tools. Basic Auth Client Secret (API Credentials > Basic Auth).",
+      "sensitive": true,
+      "required": false
+    }
+  },
+  "tools": [
+    { "name": "list_reports", "description": "List the 137 AppFolio reports (slug, name, category, required filters)" },
+    { "name": "describe_report", "description": "Full parameter spec for one report: filters, types, enums, response columns" },
+    { "name": "run_report", "description": "Run a report and return its rows, auto-paginated" },
+    { "name": "list_endpoints", "description": "List the 156 Database API endpoints (operationId, method, path, category)" },
+    { "name": "describe_endpoint", "description": "Full spec for one endpoint: path params, filters, body schema, response fields" },
+    { "name": "call_endpoint", "description": "Call a Database API endpoint after validating it against the catalog" }
+  ],
+  "compatibility": {
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": { "node": ">=18" }
+  },
+  "keywords": ["appfolio", "property-management", "real-estate", "mcp", "reporting", "msp"],
+  "license": "AGPL-3.0-only"
+}
