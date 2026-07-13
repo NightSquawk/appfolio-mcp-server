@@ -1,7 +1,7 @@
 {
   "name": "@nightsquawktech/appfolio-mcp-server",
   "version": "0.1.0",
-  "description": "MCP server for AppFolio Reporting API v2",
+  "description": "AppFolio MCP server for Claude, Cursor, and AI agents: 137 reports + 156 Database API endpoints behind 6 catalog-backed tools.",
   "license": "AGPL-3.0-only",
   "main": "dist/index.js",
   "type": "module",
