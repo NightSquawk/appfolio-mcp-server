@@ -1,6 +1,6 @@
 {
   "name": "@nightsquawktech/appfolio-mcp-server",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "AppFolio MCP server for Claude, Cursor, and AI agents: 137 reports + 156 Database API endpoints behind 6 catalog-backed tools.",
   "license": "AGPL-3.0-only",
   "main": "dist/index.js",
@@ -14,6 +14,7 @@
   ],
   "scripts": {
     "build": "tsc && shx mkdir -p dist/catalog && shx cp -r src/catalog/reports dist/catalog && shx cp src/catalog/index.json dist/catalog && shx mkdir -p dist/catalog-db && shx cp -r src/catalog-db/endpoints dist/catalog-db && shx cp src/catalog-db/index.json dist/catalog-db && shx chmod +x dist/*.js",
+    "test": "npm run build && node --test \"test/**/*.test.mjs\"",
     "prepare": "npm run build",
     "watch": "tsc --watch"
   },

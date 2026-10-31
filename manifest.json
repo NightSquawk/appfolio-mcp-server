@@ -2,7 +2,7 @@
   "manifest_version": "0.4",
   "name": "appfolio-mcp-server",
   "display_name": "AppFolio MCP Server",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "MCP server for AppFolio Property Manager: Reports API and Database API.",
   "long_description": "Connect Claude to your [AppFolio Property Manager](https://www.appfolio.com) data. 6 catalog-backed tools covering 137 reports (Reports API v2, read-only) and 156 Database API v0 endpoints (58 reads, 98 writes that execute live). Each API uses its own credentials; configure one set or both. For a read-only posture, fill in only the Reports API fields.",
   "author": {

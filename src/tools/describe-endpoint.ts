@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { ToolDefinition } from "@nightsquawktech/mcp-core/catalog";
-import { loadEndpointSpec, loadDbIndex } from "../catalog-db/endpoint-spec.js";
+import { loadEndpointSpec, loadDbIndex, isMultipartEndpoint } from "../catalog-db/endpoint-spec.js";
 
 const schema = z.object({
   operation_id: z
@@ -59,6 +59,20 @@ export const describeEndpointTool: ToolDefinition<typeof schema> = {
       responseFields: spec.responseFields ?? [],
       paginationParams: spec.pagination ? loadDbIndex().paginationParams : [],
       requestSample: spec.requestSample,
+      ...(isMultipartEndpoint(spec)
+        ? {
+            fileUpload: {
+              contentType: "multipart/form-data",
+              fileField: spec.requestBody?.fileField ?? "File",
+              usage:
+                "Pass the local file to call_endpoint as file: { path: \"<absolute path>\" } (optional filename, " +
+                "content_type). Its bytes are sent as the multipart \"File\" part with filename and MIME type; " +
+                "any other form fields go in body. Do not put a path string in body.File. The file is checked " +
+                "(exists, regular file, readable, non-empty) before anything is sent. A timed-out upload is not " +
+                "retried automatically; check the record's attachments before uploading again.",
+            },
+          }
+        : {}),
       note:
         "Query filters are advisory — AppFolio's reference often does not enumerate every " +
         "filter, so call_endpoint does not reject unknown filters. Most GET list endpoints " +

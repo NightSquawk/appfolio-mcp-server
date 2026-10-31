@@ -18,16 +18,17 @@
   ],
   "requestBody": {
     "required": true,
-    "description": "Attachment object",
+    "description": "Attachment object (multipart/form-data)",
     "attributes": [
       {
         "name": "File",
-        "type": "string",
-        "required": false,
-        "description": "Filename.file-extension",
-        "format": "multipart/form-data"
+        "type": "file (binary)",
+        "required": true,
+        "description": "The file's bytes, sent as a multipart file part named \"File\" with its filename and MIME type. Do NOT put a path string here: pass the local file via call_endpoint's `file` argument, e.g. file: { path: \"C:/scans/invoice.pdf\" }."
       }
-    ]
+    ],
+    "contentType": "multipart/form-data",
+    "fileField": "File"
   },
   "responseFields": [
     {
@@ -37,5 +38,5 @@
       "description": "Unique identifier of the rental application attachment"
     }
   ],
-  "requestSample": "{\n  \"File\": \"/path/to/file.pdf\"\n}"
+  "requestSample": "{\n  \"operation_id\": \"post_rental_applications_rentalapplicationid_attachments\",\n  \"path_params\": {\n    \"RentalApplicationId\": \"<uuid>\"\n  },\n  \"file\": {\n    \"path\": \"/path/to/file.pdf\"\n  }\n}"
 }

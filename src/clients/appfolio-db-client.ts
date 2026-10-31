@@ -1,5 +1,6 @@
 import { ToolResponse, formatError } from "@nightsquawktech/mcp-core/catalog";
 import { HttpMethod } from "../catalog-db/endpoint-spec.js";
+import { PreparedUpload, buildMultipartBody } from "../helpers/file-upload.js";
 
 const BASE_URL = "https://api.appfolio.com/api/v0";
 
@@ -10,6 +11,15 @@ const RATE_WINDOWS = [
   { max: 4096, ms: 3_600_000 },
 ];
 const MAX_429_RETRIES = 4;
+// Uploads get a hard deadline. On timeout or a dropped connection the outcome is
+// unknown (AppFolio may already have stored the file), so uploads are never
+// retried automatically -- only 429s, which AppFolio rejects without processing.
+const DEFAULT_UPLOAD_TIMEOUT_MS = 120_000;
+
+function uploadTimeoutMs(): number {
+  const raw = Number(process.env.APPFOLIO_DB_UPLOAD_TIMEOUT_MS);
+  return Number.isFinite(raw) && raw > 0 ? raw : DEFAULT_UPLOAD_TIMEOUT_MS;
+}
 
 export interface DbRequestOptions {
   /** Values substituted into {param} placeholders in the path. */
@@ -20,8 +30,13 @@ export interface DbRequestOptions {
   query?: Record<string, any>;
   /** page[number] / page[size] for GET list endpoints. */
   page?: { number?: number; size?: number };
-  /** JSON request body (writes). */
+  /** JSON request body (writes). Ignored when `multipart` is set. */
   body?: any;
+  /**
+   * Send a multipart/form-data upload instead of JSON: the file under
+   * `fileField`, plus optional scalar form `fields`.
+   */
+  multipart?: { fileField: string; file: PreparedUpload; fields?: Record<string, unknown> };
   /** Follow next_page_path and aggregate all pages (GET). Default true. */
   paginate?: boolean;
 }
@@ -87,13 +102,17 @@ export class AppfolioDbClient {
     this.requestTimestamps.push(Date.now());
   }
 
-  private getHeaders(hasBody: boolean): Record<string, string> {
+  /**
+   * Auth headers, plus Content-Type when given. Multipart requests pass none so
+   * fetch can generate "multipart/form-data; boundary=..." itself.
+   */
+  private getHeaders(contentType?: string): Record<string, string> {
     const credentials = Buffer.from(`${this.clientId!}:${this.clientSecret!}`).toString("base64");
     const headers: Record<string, string> = {
       Authorization: `Basic ${credentials}`,
       "X-AppFolio-Developer-ID": this.developerId!,
     };
-    if (hasBody) headers["Content-Type"] = "application/json";
+    if (contentType) headers["Content-Type"] = contentType;
     return headers;
   }
 
@@ -130,11 +149,19 @@ export class AppfolioDbClient {
     return parts.length ? `?${parts.join("&")}` : "";
   }
 
-  /** One fetch with rate limiting + Retry-After-aware 429 retries. */
-  private async fetchWithRetry(url: string, init: RequestInit): Promise<Response> {
+  /**
+   * One fetch with rate limiting + Retry-After-aware 429 retries. Only 429s are
+   * retried (AppFolio rejected them unprocessed); network errors propagate.
+   * `timeoutMs` bounds each attempt and starts after the rate-limit wait, so
+   * queueing behind the limiter can never masquerade as a request timeout.
+   */
+  private async fetchWithRetry(url: string, init: RequestInit, timeoutMs?: number): Promise<Response> {
     for (let attempt = 0; ; attempt++) {
       await this.waitForRateLimit();
-      const response = await fetch(url, init);
+      const response = await fetch(
+        url,
+        timeoutMs ? { ...init, signal: AbortSignal.timeout(timeoutMs) } : init
+      );
       if (response.status === 429 && attempt < MAX_429_RETRIES) {
         const retryAfter = parseInt(response.headers.get("Retry-After") || "1", 10);
         const waitMs = (Number.isFinite(retryAfter) ? retryAfter : 1) * 1000 + 100;
@@ -158,12 +185,16 @@ export class AppfolioDbClient {
       this.ensureInitialized();
 
       const resolvedPath = this.buildPath(path, opts.pathParams);
-      const hasBody = opts.body !== undefined && method !== "GET";
       const url = `${BASE_URL}${resolvedPath}${this.buildQuery(opts)}`;
 
+      if (opts.multipart) {
+        return await this.upload(method, url, opts.multipart);
+      }
+
+      const hasBody = opts.body !== undefined && method !== "GET";
       const response = await this.fetchWithRetry(url, {
         method,
-        headers: this.getHeaders(hasBody),
+        headers: this.getHeaders(hasBody ? "application/json" : undefined),
         body: hasBody ? JSON.stringify(opts.body) : undefined,
       });
 
@@ -198,7 +229,7 @@ export class AppfolioDbClient {
           : `https://api.appfolio.com${nextPath}`;
         const pageResp = await this.fetchWithRetry(nextUrl, {
           method: "GET",
-          headers: this.getHeaders(false),
+          headers: this.getHeaders(),
         });
         if (!pageResp.ok) {
           const errBody = await pageResp.text();
@@ -214,6 +245,64 @@ export class AppfolioDbClient {
     } catch (error) {
       return { result: null, isError: true, error: formatError(error) };
     }
+  }
+
+  /**
+   * Send one multipart upload. The FormData is built once from in-memory bytes,
+   * so a 429 retry re-sends identical content. Any failure where the request may
+   * have reached AppFolio (timeout, reset connection) is reported as an unknown
+   * outcome and NOT retried, to avoid duplicate attachments.
+   */
+  private async upload(
+    method: HttpMethod,
+    url: string,
+    multipart: NonNullable<DbRequestOptions["multipart"]>
+  ): Promise<ToolResponse<any>> {
+    const form = buildMultipartBody(multipart.file, multipart.fileField, multipart.fields);
+    const timeoutMs = uploadTimeoutMs();
+
+    let response: Response;
+    try {
+      response = await this.fetchWithRetry(
+        url,
+        { method, headers: this.getHeaders(), body: form },
+        timeoutMs
+      );
+    } catch (error: any) {
+      const reason =
+        error?.name === "TimeoutError" || error?.name === "AbortError"
+          ? `no response within ${timeoutMs} ms`
+          : `connection failed (${error?.cause?.code ?? error?.message ?? "unknown"})`;
+      return {
+        result: null,
+        isError: true,
+        error:
+          `Upload outcome unknown: ${reason}. AppFolio may or may not have stored "${multipart.file.filename}". ` +
+          `It was NOT retried automatically, to avoid creating a duplicate attachment. Check the record's ` +
+          `existing attachments/photos before uploading again.`,
+      };
+    }
+
+    let text: string;
+    try {
+      text = await response.text();
+    } catch {
+      // Status arrived but the body was cut off; the status alone is authoritative.
+      text = "";
+    }
+    if (!response.ok) {
+      return { result: null, isError: true, error: `HTTP ${response.status}: ${text}` };
+    }
+    // A 2xx means the file was stored; never turn an odd success body into an error.
+    let data: any = null;
+    if (text) {
+      try {
+        data = JSON.parse(text);
+      } catch {
+        data = text;
+      }
+    }
+    return { result: data, isError: false, error: null };
   }
 }
 

@@ -191,6 +191,7 @@ The server talks to two AppFolio APIs, each with its own credentials. Configure 
 | `APPFOLIO_DB_DEVELOPER_ID` | for Database API tools | | Your AppFolio Developer ID (Admin > Developer ID) |
 | `APPFOLIO_DB_CLIENT_ID` | for Database API tools | | Database API Basic Auth Client ID (API Credentials > Basic Auth) |
 | `APPFOLIO_DB_CLIENT_SECRET` | for Database API tools | | Database API Basic Auth Client Secret |
+| `APPFOLIO_DB_UPLOAD_TIMEOUT_MS` | no | `120000` | Per-attempt timeout for file uploads (attachments and photos) |
 
 ## Security & write safety
 
@@ -217,6 +218,37 @@ list_endpoints       List the 156 Database API endpoints (operationId, method, p
 describe_endpoint    Full spec for one endpoint: path params, filters, body schema, response fields
 call_endpoint        Call a Database API endpoint after validating it against the catalog
 ```
+
+### File uploads (attachments and photos)
+
+Fourteen Database API endpoints upload a file as `multipart/form-data` instead of taking JSON: every `POST .../{Id}/attachments` (bills, charges, journal entries, CA violations, rental applications, owners, occupancies, properties, units, inspections, work orders) plus `POST /properties/{PropertyId}/photos`, `POST /properties/{PropertyId}/marketing_photos` and `POST /units/{UnitId}/photos`. `describe_endpoint` marks them with `requestBody.contentType: "multipart/form-data"` and a `fileUpload` usage block.
+
+Pass the local file through `call_endpoint`'s `file` argument, not as a path string in `body`:
+
+```json
+{
+  "params": {
+    "operation_id": "post_bills_billid_attachments",
+    "path_params": { "BillId": "8a1e6f3c-2b4d-4c5e-9f70-1a2b3c4d5e6f" },
+    "file": { "path": "C:/Users/me/Documents/receipts/invoice-1042.jpg" }
+  }
+}
+```
+
+A successful upload returns the new attachment's ID (AppFolio answers HTTP 201):
+
+```json
+{ "operation_id": "post_bills_billid_attachments", "method": "POST", "path": "/bills/{BillId}/attachments",
+  "uploaded": { "field": "File", "filename": "invoice-1042.jpg", "contentType": "image/jpeg", "bytes": 48213 },
+  "result": { "Id": "<attachment UUID>" } }
+```
+
+- `file.path` must be an absolute path on the machine running the MCP server. The file must exist and be a readable, non-empty regular file of at most 100 MiB. It is checked and read before anything is sent, so a bad path never reaches AppFolio.
+- The bytes are sent as the multipart part `File`, with the filename (the path's basename unless you set `file.filename`) and a MIME type guessed from the extension (override it with `file.content_type`). The HTTP client generates the multipart `Content-Type` and boundary itself. Authentication and rate limiting are the same as for every other request.
+- Extra form fields go in `body`, e.g. `"body": { "Position": 1 }` for a marketing photo. `body.File` is rejected, because a path string there is what produced AppFolio's `422: File parameter specified, but no file was passed`.
+- A `file` argument on a JSON endpoint is rejected. JSON endpoints are unchanged.
+- Uploads are **not retried automatically** after a timeout or dropped connection, because AppFolio may already have stored the file and a retry could create a duplicate. The error says the outcome is unknown: check the record's attachments (e.g. `get_work_orders_attachments`) before uploading again. Only HTTP 429 responses, which AppFolio rejects without storing anything, are retried.
+- File contents and credentials are never logged or included in tool output.
 
 ## API coverage
 

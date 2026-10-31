@@ -18,13 +18,13 @@
   ],
   "requestBody": {
     "required": true,
-    "description": "Marketing photo object",
+    "description": "Marketing photo object (multipart/form-data)",
     "attributes": [
       {
         "name": "File",
-        "type": "string",
-        "required": false,
-        "description": "Filename.file-extension"
+        "type": "file (binary)",
+        "required": true,
+        "description": "The file's bytes, sent as a multipart file part named \"File\" with its filename and MIME type. Do NOT put a path string here: pass the local file via call_endpoint's `file` argument, e.g. file: { path: \"C:/scans/invoice.pdf\" }."
       },
       {
         "name": "Position",
@@ -38,7 +38,9 @@
         "required": false,
         "description": "The type of marketing photo"
       }
-    ]
+    ],
+    "contentType": "multipart/form-data",
+    "fileField": "File"
   },
   "responseFields": [
     {
@@ -48,5 +50,5 @@
       "description": "Unique identifier of the property marketing photo"
     }
   ],
-  "requestSample": "{\n  \"File\": \"/path/to/file.pdf\",\n  \"Position\": 1\n}"
+  "requestSample": "{\n  \"operation_id\": \"post_properties_propertyid_marketing_photos\",\n  \"path_params\": {\n    \"PropertyId\": \"<uuid>\"\n  },\n  \"file\": {\n    \"path\": \"/path/to/photo.jpg\"\n  },\n  \"body\": {\n    \"Position\": 1\n  }\n}"
 }

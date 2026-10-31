@@ -31,6 +31,14 @@ export interface EndpointAttribute {
 export interface EndpointRequestBody {
   required?: boolean;
   description?: string;
+  /**
+   * Wire format of the body. Absent means JSON. "multipart/form-data" marks the
+   * file-upload endpoints (attachments / photos): call_endpoint sends a local
+   * file's bytes under `fileField` instead of JSON-serializing the body.
+   */
+  contentType?: "application/json" | "multipart/form-data";
+  /** Multipart part name that carries the file bytes (AppFolio uses "File"). */
+  fileField?: string;
   attributes?: EndpointAttribute[];
 }
 
@@ -96,6 +104,11 @@ export function loadDbIndex(): EndpointIndex {
 export function loadEndpointSpec(operationId: string): EndpointSpec | null {
   // Entries live under endpoints/; the core store guards against path traversal.
   return store.entry<EndpointSpec>(operationId);
+}
+
+/** True if the endpoint uploads a file as multipart/form-data rather than sending JSON. */
+export function isMultipartEndpoint(spec: EndpointSpec): boolean {
+  return spec.requestBody?.contentType === "multipart/form-data";
 }
 
 /** True if the operationId names a real endpoint. */

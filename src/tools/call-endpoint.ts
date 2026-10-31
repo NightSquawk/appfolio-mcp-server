@@ -1,7 +1,8 @@
 import { z } from "zod";
 import { ToolDefinition } from "@nightsquawktech/mcp-core/catalog";
-import { loadEndpointSpec, loadDbIndex } from "../catalog-db/endpoint-spec.js";
+import { loadEndpointSpec, loadDbIndex, isMultipartEndpoint } from "../catalog-db/endpoint-spec.js";
 import { appfolioDbClient } from "../clients/appfolio-db-client.js";
+import { FileUploadError, PreparedUpload, prepareUpload } from "../helpers/file-upload.js";
 
 const schema = z.object({
   operation_id: z
@@ -25,7 +26,25 @@ const schema = z.object({
   body: z
     .any()
     .optional()
-    .describe("JSON request body for write operations (POST/PATCH/PUT). See describe_endpoint for the schema."),
+    .describe(
+      "JSON request body for write operations (POST/PATCH/PUT). See describe_endpoint for the schema. " +
+      "For file-upload endpoints this holds only the extra form fields (e.g. { Position: 1 }); the file goes in `file`."
+    ),
+  file: z
+    .object({
+      path: z.string().describe("Absolute path of the local file to upload, e.g. 'C:/scans/invoice.jpg' or '/home/me/invoice.jpg'."),
+      filename: z.string().optional().describe("Filename to send to AppFolio. Defaults to the path's basename."),
+      content_type: z
+        .string()
+        .optional()
+        .describe("MIME type, e.g. 'image/jpeg'. Defaults to a guess from the file extension."),
+    })
+    .optional()
+    .describe(
+      "Local file to upload. Required for the file-upload endpoints (POST .../attachments and .../photos, whose " +
+      "describe_endpoint requestBody.contentType is 'multipart/form-data'); not accepted by any other endpoint. " +
+      "The file's bytes are sent as the multipart 'File' part."
+    ),
   page: z
     .object({ number: z.number().optional(), size: z.number().optional() })
     .optional()
@@ -53,7 +72,8 @@ export const callEndpointTool: ToolDefinition<typeof schema> = {
     "Call an AppFolio Database API endpoint and return its JSON response. Validates the " +
     "operationId and required path params against the catalog before calling AppFolio, then " +
     "executes (GET reads are auto-paginated; POST/PATCH/PUT/DELETE writes execute live against " +
-    "your AppFolio database). Use describe_endpoint first to learn the exact params and body.",
+    "your AppFolio database). Use describe_endpoint first to learn the exact params and body. " +
+    "Attachment/photo endpoints upload a local file: pass file: { path } (sent as multipart/form-data).",
   schema,
   handler: async ({ params }: any) => {
     const operationId: string = params?.operation_id;
@@ -93,11 +113,57 @@ export const callEndpointTool: ToolDefinition<typeof schema> = {
       );
     }
 
+    // File uploads: multipart endpoints take a local file; every other endpoint
+    // keeps sending JSON exactly as before.
+    const multipart = isMultipartEndpoint(spec);
+    const fileField = spec.requestBody?.fileField ?? "File";
+    if (params?.file !== undefined && !multipart) {
+      return errorText(
+        `"${spec.operationId}" does not accept file uploads (its body is JSON). Remove "file", or use an ` +
+          `attachments/photos endpoint (list_endpoints, then describe_endpoint shows contentType "multipart/form-data").`
+      );
+    }
+
+    let upload: PreparedUpload | undefined;
+    let formFields: Record<string, unknown> | undefined;
+    if (multipart) {
+      const body = params?.body;
+      if (body !== undefined && body !== null && (typeof body !== "object" || Array.isArray(body))) {
+        return errorText(
+          `"${spec.operationId}" is a file upload: "body" may only hold extra form fields as an object (e.g. { Position: 1 }).`
+        );
+      }
+      if (body && fileField in body) {
+        return errorText(
+          `"${spec.operationId}" is a file upload: do not pass "${fileField}" inside "body" (a path string there is sent ` +
+            `as text, which AppFolio rejects with 422). Pass the local file as file: { path: "<absolute path>" } instead.`
+        );
+      }
+      if (params?.file === undefined) {
+        return errorText(
+          `"${spec.operationId}" uploads a file and requires the "file" argument, e.g. ` +
+            `file: { path: "C:/scans/invoice.jpg" }. Call describe_endpoint("${spec.operationId}") for details.`
+        );
+      }
+      try {
+        // Validates and reads the file before anything is sent to AppFolio.
+        upload = await prepareUpload(params.file);
+      } catch (error) {
+        if (error instanceof FileUploadError) {
+          return errorText(`Cannot upload for ${spec.operationId}: ${error.message} Nothing was sent to AppFolio.`);
+        }
+        throw error;
+      }
+      formFields = body ?? undefined;
+    }
+
     const response = await appfolioDbClient.request(spec.method, spec.path, {
       pathParams: provided,
       filters: params?.filters,
       query: params?.query,
-      body: params?.body,
+      ...(upload
+        ? { multipart: { fileField, file: upload, fields: formFields } }
+        : { body: params?.body }),
       page: params?.page,
       paginate: params?.paginate_results,
     });
@@ -121,6 +187,9 @@ export const callEndpointTool: ToolDefinition<typeof schema> = {
             method: spec.method,
             path: spec.path,
             ...(rowCount !== undefined ? { rowCount } : {}),
+            ...(upload
+              ? { uploaded: { field: fileField, filename: upload.filename, contentType: upload.contentType, bytes: upload.bytes.byteLength } }
+              : {}),
             result,
           }),
         },

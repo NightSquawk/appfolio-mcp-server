@@ -107,6 +107,17 @@ for (const f of files) {
   if (spec.writeOperation !== expectWrite) {
     problems.push(`${operationId}: writeOperation=${spec.writeOperation} but method=${spec.method}`);
   }
+  // File-upload endpoints must declare multipart explicitly: call_endpoint keys
+  // off requestBody.contentType, and a missing marker silently falls back to JSON
+  // (AppFolio then answers 422 "File parameter specified, but no file was passed").
+  const rb = spec.requestBody;
+  const fileAttr = rb?.attributes?.some((a) => a.name === "File");
+  if (fileAttr && rb.contentType !== "multipart/form-data") {
+    problems.push(`${operationId}: has a File attribute but requestBody.contentType is not "multipart/form-data"`);
+  }
+  if (rb?.contentType === "multipart/form-data" && !rb.fileField) {
+    problems.push(`${operationId}: multipart requestBody is missing "fileField"`);
+  }
   endpoints.push({
     operationId: spec.operationId,
     resource: spec.resource,

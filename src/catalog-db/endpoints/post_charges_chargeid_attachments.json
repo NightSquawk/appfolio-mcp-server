@@ -22,11 +22,13 @@
     "attributes": [
       {
         "name": "File",
-        "type": "string",
-        "required": false,
-        "description": "Filename.file-extension — the file to attach to the charge."
+        "type": "file (binary)",
+        "required": true,
+        "description": "The file's bytes, sent as a multipart file part named \"File\" with its filename and MIME type. Do NOT put a path string here: pass the local file via call_endpoint's `file` argument, e.g. file: { path: \"C:/scans/invoice.pdf\" }."
       }
-    ]
+    ],
+    "contentType": "multipart/form-data",
+    "fileField": "File"
   },
   "responseFields": [
     {
@@ -36,5 +38,5 @@
       "description": "Unique identifier of the charge attachment."
     }
   ],
-  "requestSample": "{\n  \"File\": \"/path/to/file.pdf\"\n}"
+  "requestSample": "{\n  \"operation_id\": \"post_charges_chargeid_attachments\",\n  \"path_params\": {\n    \"ChargeId\": \"<uuid>\"\n  },\n  \"file\": {\n    \"path\": \"/path/to/file.pdf\"\n  }\n}"
 }
